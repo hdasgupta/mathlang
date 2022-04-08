@@ -33,29 +33,29 @@ class Token private constructor(val value:String, val type: TokenType, val subTy
         @JvmStatic
         fun getTokens(expression: String): List<Token> {
             val m = pattern.matcher(expression)
-            val gapMisMatch:AtomicBoolean = AtomicBoolean(false)
-            val lastEnd: AtomicInteger = AtomicInteger(0)
-            val list: List<Token?> = m.results().map { mr ->
-                run {
-                    val value: String = mr.group().trim()
-                    val lEnd = lastEnd.get()
-                    val start:Int = m.start()
-                    val missingStr = expression.substring(lEnd, start)
-                    gapMisMatch.set(!gapMisMatch.get() && !space.matcher(missingStr).matches())
-                    lastEnd.set(m.end())
-                    var token: Token? = null
-                    for (type: TokenType in TokenType.values()) {
-                        if (type.compile()?.matcher(value)?.matches() == true) {
-                            for (subType: SubPattern in type.patterns()) {
-                                if (subType.compile()?.matcher(value)?.matches() == true) {
-                                    token = Token(value, type, subType)
-                                }
+            val gapMisMatch:Atomic<Boolean> = Atomic(false)
+            val lastEnd: Atomic<Int> = Atomic(0)
+            val list: MutableList<Token?> = mutableListOf()
+            while(m.find())
+             {
+                val value: String = m.group().trim()
+                val lEnd = lastEnd.get()
+                val start:Int = m.start()
+                val missingStr = expression.substring(lEnd, start)
+                gapMisMatch.set(!gapMisMatch.get() && !space.matcher(missingStr).matches())
+                lastEnd.set(m.end())
+                var token: Token? = null
+                for (type: TokenType in TokenType.values()) {
+                    if (type.compile()?.matcher(value)?.matches() == true) {
+                        for (subType: SubPattern in type.patterns()) {
+                            if (subType.compile()?.matcher(value)?.matches() == true) {
+                                token = Token(value, type, subType)
                             }
                         }
                     }
-                    token
                 }
-            }.toList()
+                list.add(token)
+            }
             val lEnd = lastEnd.get()
             val missingStr = expression.substring(lEnd, expression.length)
             gapMisMatch.set(!gapMisMatch.get() && !space.matcher(missingStr).matches())
