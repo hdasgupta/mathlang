@@ -125,7 +125,7 @@
                 <table>
                     <tr>
                         <td th:width="${100/(types.length-1)+'%'}" th:each="t: ${types}"  th:if="${t != type}" >
-                            <a  style="white-space: nowrap;" th:href="${'/calculator-'+t}" class="btn btn-primary btn-block cbb">[[${t.text}]] Calculator</a>
+                            <a  style="white-space: nowrap;" th:href="${'/calculator-'+t}" class="btn btn-primary btn-block  disabled">[[${t.text}]] Calculator</a>
                         </td>
                     </tr>
                 </table>
