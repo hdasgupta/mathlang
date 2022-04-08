@@ -27,7 +27,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h6>Previous Step</h6>
+                            <h5>Previous Step : </h5>
                             <div th:if="${stat.index == 0}" th:id="${'prevStep_'+stat.count}">
                                 <script>
                                     load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
@@ -38,9 +38,32 @@
 
                             <br/>
 
-                            <h6>Current Step</h6>
+                            <h5>Current Step: </h5>
                             <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
                             </span>
+
+
+                            <br th:if="${!result.assumptions.isEmpty()}"/>
+
+                            <h5 th:if="${!result.assumptions.isEmpty()}">Assumptions</h5>
+                            <div th:each="assumption, astat: ${result.assumptions}">
+                                <table border="0">
+                                    <tr>
+                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <script>
+                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_0'}]]", {'formula': '[[${assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                            </script>
+                                        </td>
+                                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
+                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <script>
+                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_1'}]]", {'formula': '[[${assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                            </script>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
 
                             <br/>
 
@@ -62,31 +85,9 @@
 
                             </table>
 
-                            <br th:if="${!result.assumptions.isEmpty()}"/>
-
-                            <h6 th:if="${!result.assumptions.isEmpty()}">Assumptions</h6>
-                            <div th:each="assumption, astat: ${result.assumptions}">
-                                <table border="0">
-                                    <tr>
-                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                                            <script>
-                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_0'}]]", {'formula': '[[${assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                            </script>
-                                        </td>
-                                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
-                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                                            <script>
-                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_1'}]]", {'formula': '[[${assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                            </script>
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </div>
-
                             <br th:if="${!result.derive.isEmpty()}"/>
 
-                            <h6 th:if="${!result.derive.isEmpty()}">Explanation</h6>
+                            <h5 th:if="${!result.derive.isEmpty()}">Explanation</h5>
                             <table th:if="${!result.derive.isEmpty()}">
                                 <tr th:each="d, estat: ${result.derive}">
                                     <td>
