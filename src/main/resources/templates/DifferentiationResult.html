@@ -36,13 +36,6 @@
                             <span  th:if="${stat.index > 0}" th:remove="tag" th:utext="${results.get(stat.index-1).operand.toHtmlString()}">
                             </span>
 
-                            <br/>
-
-                            <h5>Current Step: </h5>
-                            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
-                            </span>
-
-
                             <br th:if="${!result.assumptions.isEmpty()}"/>
 
                             <h5 th:if="${!result.assumptions.isEmpty()}">Assumptions</h5>
@@ -105,6 +98,13 @@
                                     </td>
                                 </tr>
                             </table>
+
+                            <br/>
+
+                            <h5>Current Step: </h5>
+                            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
+                            </span>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">
