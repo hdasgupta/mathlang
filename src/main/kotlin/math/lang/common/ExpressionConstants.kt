@@ -18,7 +18,7 @@ class ExpressionConstants {
         val dfx1 = Differentiate(fx1)
         val dfx2 = Differentiate(fx2)
         val one = IntegerLiteral(BigInteger.ONE)
-        val two = IntegerLiteral(BigInteger.TWO)
+        val two = IntegerLiteral(BigInteger("2"))
         val zero = IntegerLiteral(BigInteger.ZERO)
         val half = DecimalLiteral(BigDecimal(0.5))
 
