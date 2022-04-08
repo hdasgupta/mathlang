@@ -44,8 +44,8 @@ enum class Operators(val symbol: String, val reduce: (numbers:List<BigDecimal>, 
         }}),
     div("/", {numbers, isReal->
         run {
-            val num = numbers[0] / numbers[1]
-            if (isReal) num.toPlainString() else num.toBigIntegerExact().toString()
+            val num = numbers[0].div(numbers[1])
+            num.toPlainString()
         }}, 2),
     mod("%", {numbers, isReal->
         run {
@@ -358,9 +358,10 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         val numbers:List<Number> = operands.map { it.calc() }.toList()
         val isReal: Boolean = numbers.any { it is BigDecimal }
 
-        val result = operator.reduce(numbers.map { BigDecimal(it.toString()) }, isReal)
+        val dnumbers:List<BigDecimal> = numbers.map { BigDecimal(if(it.toString().contains(".")) it.toString() else "${it.toString()}.${"0".repeat(200)}") }
+        val result = operator.reduce(dnumbers, isReal)
 
-        return if(isReal) BigDecimal(result) else BigInteger(result)
+        return if(isReal || operator==Operators.div) BigDecimal(result) else BigInteger(result)
     }
 }
 
