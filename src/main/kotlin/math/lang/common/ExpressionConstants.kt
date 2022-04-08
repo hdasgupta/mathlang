@@ -137,6 +137,8 @@ class ExpressionConstants {
 
         fun d(function: Function): Differentiate = Differentiate(function)
 
+        fun d(operand: Operand): Differentiate = Differentiate(operand = operand)
+
         fun const(lit: IntegerLiteral) = Constant(lit)
 
         fun const(lit: DecimalLiteral) = Constant(lit)

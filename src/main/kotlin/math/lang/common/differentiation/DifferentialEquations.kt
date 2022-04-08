@@ -1,6 +1,6 @@
 package math.lang
 
-import math.lang.common.Differentiate
+import math.lang.common.*
 import math.lang.common.ExpressionConstants.Companion.a
 import math.lang.common.ExpressionConstants.Companion.add
 import math.lang.common.ExpressionConstants.Companion.constIn
@@ -41,9 +41,6 @@ import math.lang.common.ExpressionConstants.Companion.tan
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
-import math.lang.common.Operand
-import math.lang.common.Operation
-import math.lang.common.Operators
 
 private val DIFFERENTIATION_FORMULA : MutableList<Formula> = getAllDifferentialEquation()
 
@@ -84,8 +81,9 @@ fun getAllRule() : MutableList<Rule> {
 
     list.add(AdditionRule(add(fx1, fx2), add(dfx1, dfx2)))
     list.add(SubtractionRule(sub(fx1, fx2), sub(dfx1, dfx2)))
-    list.add(ProductiveRule(mul(fx1, fx2), add(mul(fx1, dfx2), mul(fx2, dfx2))))
-    list.add(QuotientRule(div(fx1, fx2), div(sub(mul(fx2, dfx2), mul(fx1, dfx2)), sqr(fx2))))
+    list.add(ProductiveRule(mul(fx1, fx2), add(mul(fx1, dfx2), mul(fx2, dfx1))))
+    list.add(QuotientRule(div(fx1, fx2), div(sub(mul(fx2, dfx1), mul(fx1, dfx2)), sqr(fx2))))
+    list.add(PowerRule(pow(fx1, fx2), mul(add(mul(ln(fx1), dfx2), mul(div(fx2, fx1), dfx2)), pow(fx1, fx2))))
     list.add(ChainRule(funcOfFunc, mul(d(funcOfFunc), dfx2)))
 
     return list
@@ -146,7 +144,7 @@ class AdditionRule(fx: Operand, dFx: Operand): Rule("Addition Rule", fx, dFx) {
                 for(i:Int in results.indices) {
                     for(r:Result in results[i]) {
                         ops[i] = r.operand
-                        result.add(Result(add(*ops.toTypedArray()), r.formulaApplied, r.assumption))
+                        result.add(Result(add(*ops.toTypedArray()), r.formulaApplied, r.assumptions))
                     }
                 }
                 return result
@@ -170,7 +168,7 @@ class SubtractionRule(fx: Operand, dFx: Operand): Rule("Subtraction Rule", fx, d
                 for(i:Int in results.indices) {
                     for(r:Result in results[i]) {
                         ops[i] = r.operand
-                        result.add(Result(sub(ops[0], ops[1]), r.formulaApplied, r.assumption))
+                        result.add(Result(sub(ops[0], ops[1]), r.formulaApplied, r.assumptions))
                     }
                 }
                 return result
@@ -201,7 +199,7 @@ class ProductiveRule(fx: Operand, dFx: Operand): Rule("Productive Rule", fx, dFx
                         val innerOperands: MutableList<Operand> = (ops[i] as Operation).operands.toMutableList()
                         innerOperands[i] = r.operand
                         ops[i] = mul(*innerOperands.toTypedArray())
-                        result.add(Result(add(*ops.toTypedArray()), r.formulaApplied, r.assumption))
+                        result.add(Result(add(*ops.toTypedArray()), r.formulaApplied, r.assumptions))
                     }
                 }
                 return result
@@ -232,7 +230,7 @@ class QuotientRule(fx: Operand, dFx: Operand): Rule("Quotient Rule", fx, dFx) {
                         val innerOperands: MutableList<Operand> = (ops[i] as Operation).operands.toMutableList()
                         innerOperands[i] = r.operand
                         ops[i] = mul(*innerOperands.toTypedArray())
-                        result.add(Result(div(sub(*ops.toTypedArray()), sqr(operand.operands[1])), r.formulaApplied, r.assumption))
+                        result.add(Result(div(sub(*ops.toTypedArray()), sqr(operand.operands[1])), r.formulaApplied, r.assumptions))
                     }
                 }
                 return result
@@ -245,6 +243,56 @@ class QuotientRule(fx: Operand, dFx: Operand): Rule("Quotient Rule", fx, dFx) {
     }
 }
 
+class PowerRule(fx: Operand, dFx: Operand): Rule("Power Rule", fx, dFx) {
+
+    override fun differentiate(operand: Operand): Results {
+        if(operand is Operation) {
+            if(operand.operator== Operators.pow) run {
+                val results: List<Results> = operand.operands.map { operand -> diff(operand) }
+                val additionOp1Multiplier : Operation = div(operand.operands[1], operand.operands[0]) as Operation
+                val additionOp2Multiplier : Operation = ln(operand.operands[0]) as Operation
+                val multipliers: List<Operation> = listOf(additionOp1Multiplier, additionOp2Multiplier)
+                val result: Results = Results()
+
+                val newVar1: Variable = y.new()
+                val newVar2: Variable = y.new()
+                var ops:MutableList<Operand> = mutableListOf()
+                ops.add(mul(additionOp1Multiplier, Differentiate(operand = operand.operands[0])))
+                ops.add(mul(additionOp2Multiplier, Differentiate(operand = operand.operands[1])))
+
+                
+                result.add(Result(mul(add(*ops.toTypedArray()), operand), this, listOf(eq(newVar1, operand.operands[0]), eq(newVar2, operand.operands[1])), calc(newVar1, newVar2)))
+
+                for(i:Int in results.indices) {
+                    for(r:Result in results[i]) {
+
+                        ops[i] = mul(multipliers[i], r.operand)
+                        result.add(Result(mul(add(*ops.toTypedArray()), operand), r.formulaApplied, r.assumptions))
+                    }
+                }
+                return result
+            } else {
+                return Results()
+            }
+        }else {
+            return Results()
+        }
+    }
+
+    companion object {
+        val calc:(Variable, Variable)-> List<Derive> = {newVar1:Variable, newVar2:Variable->
+            val newVar : Variable = y.new()
+            listOf(
+                Derive(newVar, pow(newVar1, newVar2), "Assumption"),
+                Derive(ln(newVar), mul(newVar2, ln(newVar1)), "Taking Log in Both Side"),
+                Derive(mul(inv(newVar), Differentiate(operand = newVar)), add(mul(div(newVar2, newVar1), Differentiate(operand = newVar1)), mul(ln(newVar1), Differentiate(operand = newVar2))), "Differentiating Both Side"),
+                Derive(Differentiate(operand = newVar), mul(add(mul(div(newVar2, newVar1), Differentiate(operand = newVar1)), mul(ln(newVar1), Differentiate(operand = newVar2))), newVar), "Multiplied by ${newVar.toHtmlString()} both side")
+            )
+        }
+    }
+}
+
+
 class ChainRule(fx: Operand, dFx: Operand): Rule("Chain Rule", fx, dFx) {
     override fun differentiate(operand: Operand): Results {
         if(operand is Operation) {
@@ -254,16 +302,17 @@ class ChainRule(fx: Operand, dFx: Operand): Rule("Chain Rule", fx, dFx) {
                 val results:List<List<Result>> = listOf(result1, result2)
                 val result: Results = Results()
 
+                val newVar: Variable = y.new()
                 var ops:MutableList<Operand> = mutableListOf()
                 ops.add(Differentiate(operand = operand.operands[0]))
-                ops.add(Differentiate(operand = Operation(operand.operator, y)))
-                result.add(Result(mul(ops[0], ops[1]), this, eq(y, operand.operands[0])))
+                ops.add(Differentiate(operand = Operation(operand.operator, newVar)))
+                result.add(Result(mul(ops[0], ops[1]), this, listOf(eq(newVar, operand.operands[0]))))
 
 
                 for(i:Int in results.indices) {
                     for(r:Result in results[i]) {
                         ops[i] = r.operand
-                        result.add(Result(mul(ops[0], ops[1]), r.formulaApplied, r.assumption))
+                        result.add(Result(mul(ops[0], ops[1]), r.formulaApplied, r.assumptions))
                     }
                 }
                 return result
@@ -273,20 +322,32 @@ class ChainRule(fx: Operand, dFx: Operand): Rule("Chain Rule", fx, dFx) {
     }
 }
 
-class Result(val operand: Operand, val formulaApplied: Formula, val assumption: Operation? = null ) {
-    var maxOperandSize: Int = 0
-    var str: String = operand.toString()
+class Result(val operand: Operand, val formulaApplied: Formula, val assumptions: List<Operation> = listOf(), val derive: List<Derive> = listOf()) {
+    var maxOperandSize: Int
+    var str: String
+
+    init {
+        try {
+            maxOperandSize= 0
+            str = operand.toString()
+        } catch (t:Throwable) {
+            t.printStackTrace()
+            throw t
+        }
+    }
 
     override fun toString(): String {
 
         val initStr = "$preAppeneder$operand${" ".repeat(maxOperandSize-str.length)}$postAppeneder"
-        return "$initStr${formulaApplied}${if(assumption != null) " | assuming $assumption" else ""}"
+        return "$initStr${formulaApplied}${if(assumptions.isNotEmpty()) " | assuming $assumptions" else ""}"
     }
     private companion object {
         const val preAppeneder = "= "
         const val postAppeneder = "| applying "
     }
 }
+
+class Derive(val left:Operand, val right: Operand, val desc: String)
 
 class Results: ArrayList<Result>() {
     override fun toString(): String {

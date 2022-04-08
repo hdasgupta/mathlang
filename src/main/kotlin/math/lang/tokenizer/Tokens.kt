@@ -234,8 +234,9 @@ enum class TokenType(private val subTypes:Array<out SubPattern>) : Patterns {
 }
 
 enum class VariableType(private val pattern:String) : SubPattern {
-    variable("x|y"),
+    variable("x|y[0-9]*"),
     constant("a[0-9]*"),
+    d("d"),
     sin("sin"),
     cos("cos"),
     tan("tan"),

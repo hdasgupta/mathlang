@@ -1,73 +1,127 @@
-<div th:if="${!results.isEmpty()}">
-    <table>
-        <tr>
-            <td id="diff_formula">
+<table th:if="${!results.isEmpty()}" border="0">
+    <tr>
+        <td id="diff_formula" colspan="2">
                 <script>
-                    load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
+                load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
+            </script>
+        </td>
+    </tr>
+    <tr th:each="result, stat :${results}">
+        <td>
+            <button class="btn btn-secondary" data-toggle="modal" th:onclick="modal[[${stat.count}]]()">Step details
+                <script>
+                    function modal[[${stat.count}]]() {
+                        $('[[${'#modal_'+stat.count}]]').modal('toggle')
+                    }
                 </script>
-            </td>
-            <td>=</td>
-        </tr>
-    </table>
-    <table border="1" id="employee"  cellspacing="0" width="100%" style="font-size: 10px">
-        <thead>
-        <tr>
-            <th>Step Answer</th>
-            <th >Formula Applied</th>
-            <th>Formula Name</th>
-            <th>Assumption</th>
-        </tr>
-        </thead>
-        <tbody id="emp_body">
-        <tr th:each="result, stat :${results}">
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <div  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
-                    <!--loadHtml("[[${'#dFx_'+stat.count}]]", '[[#{result.formulaApplied.dFx.toHtmlString()}]]')-->
-                </div>
-            </td>
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <table cellpadding="0" border="0">
-                    <tr>
-                        <td th:if="${result.formulaApplied.fx !=null}" th:id="${'fx_'+stat.count}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.formulaApplied.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-                            </script>
-                        </td>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
-                        <td th:if="${result.formulaApplied.dFx !=null}" th:id="${'dFx_'+stat.count}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <div  th:remove="tag" th:utext="${result.formulaApplied.dFx.toHtmlString()}">
-                                <!--loadHtml("[[${'#dFx_'+stat.count}]]", '[[#{result.formulaApplied.dFx.toHtmlString()}]]')-->
+            </button>
+            <div class="modal fade" th:id="${'modal_'+stat.count}">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">
+                                Step Details
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h6>Previous Step</h6>
+                            <div th:if="${stat.index == 0}" th:id="${'prevStep_'+stat.count}">
+                                <script>
+                                    load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
+                                </script>
                             </div>
-                        </td>
+                            <span  th:if="${stat.index > 0}" th:remove="tag" th:utext="${results.get(stat.index-1).operand.toHtmlString()}">
+                            </span>
 
+                            <br/>
 
-                    </tr>
-                </table>
-            </td>
-            <td th:text="${result.formulaApplied.name == null ? '' : result.formulaApplied.name}" style="vertical-align: middle;padding: 0;margin: 0;"></td>
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <table th:if="${result.assumption !=null}" >
-                    <tr>
-                        <td th:id="${'assumption_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#assumption_'+stat.count+'_0'}]]", {'formula': '[[${result.assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                            </script>
-                        </td>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
-                        <td th:id="${'assumption_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#assumption_'+stat.count+'_1'}]]", {'formula': '[[${result.assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                            </script>
-                        </td>
-                    </tr>
-                </table>
+                            <h6>Current Step</h6>
+                            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
+                            </span>
 
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+                            <br/>
+
+                            <h6>Formula Applied : <span th:text="${result.formulaApplied.name == null ? '' : result.formulaApplied.name}" ></span></h6>
+
+                            <table border="0">
+                                <tr>
+                                    <td th:id="${'fx_'+stat.count}">
+                                        <script>
+                                            load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.formulaApplied.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
+                                        </script>
+                                    </td>
+                                    <td>=</td>
+                                    <td th:id="${'dFx_'+stat.count}">
+                                        <div  th:remove="tag" th:utext="${result.formulaApplied.dFx.toHtmlString()}">
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                            <br th:if="${!result.assumptions.isEmpty()}"/>
+
+                            <h6 th:if="${!result.assumptions.isEmpty()}">Assumptions</h6>
+                            <div th:each="assumption, astat: ${result.assumptions}">
+                                <table border="0">
+                                    <tr>
+                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <script>
+                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_0'}]]", {'formula': '[[${assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                            </script>
+                                        </td>
+                                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
+                                        <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <script>
+                                                load("[[${'#assumption_'+astat.count+'_'+stat.count+'_1'}]]", {'formula': '[[${assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                            </script>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <br th:if="${!result.derive.isEmpty()}"/>
+
+                            <h6 th:if="${!result.derive.isEmpty()}">Explanation</h6>
+                            <table th:if="${!result.derive.isEmpty()}">
+                                <tr th:each="d, estat: ${result.derive}">
+                                    <td>
+                                        <div  th:remove="tag" th:utext="${d.left.toHtmlString()}">
+                                        </div>
+                                    </td>
+                                    <td>=</td>
+                                    <td>
+                                        <div  th:remove="tag" th:utext="${d.right.toHtmlString()}">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div  th:remove="tag" th:utext="${d.desc}">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
+            </span>
+        </td>
+
+    </tr>
+
+ </table>
 <div  th:if="${results.isEmpty()}" style="color: red">
     <center>ERROR OCCURED</center>
 </div>
-

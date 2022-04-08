@@ -17,12 +17,17 @@ class NoOperandOperatorException : Exception("Operator with no argument is not a
 
 class OperandCountMisMatchException(actualCount: Int, expectedCount: String) : Exception("Operator with $actualCount number of arguments is not allowed ($expectedCount expected)")
 
-class Counter(start:Int = 0) {
-    private var id:Int = start
+class Counter(val start:Int = 0) {
+    private var id: ThreadLocal<Int> = ThreadLocal<Int>()
     fun getNext(): Int {
         val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob())
         return coroutineScope.let {
-            return id++
+            if(id.get() == null) {
+                id.set(1)
+            }
+            val old:Int = id.get()
+            id.set(id.get()+1)
+            return old
         }
     }
 }
@@ -395,14 +400,24 @@ class Constant(name: String): UnitOperand(name, false) {
 }
 
 class Variable(name: String): UnitOperand(name, true) {
+    private var index: Int?= null
+    private constructor(name: String, index: Int): this(name) {
+        this.index = index
+    }
     override fun funcOf(): Set<Variable> {
         return setOf(this)
     }
 
-    override fun toString(): String = name ?: ""
-    override fun toHtmlString(root:Boolean): String = if(name==null) "" else "<b>$name</b>"
+    override fun toString(): String = "${name ?: ""}${index ?: ""}"
+    override fun toHtmlString(root:Boolean): String = if(name==null) "" else "<b>$name${if(index==null) "" else "<sub>$index</sub>"}</b>"
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    fun new(): Variable = Variable(this.name ?: "y", counter.getNext())
+
+    private companion object {
+        val counter: Counter = Counter()
     }
 }
 
@@ -424,7 +439,7 @@ class Function(private val nm: String, val variables: Set<Variable>? = null, val
     }
 
     private companion object {
-        val counter: Counter = Counter(3)
+        val counter: Counter = Counter(1)
         val numericPattern: Pattern = Pattern.compile("^(?<name>.*)(?<num>[0-9]+)$")
     }
 
@@ -435,7 +450,7 @@ class Differentiate(val function: Function? = null, val operand: Operand? = null
         return if(function ==null && operand != null) varIn(operand) else function?.variables ?: setOf()
     }
 
-    override fun toString(): String = "(d(${operand ?: function})/d${func() ?: "x"})"
+    override fun toString(): String = "(d(${operand ?: function}))"
     override fun toHtmlString(root:Boolean): String {
         var of:String = "${operand?.toHtmlString() ?: function?.toHtmlString()}"
         if(operand!=null || function !=null) {
