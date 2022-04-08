@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <script th:src="@{js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+
+    <script>
+        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
+        function load(elem, json, url, succCallBack, errCallBack) {
+            $(document).ready(function() {
+                $.post(url,
+                            json,
+                            function (response, status) {
+
+
+                            }
+                    )
+                    .done(function(response) {
+                        if($(elem).html() !== response) {
+                            $(elem).html(response)
+                            if(!!succCallBack) {
+                                succCallBack()
+                            }
+                        }
+                    })
+                    .fail(function() {
+                        if(!!errCallBack) {
+                            errCallBack()
+                        }
+                    })
+            })
+        }
+
+        function loadHtml(elem, html) {
+            $(document).ready(function() {
+                $(elem).html(html);
+            })
+        }
+
+        function onChange(e) {
+            onReset()
+            $(document).ready(function() {
+                load("#table", {'formula': $('#formula').val()}, url, onSuccess, onError)
+            })
+        }
+
+        function onError() {
+            $("#success").hide()
+            $("#error").show()
+        }
+
+        function onReset() {
+            $("#success").hide()
+            $("#error").hide()
+        }
+
+        function onSuccess() {
+            if($("#table").html().indexOf("ERROR")>=0) {
+                onError()
+            } else {
+                $("#success").show()
+                $("#error").hide()
+            }
+        }
+
+        $(document).ready(function() {
+            onReset()
+        })
+    </script>
+    <title>Differentiation Page</title>
+</head>
+<body>
+
+    <div class="form-group has-error has-feedback nm">
+        <input type="text"
+               class="form-control cfc" th:id="formula" th:name="formula"
+               th:value="${formula}" placeholder="Enter Formula to Differentiate"
+               onkeyup="onChange(event)"
+        >
+        <div class="alert alert-success alert-dismissible fade show" id="success">
+            <strong>Success!</strong> Your expression parsed successfully.
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show" id="error">
+            <strong>Error!</strong> A problem has been occurred while parsing expression.
+        </div>
+<!--        <center>
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </center>-->
+    </div>
+
+
+<div id="table">
+    <script>
+        if(!!'[[${formula}]]') {
+            load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diffHtml'}]]")
+        }
+    </script>
+
+</div>
+
+</script>
+</body>
+</html>
