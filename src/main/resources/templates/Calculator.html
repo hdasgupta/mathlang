@@ -69,37 +69,35 @@
             onReset()
         })
     </script>
+    <style>
+        @font-face {
+          font-family: 'Orbitron';
+          src: url('font/Orbitron.ttf');
+        }
+    </style>
     <title>Differentiation Page</title>
 </head>
-<body>
-
-    <div class="form-group has-error has-feedback nm">
-        <input type="text"
-               class="form-control cfc" th:id="formula" th:name="formula"
-               th:value="${formula}" placeholder="Enter Formula to Differentiate"
-               onkeyup="onChange(event)"
-        >
-        <div class="alert alert-success alert-dismissible fade show" id="success">
-            <strong>Success!</strong> Your expression parsed successfully.
-        </div>
-        <div class="alert alert-danger alert-dismissible fade show" id="error">
-            <strong>Error!</strong> A problem has been occurred while parsing expression.
-        </div>
-<!--        <center>
-            <button type="submit" class="btn btn-primary">Apply</button>
-        </center>-->
-    </div>
-
-
-<div id="table">
-    <script>
-        if(!!'[[${formula}]]') {
-            load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diffHtml'}]]")
-        }
-    </script>
+<body style="font-family: 'Orbitron'; font-size: 32px">
+<div id="display">
 
 </div>
-
-</script>
+<center>
+    <table>
+        <tr>
+            <td th:colspan="${columnCount}">
+                <div class="btn-group">
+                    <a th:each="t: ${types}" th:if="${t != type}" th:href="${'/calculator-'+t}" class="btn btn-primary">[[${t.text}]] Calculator</a>
+                </div>
+            </td>
+        </tr>
+        <tr th:each="buttonRow: ${buttons}">
+            <td th:each="button: ${buttonRow} " th:if="${button.command!=null}" th:rowspan="${button.rowSpan}" th:colspan="${button.colSpan}">
+                <div class="btn btn-primary btn-block">
+                    [[${button.command.text}]]
+                </div>
+            </td>
+        </tr>
+    </table>
+</center>
 </body>
 </html>

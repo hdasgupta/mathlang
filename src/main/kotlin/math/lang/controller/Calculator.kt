@@ -62,6 +62,9 @@ class Calculator {
     fun calculator(@PathVariable type:CalculatorType, @RequestParam(required = false) command: Command? =null, map: ModelMap, req: HttpServletRequest, sess: HttpSession): String {
         if(command == null) {
             map["buttons"] = buttons[type]
+            map["type"] = type
+            map["types"] = CalculatorType.values()
+            map["columnCount"] = buttons[type]?.get(0)?.map { it.colSpan }?.reduce { a, b -> a + b }
             sess.setAttribute("node", Node())
             return "Calculator"
         } else {
@@ -83,10 +86,10 @@ class Calculator {
 
 }
 
-enum class CalculatorType {
-    sim,
-    tri,
-    sci
+enum class CalculatorType(val text: String) {
+    sim("Simple"),
+    tri("Trigonometric"),
+    sci("Scientific")
 }
 
 open class Button(val command: Command?, val rowSpan: Int = 1, val colSpan: Int = 1)

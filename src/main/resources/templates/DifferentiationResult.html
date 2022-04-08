@@ -1,73 +1,7 @@
-<div th:if="${!results.isEmpty()}">
-    <table>
-        <tr>
-            <td id="diff_formula">
-                <script>
-                    load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-                </script>
-            </td>
-            <td>=</td>
-        </tr>
-    </table>
-    <table border="1" id="employee"  cellspacing="0" width="100%" style="font-size: 10px">
-        <thead>
-        <tr>
-            <th>Step Answer</th>
-            <th >Formula Applied</th>
-            <th>Formula Name</th>
-            <th>Assumption</th>
-        </tr>
-        </thead>
-        <tbody id="emp_body">
-        <tr th:each="result, stat :${results}">
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <div  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
-                    <!--loadHtml("[[${'#dFx_'+stat.count}]]", '[[#{result.formulaApplied.dFx.toHtmlString()}]]')-->
-                </div>
-            </td>
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <table cellpadding="0" border="0">
-                    <tr>
-                        <td th:if="${result.formulaApplied.fx !=null}" th:id="${'fx_'+stat.count}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.formulaApplied.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-                            </script>
-                        </td>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
-                        <td th:if="${result.formulaApplied.dFx !=null}" th:id="${'dFx_'+stat.count}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <div  th:remove="tag" th:utext="${result.formulaApplied.dFx.toHtmlString()}">
-                                <!--loadHtml("[[${'#dFx_'+stat.count}]]", '[[#{result.formulaApplied.dFx.toHtmlString()}]]')-->
-                            </div>
-                        </td>
-
-
-                    </tr>
-                </table>
-            </td>
-            <td th:text="${result.formulaApplied.name == null ? '' : result.formulaApplied.name}" style="vertical-align: middle;padding: 0;margin: 0;"></td>
-            <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <table th:if="${result.assumption !=null}" >
-                    <tr>
-                        <td th:id="${'assumption_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#assumption_'+stat.count+'_0'}]]", {'formula': '[[${result.assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                            </script>
-                        </td>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
-                        <td th:id="${'assumption_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
-                            <script>
-                                load("[[${'#assumption_'+stat.count+'_1'}]]", {'formula': '[[${result.assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                            </script>
-                        </td>
-                    </tr>
-                </table>
-
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="input-group input-group-lg">
+    <input type="text"
+              class="form-control" th:id="result" th:name="result"
+              th:value="${result}" placeholder="Enter Formula to Differentiate"
+              aria-label="Large"
+              onkeyup="onChange(event)" autocomplete="on">
 </div>
-<div  th:if="${results.isEmpty()}" style="color: red">
-    <center>ERROR OCCURED</center>
-</div>
-
