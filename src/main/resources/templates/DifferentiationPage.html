@@ -5,11 +5,12 @@
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
     <script th:src="@{js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
-
+    <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
     <script>
         var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
         var lastResponse = {}
         var responses = {}
+        var successes = []
         function load(elem, json, url, lateInit = false, succCallBack, errCallBack) {
             if(!lastResponse[url+JSON.stringify(json)]) {
                 $(document).ready(function() {
@@ -21,11 +22,13 @@
                                 }
                         )
                         .done(function(response) {
-                            if(!lateInit) {
-                                $(elem).html(response)
-                            }
                             lastResponse[url+JSON.stringify(json)] = response
                             responses[elem] = response
+                            if(!lateInit) {
+                                $(elem).html(response)
+                            } else {
+                                successes.push(json.formula)
+                            }
                             if(!!succCallBack) {
                                 succCallBack()
                             }
@@ -39,6 +42,8 @@
             } else {
                 if(!lateInit) {
                     $(elem).html(lastResponse[url+JSON.stringify(json)])
+                } else {
+                    successes.push(json.formula)
                 }
                 responses[elem] = lastResponse[url+JSON.stringify(json)]
                 if(!!succCallBack) {
@@ -84,11 +89,13 @@
                 $("#success").show()
                 $("#error").hide()
                 $("#generate").removeAttr("disabled")
+
             }
         }
 
         $(document).ready(function() {
             onReset()
+
         })
     </script>
     <title>Differentiation Page</title>
@@ -112,10 +119,10 @@
             </span>
         </div>
         <textarea type="text"
-               class="form-control cfc" th:id="formula" th:name="formula"
+               class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
                th:value="${formula}" placeholder="Enter Formula to Differentiate"
                aria-label="Large"
-               onkeyup="onChange(event)"
+               onkeyup="onChange(event)" autocomplete="on"
         ></textarea>
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Differentiate</button>
