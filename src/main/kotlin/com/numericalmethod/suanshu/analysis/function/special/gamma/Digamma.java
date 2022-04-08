@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.analysis.function.special.gamma;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.sequence.Summation;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.isNegative;
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.*;
@@ -37,8 +38,7 @@ import static java.lang.Math.*;
  * This implementation is based on Algorithm 610.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"D. E. Amos, "Algorithm 610: A Portable FORTRAN Subroutine for Derivatives of the Psi Function," ACM Transactions on Mathematical Software (TOMS), Volume 9, Issue 4 (December 1983), p. 494 - 502."
  * <li>"Shanjie Zhang, Jianming Jin, Computation of Special Functions. Wiley-Interscience; Har/Dis edition (July 12, 1996)."
  * <li><a href="http://en.wikipedia.org/wiki/Digamma_function">Wikipedia: Digamma function</a>
@@ -48,27 +48,27 @@ public class Digamma extends UnivariateRealFunction {
 
     /* ± the Bernoulli numbers divided by 2k, except for the first one (-0.5) */
     private static final double[] coefficients = new double[]{
-        -0.5,
-        -0.0833333333333333,
-        0.008333333333333333,
-        -0.003968253968253968,
-        0.004166666666666667,
-        -0.007575757575757576,
-        0.02109279609279609,
-        -0.08333333333333334,
-        0.4432598039215686,
-        -3.05395433027012,
-        26.45621212121212,
-        -281.4601449275362,
-        3607.510546398047,
-        -54827.5833333333,
-        974936.823850575,
-        -20052695.79668808,
-        472384867.72163,
-        -12635724795.91667,
-        380879311252.4537,
-        -12850850499305.08,
-        482414483548501.7
+            -0.5,
+            -0.0833333333333333,
+            0.008333333333333333,
+            -0.003968253968253968,
+            0.004166666666666667,
+            -0.007575757575757576,
+            0.02109279609279609,
+            -0.08333333333333334,
+            0.4432598039215686,
+            -3.05395433027012,
+            26.45621212121212,
+            -281.4601449275362,
+            3607.510546398047,
+            -54827.5833333333,
+            974936.823850575,
+            -20052695.79668808,
+            472384867.72163,
+            -12635724795.91667,
+            380879311252.4537,
+            -12850850499305.08,
+            482414483548501.7
     };
     private static final double BIG_X = 10;
 

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.distribution.univariate;
 
 import com.numericalmethod.suanshu.analysis.sequence.Summation;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static java.lang.Math.*;
 
@@ -34,15 +35,16 @@ import static java.lang.Math.*;
  * The R equivalent functions are {@code dpois, ppois, qpois, rpois}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Poisson_distribution">Wikipedia: Poisson distribution</a>
  * <li><a href="http://www.boost.org/doc/libs/1_36_0/libs/math/doc/sf_and_dist/html/math_toolkit/policy/pol_tutorial/understand_dis_quant.html">Wikipedia: Understanding Quantiles of Discrete Distributions</a>
  * </ul>
  */
 public class PoissonDistribution implements ProbabilityDistribution {
 
-    /** α: a positive real number, equal to the expected number of occurrences during the given interval */
+    /**
+     * α: a positive real number, equal to the expected number of occurrences during the given interval
+     */
     private final double lambda;
 
     /**
@@ -109,7 +111,7 @@ public class PoissonDistribution implements ProbabilityDistribution {
                 return s * l;
             }
         },
-                                    1e-8);
+                1e-8);
 
         double sum = S.sumToInfinity(2, 1);//k = 0, 1 imples the term is 0; we skip them
 
@@ -167,7 +169,7 @@ public class PoissonDistribution implements ProbabilityDistribution {
 
     @Override
     public double quantile(double u) {// TODO: use the Cornish–Fisher Expansion followed by a search
-        for (int k = 0;; ++k) {
+        for (int k = 0; ; ++k) {
             if (cdf(k) >= u) {
                 return k;
             }

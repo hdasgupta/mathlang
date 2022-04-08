@@ -37,9 +37,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * This particular implementation works with binary data (y).
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Logistic_regression">Wikipedia: Logistic regression</a>
  * <li>P. J. MacCullagh and J. A. Nelder. "Likelihood functions for binary data," in <i>Generalized Linear Models</i>, 2nd ed. pp.114. Section 4.4."
  * </ul>

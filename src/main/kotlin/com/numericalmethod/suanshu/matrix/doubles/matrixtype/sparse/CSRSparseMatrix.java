@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.sparse;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
+
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
@@ -32,6 +33,7 @@ import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,11 +73,15 @@ import java.util.List;
  */
 public class CSRSparseMatrix implements SparseMatrix {
 
-    /** number of non-zeros */
+    /**
+     * number of non-zeros
+     */
     private int nnz = 0;
     private int[] row_ptr = null;
     private int[] col_ind = null;
-    /** non-zero values */
+    /**
+     * non-zero values
+     */
     private double[] value = null;
     private final int nRows;
     private final int nCols;
@@ -97,6 +103,7 @@ public class CSRSparseMatrix implements SparseMatrix {
     }
 
     // TODO: add 1 more ctor to allocate max nNonZeros
+
     /**
      * Construct a sparse matrix in CSR format.
      *
@@ -110,7 +117,7 @@ public class CSRSparseMatrix implements SparseMatrix {
         this(nRows, nCols);
 
         SuanShuUtils.assertArgument(columnIndices.length == value.length && rowIndices.length == value.length,
-                                    "input arrays size mismatch");
+                "input arrays size mismatch");
 
         this.nnz = value.length;
         this.value = new double[value.length];
@@ -421,8 +428,8 @@ public class CSRSparseMatrix implements SparseMatrix {
         throwIfIncompatible4Multiplication(this, v);
 
         Vector Av = (v instanceof SparseVector)
-                    ? new SparseVector(nRows)
-                    : new DenseVector(nRows);
+                ? new SparseVector(nRows)
+                : new DenseVector(nRows);
 
         for (int i = 1; i <= nRows; ++i) {
             Av.set(i, this.getRow(i).innerProduct(v));
@@ -561,6 +568,7 @@ public class CSRSparseMatrix implements SparseMatrix {
 //
 //        return oldNnz - nnz;
 //    }
+
     /**
      * This is a utility class for accumulating sum of rows in CSR format.
      * It is useful for computing matrix addition and multiplication,
@@ -582,10 +590,10 @@ public class CSRSparseMatrix implements SparseMatrix {
      * Scatter scatter = new Scatter(sizeOfRow);
      * // ...
      * for (int i = 1; i <= nRows; ++i) { // for each row i
-     *     scatter.startRow(i);
-     *     scatter.add(matrix, i, weight); // add row i of matrix times weight to the sum
-     *     // ... add all the rows needed
-     *     nNonZeros += scatter.copyResults(values, columns, nNonZeros); // copy the results to values and columns array
+     * scatter.startRow(i);
+     * scatter.add(matrix, i, weight); // add row i of matrix times weight to the sum
+     * // ... add all the rows needed
+     * nNonZeros += scatter.copyResults(values, columns, nNonZeros); // copy the results to values and columns array
      * }
      * </code></blockquote>
      */

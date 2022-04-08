@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -44,6 +44,7 @@ public abstract class Integrator {
      * @return an array of the measure values
      */
     public abstract double[] du();
+
     /**
      * the integrand
      */
@@ -51,7 +52,7 @@ public abstract class Integrator {
 
     /**
      * Construct an integral from an integrand.
-     * 
+     *
      * @param f an integrand
      */
     public Integrator(FiltrationFunction f) {
@@ -60,7 +61,7 @@ public abstract class Integrator {
 
     /**
      * Integrate the function for a given filtration.
-     * 
+     *
      * @param FT a filtration
      * @return the integral value
      */

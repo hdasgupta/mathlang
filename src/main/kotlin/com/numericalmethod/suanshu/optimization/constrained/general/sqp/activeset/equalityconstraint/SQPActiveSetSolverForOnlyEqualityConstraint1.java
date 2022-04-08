@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR Jacobian PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR Jacobian PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -28,7 +28,9 @@ import com.numericalmethod.suanshu.analysis.function.rn2r1.QuadraticFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Inverse;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.optimization.constrained.ConstrainedMinimizer;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.EqualityConstraints;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.LessThanConstraints;
@@ -41,6 +43,7 @@ import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.List;
 
 /**
@@ -72,7 +75,9 @@ public class SQPActiveSetSolverForOnlyEqualityConstraint1 implements Constrained
          * @return a new instance of {@code SQPASEVariation}
          */
         SQPASEVariation newVariation(RealScalarFunction f, EqualityConstraints equal);
-    };
+    }
+
+    ;
 
     /**
      * This is the solution to a general minimization with only equality constraints using the SQP Active Set algorithm.

@@ -36,9 +36,7 @@ import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDist
  * the p-value is less than 0.05 or 0.01, corresponding respectively to a 5% or 1% chance of rejecting the null hypothesis when it is true.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Statistical_hypothesis_testing">Wikipedia: Statistical hypothesis testing</a>
  * <li><a href="http://en.wikipedia.org/wiki/Test_statistic">Wikipedia: Test statistic</a>
  * <li><a href="http://en.wikipedia.org/wiki/P-value">Wikipedia: P-value</a>
@@ -86,9 +84,8 @@ public abstract class HypothesisTest {
     /**
      * Get the test statistics.
      *
-     * @see <a href="http://en.wikipedia.org/wiki/Test_statistic">Wikipedia: Test statistic</a>
-     *
      * @return the test statistics
+     * @see <a href="http://en.wikipedia.org/wiki/Test_statistic">Wikipedia: Test statistic</a>
      */
     public double statistics() {
         return testStatistics;
@@ -102,12 +99,12 @@ public abstract class HypothesisTest {
     /* public double rejectionRegion() {
      * return rejectionRegion;
      * } */
+
     /**
      * Get the p-value.
      *
-     * @see <a href="http://en.wikipedia.org/wiki/P-value">Wikipedia: P-value</a>
-     *
      * @return the p-value
+     * @see <a href="http://en.wikipedia.org/wiki/P-value">Wikipedia: P-value</a>
      */
     public double pValue() {
         return pValue;
@@ -127,18 +124,16 @@ public abstract class HypothesisTest {
     /**
      * Get a description of the null hypothesis.
      *
-     * @see <a href="http://en.wikipedia.org/wiki/Null_hypothesis">Wikipedia: Null hypothesis</a>
-     *
      * @return the null hypothesis description
+     * @see <a href="http://en.wikipedia.org/wiki/Null_hypothesis">Wikipedia: Null hypothesis</a>
      */
     public abstract String getNullHypothesis();
 
     /**
      * Get a description of the alternative hypothesis.
      *
-     * @see <a href="http://en.wikipedia.org/wiki/Alternative_hypothesis">Wikipedia: Alternative hypothesis</a>
-     *
      * @return the alternative hypothesis description
+     * @see <a href="http://en.wikipedia.org/wiki/Alternative_hypothesis">Wikipedia: Alternative hypothesis</a>
      */
     public abstract String getAlternativeHypothesis();
 

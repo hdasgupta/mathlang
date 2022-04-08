@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -46,8 +46,7 @@ public class FunctionOps {
      * @param modulus  positive integer <i>m</i>
      * @return <i>b<sup>e</sup> mod m</i>
      * @throws IllegalArgumentException if not all inputs are positive integers
-     * @see
-     * <ul>
+     * @see <ul>
      * <li><a href="http://en.wikipedia.org/wiki/Modular_exponentiation">Wikipedia: Modular exponentiation</a>
      * <li><a href="http://en.wikipedia.org/wiki/Modular_exponentiation#Right-to-left_binary_method">Wikipedia: Right-to-left binary method</a>
      * <li>"Bruce Schneier, "p. 244," Applied Cryptography, 2e, ISBN 0-471-11709-9."

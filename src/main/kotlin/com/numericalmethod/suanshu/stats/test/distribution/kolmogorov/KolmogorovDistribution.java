@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -27,12 +27,13 @@ import com.numericalmethod.suanshu.analysis.sequence.Summation;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Pow;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import static java.lang.Math.*;
 
 /**
  * KolmogorovDistribution distribution is the distribution of the KolmogorovDistribution–Smirnov statistic.
  * The statistic is defined as the supremum of the absolute difference between the empirical and reference distributions.
- *
+ * <p>
  * To compute the cdf of the KolmogorovDistribution distribution, we implement the algorithm published in
  * <pre>
  * Evaluating KolmogorovDistribution's distribution
@@ -50,9 +51,7 @@ import static java.lang.Math.*;
  * </pre>
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Kolmogorov_distribution#Kolmogorov_distribution">Wikipedia: KolmogorovDistribution distribution</a>
  * <li>"George Marsaglia, Wai Wan Tsang & Jingbo Wang. "Evaluating KolmogorovDistribution's distribution," Journal of Statistical Software, 8/18."
  * <li>"Drew, J.H., Glen, A.G. and Leemis, L.M. "Computing the cumulative distribution function of the KolmogorovDistribution-Smirnov statistic," Computational Statistics and Data Analysis 34 (2000) 1-15."
@@ -76,8 +75,8 @@ public class KolmogorovDistribution implements ProbabilityDistribution {
     /**
      * Construct a KolmogorovDistribution distribution for a sample size <i>n</i>.
      *
-     * @param n the number of observations
-     * @param bigN we use asymptotic distribution for n > bigN
+     * @param n                      the number of observations
+     * @param bigN                   we use asymptotic distribution for n > bigN
      * @param rightTailApproximation {@code true} if we use the right tail approximation
      */
     public KolmogorovDistribution(int n, int bigN, boolean rightTailApproximation) {
@@ -216,7 +215,6 @@ public class KolmogorovDistribution implements ProbabilityDistribution {
      *
      * @param x
      * @return {@code F(x)}
-     *
      * @see <a href="http://en.wikipedia.org/wiki/KolmogorovDistribution%E2%80%93Smirnov_test#Kolmogorov_distribution">Wikipedia: KolmogorovDistribution distribution</a>
      */
     public static double asymptoticCDF(final double x) {

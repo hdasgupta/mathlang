@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
+
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.mathoperation.MatrixMathOperation;
@@ -34,6 +35,7 @@ import com.numericalmethod.suanshu.parallel.MultipleExecutionException;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
 
 /**
@@ -109,13 +111,17 @@ public class DenseMatrix implements Matrix, Densifiable {
             return nCols;
         }
     }
+
     //</editor-fold>
     private MyDenseDataImpl storage;
     private final MatrixMathOperation math = new SimpleMatrixMathOperation();
-    /** for parallel algorithm execution */
+    /**
+     * for parallel algorithm execution
+     */
     private static final int LENGTH_THRESHOLD = 100 * 100;
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
+
     /**
      * Construct a 0 matrix of dimension <i>nRows * nCols</i>.
      *
@@ -470,14 +476,14 @@ public class DenseMatrix implements Matrix, Densifiable {
                     thisData.length >= LENGTH_THRESHOLD,
                     0, nRows, new LoopBody() {
 
-                @Override
-                public void run(int i) throws Exception {
-                    int j = i * nCols;
-                    for (int p = 0, q = 0; p < nCols; ++p, q += nRows) { //fill result's i-th column
-                        resultData[i + q] = thisData[j + p];
-                    }
-                }
-            });
+                        @Override
+                        public void run(int i) throws Exception {
+                            int j = i * nCols;
+                            for (int p = 0, q = 0; p < nCols; ++p, q += nRows) { //fill result's i-th column
+                                resultData[i + q] = thisData[j + p];
+                            }
+                        }
+                    });
         } catch (MultipleExecutionException ex) {
             throw new RuntimeException(ex);
         }

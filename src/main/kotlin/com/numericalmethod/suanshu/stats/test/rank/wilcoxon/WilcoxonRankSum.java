@@ -4,8 +4,11 @@ import com.numericalmethod.suanshu.stats.descriptive.rank.Rank;
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
+
 import java.util.Arrays;
+
 import static java.lang.Math.*;
 
 /**
@@ -19,7 +22,6 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code wilcox.test}.
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U">Wikipedia: Mann–Whitney U</a>
  */
 public class WilcoxonRankSum extends HypothesisTest {
@@ -130,7 +132,6 @@ public class WilcoxonRankSum extends HypothesisTest {
      * Perform the Wilcoxon Rank Sum test to test for the equality of means of two population, or whether the means differs by an offset.
      * <p/>
      * The exact distribution is used for sample size < 50.
-     *
      *
      * @param sample1 sample 1
      * @param sample2 sample 2

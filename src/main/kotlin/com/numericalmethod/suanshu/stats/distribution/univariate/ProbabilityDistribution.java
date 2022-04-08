@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -120,8 +120,7 @@ public interface ProbabilityDistribution {
      *
      * @param x <i>x</i>
      * @return <i>f(x)</i>
-     * @see
-     * <ul>
+     * @see <ul>
      * <li><a href="http://en.wikipedia.org/wiki/Probability_density_function">Wikipedia: Probability density function</a>
      * <li><a href="http://en.wikipedia.org/wiki/Probability_mass_function">Wikipedia: Probability mass function</a>
      * </ul>
@@ -140,6 +139,7 @@ public interface ProbabilityDistribution {
 //     * @see <a href="http://en.wikipedia.org/wiki/Survival_function">Wikipedia: Survival function</a>
 //     */
 //    public double survival(double t);
+
     /**
      * The moment generating function is the expected value of <i>e<sup>tX</sup></i>. That is,
      * <blockquote><i>

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -33,6 +33,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.Basis;
 import com.numericalmethod.suanshu.vector.doubles.operation.Projection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,8 +57,7 @@ import java.util.List;
  * the result for the orthogonal complement may differ because the kernel basis is not unique.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Luc Giraud, Julien Langou, Miroslav Rozloznik, "On the loss of orthogonality in the Gram-Schmidt orthogonalization process," Computers & Mathematics with Applications, Volume 50, Issue 7, October 2005, p. 1069-1075. Numerical Methods and Computational Mechanics."
  * <li>"Gene H. Golub, Charles F. Van Loan, Matrix Computations (Johns Hopkins Studies in Mathematical Sciences)(3rd Edition)(Paperback)."
  * <li><a href="http://en.wikipedia.org/wiki/Gram-Schmidt">Wikipedia: Gram–Schmidt process</a>
@@ -66,7 +66,7 @@ import java.util.List;
 //TODO: column pivoting, rank, det, output the diagonal
 //
 public class GramSchmidt implements QRDecomposition {
-    
+
     private Matrix Q;
     private UpperTriangularMatrix R;
     private PermutationMatrix P;
@@ -87,13 +87,13 @@ public class GramSchmidt implements QRDecomposition {
         this.nRows = A.nRows();
         this.nCols = A.nCols();
         this.epsilon = epsilon;
-        
+
         R = new UpperTriangularMatrix(nCols);
         R.set(1, 1, 0);//allocate space
         P = new PermutationMatrix(nCols);//For a fat matrix A, the permutation matrix P is not square. The rightmost columns are 0.
         rank = 0;
         zero = new DenseVector(nRows);
-        
+
         Vector[] basis = new Vector[nCols];
         basis[0] = new DenseVector(nRows);//in case the one and only column has norm 0, we need to have the lenght for CreateMatrix.cbind
 
@@ -108,7 +108,7 @@ public class GramSchmidt implements QRDecomposition {
                     }
                 }
             }
-            
+
             if (!IsMatrix.zero(orthogonalVector, epsilon)) {
                 double norm = orthogonalVector.norm();
                 R.set(i, i, norm);
@@ -118,12 +118,12 @@ public class GramSchmidt implements QRDecomposition {
                 if (pad0Cols) {
                     basis[i - 1] = zero;
                 }
-                
+
                 R.set(i, i, 0);
                 P.moveColumn2End(i);//record column pivoting if this vector is linearly dependent on the previous vectors
             }
         }
-        
+
         Q = CreateMatrix.cbind(basis);
     }
 
@@ -135,22 +135,22 @@ public class GramSchmidt implements QRDecomposition {
     public GramSchmidt(Matrix A) {
         this(A, true, SuanShuUtils.autoEpsilon(A));
     }
-    
+
     @Override
     public Matrix Q() {
         return Q.deepCopy();
     }
-    
+
     @Override
     public UpperTriangularMatrix R() {
         return new UpperTriangularMatrix(R);
     }
-    
+
     @Override
     public PermutationMatrix P() {
         return new PermutationMatrix(P);
     }
-    
+
     @Override
     public int rank() {
         return rank;
@@ -158,7 +158,7 @@ public class GramSchmidt implements QRDecomposition {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This implementation extends <i>Q</i> by appending <i>A</i>'s orthogonal complement.
      * Suppose <i>Q</i> has the orthogonal basis for a subspace <i>A</i>.
      * To compute the orthogonal complement of <i>A</i>, we apply the Gram-Schmidt procedure to either
@@ -178,7 +178,7 @@ public class GramSchmidt implements QRDecomposition {
             if (Q.nCols() <= Q.nRows()) {//square or tall <i>A</i>
                 return Q();//<i>Q</i> is already complete because <i>A</i> is full rank
             }
-            
+
             Matrix squareQ = CreateMatrix.subMatrix(Q, 1, nRows, 1, nRows);//keep only the first <i>nRows</i> columns
             return squareQ;
         }
@@ -200,18 +200,18 @@ public class GramSchmidt implements QRDecomposition {
         for (int i = 1; i <= rank; ++i) {//compute the span for the range space
             basis.add(Q.getColumn(i));
         }
-        
+
         List<Vector> Rn = Basis.getBasis(nRows, nRows);//basis for Euclidean space Rn
         basis.addAll(Rn);
-        
+
         Matrix M = CreateMatrix.cbind(basis);
         GramSchmidt gs = new GramSchmidt(M, false, epsilon);
-        
+
         Matrix squareQ = gs.Q();
         squareQ = CreateMatrix.subMatrix(squareQ, 1, nRows, 1, nRows);//keep only the first <i>nRows</i> columns
         return squareQ;
     }
-    
+
     @Override
     public Matrix tallR() {
         UpperTriangularMatrix myR = R();

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.analysis.function.special.gamma;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
 import static java.lang.Math.*;
 
@@ -34,8 +35,7 @@ import static java.lang.Math.*;
  * This implementation is based on Algorithm 121.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"B. E. Schneider, "Algorithm 121: Trigamma Function," JSTOR. Vol. 27, No. 1, 1978."
  * <li><a href="http://en.wikipedia.org/wiki/Trigamma_function">Wikipedia: Trigamma function</a>
  * <li>"http://pmtksupport.googlecode.com/svn/trunk/lightspeed2.3/trigamma.m"

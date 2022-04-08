@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.stats.test.distribution.kolmogorov;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import static com.numericalmethod.suanshu.number.big.BigIntegerUtils.combination;
 import static java.lang.Math.*;
 
@@ -32,9 +34,7 @@ import static java.lang.Math.*;
  * i.e., the probability that F(x) is dominated by the upper confidence contour.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"One-sided confidence contours for probability distribution functions. Z. W. Birnbaum and Fred H. Tingey (1951). The Annals of Mathematical Statistics,Vol. 22, No. 4 (Dec., 1951), p. 592-596."
  * <li>"Sur les 6carts de la courbe de distribution empirique. N. Smirnov. Rec. Math. (Mat.Sbornik), N. S. Vol. 6 (48) (1939), p. 3-26."
  * </ul>
@@ -52,8 +52,8 @@ public class KolmogorovOneSidedDistribution implements ProbabilityDistribution {
 
     /**
      * Construct a one-sided Kolmogorov distribution.
-     * 
-     * @param n the number of observation
+     *
+     * @param n    the number of observation
      * @param bigN the big N for which {@code n > bigN}, we use the asymptotic distribution
      */
     public KolmogorovOneSidedDistribution(int n, int bigN) {
@@ -130,7 +130,6 @@ public class KolmogorovOneSidedDistribution implements ProbabilityDistribution {
     /**
      * @param x <i>x</i>
      * @return Pr(x)
-     *
      * @see "Z. W. Birnbaum and Fred H. Tingey. "One-sided confidence contours for probability distribution functions," The Annals of Mathematical Statistics,Vol. 22, No. 4 (Dec., 1951), p. 592-596."
      */
     private double BirnbaumTingey(double x) {
@@ -156,7 +155,6 @@ public class KolmogorovOneSidedDistribution implements ProbabilityDistribution {
      * @param m scaling factor; usually a function of the size of the sample(s)
      * @param x <i>x</i>
      * @return Pr(x)
-     *
      * @see "N. Smirnov. "Sur les 6carts de la courbe de distribution empirique," Rec. Math. (Mat.Sbornik), N. S. Vol. 6 (48) (1939), p. 3-26."
      */
     public static double asymptoticCDF(double m, double x) {

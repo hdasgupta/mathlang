@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,11 +24,14 @@ package com.numericalmethod.suanshu.matrix.doubles.matrixtype.sparse;
 
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.*;
+
 import com.numericalmethod.suanshu.number.Real;
 import com.numericalmethod.suanshu.vector.doubles.IsVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -107,7 +110,7 @@ public class SparseVector implements
          * Overridden to avoid the vector being altered.
          *
          * @throws UnsupportedOperationException always; set the element to zero
-         * instead
+         *                                       instead
          */
         @Override
         public void remove() {
@@ -116,7 +119,9 @@ public class SparseVector implements
     }
 
     private final int size;
-    /** Store non-zero entries in sorted order of indices */
+    /**
+     * Store non-zero entries in sorted order of indices
+     */
     private final LinkedList<Entry> entries;
 
     /**
@@ -211,7 +216,7 @@ public class SparseVector implements
     public void set(int index, double value) {
         SuanShuUtils.assertArgument(index >= 1 && index <= size, "out-of-range [1:%d] index: %d", size, index);
 
-        for (ListIterator<Entry> it = entries.listIterator(); it.hasNext();) {
+        for (ListIterator<Entry> it = entries.listIterator(); it.hasNext(); ) {
             Entry entry = it.next();
             if (entry.index == index) {
                 if (Double.compare(0., value) != 0) {
@@ -497,7 +502,7 @@ public class SparseVector implements
         return entries.size();
     }
 
-//    public int dropTolerance(double tol) {
+    //    public int dropTolerance(double tol) {
 //        int nDrops = 0;
 //        for (java.util.Iterator<Entry> iterator = entries.iterator(); iterator.hasNext();) {
 //            Entry entry = iterator.next();

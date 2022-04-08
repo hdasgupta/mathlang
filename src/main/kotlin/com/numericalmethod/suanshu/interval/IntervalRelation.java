@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,7 +37,6 @@ public enum IntervalRelation {
      * X takes place before Y.
      */
     BEFORE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.end().compareTo(Y.begin()) < 0;
@@ -47,7 +46,6 @@ public enum IntervalRelation {
      * X takes place after Y.
      */
     AFTER {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.end()) > 0;
@@ -57,7 +55,6 @@ public enum IntervalRelation {
      * X meets Y.
      */
     MEET {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.end().compareTo(Y.begin()) == 0;
@@ -67,7 +64,6 @@ public enum IntervalRelation {
      * Y meets X.
      */
     MEET_INVERSE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return Y.end().compareTo(X.begin()) == 0;
@@ -77,7 +73,6 @@ public enum IntervalRelation {
      * X overlaps with Y.
      */
     OVERLAP {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return Y.begin().compareTo(X.begin()) > 0 && Y.begin().compareTo(X.end()) < 0 && Y.end().compareTo(X.end()) > 0;
@@ -87,7 +82,6 @@ public enum IntervalRelation {
      * Y overlaps with X.
      */
     OVERLAP_INVERSE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.end().compareTo(Y.end()) > 0 && X.begin().compareTo(Y.begin()) > 0 && X.begin().compareTo(Y.end()) < 0;
@@ -97,7 +91,6 @@ public enum IntervalRelation {
      * X starts Y.
      */
     START {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) == 0 && X.end().compareTo(Y.end()) < 0;
@@ -107,7 +100,6 @@ public enum IntervalRelation {
      * Y starts X.
      */
     START_INVERSE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) == 0 && X.end().compareTo(Y.end()) > 0;
@@ -117,7 +109,6 @@ public enum IntervalRelation {
      * X during Y.
      */
     DURING {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) > 0 && X.end().compareTo(Y.end()) < 0;
@@ -127,7 +118,6 @@ public enum IntervalRelation {
      * Y during X.
      */
     DURING_INVERSE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) < 0 && X.end().compareTo(Y.end()) > 0;
@@ -137,7 +127,6 @@ public enum IntervalRelation {
      * X finishes Y
      */
     FINISH {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) > 0 && X.end().compareTo(Y.end()) == 0;
@@ -147,7 +136,6 @@ public enum IntervalRelation {
      * Y finishes X.
      */
     FINISH_INVERSE {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) < 0 && X.end().compareTo(Y.end()) == 0;
@@ -157,7 +145,6 @@ public enum IntervalRelation {
      * X is equal to Y.
      */
     EQUAL {
-
         @Override
         public <T extends Comparable<? super T>> boolean isBetween(Interval<T> X, Interval<T> Y) {
             return X.begin().compareTo(Y.begin()) == 0 && X.end().compareTo(Y.end()) == 0;

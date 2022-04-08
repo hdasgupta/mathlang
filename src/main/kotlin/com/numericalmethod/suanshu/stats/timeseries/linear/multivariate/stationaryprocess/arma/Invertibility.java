@@ -24,13 +24,13 @@ package com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.station
 
 import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
+
 import static java.lang.Math.*;
 
 /**
  * This class computes the inverse representation of an Autoregressive Moving Average (ARMA) model.
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. Brockwell and R. A. Davis, "Eq. 11.3.13., Theorem 13.3.2., Chapter 11.3 Multivariate ARMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class Invertibility {//TODO: test cases
@@ -46,7 +46,7 @@ public class Invertibility {//TODO: test cases
 
     /**
      * Construct the inverse representation of an ARMA model.
-     *    
+     *
      * @param model the ARMA model
      * @param nLags the number of lags in the series
      */

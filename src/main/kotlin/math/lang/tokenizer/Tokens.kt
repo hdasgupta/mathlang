@@ -15,9 +15,9 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.regex.Pattern
 
-fun main() {
-    println(getOperand(TokenNode.getTree(Token.getTokens("a+x"))))
-}
+//fun main() {
+//    println(getOperand(TokenNode.getTree(Token.getTokens("a+x"))))
+//}
 
 interface Nodable
 

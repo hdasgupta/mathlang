@@ -29,6 +29,7 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.PermutationMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.LowerTriangularMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.UpperTriangularMatrix;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.autoEpsilon;
 import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
@@ -48,7 +49,9 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
  */
 public class Inverse extends DenseMatrix {
 
-    /** the dimension of the square matrix */
+    /**
+     * the dimension of the square matrix
+     */
     private final int dim;
 
     /**

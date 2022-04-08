@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -172,11 +172,11 @@ public class Summation {
      */
     public double sumToInfinity(double from, double inc) {
         SuanShuUtils.assertOrThrow(threshold > 0
-                                   ? null
-                                   : new RuntimeException("the convergence threshold is 0; summing will not stop"));
+                ? null
+                : new RuntimeException("the convergence threshold is 0; summing will not stop"));
 
         double sum = 0;
-        for (double i = from;; i += inc) {//TODO: parallelize this
+        for (double i = from; ; i += inc) {//TODO: parallelize this
             double value = term.evaluate(i);
             if (Math.abs(value) < threshold) {//convergence criterion
                 break;

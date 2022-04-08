@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -41,7 +41,7 @@ public abstract class Family implements ExponentialDistribution {
 
     /**
      * Construct an instance of <tt>Family</tt>.
-     * 
+     *
      * @param link the link function of this distribution
      */
     public Family(LinkFunction link) {
@@ -66,12 +66,10 @@ public abstract class Family implements ExponentialDistribution {
      * function to implement a simplified expression for efficiency or handle
      * special values.
      *
-     * @param y the observed value
+     * @param y  the observed value
      * @param mu the <em>estimated</em> mean, μ^
      * @return the deviance
-     *
-     * @see
-     * <ul>
+     * @see <ul>
      * <li>P. J. MacCullagh and J. A. Nelder, "Measuring the goodness-of-fit," <i>Generalized Linear Models,<i> 2nd ed. Section 2.3. pp.34.
      * <li><a href="http://en.wikipedia.org/wiki/Deviance_%28statistics%29">Wikipedia: Deviance<a>
      * </ul>

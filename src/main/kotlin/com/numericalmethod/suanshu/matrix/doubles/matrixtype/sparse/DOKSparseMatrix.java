@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.sparse;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
+
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
@@ -32,6 +33,7 @@ import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.*;
 
 /**
@@ -79,7 +81,7 @@ public class DOKSparseMatrix implements SparseMatrix {
         this.dictionary = new HashMap<Coordinates, Double>(value.length);
 
         SuanShuUtils.assertArgument(rowIndices.length == columnIndices.length && rowIndices.length == value.length,
-                                    "input arrays size mismatch");
+                "input arrays size mismatch");
 
         for (int k = 0; k < rowIndices.length; ++k) {
             this.set(rowIndices[k], columnIndices[k], value[k]);
@@ -223,8 +225,8 @@ public class DOKSparseMatrix implements SparseMatrix {
 
         final int ncols = that.nCols();
         Matrix product = (that instanceof SparseMatrix)
-                         ? new DOKSparseMatrix(nRows, ncols)
-                         : new DenseMatrix(nRows, ncols);
+                ? new DOKSparseMatrix(nRows, ncols)
+                : new DenseMatrix(nRows, ncols);
 
         for (Map.Entry<Coordinates, Double> entry : dictionary.entrySet()) {
             int i = entry.getKey().i;
@@ -243,8 +245,8 @@ public class DOKSparseMatrix implements SparseMatrix {
         throwIfIncompatible4Multiplication(this, v);
 
         Vector Av = (v instanceof SparseVector)
-                    ? new SparseVector(nRows)
-                    : new DenseVector(nRows);
+                ? new SparseVector(nRows)
+                : new DenseVector(nRows);
 
         for (Map.Entry<Coordinates, Double> entry : dictionary.entrySet()) {
             double value = entry.getValue() * v.get(entry.getKey().j);
@@ -321,7 +323,7 @@ public class DOKSparseMatrix implements SparseMatrix {
         return dictionary.size();
     }
 
-//    public int dropTolerance(double tol) {
+    //    public int dropTolerance(double tol) {
 //        int nDrops = 0;
 //        for (Iterator<Map.Entry<Coordinates, Double>> iterator = dictionary.entrySet().iterator(); iterator.hasNext();) {
 //            Map.Entry<Coordinates, Double> entry = iterator.next();

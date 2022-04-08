@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess.arma;
 
 import static com.numericalmethod.suanshu.analysis.function.FunctionOps.dotProduct;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.integration.univariate.riemann.Riemann;
@@ -38,7 +39,9 @@ import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.TimeSeri
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.*;
+
 import java.util.Arrays;
 
 /**
@@ -55,7 +58,6 @@ import java.util.Arrays;
  * The R equivalent functions is {@code arima}.
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. Brockwell and R. A. Davis, "Chapter 8.7. Model Building and Forecasting with ARIMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class ConditionalSumOfSquares implements ARMAFitting {
@@ -169,7 +171,6 @@ public class ConditionalSumOfSquares implements ARMAFitting {
      * The estimators are asymptotically normal.
      *
      * @return the asymptotic covariance matrix
-     *
      * @see "P. J. Brockwell and R. A. Davis, "Eq. 10.8.27. Thm. 10.8.2. Chapter 10.8. Model Building and Forecasting with ARIMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
      */
     @Override
@@ -216,7 +217,6 @@ public class ConditionalSumOfSquares implements ARMAFitting {
      * The estimators are asymptotically normal.
      *
      * @return the asymptotic errors
-     *
      * @see "P. J. Brockwell and R. A. Davis, "Eq. 10.8.27. Thm. 10.8.2. Chapter 10.8. Model Building and Forecasting with ARIMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
      */
     @Override
@@ -249,7 +249,6 @@ public class ConditionalSumOfSquares implements ARMAFitting {
      * Compute the AIC, a model selection criterion.
      *
      * @return the AIC
-     *
      * @see <a href="http://en.wikipedia.org/wiki/Akaike_information_criterion">Wikipedia: Akaike information criterion</a>
      */
     @Override
@@ -263,7 +262,6 @@ public class ConditionalSumOfSquares implements ARMAFitting {
      * Compute the AICC, a model selection criterion.
      *
      * @return the AICC
-     *
      * @see "P. J. Brockwell and R. A. Davis, "Eq. 9.2.1. Chapter 9.2. Model Building and Forecasting with ARIMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
      */
     @Override
@@ -285,7 +283,6 @@ public class ConditionalSumOfSquares implements ARMAFitting {
      * @param q    the number of MA terms
      * @param arma a stationary ARMA series of observations
      * @return the negative of the log-likelihood function
-     *
      * @see "P. J. Brockwell and R. A. Davis, "Eq. 8.7.4. Chapter 8.7. Model Building and Forecasting with ARIMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
      */
     private static RealScalarFunction nLogLikelihood(final int p, final int q, final double[] arma) {
@@ -358,12 +355,12 @@ public class ConditionalSumOfSquares implements ARMAFitting {
 
     /**
      * This implements dlogg/dφ or dlogg/dθ.
-     *
+     * <p>
      * To understand this implementation, we first make a dlogg/dφ into a fraction form.
      * We expand both the numerator and denominator.
      * Then we find that both the numerator and denominator are a real function in λ.
      * All computation can be done in the Real number domain, though the equations appear to be Complex.
-     *
+     * <p>
      * To get rid of the complex i, we use the Euler formula:
      * e<sup>ix</sup> + e<sup>-ix</sup> = 2cos(x)
      *

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,11 +26,14 @@ import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.stationaryprocess.arma.ARMAXModel;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
 
 /**
@@ -47,7 +50,7 @@ import java.util.Arrays;
  * <blockquote><code>
  * X_t = μ + Σ φ_i * X_{t-i} + Σ θ_j * ε_{t-j} + ψ * D_t + ε_t.
  * </code></blockquote>
- *
+ * <p>
  * In the equation above, X_s, μ and ε_s are n-dimensional vectors; (n * n) matrices {φ_i} and {θ_j} are the AR and MA
  * coefficients, respectively; D_t is an (m * 1) vector which contains all exogenous variables at time t (excl. the intercept term),
  * and its coefficients are represented by a (n * m) matrix ψ.
@@ -84,11 +87,11 @@ public class ARIMAXModel {
     /**
      * Construct a multivariate ARIMAX (ARIMA model with eXogenous inputs) model.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public ARIMAXModel(Vector mu, Matrix[] phi, int d, Matrix[] theta, Matrix psi, Matrix sigma) {
@@ -139,11 +142,11 @@ public class ARIMAXModel {
     /**
      * Construct a multivariate ARIMAX model with unit variance.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARIMAXModel(Vector mu, Matrix[] phi, int d, Matrix[] theta, Matrix psi) {
         this(mu, phi, d, theta, psi,
@@ -153,10 +156,10 @@ public class ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARIMAX model.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public ARIMAXModel(Matrix[] phi, int d, Matrix[] theta, Matrix psi, Matrix sigma) {
@@ -167,16 +170,16 @@ public class ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARIMAX model with unit variance.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARIMAXModel(Matrix[] phi, int d, Matrix[] theta, Matrix psi) {
         this(phi, d, theta, psi,
                 new DenseMatrix(
-                phi != null ? phi[0].nRows() : theta[0].nRows(),
-                phi != null ? phi[0].nRows() : theta[0].nRows()).ONE());//sigma
+                        phi != null ? phi[0].nRows() : theta[0].nRows(),
+                        phi != null ? phi[0].nRows() : theta[0].nRows()).ONE());//sigma
     }
 
     /**

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.number.big;
 
 import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -38,6 +39,7 @@ public class BigDecimalUtils {
     private BigDecimalUtils() {
         // private constructor for utility class
     }
+
     /**
      * the value of PI
      *
@@ -46,6 +48,7 @@ public class BigDecimalUtils {
     public static final BigDecimal PI = new BigDecimal("3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679");
 
     //<editor-fold defaultstate="collapsed" desc="comparisons">
+
     /**
      * Compare two {@code BigDecimal}s up to a precision.
      * In other words, if the absolute difference between the two numbers falls below a threshold, they are considered equal.
@@ -76,6 +79,7 @@ public class BigDecimalUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="sum">
+
     /**
      * Sum up the {@code BigDecimal} numbers.
      *
@@ -110,6 +114,7 @@ public class BigDecimalUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="get parts">
+
     /**
      * Get the integral part of a number (discarding the fractional part).
      *
@@ -137,6 +142,7 @@ public class BigDecimalUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="pow">
+
     /**
      * Compute <i>a</i> to the power of <i>b</i>.
      *
@@ -195,6 +201,7 @@ public class BigDecimalUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="log">
+
     /**
      * Compute <i>log(x)</i>.
      * The base is <i>e</i>, hence the natural log.
@@ -245,8 +252,7 @@ public class BigDecimalUtils {
      * @param x     <i>x</i>
      * @param scale the scale for the BigDecimal result; a precision parameter
      * @return <i>log(x)</i>
-     * @see
-     * <ul>
+     * @see <ul>
      * <li><a href="http://en.wikipedia.org/wiki/Natural_logarithm">Wikipedia: Natural logarithm</a>
      * <li><a href="http://en.wikipedia.org/wiki/Newton%27s_method">Wikipedia: Newton's method</a>
      * </ul>
@@ -263,7 +269,7 @@ public class BigDecimalUtils {
             y = BigDecimal.ZERO;
         }
 
-        for (BigDecimal delta = BigDecimal.ONE; !equals(delta, BigDecimal.ZERO, scale);) {
+        for (BigDecimal delta = BigDecimal.ONE; !equals(delta, BigDecimal.ZERO, scale); ) {
             BigDecimal ey = exp(y, precision);
             delta = BigDecimal.ONE.subtract(x.divide(ey, precision, BigDecimal.ROUND_HALF_EVEN));
             y = y.subtract(delta);//y' = y - (1 - x / e(y))
@@ -274,6 +280,7 @@ public class BigDecimalUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="exp">
+
     /**
      * Compute <i>e<sup>x</sup></i>.
      *

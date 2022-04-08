@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.analysis.function.polynomial;
 import com.numericalmethod.suanshu.analysis.uniroot.Newton;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
+
 import static java.lang.Math.exp;
 import static java.lang.Math.log;
 
@@ -33,7 +34,7 @@ import static java.lang.Math.log;
  * <pre><i>
  * C(x) = |p_n|x^n + |p_{n-1}|x^{n-1} + ... + |p_1|x - |p_0| = 0
  * </i></pre>
- *
+ * <p>
  * Note: the sign of the constant is negative.
  *
  * @author Haksun Li

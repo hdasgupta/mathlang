@@ -48,8 +48,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * ]/
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou, Wu-Sheng Lu, "Algorithm 5.5," Practical Optimization: Algorithms and Engineering Applications."
  * <li><a href="http://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm">Wikipedia: Gauss–Newton algorithm</a>
  * </ul>
@@ -91,7 +90,9 @@ public class GaussNewton {
         public IterativeMinimizer<Vector> solve(C2OptimProblem problem) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
-    };
+    }
+
+    ;
 
     private final MySteepestDescent minimizer;
 
@@ -109,6 +110,7 @@ public class GaussNewton {
 //    public IterativeMinimizer<Vector> solve(C2OptimProblem problem) {
 //        return new GaussNewton.GaussNewtonImpl(problem);
 //    }
+
     /**
      * Solve the minimization problem to minimize <i>F = vf' * vf</i>.
      *

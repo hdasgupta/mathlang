@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.stats.random.univariate.uniform.linear;
 
 import com.numericalmethod.suanshu.analysis.function.FunctionOps;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -47,21 +48,28 @@ import java.util.concurrent.atomic.AtomicLong;
  * This class is the most fundamental building block for <em>all linear</em> random number generation algorithms in this library.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Lehmer, D.H. (1951) Mathematical methods in large-scale computing units, p.141-146. Proceedings of the Second Symposium on Large Scale Digital Computing Machinery. Harvard University Press, Cambridge, Mass."
  * <li><a href="http://en.wikipedia.org/wiki/Lehmer_random_number_generator">Wikipedia: Lehmer random number generator</a>
  * </ul>
  */
 public class Lehmer implements LinearCongruentialGenerator {
 
-    /** the multiplier */
+    /**
+     * the multiplier
+     */
     private final long a;
-    /** the modulus */
+    /**
+     * the modulus
+     */
     private final long m;
-    /** m / a */
+    /**
+     * m / a
+     */
     private final long q;
-    /** m % a */
+    /**
+     * m % a
+     */
     private final long r;
     private AtomicLong x = new AtomicLong();//the current random value
 
@@ -81,8 +89,7 @@ public class Lehmer implements LinearCongruentialGenerator {
      * @param a    the multiplier
      * @param m    the modulus
      * @param seed the seed. It should <em>not</em> be zero.
-     * @see
-     * <ul>
+     * @see <ul>
      * <li>"Paul Glasserman, Monte Carlo Methods in Financial Engineering, 2004."
      * <li>"P. L'Ecuyer, "Efficient and portable combined random number generators," Communications of the ACM 31:742-749, 774, Correspondence 32:1019-1024, 1988."
      * </ul>

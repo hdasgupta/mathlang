@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -30,6 +30,7 @@ import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.qr.Hessenb
 import com.numericalmethod.suanshu.matrix.doubles.operation.CongruentMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,7 +116,7 @@ public class QRAlgorithm implements Spectrum {
      * \]
      * the real Schur canonical form is <i>Q'HQ = T</i>, where
      * <i>Q</i> is orthogonal, and <i>T</i> is quasi-triangular.
-     *
+     * <p>
      * <p/>
      * This implementation is a modified version of the algorithm in the reference.
      *
@@ -144,10 +145,10 @@ public class QRAlgorithm implements Spectrum {
         List<Number> eigenvalues = new ArrayList<Number>();
         //get the 1x1 and 2x2 matrix blocks
         //for each matrix, compute its eigenvalue analytically
-        for (int ul = 1; ul <= dim;) {
+        for (int ul = 1; ul <= dim; ) {
             Matrix sub;
             if ((ul == dim)
-                || (hss.deflationCriterion.isNegligible(H, ul + 1, ul, epsilon))) {//1x1
+                    || (hss.deflationCriterion.isNegligible(H, ul + 1, ul, epsilon))) {//1x1
                 sub = CreateMatrix.subMatrix(H, ul, ul, ul, ul);
                 ++ul;
             } else {//2x2
@@ -167,7 +168,7 @@ public class QRAlgorithm implements Spectrum {
      * Get the <i>Q</i> matrix as in the real Schur canonical form <i>Q'MQ = T</i>.
      * The columns of are called Schur vectors.
      * If <i>T</i> is diagonal, then the Schur vectors are the eigenvectors.
-     *
+     * <p>
      * <p/>
      * This implementation stores all the <i>Q<sub>i</sub></i>'s produced in the process of the QR algorithm.
      * <i>Q</i> is a product of them. That is,

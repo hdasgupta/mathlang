@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.QuadraticMonomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.QuadraticSyntheticDivision;
 import com.numericalmethod.suanshu.number.complex.Complex;
+
 import static java.lang.Math.abs;
 
 /**
@@ -130,7 +131,7 @@ class JTFixedShiftStep extends JTStep {
                      */
                     s = ss;
                     // Choose iteration according to the fastest converging sequence
-                    for (stry = vtry = areZerosNearRealAxis = false; (spass && !stry) || (vpass && !vtry) || areZerosNearRealAxis;) {
+                    for (stry = vtry = areZerosNearRealAxis = false; (spass && !stry) || (vpass && !vtry) || areZerosNearRealAxis; ) {
                         /*
                          * check quadratic shift if any of these 4 conditions is fulfilled:
                          * 1. only v converges

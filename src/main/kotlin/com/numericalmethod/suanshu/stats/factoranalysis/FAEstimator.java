@@ -35,8 +35,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * from the factor analysis MLE optimization.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li> M. S. Bartlett, "The Statistical Conception of Mental Factors," The British Journal of Psychology, vol. 28, 97–104, 1937.
  * <li> M. S. Bartlett, "A Note on Multiplying Factors for Various Chi-Squared Approximations," Journal of the Royal Statistical Society, Series B, vol. 16, 296–298, 1954.
  * <li> D. N. Lawley and A. E. Maxwell, "Factor Analysis as a Statistical Method," Second Edition, Butterworths, 1971.
@@ -59,8 +58,8 @@ public class FAEstimator extends HypothesisTest {
      * @param nObs          the sample size, i.e. <i>N</i> in Lawley and Maxwell (1971)
      * @param psi           the estimated (optimal) psi
      * @param loadings      This is the loading matrix, one column for each factor.
-     * The factors are ordered in decreasing order of sums of squares of loadings,
-     * The loadings are given the sign such that the sum of each loading is positive.
+     *                      The factors are ordered in decreasing order of sums of squares of loadings,
+     *                      The loadings are given the sign such that the sum of each loading is positive.
      * @param logLikelihood the log-likelihood value, f<sub>k</sub>
      * @param dof           the degree of freedom in the factor analysis model
      * @param scores        the matrix of scores, computed using either Thompson's (1951) scores or Bartlett's (1937) weighted least-squares scores

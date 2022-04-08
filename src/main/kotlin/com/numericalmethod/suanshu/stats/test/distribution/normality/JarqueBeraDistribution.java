@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -39,11 +39,10 @@ import com.numericalmethod.suanshu.stats.random.multivariate.IID;
  * JB = --- (S<sup>2</sup>) + 0.25 * K<sup>2</sup>))
  *       6
  * </pre></code></blockquote>
- *
+ * <p>
  * S is the skewness; K is the kurtosis.
- * 
- * @author Haksun Li
  *
+ * @author Haksun Li
  * @see <a href="http://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Wikipedia: Jarque–Bera test</a>
  */
 public class JarqueBeraDistribution extends EmpiricalDistribution {
@@ -59,9 +58,9 @@ public class JarqueBeraDistribution extends EmpiricalDistribution {
 
     /**
      * Construct a Jarque–Bera distribution using Monte Carlo simulation.
-     * 
-     * @param N number of observations in a sample
-     * @param nSim number of simulations
+     *
+     * @param N     number of observations in a sample
+     * @param nSim  number of simulations
      * @param rnorm a Gaussian random number generator
      */
     public JarqueBeraDistribution(int N, int nSim, StandardNormalRng rnorm) {//recommend nSim to be >= 70000 for cdf, and >= 1000000 for quantile
@@ -74,7 +73,7 @@ public class JarqueBeraDistribution extends EmpiricalDistribution {
     /**
      * Construct a Jarque–Bera distribution using Monte Carlo simulation.
      *
-     * @param N number of observations in a sample
+     * @param N    number of observations in a sample
      * @param nSim number of simulations
      */
     public JarqueBeraDistribution(int N, int nSim) {
@@ -83,9 +82,9 @@ public class JarqueBeraDistribution extends EmpiricalDistribution {
 
     /**
      * Simulate the statistics.
-     * 
-     * @param N number of observations in a sample
-     * @param nSim number of simulations
+     *
+     * @param N     number of observations in a sample
+     * @param nSim  number of simulations
      * @param rnorm a Gaussian random number generator
      * @return a set of statistics
      */

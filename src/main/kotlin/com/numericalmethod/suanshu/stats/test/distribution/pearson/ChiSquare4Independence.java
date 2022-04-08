@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.sum;
 
 /**
@@ -35,7 +36,6 @@ import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.sum
  * expressed in a contingency table, are independent of each other.
  *
  * @author Haksun Li
- *
  * @see <a href="http://en.wikipedia.org/wiki/Pearson%27s_chi-square_test">Wikipedia: Pearson's chi-square test</a>
  */
 public class ChiSquare4Independence extends HypothesisTest {

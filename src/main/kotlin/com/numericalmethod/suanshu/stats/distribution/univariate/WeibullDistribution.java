@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,10 +23,12 @@
 package com.numericalmethod.suanshu.stats.distribution.univariate;
 
 import static com.numericalmethod.suanshu.Constant.EULER_MASCHERONI;
+
 import com.numericalmethod.suanshu.analysis.function.special.gamma.Gamma;
 import com.numericalmethod.suanshu.analysis.function.special.gamma.GammaLanczosQuick;
 import com.numericalmethod.suanshu.analysis.sequence.Summation;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static java.lang.Math.*;
 
 /**
@@ -40,9 +42,13 @@ import static java.lang.Math.*;
  */
 public class WeibullDistribution implements ProbabilityDistribution {
 
-    /** the scale parameter */
+    /**
+     * the scale parameter
+     */
     private final double lambda;
-    /** the shape parameter */
+    /**
+     * the shape parameter
+     */
     private final double k;
     private static final Gamma gamma = new GammaLanczosQuick();
 

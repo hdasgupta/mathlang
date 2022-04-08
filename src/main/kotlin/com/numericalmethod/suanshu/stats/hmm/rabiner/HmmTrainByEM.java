@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -38,7 +38,7 @@ public class HmmTrainByEM extends HiddenMarkovModel {
      * Construct an HMM model by training an initial model using an EM algorithm.
      *
      * @param observations an integer array of observation symbols (length = <i>T</i>).
-     * Each symbol is a positive integer less than or equal to <i>M</i> (the number of observation symbols per state).
+     *                     Each symbol is a positive integer less than or equal to <i>M</i> (the number of observation symbols per state).
      * @param model0       an initial model
      * @param nIteraions   the number of iterations
      */
@@ -61,7 +61,7 @@ public class HmmTrainByEM extends HiddenMarkovModel {
      *
      * @param model0       the initial hidden Markov model
      * @param observations an integer array of observation symbols (length = <i>T</i>).
-     * Each symbol is a positive integer less than or equal to <i>M</i> (the number of observation symbols per state).
+     *                     Each symbol is a positive integer less than or equal to <i>M</i> (the number of observation symbols per state).
      * @return a trained (discrete) hidden Markov model
      */
     public static HiddenMarkovModel train(HiddenMarkovModel model0, int[] observations) {

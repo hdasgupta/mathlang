@@ -35,16 +35,14 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * <p>
  * This implementation works for multivariate time series with known auto-covariance structure
  * and these properties (not limited to ARMA processes):
- * 
+ *
  * <ul>
  * <li>{X<sub>t</sub>} can be non-stationary.
  * <li>E{X<sub>t</sub>} = 0 for all <i>t</i>.
  * </ul>
- * 
- * @author Chun Yip Yau
  *
- * @see
- * <ul>
+ * @author Chun Yip Yau
+ * @see <ul>
  * <li>"P. J. Brockwell and R. A. Davis, "Proposition. 5.2.2. Chapter 5. Multivariate Time Series," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  * <li>"P. J. Brockwell and R. A. Davis, "Proposition. 11.4.2. Chapter 11.4 Best Linear Predictors of Second Order Random Vectors," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  * </ul>
@@ -53,9 +51,9 @@ public class InnovationAlgorithm extends InnovationAlgorithmImpl {
 
     /**
      * Construct an instance of <tt>InnovationAlgorithm</tt> for a multivariate time series with known auto-covariance structure.
-     * 
+     *
      * @param Xt an m-dimensional time series, length <i>t</i>
-     * @param K auto-covariance function K(i, j) = E(Xi * Xj'), a m x m matrix
+     * @param K  auto-covariance function K(i, j) = E(Xi * Xj'), a m x m matrix
      */
     public InnovationAlgorithm(MultiVariateTimeSeries Xt, AutoCovarianceFunction K) {
         int m = Xt.dimension();

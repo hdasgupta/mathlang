@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,7 +37,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * <blockquote><code>
  * ΔY_t = μ + Π * Y_{t-p} + Σ[Γ_i * ΔY_{t-i}] + ψ * D_t + ε_t, (i = 1, 2, ..., p-1),
  * </code></blockquote>
- *
+ * <p>
  * where Y_s, μ and ε_s are n-dimensional vectors;
  * the impact matrix Π and the coefficients {Γ_i} of the lagged time series are (n * n) matrices;
  * D_t is an (m * 1) vector which contains all exogenous variables at time t (excl. the intercept term),
@@ -47,9 +47,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * This class also provides a conversion method between a long-run VECM(p) and a VARX(p) model.
  *
  * @author Kevin Sun
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li> <a href="http://en.wikipedia.org/wiki/Error_correction_model">Wikipedia: Error correction model</a>
  * <li> <a href="http://en.wikipedia.org/wiki/Johansen_test#longrun">Wikipedia: Johansen test - The longrun VECM</a>
  * <li> S. Johansen, “Likelihood-Based Inference in Cointegrated Vector Autoregressive Models,” Oxford, Oxford University Press, 1995, ch. 3-6, pp. 34-103.
@@ -62,10 +60,10 @@ public class VECMLongrun extends VECM {
     /**
      * Construct a long-run VECM(p) model.
      *
-     * @param mu the intercept (constant) vector
-     * @param pi the impact matrix
+     * @param mu    the intercept (constant) vector
+     * @param pi    the impact matrix
      * @param gamma the AR coefficients on the lagged differences; {@code null} if p = 1
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public VECMLongrun(Vector mu, Matrix pi, Matrix[] gamma, Matrix psi, Matrix sigma) {
@@ -75,9 +73,9 @@ public class VECMLongrun extends VECM {
     /**
      * Construct a zero-intercept (mu) long-run VECM(p) model.
      *
-     * @param pi the impact matrix
+     * @param pi    the impact matrix
      * @param gamma the AR coefficients on the lagged differences; {@code null} if p = 1
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public VECMLongrun(Matrix pi, Matrix[] gamma, Matrix psi, Matrix sigma) {

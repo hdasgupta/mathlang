@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,10 @@
 package com.numericalmethod.suanshu.analysis.function;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -40,9 +42,13 @@ import java.util.Map.Entry;
  */
 public abstract class SubFunction<R> implements Function<Vector, R> {
 
-    /** the original, unrestricted function */
+    /**
+     * the original, unrestricted function
+     */
     protected final Function<Vector, R> f;
-    /** the restrictions or fixed values */
+    /**
+     * the restrictions or fixed values
+     */
     protected final Map<Integer, Double> fixing;
     private static Entry<Integer, Double> dummy = new Entry<Integer, Double>() {
 

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -30,6 +30,7 @@ import com.numericalmethod.suanshu.optimization.problem.OptimProblem;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,13 +43,12 @@ import java.util.List;
  * such as gradient descent and quasi-newton methods.
  * DE can therefore also be used on optimization problems that are not even continuous, are noisy, change over time, etc.
  * Comparing to other genetic algorithm optimization methods, the breakthrough of DE is the idea of using vector differences for perturbing the vector population.
- *
+ * <p>
  * <p/>
  * The R equivalent function is {@code DEoptim} in package {@code DEoptim}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Differential_evolution">Wikipedia: Differential evolution</a>
  * <li><a href="http://www.icsi.berkeley.edu/~storn/code.html">Differential Evolution (DE)</a>
  * <li>"Kenneth Price, Rainer M. Storn, Jouni A. Lampinen. Differential Evolution: A Practical Approach to Global Optimization. Springer. 2005."

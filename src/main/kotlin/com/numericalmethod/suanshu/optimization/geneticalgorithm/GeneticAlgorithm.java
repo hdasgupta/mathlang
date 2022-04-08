@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.parallel.LoopBody;
 import com.numericalmethod.suanshu.parallel.ParallelExecutor;
 import com.numericalmethod.suanshu.stats.random.RngUtils;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -48,8 +49,7 @@ import java.util.List;
  * All methods are {@code protected} so any can be overridden to allow customization.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Differential_evolution">Wikipedia: Differential evolution</a>
  * <li>"Kenneth Price, Rainer M. Storn, Jouni A. Lampinen, "Fig. 1.15, Meta-algorithm for evolution strategies (ESs)," Differential Evolution: A Practical Approach to Global Optimization, 2005."
  * </ul>
@@ -69,6 +69,7 @@ public abstract class GeneticAlgorithm {
      * @return {@code true} if the search has converged
      */
     protected abstract boolean isConverged();
+
     /**
      * This indicate if the algorithm is to run in parallel (multi-core).
      */
@@ -101,7 +102,7 @@ public abstract class GeneticAlgorithm {
     public void run() {
         population.addAll(initialization());
 
-        for (; !isConverged();) {
+        for (; !isConverged(); ) {
             step();
         }
     }
@@ -119,15 +120,15 @@ public abstract class GeneticAlgorithm {
             //multiple threads
             try {
                 parallel.forLoop(0, children.size(),
-                                 new LoopBody() {
+                        new LoopBody() {
 
-                    @Override
-                    public void run(int i) throws Exception {
-                        Chromosome child = getChild(i);
-                        child.fitness();//force objective function evaluation in the parallel loop
-                        children.set(i, child);
-                    }
-                });
+                            @Override
+                            public void run(int i) throws Exception {
+                                Chromosome child = getChild(i);
+                                child.fitness();//force objective function evaluation in the parallel loop
+                                children.set(i, child);
+                            }
+                        });
             } catch (Exception ex) {
                 throw new RuntimeException("failed to generate children", ex);
             }

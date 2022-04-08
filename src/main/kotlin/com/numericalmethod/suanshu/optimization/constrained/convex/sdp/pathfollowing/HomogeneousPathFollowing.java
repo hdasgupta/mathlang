@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,8 +24,10 @@ package com.numericalmethod.suanshu.optimization.constrained.convex.sdp.pathfoll
 
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
+
 import static com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure.Frobenius;
 import static com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure.tr;
+
 import com.numericalmethod.suanshu.matrix.doubles.operation.*;
 import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
@@ -35,14 +37,14 @@ import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
+
 import java.util.ArrayList;
 
 /**
  * This implementation solves a Semi-Definite Programming problem using the Homogeneous Self-Dual Path-Following algorithm.
  *
  * @author Weng Bo
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou, Wu-Sheng Lu, "Algorithm 14.1, Primal-dual path-following algorithm," Practical Optimization: Algorithms and Engineering Applications."
  * <li>"K. C. Toh, M. J. Todd, R. H. Tütüncü, "SDPT3 -- a MATLAB software package for semidefinite programming, version 2.1," OPTIMIZATION METHODS AND SOFTWARE, 1999."
  * </ul>
@@ -60,7 +62,9 @@ public class HomogeneousPathFollowing implements ConstrainedMinimizer<SDPDualPro
         double tau;
         private Vector ybar;
 
-        /** solve the semi-definite programming problem using the Homogeneous Self-Dual Path-Following algorithm */
+        /**
+         * solve the semi-definite programming problem using the Homogeneous Self-Dual Path-Following algorithm
+         */
         protected Solution(PrimalDualPathFollowing parent, SDPDualProblem problem, double gamma0, double sigma0) {
             parent.super(problem, gamma0, sigma0);
 
@@ -209,7 +213,9 @@ public class HomogeneousPathFollowing implements ConstrainedMinimizer<SDPDualPro
             return true;
         }
 
-        /** eq. 40 */
+        /**
+         * eq. 40
+         */
         private double increment(Matrix M, Matrix dM, double tau, double dtau, double k, double dk) {
             Inverse Sinv = new Inverse(M);
             Matrix UtDU = Sinv.multiply(dM);
@@ -234,7 +240,9 @@ public class HomogeneousPathFollowing implements ConstrainedMinimizer<SDPDualPro
             return alpha;
         }
 
-        /** Toh, Todd, Tütüncü, Section 3.1, A^ */
+        /**
+         * Toh, Todd, Tütüncü, Section 3.1, A^
+         */
         @Override
         protected Matrix svecA() {
             Matrix svecA = super.svecA();

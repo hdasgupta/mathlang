@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.stats.random.univariate.normal;
 
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+
 import static java.lang.Math.*;
 
 /**
@@ -33,8 +34,7 @@ import static java.lang.Math.*;
  * given a source of uniformly distributed random numbers.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Box-Muller_method">Wikipedia: Box–Muller transform</a>
  * <li>"G. E. P. Box, and M. E. Muller, "A note on the generation of random normal deviates," Annals of Mathematical Statistics 29:610-611, 1958."
  * </ul>

@@ -38,16 +38,15 @@ import com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.arima.AR
  * The R equivalent function are {@code ARMAacf} and {@code TacvfAR} in package {@code FitAR}.
  *
  * @author Haksun Li, Kevin Sun
- *
  * @see "P. J. Brockwell and R. A. Davis, "p. 420. Eq. 11.3.15. The Covariance Matrix Function of a Causal ARMA Process. Chapter 11.3. Multivariate Time Series," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class AutoCorrelation extends AutoCorrelationFunction {
 
     private final AutoCovariance cov;
 
-    /** 
+    /**
      * Compute the auto-correlation function of a vector ARMA model.
-     * 
+     *
      * @param model an ARIMA specification
      * @param nLags the number of lags in the result
      */

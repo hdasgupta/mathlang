@@ -26,7 +26,9 @@ import com.numericalmethod.suanshu.matrix.doubles.MatrixAccess;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.Densifiable;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
+
 import java.util.Arrays;
 
 /**
@@ -36,22 +38,36 @@ import java.util.Arrays;
  */
 class DiagonalData implements MatrixAccess, Densifiable {
 
-    /** the types of matrices the data represent */
+    /**
+     * the types of matrices the data represent
+     */
     static enum Type {
 
-        /** a tridiagonal matrix has the super, main and sub diagonals */
+        /**
+         * a tridiagonal matrix has the super, main and sub diagonals
+         */
         TRI_DIAGONAL,
-        /** an upper diagonal matrix has the super and main diagonals */
+        /**
+         * an upper diagonal matrix has the super and main diagonals
+         */
         BI_DIAGONAL_UPPER,
-        /** a lower diagonal matrix has the main and sub diagonals */
+        /**
+         * a lower diagonal matrix has the main and sub diagonals
+         */
         BI_DIAGONAL_LOWER,
-        /** a diagonal matrix has only the main diagonal */
+        /**
+         * a diagonal matrix has only the main diagonal
+         */
         DIAGONAL
-    };
+    }
+
+    ;
 
     final Type type;
     final int dim;
-    /** row view, recording the row index of the super/main/sub diagonals */
+    /**
+     * row view, recording the row index of the super/main/sub diagonals
+     */
     private double[][] data = null;
 
     /**

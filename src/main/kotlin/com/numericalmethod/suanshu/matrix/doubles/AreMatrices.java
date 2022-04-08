@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.matrix.doubles;
 
 import com.numericalmethod.suanshu.datastructure.DimensionCheck;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**

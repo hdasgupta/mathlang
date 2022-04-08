@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,9 +23,12 @@
 package com.numericalmethod.suanshu.analysis.function.rn2r1.univariate;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
+
 import java.math.BigDecimal;
+
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
+
 import java.math.BigInteger;
 
 /**
@@ -45,8 +48,7 @@ import java.math.BigInteger;
  * but then increase again by many orders of magnitude before finally converging.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"I. J. Thompson, A. R. Barnett, "Coulomb and Bessel functions of complex arguments and order," J. Comput. Phys, 1986."
  * <li>"W. J. Lentz, "Generating Bessel Functions In Mie Scattering Calculations Using Continued Fractions," Applied Optics, Vol. 15, Issue 3, p. 668-671."
  * <li>"W. Gautschi, Math. Comput, 31, 994(1997)."
@@ -156,7 +158,7 @@ public class ContinuedFraction extends UnivariateRealFunction {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * This implementation adopts the modified Lentz's method, using {@code double} arithmetics.
      * It is quick.
      * However, the precision is limited by the double precision of the intermediate results.
@@ -165,7 +167,7 @@ public class ContinuedFraction extends UnivariateRealFunction {
      * @param x <i>x</i>
      * @return an <em>approximation</em> of <i>z</i>
      * @throws MaxIterationsExceededException if it does not converge before the maximum number of iterations;
-     * repeat with a bigger epsilon, or use the BigDecimal version of the algorithm
+     *                                        repeat with a bigger epsilon, or use the BigDecimal version of the algorithm
      */
     @Override
     public double evaluate(double x) {//TODO: implement a version in BigDecimal?
@@ -204,7 +206,7 @@ public class ContinuedFraction extends UnivariateRealFunction {
 
     /**
      * Evaluate <i>z</i>.
-     *
+     * <p>
      * This implementation adopts the modified Lentz's method using arbitrary precision arithmetics {@link java.math.BigDecimal}.
      *
      * @param x <i>x</i>

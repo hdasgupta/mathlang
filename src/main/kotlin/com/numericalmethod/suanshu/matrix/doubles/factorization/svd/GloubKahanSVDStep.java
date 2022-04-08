@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.Characteri
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.GivensMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.BidiagonalMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.diagonal;
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.superDiagonal;
 
@@ -53,11 +54,11 @@ class GloubKahanSVDStep {
      * Run a Gloub-Kahan SVD step.
      *
      * @param B a <em>square</em>, <em>unreduced</em>, <em>upper</em> bidiagonal matrix; i.e., it is necessary to make sure that
-     * <blockquote><pre><code>
-     * Is.upperBidiagonal(B, ε) == true;
-     * Check.square(B) == true;
-     * B.isUnreduced(ε) == true;
-     * </code></pre></blockquote>
+     *          <blockquote><pre><code>
+     *          Is.upperBidiagonal(B, ε) == true;
+     *          Check.square(B) == true;
+     *          B.isUnreduced(ε) == true;
+     *          </code></pre></blockquote>
      */
     GloubKahanSVDStep(BidiagonalMatrix B) {
         this.B = B;
@@ -110,9 +111,9 @@ class GloubKahanSVDStep {
 //        assert Is.upperBidiagonal(D, 0) : "checkpoint failed: D must be upper bidiagonal";
 
         return (new BidiagonalMatrix(new double[][]{
-                    superDiagonal(D).toArray(),
-                    diagonal(D).toArray()
-                }));
+                superDiagonal(D).toArray(),
+                diagonal(D).toArray()
+        }));
     }
 
     /**

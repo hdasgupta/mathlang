@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.stats.stochasticprocess.univariate.integrati
 
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.TimeSeries;
+
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -54,7 +55,7 @@ public class Filtration {
 
     /**
      * Construct a <tt>Filtration</tt> from a Brownian path.
-     * 
+     *
      * @param Bt a Brownian path
      */
     public Filtration(TimeSeries<Double, ? extends TimeSeries.Entry<Double>> Bt) {
@@ -75,7 +76,7 @@ public class Filtration {
 
     /**
      * Get the length of the history, excluding the initial value (0).
-     * 
+     *
      * @return the length of the Brownian path - 1
      */
     public int size() {
@@ -100,7 +101,7 @@ public class Filtration {
      *
      * <p>
      * B[0] = 0
-     * 
+     *
      * @return the entire Brownian path
      */
     public double[] Bt() {
@@ -122,7 +123,7 @@ public class Filtration {
 
     /**
      * Get all the Brownian increments.
-     * 
+     *
      * @return the Brownian increments
      */
     public double[] dBt() {
@@ -131,7 +132,7 @@ public class Filtration {
 
     /**
      * Get the t-th time point.
-     * 
+     *
      * @param t the time index
      * @return the t-th time point
      */
@@ -141,7 +142,7 @@ public class Filtration {
 
     /**
      * Get the entire time grid.
-     * 
+     *
      * @return the times
      */
     public double[] T() {
@@ -163,7 +164,7 @@ public class Filtration {
 
     /**
      * Get all the time increments.
-     * 
+     *
      * @return the time increments
      */
     public double[] dt() {

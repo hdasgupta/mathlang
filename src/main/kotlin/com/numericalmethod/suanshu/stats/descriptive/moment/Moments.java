@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,9 +23,12 @@
 package com.numericalmethod.suanshu.stats.descriptive.moment;
 
 import static com.numericalmethod.suanshu.analysis.function.FunctionOps.combination;
+
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.stats.descriptive.Statistic;
+
 import static java.lang.Math.pow;
+
 import java.util.Arrays;
 
 /**
@@ -38,15 +41,16 @@ import java.util.Arrays;
  * This implementation uses Pébay's update formula to incrementally compute the new statistic.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Pébay, Philippe, "Formulas for Robust, One-Pass Parallel Computation of Covariances and Arbitrary-Order Statistical Moments," Technical Report SAND2008-6212, Sandia National Laboratories, 2008."
  * <li><a href="http://en.wikipedia.org/wiki/Moment_%28mathematics%29">Wikipedia: Moment (mathematics)</a>
  * </ul>
  */
 public class Moments implements Statistic {
 
-    /** the highest moment to compute */
+    /**
+     * the highest moment to compute
+     */
     private final int order;
     private long N = 0;
     private double[] m;//sum of powers of differences

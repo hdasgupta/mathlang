@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,7 +24,9 @@ package com.numericalmethod.suanshu.stats.dlm.multivariate;
 
 import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
@@ -54,8 +56,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * <i>H<sub>t</sub></i> is a known matrix of coefficients, with dimension of (number of states * m).
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li>G. Petris et al., "ch. 2, pp. 31-84," Dynamic Linear Models with R, New York, Springer, 2009.
  * <li><a href="http://en.wikipedia.org/wiki/Kalman_filter#Underlying_dynamic_system_model">Wikipedia: Kalman filter - Underlying dynamic system model</a>
  * </ul>
@@ -97,7 +98,7 @@ public class DLM {
      */
     public DLM(Vector m0, Matrix C0, ObservationEquation Yt, StateEquation Xt) {
         assertArgument((m0 != null) && (C0 != null),
-                       "the distribution of the initial state x_0 ~ N(m0, C0) must be specified");
+                "the distribution of the initial state x_0 ~ N(m0, C0) must be specified");
 
         this.p = m0.size();
         this.d = Yt.dimension();

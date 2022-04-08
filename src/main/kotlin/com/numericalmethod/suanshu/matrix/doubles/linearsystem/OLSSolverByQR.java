@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -55,8 +55,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
  * numerically stable.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Linear_least_squares">Wikipedia:
  * Linear least squares</a>
  * <li><a href="http://en.wikipedia.org/wiki/Least_squares">Wikipedia: Least
@@ -75,7 +74,7 @@ public class OLSSolverByQR {//TODO: finish up this class; add javadoc, etc.
      * equations.
      *
      * @param epsilon a precision parameter: when a number |x| ≤ ε, it is
-     * considered 0
+     *                considered 0
      */
     public OLSSolverByQR(double epsilon) {
         this.epsilon = epsilon;

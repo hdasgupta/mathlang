@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.analysis.integration.univariate.riemann;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.relativeError;
 
 /**
@@ -35,8 +36,7 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.relativeError;
  * This implementation is based on the Euler-Maclaurin formula.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Newton%E2%80%93Cotes_formulas">Wikipedia: Newton–Cotes formulas</a>
  * <li><a href="http://en.wikipedia.org/wiki/Euler_Maclaurin">Wikipedia: Euler–Maclaurin formula</a>
  * <li><a href="http://en.wikipedia.org/wiki/Trapezoidal_rule">Wikipedia: Trapezoidal rule</a>
@@ -45,7 +45,9 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.relativeError;
  */
 public class NewtonCotes implements IterativeIntegrator {
 
-    /** There are two types of the Newton-Cotes method: OPEN and CLOSED. */
+    /**
+     * There are two types of the Newton-Cotes method: OPEN and CLOSED.
+     */
     public static enum Type {
 
         /**
@@ -61,7 +63,9 @@ public class NewtonCotes implements IterativeIntegrator {
          * Instead, we use the mid-point to make the first rough estimate of the integral.
          */
         OPEN
-    };
+    }
+
+    ;
 
     /**
      * This is the rate of sub-dividing an interval.

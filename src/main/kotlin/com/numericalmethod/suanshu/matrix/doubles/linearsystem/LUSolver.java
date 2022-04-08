@@ -62,13 +62,13 @@ public class LUSolver {
     public Vector solve(LSProblem problem) {
         final ImmutableMatrix A = problem.A();
         final ImmutableVector b = problem.b();
-        
+
         SuanShuUtils.assertArgument(DimensionCheck.isSquare(A), "A must be a square matrix");
 
         try {
             com.numericalmethod.suanshu.matrix.doubles.factorization.triangle.LU luDecomp =
                     new com.numericalmethod.suanshu.matrix.doubles.factorization.triangle.LU(A,
-                                                                                             0);
+                            0);
             LowerTriangularMatrix L = luDecomp.L();
             UpperTriangularMatrix U = luDecomp.U();
             PermutationMatrix P = luDecomp.P();

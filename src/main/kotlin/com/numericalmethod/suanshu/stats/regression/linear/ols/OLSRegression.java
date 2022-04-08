@@ -39,9 +39,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * however the method has good statistical properties for a much broader class of distributions (except for efficiency).
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Linear_regression">Wikipedia: Linear regression</a>
  * <li><a href="http://en.wikipedia.org/wiki/Least_squares">Wikipedia: Least squares</a>
  * <li><a href="http://en.wikipedia.org/wiki/Linear_least_squares">Wikipedia: Ordinary least squares</a>

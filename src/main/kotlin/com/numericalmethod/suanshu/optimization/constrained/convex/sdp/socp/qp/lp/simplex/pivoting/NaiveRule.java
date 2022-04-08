@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.simplex.pivoting;
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.exception.LPUnbounded;
 import com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.simplex.SimplexTable;
 
@@ -52,8 +54,8 @@ public class NaiveRule implements SimplexPivoting {
 
         for (int i = 1; i < table.nCols(); i++) {//ignore the last B column
             if (table.getColLabel(i).type == SimplexTable.LabelType.NON_BASIC
-                || table.getColLabel(i).type == SimplexTable.LabelType.BASIC
-                || table.getColLabel(i).type == SimplexTable.LabelType.FREE) {
+                    || table.getColLabel(i).type == SimplexTable.LabelType.BASIC
+                    || table.getColLabel(i).type == SimplexTable.LabelType.FREE) {
                 if (table.getCostRow(i) < 0) {//a candidate column has a negative value in the bottom row
                     s = s == 0 ? i : (table.getCostRow(i) < table.getCostRow(s) ? i : s);
                 }
@@ -79,8 +81,8 @@ public class NaiveRule implements SimplexPivoting {
 
         for (int i = 1; i < table.nRows(); i++) {//ignore the last COST row
             if (table.getRowLabel(i).type != SimplexTable.LabelType.BASIC
-                && table.getRowLabel(i).type != SimplexTable.LabelType.NON_BASIC
-                && table.getRowLabel(i).type != SimplexTable.LabelType.ARTIFICIAL) {// possibly swapping back variable to columns
+                    && table.getRowLabel(i).type != SimplexTable.LabelType.NON_BASIC
+                    && table.getRowLabel(i).type != SimplexTable.LabelType.ARTIFICIAL) {// possibly swapping back variable to columns
                 continue;
             }
 
@@ -93,7 +95,7 @@ public class NaiveRule implements SimplexPivoting {
             double ratio = -hi / Hrs;
             double epsilon = SuanShuUtils.autoEpsilon(ratio);
             if (ratio < minRatio - epsilon
-                || (compare(ratio, minRatio, epsilon) == 0 && table.getRowLabel(i).index < table.getRowLabel(r).index)) {
+                    || (compare(ratio, minRatio, epsilon) == 0 && table.getRowLabel(i).index < table.getRowLabel(r).index)) {
                 minRatio = ratio;
                 r = i;
             }

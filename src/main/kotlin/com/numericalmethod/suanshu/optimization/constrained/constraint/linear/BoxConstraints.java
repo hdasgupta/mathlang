@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,6 +29,7 @@ import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.linear.BoxConstraints.Bound;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -79,14 +80,15 @@ public class BoxConstraints {
             return String.format("x[%d]: %s", index, interval.toString());
         }
     }
+
     private final int dim;
     private final ArrayList<Bound> bounds;
 
     /**
      * Construct a set of bound constraints.
-     * 
+     *
      * @param bounds the bounds
-     * @param dim the number of variables
+     * @param dim    the number of variables
      */
     public BoxConstraints(int dim, Bound... bounds) {
         this.dim = dim;
@@ -108,7 +110,7 @@ public class BoxConstraints {
 
     /**
      * Split the equality constraints and get the less-than-the-upper-bounds part.
-     * 
+     *
      * @return the upper bound constraints
      */
     public LinearLessThanConstraints getUpperBounds() {

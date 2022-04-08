@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -32,7 +32,6 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * This class represents a VAR model.
  *
  * @author Kevin Sun
- *
  * @see <a href="http://en.wikipedia.org/wiki/Vector_Autoregression">Wikipedia: Vector autoregressive model</a>
  */
 public class ARModel extends ARMAModel {
@@ -40,8 +39,8 @@ public class ARModel extends ARMAModel {
     /**
      * Construct a VAR model.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1)
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1)
      * @param sigma the covariance matrix of white noise
      */
     public ARModel(Vector mu, Matrix[] phi, Matrix sigma) {
@@ -51,7 +50,7 @@ public class ARModel extends ARMAModel {
     /**
      * Construct a VAR model with unit variance.
      *
-     * @param mu the intercept (constant) vector
+     * @param mu  the intercept (constant) vector
      * @param phi the AR coefficients (excluding the initial 1)
      */
     public ARModel(Vector mu, Matrix[] phi) {
@@ -62,7 +61,7 @@ public class ARModel extends ARMAModel {
     /**
      * Construct a zero-intercept (mu) VAR model.
      *
-     * @param phi the AR coefficients (excluding the initial 1)
+     * @param phi   the AR coefficients (excluding the initial 1)
      * @param sigma the covariance matrix of white noise
      */
     public ARModel(Matrix[] phi, Matrix sigma) {

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.arima;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess.arma.ARMAXModel;
+
 import java.util.Arrays;
 
 /**
@@ -77,11 +79,11 @@ public class ARIMAXModel {
     /**
      * Construct a univariate ARIMAX (ARIMA model with eXogenous inputs) model.
      *
-     * @param mu the intercept (constant) term
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param mu    the intercept (constant) term
+     * @param AR    the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
+     * @param MA    the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the white noise variance
      */
     public ARIMAXModel(double mu, double[] AR, int d, double[] MA, double[] psi, double sigma) {
@@ -100,10 +102,10 @@ public class ARIMAXModel {
     /**
      * Construct a univariate ARIMAX model with unit variance.
      *
-     * @param mu the intercept (constant) term
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
+     * @param mu  the intercept (constant) term
+     * @param AR  the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d   the order of integration
+     * @param MA  the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      * @param psi the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARIMAXModel(double mu, double[] AR, int d, double[] MA, double[] psi) {
@@ -113,10 +115,10 @@ public class ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) univariate ARIMAX model.
      *
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param AR    the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
+     * @param MA    the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the white noise variance
      */
     public ARIMAXModel(double[] AR, int d, double[] MA, double[] psi, double sigma) {
@@ -126,9 +128,9 @@ public class ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) univariate ARIMAX model with unit variance.
      *
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
+     * @param AR  the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d   the order of integration
+     * @param MA  the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      * @param psi the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARIMAXModel(double[] AR, int d, double[] MA, double[] psi) {

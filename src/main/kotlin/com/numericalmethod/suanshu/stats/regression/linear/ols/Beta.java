@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -45,8 +45,8 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.Be
 
     /**
      * Construct an instance of <tt>Beta</tt>.
-     * 
-     * @param betaHat β^
+     *
+     * @param betaHat   β^
      * @param residuals the residuals of this ols regression
      */
     Beta(Vector betaHat, Residuals residuals) {
@@ -56,7 +56,7 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.Be
     /**
      * Construct an instance of <tt>Beta</tt>.
      *
-     * @param betaHat β^
+     * @param betaHat    β^
      * @param covariance the covariance of the residuals of this ols regression
      */
     protected Beta(Vector betaHat, Matrix covariance) {//This is a trick to compute first the covariance and then the stderr.
@@ -72,7 +72,7 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.Be
      * cov(β^) = (residuals.stderr)^2 * (A' %*% A)^-1
      *
      * @param residuals the residuals of this ols regression
-     * @return cov(β^)
+     * @return cov(β ^)
      */
     private static Matrix covariance(Residuals residuals) {
         return residuals.problem.invOfwAtwA().scaled(residuals.stderr * residuals.stderr);
@@ -82,7 +82,7 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.Be
      * stderr(β^) = sqrt(cov.diagonal)
      *
      * @param residuals the residuals of this ols regression
-     * @return stderr(β^)
+     * @return stderr(β ^)
      */
     private static Vector stderr(Matrix covariance) {
         return CreateVector.diagonal(covariance).pow(0.5);

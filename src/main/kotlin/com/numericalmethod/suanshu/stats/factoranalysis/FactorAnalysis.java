@@ -33,15 +33,19 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.Inverse;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.foreach;
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.sum;
+
 import com.numericalmethod.suanshu.stats.descriptive.CorrelationMatrix;
 import com.numericalmethod.suanshu.stats.descriptive.CovarianceMatrix;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Mean;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.*;
+
 import java.util.Arrays;
 
 /**
@@ -60,8 +64,7 @@ import java.util.Arrays;
  * if the error terms in the factor analysis model can be assumed to all have the same variance.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li> M. S. Bartlett, "The Statistical Conception of Mental Factors," The British Journal of Psychology, vol. 28, 97–104, 1937.
  * <li> M. S. Bartlett, "A Note on Multiplying Factors for Various Chi-Squared Approximations," Journal of the Royal Statistical Society, Series B, vol. 16, 296–298, 1954.
  * <li> K. G. Jöreskog, "Statistical Estimation in Factor Analysis: A New Technique and Its Foundation," Almqvist and Wicksell, 1963.
@@ -100,8 +103,8 @@ public class FactorAnalysis {
      * @param nFactors the number of factors
      * @param rule     the scoring rule
      * @param S        a covariance (or correlation) matrix,
-     * usually taken to be the covariance (or correlation) matrix of the {@code data} set.
-     * Using a correlation matrix amounts to scaling the original data set.
+     *                 usually taken to be the covariance (or correlation) matrix of the {@code data} set.
+     *                 Using a correlation matrix amounts to scaling the original data set.
      */
     public FactorAnalysis(Matrix data, int nFactors, ScoringRule rule, Matrix S) {
         this.data = new ImmutableMatrix(data);
@@ -351,7 +354,7 @@ public class FactorAnalysis {
         //this is the implimentation of the algorithm in Section 6.2 (between (6.3)
         //and (6.4) on page 73, and also pages 74-75) of Lawley and Maxwell (1971).
         Matrix M = new DiagonalMatrix(R.rep(1., k));
-        for (double diagSum0 = 0, diagSum1 = 0;; diagSum0 = diagSum1) {
+        for (double diagSum0 = 0, diagSum1 = 0; ; diagSum0 = diagSum1) {
             Matrix lambda = lambda0.multiply(M); //the (temparary) rotated loadings; p. 72
 
             Matrix C = new DenseMatrix(p, k); //p. 73: c_{i,r} = lambda_{i,r} ^ 3; loadings cubed

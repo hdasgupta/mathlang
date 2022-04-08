@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.isSquare;
+
 import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.Eigen;
 import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.Eigen.Method;
 import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.qr.Hessenberg;
@@ -36,7 +37,9 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
 import com.numericalmethod.suanshu.number.DoubleUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**

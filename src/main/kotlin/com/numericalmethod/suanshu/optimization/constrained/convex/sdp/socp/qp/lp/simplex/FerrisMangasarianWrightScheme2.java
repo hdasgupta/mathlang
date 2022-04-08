@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.simplex;
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.exception.LPInfeasible;
 import com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.exception.LPUnbounded;
 import com.numericalmethod.suanshu.optimization.constrained.convex.sdp.socp.qp.lp.simplex.pivoting.SmallestSubscriptRule;
@@ -64,7 +66,9 @@ public class FerrisMangasarianWrightScheme2 {
         return table2;
     }
 
-    /** Move the equalities to columns then delete. */
+    /**
+     * Move the equalities to columns then delete.
+     */
     private SimplexTable swapEqualities(SimplexTable table) throws LPInfeasible {
         for (int r = 1; r < table.nRows(); ++r) {//rows
             if (table.getRowLabel(r).type != SimplexTable.LabelType.EQUALITY) {
@@ -111,7 +115,9 @@ public class FerrisMangasarianWrightScheme2 {
         return table;
     }
 
-    /** Move the free variables to rows. */
+    /**
+     * Move the free variables to rows.
+     */
     private SimplexTable swapFrees(SimplexTable table) throws LPUnbounded {
         SmallestSubscriptRule pivoting = new SmallestSubscriptRule();
 

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -39,15 +39,16 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * This procedure is repeated until the increment <i>|α<sub>k</sub> * d<sub>k</sub>|</i> becomes sufficiently small, hence convergence.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou and Wu-Sheng Lu, "Algorithms 5.2, 5.3, 5.5," Practical Optimization: Algorithms and Engineering Applications."
  * <li><a href="http://en.wikipedia.org/wiki/Gradient_descent">Wikipedia: Gradient descent</a>
  * </ul>
  */
 public abstract class SteepestDescent implements MultivariateMinimizer<IterativeMinimizer<Vector>> {
 
-    /** This is an implementation of the steepest descent method. */
+    /**
+     * This is an implementation of the steepest descent method.
+     */
     protected abstract class SteepestDescentImpl implements IterativeMinimizer<Vector> {
 
         private Vector xmin = null;//the current minimizer
@@ -126,9 +127,13 @@ public abstract class SteepestDescent implements MultivariateMinimizer<Iterative
         }
     }
 
-    /** a precision parameter: when a number |x| ≤ ε, it is considered 0 */
+    /**
+     * a precision parameter: when a number |x| ≤ ε, it is considered 0
+     */
     protected final double epsilon;
-    /** the maximum number of iterations */
+    /**
+     * the maximum number of iterations
+     */
     protected final double maxIterations;
     private final LineSearch linesearch0;
 

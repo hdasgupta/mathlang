@@ -2,6 +2,7 @@ package com.numericalmethod.suanshu.optimization.minmax;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2rm.RealVectorFunction;
+
 import java.util.List;
 
 /**

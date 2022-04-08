@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -32,6 +32,7 @@ import com.numericalmethod.suanshu.stats.timeseries.multivariate.MultiVariateTim
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +58,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements M
      */
     public GenericTimeTimeSeries(T[] timestamps, Vector[] values) {
         SuanShuUtils.assertArgument(timestamps.length == values.length,
-                                    "number of values and numbers of timestamps do not match");
+                "number of values and numbers of timestamps do not match");
 
         for (int i = 0; i < timestamps.length; ++i) {
             ts.add(new MultiVariateTimeSeries.Entry<T>(timestamps[i], values[i]));
@@ -72,7 +73,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements M
      */
     public GenericTimeTimeSeries(T[] timestamps, double[][] values) {
         SuanShuUtils.assertArgument(timestamps.length == values.length,
-                                    "number of values and numbers of timestamps do not match");
+                "number of values and numbers of timestamps do not match");
 
         for (int i = 0; i < timestamps.length; ++i) {
             ts.add(new MultiVariateTimeSeries.Entry<T>(timestamps[i], new DenseVector(values[i])));
@@ -88,7 +89,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements M
     public GenericTimeTimeSeries(T[] timestamps, Matrix values) {
         final int nRows = values.nRows();
         SuanShuUtils.assertArgument(timestamps.length == nRows,
-                                    "number of values and numbers of timestamps do not match");
+                "number of values and numbers of timestamps do not match");
 
         for (int i = 0; i < timestamps.length; ++i) {
             ts.add(new MultiVariateTimeSeries.Entry<T>(timestamps[i], values.getRow(i + 1)));
@@ -235,8 +236,8 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements M
 
         for (int i = 0; i < size; ++i) {
             result.append(String.format("%s: %s;\n",
-                                        time(i + 1),
-                                        get(i + 1)));
+                    time(i + 1),
+                    get(i + 1)));
         }
 
         result.setCharAt(result.length() - 2, '}');
@@ -252,8 +253,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements M
         if (getClass() != obj.getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
-        final GenericTimeTimeSeries<T> other = (GenericTimeTimeSeries<T>) obj;
+        @SuppressWarnings("unchecked") final GenericTimeTimeSeries<T> other = (GenericTimeTimeSeries<T>) obj;
         if (this.ts != other.ts && (this.ts == null || !this.ts.equals(other.ts))) {
             return false;
         }

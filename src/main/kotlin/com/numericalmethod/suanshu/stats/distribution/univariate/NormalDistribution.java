@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.special.gaussian.Cumulative
 import com.numericalmethod.suanshu.analysis.function.special.gaussian.CumulativeNormalMarsaglia;
 import com.numericalmethod.suanshu.analysis.function.special.gaussian.Gaussian;
 import com.numericalmethod.suanshu.analysis.function.special.gaussian.StandardCumulativeNormal;
+
 import static java.lang.Math.exp;
 import static java.lang.Math.log;
 
@@ -40,17 +41,20 @@ import static java.lang.Math.log;
  * The R equivalent functions are {@code dnorm, pnorm, qnorm, rnorm}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Normal_distribution">Wikipedia: NormalDistribution distribution</a>
  * <li>Gaussian
  * </ul>
  */
 public class NormalDistribution implements ProbabilityDistribution {
 
-    /** the mean */
+    /**
+     * the mean
+     */
     private final double mu;
-    /** the standard deviation */
+    /**
+     * the standard deviation
+     */
     private final double sigma;
     private static Gaussian f = new Gaussian();
     private static StandardCumulativeNormal N = new CumulativeNormalMarsaglia();

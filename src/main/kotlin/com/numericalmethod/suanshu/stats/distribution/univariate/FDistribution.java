@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.special.beta.BetaRegularize
 import com.numericalmethod.suanshu.analysis.function.special.beta.BetaRegularizedInverse;
 import com.numericalmethod.suanshu.analysis.function.special.beta.LogBeta;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.*;
 
@@ -39,9 +40,13 @@ import static java.lang.Math.*;
  */
 public class FDistribution implements ProbabilityDistribution {
 
-    /** the first degree of freedom */
+    /**
+     * the first degree of freedom
+     */
     private final double df1;
-    /** the second degree of freedom */
+    /**
+     * the second degree of freedom
+     */
     private final double df2;
     private final BetaRegularized Ix;
     private final BetaRegularizedInverse IxInv;
@@ -71,7 +76,7 @@ public class FDistribution implements ProbabilityDistribution {
     @Override
     public double mean() {
         SuanShuUtils.assertOrThrow(df2 > 2 ? null
-                                   : new UnsupportedOperationException("only supported for df2 > 2"));
+                : new UnsupportedOperationException("only supported for df2 > 2"));
 
         return df2 / (df2 - 2);
     }
@@ -92,7 +97,7 @@ public class FDistribution implements ProbabilityDistribution {
     @Override
     public double variance() {
         SuanShuUtils.assertOrThrow(df2 > 4 ? null
-                                   : new UnsupportedOperationException("only supported for df2 > 4"));
+                : new UnsupportedOperationException("only supported for df2 > 4"));
 
         double result = 2 * df2 * df2 * (df1 + df2 - 2);
         result /= df1 * (df2 - 2) * (df2 - 2) * (df2 - 4);
@@ -107,7 +112,7 @@ public class FDistribution implements ProbabilityDistribution {
     @Override
     public double skew() {
         SuanShuUtils.assertOrThrow(df2 > 6 ? null
-                                   : new UnsupportedOperationException("only supported for df2 > 6"));
+                : new UnsupportedOperationException("only supported for df2 > 6"));
 
         double result = (2 * df1 + df2 - 2) * sqrt(8 * (df2 - 4));
         result /= (df2 - 6) * sqrt(df1 * (df1 + df2 - 2));
@@ -122,7 +127,7 @@ public class FDistribution implements ProbabilityDistribution {
     @Override
     public double kurtosis() {
         SuanShuUtils.assertOrThrow(df2 > 8 ? null
-                                   : new UnsupportedOperationException("only supported for df2 > 8"));
+                : new UnsupportedOperationException("only supported for df2 > 8"));
 
         double A = 5 * df2 * df2 * df1 - 22 * df1 * df1 + 5 * df2 * df1 * df1 - 16;
         double result = 20 * df2 - 8 * df2 * df2 + df2 * df2 * df2 + 44 * df1 - 32 * df1 * df2 + A;

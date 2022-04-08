@@ -23,9 +23,12 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.arima;
 
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.random.univariate.normal.StandardNormalRng;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.SimpleTimeSeries;
+
 import java.util.Arrays;
 
 /**
@@ -52,9 +55,7 @@ import java.util.Arrays;
  * The random shocks are suppose to propagate to future values of the time series.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">Wikipedia: Autoregressive integrated moving average</a>
  * <li><a href="http://en.wikipedia.org/wiki/Autoregressive_moving_average">Wikipedia: Autoregressive moving average model</a>
  * <li><a href="http://en.wikipedia.org/wiki/Autoregressive_model">Wikipedia: Autoregressive model</a>
@@ -71,7 +72,7 @@ public class ARIMASim extends SimpleTimeSeries {
         for (int i = 0; i < size; ++i) {
             wn[i] = rnorm.nextDouble();
         }
-        
+
         return wn;
     }
 

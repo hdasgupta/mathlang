@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Kurtosis;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Skewness;
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static java.lang.Math.*;
 
 /**
@@ -42,7 +43,6 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code dagoTest} in {@code fBasics}.
  *
  * @author Haksun Li
- *
  * @see "D'Agostino, Ralph B., Albert Belanger, and Ralph B. D'Agostino, Jr. "A Suggestion for Using Powerful and Informative Tests of Normality", The American Statistician, Vol. 44, No. 4. (Nov., 1990), pp. 316-321."
  */
 //TODO: the R function "dagoTest" in package "fBasics" does not seem to be correct; probably b/c they use the biased estimator?
@@ -81,7 +81,7 @@ public class DAgostino extends HypothesisTest {//TODO: the formulae on Wikipedia
 
     /**
      * Perform D'Agostino's test to test for the departure from normality.
-     * 
+     *
      * @param sample a sample
      */
     public DAgostino(double[] sample) {

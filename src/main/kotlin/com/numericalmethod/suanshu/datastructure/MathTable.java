@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.datastructure;
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.number.DoubleUtils;
+
 import java.util.*;
 
 /**
@@ -40,6 +41,7 @@ public class MathTable {//TODO: make synchronized; read/write from/to file
     private final double EPSILON = 10. * com.numericalmethod.suanshu.Constant.EPSILON;
 
     //<editor-fold defaultstate="collapsed" desc="MathTable.Row">
+
     /**
      * A row is indexed by a number and contains multiple values.
      * <p/>
@@ -47,9 +49,13 @@ public class MathTable {//TODO: make synchronized; read/write from/to file
      */
     public class Row {
 
-        /** the row index */
+        /**
+         * the row index
+         */
         private final double index;
-        /** the column values in the row */
+        /**
+         * the column values in the row
+         */
         private final double[] values;
 
         /**
@@ -94,9 +100,13 @@ public class MathTable {//TODO: make synchronized; read/write from/to file
     }
     //</editor-fold>
 
-    /** a translation table to convert header strings to header indices */
+    /**
+     * a translation table to convert header strings to header indices
+     */
     private final Map<String, Integer> headers = new LinkedHashMap<String, Integer>();//perserve insertion order
-    /** store the rows, sorted according the row indices in ascending order */
+    /**
+     * store the rows, sorted according the row indices in ascending order
+     */
     private final TreeMap<Double, Row> table = new TreeMap<Double, Row>();
 
     /**

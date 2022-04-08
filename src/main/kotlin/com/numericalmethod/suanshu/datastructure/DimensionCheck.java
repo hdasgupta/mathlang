@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -133,7 +133,7 @@ public class DimensionCheck {
         if (i < 1 || i > A.nRows()) {
             throw new MatrixAccessException(
                     String.format("out of range [1:%d] row index: %d",
-                                  A.nRows(), i));
+                            A.nRows(), i));
         }
     }
 
@@ -147,7 +147,7 @@ public class DimensionCheck {
         if (j < 1 || j > A.nCols()) {
             throw new MatrixAccessException(
                     String.format("out of range [1:%d] column index: %d",
-                                  A.nCols(), j));
+                            A.nCols(), j));
         }
     }
 
@@ -162,7 +162,7 @@ public class DimensionCheck {
         if (A1.nCols() != A2.nRows()) {
             throw new MatrixMismatchException(
                     String.format("matrix with %d columns and matrix with %d rows cannot multiply due to mis-matched dimension",
-                                  A1.nCols(), A2.nRows()));
+                            A1.nCols(), A2.nRows()));
         }
     }
 
@@ -177,7 +177,7 @@ public class DimensionCheck {
         if (A.nCols() != v.size()) {
             throw new MatrixMismatchException(
                     String.format("matrix with %d columns and vector with %d elements cannot multiply due to mis-matched dimension",
-                                  A.nCols(), v.size()));
+                            A.nCols(), v.size()));
         }
     }
 }

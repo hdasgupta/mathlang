@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,11 @@
 package com.numericalmethod.suanshu.stats.test.distribution.kolmogorov;
 
 import com.numericalmethod.suanshu.number.DoubleUtils;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.max;
+
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import java.util.Arrays;
 
 /**
@@ -32,7 +35,6 @@ import java.util.Arrays;
  * This class computes the one-sample KolmogorovDistribution-Smirnov statistic.
  *
  * @author Haksun Li
- *
  * @see "Jean Dickinson Gibbons, Subhabrata Chakraborti. "Nonparametric Statistical Inference", 4th edition. Section 4.3."
  */
 public class KolmogorovSmirnov1Sample extends KolmogorovSmirnov {
@@ -41,9 +43,8 @@ public class KolmogorovSmirnov1Sample extends KolmogorovSmirnov {
      * Construct an one-sample KolmogorovDistribution-Smirnov test.
      *
      * @param sample a sample
-     * @param F the reference probability distribution to test against
-     * @param side specifying two-sided, one-sided
-     *
+     * @param F      the reference probability distribution to test against
+     * @param side   specifying two-sided, one-sided
      * @see "Jean Dickinson Gibbons, Subhabrata Chakraborti. "Nonparametric Statistical Inference", 4th edition. Section 4.3."
      */
     public KolmogorovSmirnov1Sample(double[] sample, ProbabilityDistribution F, Side side) {

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -31,6 +31,7 @@ import com.numericalmethod.suanshu.analysis.interpolation.NevilleTable;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.*;
 
 /**
@@ -53,19 +54,33 @@ public class Ridders implements RealScalarFunction {
         double evaluate(Vector x, double h);
     }
 
-    /** the function to take the limit of when {@code h → 0} */
+    /**
+     * the function to take the limit of when {@code h → 0}
+     */
     private MyFunction dfh;
-    /** the interpolation method */
+    /**
+     * the interpolation method
+     */
     private NevilleTable neville;
-    /** the function to take the derivative of */
+    /**
+     * the function to take the derivative of
+     */
     private final RealScalarFunction f;
-    /** the order of the derivative */
+    /**
+     * the order of the derivative
+     */
     private final int order;
-    /** the rate at which <i>h</i> decreases */
+    /**
+     * the rate at which <i>h</i> decreases
+     */
     private final double rate;
-    /** the number of points for extrapolation */
+    /**
+     * the number of points for extrapolation
+     */
     private final int discretization;
-    /** the default number of points for extrapolation */
+    /**
+     * the default number of points for extrapolation
+     */
     private static final int DISCRETIZATION = 15;
 
     /**

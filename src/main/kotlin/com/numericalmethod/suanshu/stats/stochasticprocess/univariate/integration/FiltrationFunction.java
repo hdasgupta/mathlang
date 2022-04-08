@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -34,11 +34,12 @@ public abstract class FiltrationFunction extends UnivariateRealFunction {
 
     /**
      * Compute the value at the t-th time point, f(T[t]).
-     * 
+     *
      * @param t the index to time
      * @return f(T[t])
      */
     public abstract double evaluate(int t);
+
     /**
      * the filtration, containing all histories
      */
@@ -49,7 +50,7 @@ public abstract class FiltrationFunction extends UnivariateRealFunction {
      *
      * <p>
      * This function is called for each call to {@link Integrator#integral} before doing the integration.
-     * 
+     *
      * @param FT a filtration
      */
     public void setFT(Filtration FT) {
@@ -58,7 +59,7 @@ public abstract class FiltrationFunction extends UnivariateRealFunction {
 
     /**
      * Compute all values at all time points.
-     * 
+     *
      * @return {f(T[t])}, for each time point
      */
     public double[] ft() {

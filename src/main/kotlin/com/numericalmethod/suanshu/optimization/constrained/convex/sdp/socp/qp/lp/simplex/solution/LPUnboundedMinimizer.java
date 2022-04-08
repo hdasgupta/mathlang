@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -43,11 +43,11 @@ public class LPUnboundedMinimizer implements LPSimplexMinimizer {
      *
      * @param table     the table of the current (intermediate) solution of a linear programming problem
      * @param lambdaCol the column index for which there is no row that passes the ratio test (hence the problem is unbounded)
-     * When the problem is bounded, {@code lambdaCol = 0}.
+     *                  When the problem is bounded, {@code lambdaCol = 0}.
      */
     public LPUnboundedMinimizer(SimplexTable table, int lambdaCol) {
         SuanShuUtils.assertArgument(lambdaCol > 0,
-                                    "this class reads only an unbounded solution, lambdaCol = %d", lambdaCol);
+                "this class reads only an unbounded solution, lambdaCol = %d", lambdaCol);
 
         this.lambdaCol = lambdaCol;
         this.table = new SimplexTable(table);

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,10 @@
 package com.numericalmethod.suanshu.stats.descriptive.rank;
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.shellsort;
 import static java.lang.Math.abs;
+
 import java.util.Arrays;
 
 /**
@@ -41,8 +43,7 @@ import java.util.Arrays;
  * The R equivalent function is {@code rank}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Ranking">Wikipedia: Ranking</a>
  * <li><a href="http://en.wikipedia.org/wiki/Ranking#Ranking_in_statistics">Wikipedia: Ranking in statistics</a>
  * <li>"Algorithm AS 26: Ranking an Array of Numbers. P. R. Freeman. Journal of the Royal Statistical Society. Series C (Applied Statistics) Vol. 19, No. 1 (1970), p. 111-113."
@@ -69,8 +70,8 @@ public class Rank {
      *
      * @param values    the values
      * @param threshold the tie threshold.
-     * If successive elements of the sorted array differ by less than the threshold, they are treated as equal.
-     * We count the number of ties in each group.
+     *                  If successive elements of the sorted array differ by less than the threshold, they are treated as equal.
+     *                  We count the number of ties in each group.
      */
     public Rank(double[] values, double threshold) {
         double tt = 0;

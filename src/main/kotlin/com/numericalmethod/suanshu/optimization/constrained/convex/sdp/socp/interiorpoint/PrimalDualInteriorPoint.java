@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -36,14 +36,14 @@ import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
+
 import static java.lang.Math.*;
 
 /**
  * This implementation solves a Dual Second Order Conic Programming problem using the Primal Dual Interior Point algorithm.
  *
  * @author Weng Bo
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou, Wu-Sheng Lu, "Algorithm 14.5, Section 14.8.2, A primal-dual interior-point algorithm," Practical Optimization: Algorithms and Engineering Applications."
  * <li>"K. C. Toh, M. J. Todd, R. H. Tütüncü, "SDPT3 -- a MATLAB software package for semidefinite programming, version 3.0," OPTIMIZATION METHODS AND SOFTWARE, 2001."
  * </ul>
@@ -201,7 +201,9 @@ public class PrimalDualInteriorPoint implements ConstrainedMinimizer<SOCPDualPro
             return true;
         }
 
-        /** eqs. 14.125d, 14.125e */
+        /**
+         * eqs. 14.125d, 14.125e
+         */
         private DenseMatrix XS(Vector xs) {
             int act = 0;//index to xi[0] in x = [x1, x2, ... xq]
             DenseMatrix XS = new DenseMatrix(N, N);
@@ -232,7 +234,9 @@ public class PrimalDualInteriorPoint implements ConstrainedMinimizer<SOCPDualPro
             return XS;
         }
 
-        /** eq. 14.126: find_alpha.m */
+        /**
+         * eq. 14.126: find_alpha.m
+         */
         //TODO: there is no explanation in the book on this algorithm (line search within a cone)
         private double increment(Vector x, Vector dx) {
             double[] alpha = new double[problem.q()];

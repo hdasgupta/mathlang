@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -32,9 +32,13 @@ import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.Eigen;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.DiagonalMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Inverse;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.foreach;
+
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.min;
+
 import com.numericalmethod.suanshu.optimization.constrained.constraint.linear.LinearConstraints;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.linear.LinearLessThanConstraints;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.linear.LowerBoundConstraints;
@@ -46,8 +50,10 @@ import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.optimization.unconstrained.NelderMead;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.log;
 import static java.lang.Math.sqrt;
+
 import java.util.Arrays;
 
 /**
@@ -60,8 +66,7 @@ import java.util.Arrays;
  * Then we find the Psi that minimizes <i>f<sub>k</sub></i>.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li>D. N. Lawley and A. E. Maxwell, "Factor Analysis as a Statistical Method", Second Edition, Butterworths, 1971.
  * <li><a href="http://en.wikipedia.org/wiki/Factor_analysis">Wikipedia: Factor analysis</a>
  * </ul>
@@ -85,7 +90,9 @@ class FactorAnalysisMLE {
     private final GRADIENT gradient;
     private final double epsilon;
     private final int maxIterations;
-    /** the log-likelihood function */
+    /**
+     * the log-likelihood function
+     */
     final RealScalarFunction nL;
 
     /**
@@ -131,7 +138,7 @@ class FactorAnalysisMLE {
                     nL,
                     null,
                     (LinearLessThanConstraints) LinearConstraints.concat(new LowerBoundConstraints(nL, 0.005).toLessThanConstraints(),
-                                                                         new UpperBoundConstraints(nL, 1.)));
+                            new UpperBoundConstraints(nL, 1.)));
             IterativeMinimizer<Vector> soln = optim3.solve(problem);
             soln.search(initials);
             xmin = soln.minimizer();
@@ -240,7 +247,9 @@ class FactorAnalysisMLE {
         public int dimensionOfRange() {
             return 1;
         }
-    };
+    }
+
+    ;
 
     /**
      * This is the analytic gradient function of log-likelihood used

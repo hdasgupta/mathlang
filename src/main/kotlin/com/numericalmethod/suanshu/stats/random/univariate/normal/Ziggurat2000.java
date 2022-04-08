@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -34,8 +34,7 @@ import com.numericalmethod.suanshu.stats.random.univariate.uniform.MWC8222;
  * To improve the quality, we use {@link MWC8222} for the uniform random number generation.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"George Marsaglia, Wai Wan Tsang, "The Ziggurat Method for Generating Random Variables," Journal of Statistical Software 5 (8), 2000"
  * <li><a href="http://en.wikipedia.org/wiki/Ziggurat_algorithm">Wikipedia: Ziggurat algorithm</a>
  * <li><a href="http://www.jstatsoft.org/v05/i08/supp/1">a C implementation of the Ziggurat algorithm</a>
@@ -48,6 +47,7 @@ public class Ziggurat2000 implements RandomStandardNormalNumberGenerator {
     static {
         zigset();//initialization
     }
+
     private static int[] kn;
     private static double[] wn, fn;
     private final RandomLongGenerator uniform = new MWC8222();
@@ -72,7 +72,7 @@ public class Ziggurat2000 implements RandomStandardNormalNumberGenerator {
         double r = 3.442619855899;//the start of the right tail
         double r1 = 1 / r;
 
-        for (double x, y;;) {
+        for (double x, y; ; ) {
             if (iz == 0) {
                 do {
                     x = -Math.log(uniform.nextDouble()) * r1;

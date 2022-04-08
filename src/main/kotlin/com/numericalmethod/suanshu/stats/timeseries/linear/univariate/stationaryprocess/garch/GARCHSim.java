@@ -23,11 +23,14 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess.garch;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.timeseries.linear.univariate.arima.ARIMASim;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.SimpleTimeSeries;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.TimeSeries;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.sqrt;
+
 import java.util.Arrays;
 
 /**
@@ -44,9 +47,7 @@ import java.util.Arrays;
  * often the variance is related to the squares of the previous innovations.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Autoregressive_conditional_heteroskedasticity#GARCH">Wikipedia: GARCH</a>
  * <li><a href="http://en.wikipedia.org/wiki/Autoregressive_conditional_heteroskedasticity">Wikipedia: Autoregressive conditional heteroskedasticity</a>
  * </ul>

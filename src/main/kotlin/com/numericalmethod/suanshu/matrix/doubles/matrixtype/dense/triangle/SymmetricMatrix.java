@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
+
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.AreMatrices;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
@@ -45,7 +46,9 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 public class SymmetricMatrix implements Matrix, Densifiable {
 
     private final int dim;
-    /** storage */
+    /**
+     * storage
+     */
     private LowerTriangularMatrix L;//TODO: made final
     private final MatrixMathOperation math = new SimpleMatrixMathOperation();
 

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.*;
+
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.AreMatrices;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
@@ -30,6 +31,7 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
 
 /**
@@ -70,6 +72,7 @@ public class PermutationMatrix implements Matrix {
     private final int dim;
 
     //<editor-fold defaultstate="collapsed" desc="ctors">
+
     /**
      * Construct an identity permutation matrix.
      *
@@ -148,6 +151,7 @@ public class PermutationMatrix implements Matrix {
     }
 
     //<editor-fold defaultstate="collapsed" desc="the swapping operations">    
+
     /**
      * Swap two rows of a permutation matrix.
      *
@@ -253,6 +257,7 @@ public class PermutationMatrix implements Matrix {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="the math operations">
+
     /**
      * Right multiplication by <i>P</i>.
      * <i>A * P</i> is the same as swapping columns in <i>A</i> according to <i>P</i>.

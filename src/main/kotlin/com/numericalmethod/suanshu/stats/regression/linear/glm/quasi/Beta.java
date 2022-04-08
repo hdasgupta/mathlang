@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -38,7 +38,7 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.gl
     /**
      * Construct an instance of <tt>Beta</tt>.
      *
-     * @param fitting the fitting results of a quasi-GLM
+     * @param fitting   the fitting results of a quasi-GLM
      * @param residuals the residual analysis of a quasi-GLM
      */
     Beta(NewtonRaphson fitting, Residuals residuals) {
@@ -48,7 +48,7 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.gl
     /**
      * Construct an instance of <tt>Beta</tt>.
      *
-     * @param betaHat β^
+     * @param betaHat    β^
      * @param covariance the covariance matrix of β^
      */
     private Beta(Vector betaHat, Matrix covariance) {
@@ -57,8 +57,8 @@ public class Beta extends com.numericalmethod.suanshu.stats.regression.linear.gl
 
     /**
      * Compute the covariance matrix for β^.
-     * 
-     * @param fitting the fitting results of a quasi-GLM
+     *
+     * @param fitting   the fitting results of a quasi-GLM
      * @param residuals the residual analysis of a quasi-GLM
      * @return the covariance matrix for β^
      */

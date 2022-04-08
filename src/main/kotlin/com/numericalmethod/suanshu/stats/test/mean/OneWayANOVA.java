@@ -5,6 +5,7 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.distribution.univariate.FDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static java.lang.Math.*;
 
 /**
@@ -19,9 +20,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code aov}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Analysis_of_variance">Wikipedia: ANOVA</a>
  * <li><a href="http://en.wikipedia.org/wiki/Analysis_of_variance#The_F-test">Wikipedia: The FDistribution-test</a>
  * <li><a href="http://en.wikipedia.org/wiki/FDistribution-test">Wikipedia: FDistribution-test</a>

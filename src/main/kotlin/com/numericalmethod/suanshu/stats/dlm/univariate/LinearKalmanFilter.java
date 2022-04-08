@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.dlm.univariate;
 
 import com.numericalmethod.suanshu.misc.R;
+
 import java.util.Arrays;
 
 /**
@@ -36,7 +37,9 @@ import java.util.Arrays;
  */
 public class LinearKalmanFilter {
 
-    /** the DLM model */
+    /**
+     * the DLM model
+     */
     private final DLM model;
     /**
      * the state predictions
@@ -66,7 +69,9 @@ public class LinearKalmanFilter {
      * </i></blockquote>
      */
     private double[] V_yt_tlag;
-    /** the optimal Kalman gain matrices */
+    /**
+     * the optimal Kalman gain matrices
+     */
     private double[] KalmanGain;
     /**
      * the state updates

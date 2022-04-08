@@ -29,7 +29,9 @@ import com.numericalmethod.suanshu.analysis.function.polynomial.QuadraticSynthet
 import com.numericalmethod.suanshu.analysis.function.polynomial.root.QuadraticRoot;
 import com.numericalmethod.suanshu.number.NumberUtils;
 import com.numericalmethod.suanshu.number.complex.Complex;
+
 import static java.lang.Math.*;
+
 import java.util.List;
 
 /**

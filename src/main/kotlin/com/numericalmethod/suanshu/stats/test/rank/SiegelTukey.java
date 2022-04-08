@@ -3,6 +3,7 @@ package com.numericalmethod.suanshu.stats.test.rank;
 import com.numericalmethod.suanshu.stats.test.rank.wilcoxon.WilcoxonRankSum;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,6 @@ import java.util.Arrays;
  * In other words, the test determines whether one of the two groups tends to move, sometimes to the right, sometimes to the left, but away from the center (of the ordinal scale).
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/Siegel%E2%80%93Tukey_test">Wikipedia: iegel–Tukey test</a>
  */
 public class SiegelTukey extends HypothesisTest {
@@ -39,10 +39,10 @@ public class SiegelTukey extends HypothesisTest {
 
     /**
      * Perform the Siegel-Tukey test to test for differences in scale (variability) between two groups.
-     * 
+     *
      * @param sample1 sample 1
      * @param sample2 sample 2
-     * @param mu the hypothetical mean difference
+     * @param mu      the hypothetical mean difference
      * @param isExact indicate whether the exact Wilcoxon Rank Sum distribution is used
      */
     public SiegelTukey(double[] sample1, double[] sample2, double mu, boolean isExact) {
@@ -97,10 +97,10 @@ public class SiegelTukey extends HypothesisTest {
 
     /**
      * Perform the Siegel-Tukey test to test for differences in scale (variability) between two groups.
-     * 
+     *
      * @param sample1 sample 1
      * @param sample2 sample 2
-     * @param mu the hypothetical mean difference
+     * @param mu      the hypothetical mean difference
      */
     public SiegelTukey(double[] sample1, double[] sample2, double mu) {
         this(sample1, sample2, mu, sample1.length + sample2.length < 50);
@@ -108,7 +108,7 @@ public class SiegelTukey extends HypothesisTest {
 
     /**
      * Perform the Siegel-Tukey test to test for differences in scale (variability) between two groups.
-     * 
+     *
      * @param sample1 sample 1
      * @param sample2 sample 2
      */

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -36,14 +36,13 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * <blockquote><code>
  * Y_t = μ + Σ φ_i * Y_{t-i} + Σ θ_j * ε_{t-j} + ψ * D_t + ε_t.
  * </code></blockquote>
- *
+ * <p>
  * In the equation above, Y_s, μ and ε_s are n-dimensional vectors;
  * (n * n) matrices {φ_i} and {θ_j} are the AR and MA coefficients, respectively;
  * D_t is an (m * 1) vector which contains all exogenous variables at time t (excl. the intercept term),
  * and its coefficients are represented by a (n * m) matrix ψ.
  *
  * @author Kevin Sun
- * 
  * @see <a href="http://en.wikipedia.org/wiki/Autoregressive_moving_average#Generalizations">Wikipedia: Autoregressive moving average model - Generalizations</a>
  */
 public class ARMAXModel extends ARIMAXModel {
@@ -51,10 +50,10 @@ public class ARMAXModel extends ARIMAXModel {
     /**
      * Construct a multivariate ARMAX (ARMA model with eXogenous inputs) model.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public ARMAXModel(Vector mu, Matrix[] phi, Matrix[] theta, Matrix psi, Matrix sigma) {
@@ -64,10 +63,10 @@ public class ARMAXModel extends ARIMAXModel {
     /**
      * Construct a multivariate ARMAX model with unit variance.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARMAXModel(Vector mu, Matrix[] phi, Matrix[] theta, Matrix psi) {
         super(mu, phi, 0, theta, psi);
@@ -76,9 +75,9 @@ public class ARMAXModel extends ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARMAX model.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public ARMAXModel(Matrix[] phi, Matrix[] theta, Matrix psi, Matrix sigma) {
@@ -88,9 +87,9 @@ public class ARMAXModel extends ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARMAX model with unit variance.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      */
     public ARMAXModel(Matrix[] phi, Matrix[] theta, Matrix psi) {
         super(phi, 0, theta, psi);
@@ -119,7 +118,7 @@ public class ARMAXModel extends ARIMAXModel {
      *
      * @param arLags the AR lags
      * @param maLags the MA lags
-     * @param exVar the exogenous variables
+     * @param exVar  the exogenous variables
      * @return the conditional mean
      */
     public Matrix armaxMeanNoIntercept(Matrix arLags, Matrix maLags, Vector exVar) {
@@ -149,7 +148,7 @@ public class ARMAXModel extends ARIMAXModel {
      *
      * @param arLags the AR lags
      * @param maLags the MA lags
-     * @param exVar the exogenous variables
+     * @param exVar  the exogenous variables
      * @return the conditional mean
      */
     public Matrix armaxMean(Matrix arLags, Matrix maLags, Vector exVar) {

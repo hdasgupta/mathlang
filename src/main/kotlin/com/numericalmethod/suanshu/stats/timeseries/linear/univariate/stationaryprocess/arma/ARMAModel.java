@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,13 +23,13 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess.arma;
 
 import com.numericalmethod.suanshu.stats.timeseries.linear.univariate.arima.ARIMAModel;
+
 import static com.numericalmethod.suanshu.analysis.function.FunctionOps.dotProduct;
 
 /**
  * This class represents a univariate ARMA model.
  *
  * @author Haksun Li, Kevin Sun
- *
  * @see <a href="http://en.wikipedia.org/wiki/Autoregressive_moving_average">Wikipedia: Autoregressive moving average model</a>
  */
 public class ARMAModel extends ARIMAModel {
@@ -37,9 +37,9 @@ public class ARMAModel extends ARIMAModel {
     /**
      * Construct a univariate ARMA model.
      *
-     * @param mu the intercept (constant) term
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficients
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficients
+     * @param mu    the intercept (constant) term
+     * @param AR    the AR coefficients (excluding the initial 1); {@code null} if no AR coefficients
+     * @param MA    the MA coefficients (excluding the initial 1); {@code null} if no MA coefficients
      * @param sigma the white noise variance
      */
     public ARMAModel(double mu, double[] AR, double[] MA, double sigma) {
@@ -60,8 +60,8 @@ public class ARMAModel extends ARIMAModel {
     /**
      * Construct a zero-intercept (mu) univariate ARMA model.
      *
-     * @param AR the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param MA the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
+     * @param AR    the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param MA    the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      * @param sigma the white noise variance
      */
     public ARMAModel(double[] AR, double[] MA, double sigma) {

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,8 +37,7 @@ import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.Univariate
  * The R equivalent function is {@code qnorm}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Moro, B, The full monte. Risk 8 (Feb): 57-58, 1995"
  * <li><a href="http://en.wikipedia.org/wiki/Cumulative_normal#Cumulative_distribution_function">Wikipedia: Cumulative distribution function</a>
  * </ul>
@@ -46,27 +45,27 @@ import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.Univariate
 public class CumulativeNormalInverse extends UnivariateRealFunction {
 
     private static final double[] a = new double[]{
-        2.50662823884,
-        -18.61500062529,
-        41.39119773534,
-        -25.44106049637
+            2.50662823884,
+            -18.61500062529,
+            41.39119773534,
+            -25.44106049637
     };
     private static final double[] b = new double[]{
-        -8.4735109309,
-        23.08336743743,
-        -21.06224101826,
-        3.13082909833
+            -8.4735109309,
+            23.08336743743,
+            -21.06224101826,
+            3.13082909833
     };
     private static final double[] c = new double[]{
-        0.3374754822726147,
-        0.9761690190917186,
-        0.1607979714918209,
-        0.0276438810333863,
-        0.0038405729373609,
-        0.0003951896511919,
-        0.0000321767881768,
-        0.0000002888167364,
-        0.0000003960315187
+            0.3374754822726147,
+            0.9761690190917186,
+            0.1607979714918209,
+            0.0276438810333863,
+            0.0038405729373609,
+            0.0003951896511919,
+            0.0000321767881768,
+            0.0000002888167364,
+            0.0000003960315187
     };
 
     @Override

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -159,7 +159,7 @@ public class Complex extends Number implements Field<Complex>, NumberUtils.Compa
      */
     public static boolean isInfinite(Complex z) {
         return !isNaN(z)
-               && (java.lang.Double.isInfinite(z.real) || java.lang.Double.isInfinite(z.imaginary));
+                && (java.lang.Double.isInfinite(z.real) || java.lang.Double.isInfinite(z.imaginary));
     }
 
     /**
@@ -385,9 +385,9 @@ public class Complex extends Number implements Field<Complex>, NumberUtils.Compa
     @Override
     public String toString() {
         String result = String.format("%f%s%fi",
-                                      real,
-                                      imaginary >= 0 ? "+" : "",//use the "-" sign from imaginary
-                                      imaginary);
+                real,
+                imaginary >= 0 ? "+" : "",//use the "-" sign from imaginary
+                imaginary);
         return result;
     }
 

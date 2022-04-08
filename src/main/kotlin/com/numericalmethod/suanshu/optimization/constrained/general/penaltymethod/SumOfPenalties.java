@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.optimization.constrained.general.penaltymeth
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import java.util.Arrays;
 
 /**
@@ -35,7 +36,9 @@ import java.util.Arrays;
  */
 public class SumOfPenalties extends PenaltyFunction {
 
-    /** the constituent penalty functions */
+    /**
+     * the constituent penalty functions
+     */
     private final PenaltyFunction[] penalties;
 
     /**
@@ -49,7 +52,7 @@ public class SumOfPenalties extends PenaltyFunction {
 
         for (int i = 1; i < penalties.length; ++i) {
             SuanShuUtils.assertArgument(dimension == penalties[i].dimensionOfDomain(),
-                                        "the penalties must have the same dimension");
+                    "the penalties must have the same dimension");
         }
 
         this.penalties = Arrays.copyOf(penalties, penalties.length);

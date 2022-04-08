@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,11 +25,15 @@ package com.numericalmethod.suanshu.stats.test.distribution.normality;
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.descriptive.moment.Mean;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import java.util.Arrays;
+
 import static java.lang.Math.*;
 
 /**
@@ -49,9 +53,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code lillie.test} in package {@code nortest}.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Lilliefors_test">Wikipedia: Lilliefors test</a>
  * <li>Dallal, G.E. and Wilkinson, L. "An analytic approximation to the distribution of Lilliefors' test for normality," The American Statistician, 40, 294–296. 1986.
  * <li>Stephens, M.A. "EDF statistics for goodness of fit and some comparisons," Journal of the American Statistical Association, 69, 730–737. 1974.
@@ -76,7 +78,7 @@ public class Lilliefors extends HypothesisTest {
 
     /**
      * Perform the Lilliefors test to test for the null hypothesis that data come from a normally distributed population with an estimated sample mean and variance.
-     * 
+     *
      * @param sample a sample
      */
     public Lilliefors(double[] sample) {
@@ -122,11 +124,10 @@ public class Lilliefors extends HypothesisTest {
 
     /**
      * the Dallal-Wilkinson formula
-     * 
+     *
      * @param N
      * @param K
      * @return
-     *
      * @see "Dallal, G.E. and Wilkinson, L. "An analytic approximation to the distribution of Lilliefors' test for normality," The American Statistician, 40, 294–296. 1986."
      */
     private double DallalWilkinson(int N, double K) {
@@ -153,7 +154,6 @@ public class Lilliefors extends HypothesisTest {
      * @param N
      * @param K
      * @return
-     *
      * @see "Stephens, M.A. "EDF statistics for goodness of fit and some comparisons," Journal of the American Statistical Association, 69, 730–737. 1974."
      */
     private double Stephen(int N, double K) {

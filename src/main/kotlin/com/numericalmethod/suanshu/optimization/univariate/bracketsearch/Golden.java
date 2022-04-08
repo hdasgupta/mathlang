@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.optimization.univariate.bracketsearch;
 
 import static com.numericalmethod.suanshu.Constant.GOLDEN_RATIO;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.optimization.problem.C2OptimProblem;
 

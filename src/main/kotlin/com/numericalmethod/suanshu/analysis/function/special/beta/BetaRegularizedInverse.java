@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,11 +23,13 @@
 package com.numericalmethod.suanshu.analysis.function.special.beta;
 
 import static com.numericalmethod.suanshu.Constant.ROOT_2;
+
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.function.special.gaussian.ErfInverse;
 import com.numericalmethod.suanshu.analysis.uniroot.Halley;
 import com.numericalmethod.suanshu.analysis.uniroot.NoRootFoundException;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
 import static java.lang.Math.*;
 
@@ -40,8 +42,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code qbeta}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Amparo Gil, Javier Segura, and Nico M. Temme, "Section 10.5," Numerical Methods for Special Functions."
  * <li>"John Maddock, Paul A. Bristow, Hubert Holin, and Xiaogang Zhang. "Notes for The Incomplete Beta Function Inverses," Boost Library."
  * <li>"K. L. Majumder, and G. P. Bhattacharjee, Algorithm AS 63: The Incomplete Beta Integral, 1973."

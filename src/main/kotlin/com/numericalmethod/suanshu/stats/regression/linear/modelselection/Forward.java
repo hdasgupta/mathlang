@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GeneralizedLinearModel;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GLMProblem;
+
 import static com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix.cbind;
 import static java.lang.Math.abs;
 
@@ -58,8 +59,8 @@ public class Forward extends SingleFactorSelection {
 
     /**
      * Construct automatically a GLM getModel using the forward selection method.
-     * 
-     * @param problem a GLM problem
+     *
+     * @param problem      a GLM problem
      * @param significance a critical value to determine whether a factor is significant (to be included in the getModel)
      */
     public Forward(GLMProblem problem, double significance) {
@@ -85,9 +86,9 @@ public class Forward extends SingleFactorSelection {
 
                 //add in one factor for trial
                 Matrix A = cbind(new Matrix[]{
-                            new DenseMatrix(problem.A.getColumn(i)),
-                            subA
-                        });
+                        new DenseMatrix(problem.A.getColumn(i)),
+                        subA
+                });
 
                 GLMProblem trial = new GLMProblem(problem.y, A, problem.addIntercept, problem.family);
                 GeneralizedLinearModel glm = new GeneralizedLinearModel(trial);

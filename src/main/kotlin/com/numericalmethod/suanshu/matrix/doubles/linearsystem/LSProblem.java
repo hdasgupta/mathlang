@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -56,17 +56,14 @@ public class LSProblem {
      * Construct a system of linear equations <i>Ax = b</i>.
      *
      * @param A the the homogeneous part, the coefficient matrix, of the linear
-     * system
+     *          system
      * @param b the non-homogeneous part, the right-hand side vector, of the
-     * linear system
+     *          linear system
      */
     public LSProblem(Matrix A, Vector b) {
         SuanShuUtils.assertArgument(A.nRows() == b.size(), "A's nrows must equal to b's size");
         this.A = new ImmutableMatrix(A);
         this.b = new ImmutableVector(b);
-
-
-
 
 
         // initialize optional parameters to default values
@@ -130,7 +127,7 @@ public class LSProblem {
      * Overrides the tolerance instance.
      *
      * @param tolerance the criteria which determines when the solution
-     * converges and the iteration stops
+     *                  converges and the iteration stops
      * @return the new problem with the overriden withTolerance
      */
     public LSProblem withTolerance(Tolerance tolerance) {

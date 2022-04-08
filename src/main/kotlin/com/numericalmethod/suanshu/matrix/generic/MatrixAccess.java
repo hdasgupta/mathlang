@@ -35,7 +35,6 @@ import com.numericalmethod.suanshu.matrix.MatrixAccessException;
  * Other operations that "change" the matrix actually creates a new and independent copy.
  *
  * @param <F> the number Field
- *
  * @author Haksun Li
  * @see com.numericalmethod.suanshu.mathstructure.Field
  */

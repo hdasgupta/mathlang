@@ -3,6 +3,7 @@ package com.numericalmethod.suanshu.stats.test.variance;
 import com.numericalmethod.suanshu.stats.descriptive.rank.Quantile;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
 import com.numericalmethod.suanshu.stats.test.mean.OneWayANOVA;
+
 import static java.lang.Math.*;
 
 /**
@@ -11,7 +12,6 @@ import static java.lang.Math.*;
  * If this assumption is not valid, then the resulting F-test is invalid.
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/Brown%E2%80%93Forsythe_test">Wikipedia: Brown-Forsythe Test</a>
  */
 public class BrownForsythe extends HypothesisTest {

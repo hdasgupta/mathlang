@@ -23,12 +23,17 @@
 package com.numericalmethod.suanshu.stats.regression.linear.modelselection;
 
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
+
 import static com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix.columns;
+
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GLMProblem;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GeneralizedLinearModel;
+
 import java.util.Arrays;
 
 /**
@@ -106,13 +111,13 @@ abstract class SingleFactorSelection {//TODO: R package leaps
         Matrix subA() {
             //the selected variable indices
             subset = R.select(flags,
-                              new R.which() {
+                    new R.which() {
 
-                @Override
-                public boolean isTrue(double x, int index) {
-                    return x > 0;
-                }
-            });
+                        @Override
+                        public boolean isTrue(double x, int index) {
+                            return x > 0;
+                        }
+                    });
 
             Matrix subA = subset.length > 0 ? columns(problem.A, subset) : null;
             return subA;

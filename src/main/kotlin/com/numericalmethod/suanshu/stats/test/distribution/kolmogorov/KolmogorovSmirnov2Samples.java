@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.stats.test.distribution.kolmogorov;
 
 import com.numericalmethod.suanshu.misc.R;
+
 import java.util.Arrays;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.*;
 import static com.numericalmethod.suanshu.misc.R.*;
@@ -40,8 +42,7 @@ public class KolmogorovSmirnov2Samples extends KolmogorovSmirnov {
      *
      * @param sample1 a sample
      * @param sample2 another sample
-     * @param side specifying two-sided, one-sided
-     *
+     * @param side    specifying two-sided, one-sided
      * @see "Jean Dickinson Gibbons, Subhabrata Chakraborti. "Nonparametric Statistical Inference", 4th edition. Section 6.3."
      */
     public KolmogorovSmirnov2Samples(double[] sample1, double[] sample2, Side side) {

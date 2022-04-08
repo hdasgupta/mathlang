@@ -28,7 +28,9 @@ import com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.Eigen;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure;
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
 import com.numericalmethod.suanshu.stats.descriptive.CorrelationMatrix;
 import com.numericalmethod.suanshu.stats.descriptive.CovarianceMatrix;
@@ -55,9 +57,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * instead of nObs for the sample covariance matrix.
  *
  * @author Kevin Sun
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li> K. V. Mardia, J. T. Kent and J. M. Bibby, "Multivariate Analysis," London, Academic Press, 1979.
  * <li> W. N. Venables and B. D. Ripley, "Modern Applied Statistics with S," New York, Springer-Verlag, 2002.
  * <li> <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia: Principal component analysis</a>
@@ -93,7 +93,7 @@ public class PCAbyEigen extends PCAImpl {
      *
      * @param data        a matrix which provides the original data for the principal component analysis
      * @param correlation a logical value indicating whether the correlation matrix (preferred) or the covariance matrix should be used
-     * (N.B. the correlation matrix can only be used if there is no constant variable)
+     *                    (N.B. the correlation matrix can only be used if there is no constant variable)
      */
     public PCAbyEigen(Matrix data, boolean correlation) {
         this(data, correlation, null);

@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ChiSquareDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static java.lang.Math.*;
 
 /**
@@ -42,9 +43,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code bartlett.test}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Bartlett%27s_test">Wikipedia: Bartlett's test</a>
  * <li><a href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda357.htm">Engineer Statistics handbook</a>
  * </ul>
@@ -68,7 +67,7 @@ public class Bartlett extends HypothesisTest {
 
     /**
      * Perform the Bartlett test to test if the samples are from populations with equal variances.
-     * 
+     *
      * @param samples samples
      */
     public Bartlett(double[]... samples) {

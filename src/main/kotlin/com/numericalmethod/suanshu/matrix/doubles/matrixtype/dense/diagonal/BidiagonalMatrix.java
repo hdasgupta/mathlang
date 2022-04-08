@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,10 +23,14 @@
 package com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal;
 
 import com.numericalmethod.suanshu.datastructure.DimensionCheck;
+
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfDifferentDimension;
+
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**
@@ -38,14 +42,22 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  */
 public class BidiagonalMatrix extends DiagonalDataMatrix {
 
-    /** the types of bi-diagonal matrices available */
+    /**
+     * the types of bi-diagonal matrices available
+     */
     public static enum BidiagonalMatrixType {
 
-        /** an upper bi-diagonal matrix, where there are only non-zero entries on the main and super diagonal */
+        /**
+         * an upper bi-diagonal matrix, where there are only non-zero entries on the main and super diagonal
+         */
         UPPER,
-        /** a lower bi-diagonal matrix, where there are only non-zero entries on the main and sub diagonal */
+        /**
+         * a lower bi-diagonal matrix, where there are only non-zero entries on the main and sub diagonal
+         */
         LOWER;
-    };
+    }
+
+    ;
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
     private BidiagonalMatrix(DiagonalData data) {
@@ -111,8 +123,8 @@ public class BidiagonalMatrix extends DiagonalDataMatrix {
     private static DiagonalData createDataByArray(double[][] data) {
         if ((data[0] == null) || (data[1] == null)) {
             double[] diag = (data[0] == null)
-                            ? data[1]//main diagonal
-                            : data[0];//super-diagonal if exists
+                    ? data[1]//main diagonal
+                    : data[0];//super-diagonal if exists
             //we treat a (main) diagonal matrix as upper diagonal
             return new DiagonalData(new double[][]{R.rep(0.0, diag.length - 1), diag});
         } else {
@@ -132,8 +144,8 @@ public class BidiagonalMatrix extends DiagonalDataMatrix {
 
     private static DiagonalData createDataByType(int dim, BidiagonalMatrixType type) {
         return new DiagonalData(type == BidiagonalMatrixType.UPPER
-                                ? DiagonalData.Type.BI_DIAGONAL_UPPER
-                                : DiagonalData.Type.BI_DIAGONAL_LOWER, dim);
+                ? DiagonalData.Type.BI_DIAGONAL_UPPER
+                : DiagonalData.Type.BI_DIAGONAL_LOWER, dim);
     }
 
     /**

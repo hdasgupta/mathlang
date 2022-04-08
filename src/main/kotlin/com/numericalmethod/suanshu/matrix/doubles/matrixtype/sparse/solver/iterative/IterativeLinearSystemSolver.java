@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -50,7 +50,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * matrices.
  * <p/>
  * Here are some guidelines for choosing an iterative solver of a sparse system.
- *
+ * <p>
  * For Hermitian problems, if the system is positive definite,
  * use {@linkplain ConjugateGradientSolver CG} or
  * {@linkplain MinimalResidualSolver MINRES}, otherwise use only MINRES.
@@ -61,7 +61,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * {@linkplain SymmetricSuccessiveOverrelaxationSolver SSOR}.
  * These methods saves computation costs in each iteration but the number of
  * iterations may increase unless there is a good preconditioner.
- *
+ * <p>
  * For non-Hermitian problems, the choice is not so easy.
  * If matrix-vector multiplication is very expensive,
  * {@linkplain GeneralizedMinimalResidualSolver GMRES} is probably the best
@@ -69,12 +69,12 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * The second best alternatives are {@linkplain QuasiMinimalResidualSolver QMR}
  * or {@linkplain BiconjugateGradientSolver BiCG}.
  * QMR is numerically more stable than BiCG.
- *
+ * <p>
  * When the transpose of a matrix is not available, there are transpose-free
  * methods such as
  * {@linkplain ConjugateGradientSquaredSolver CGS} or
  * {@linkplain BiconjugateGradientStabilizedSolver BiCGSTAB}.
- *
+ * <p>
  * For non-square systems, there are CG methods for solving over-determined
  * systems such as
  * {@linkplain ConjugateGradientNormalResidualSolver CGNR}, and
@@ -84,7 +84,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * iterative method. A preconditioner transforms a linear system into one that
  * is equivalent in the sense that it has the same solution. The transformed
  * system has more favorable spectral properties which affect convergence rate.
- *
+ * <p>
  * In particular, a preconditioner <i>M</i> approximates the coefficient
  * matrix <i>A</i>, and the transformed system is easier to solve. For example,
  * <blockquote><i>

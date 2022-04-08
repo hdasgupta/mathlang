@@ -41,7 +41,9 @@ import com.numericalmethod.suanshu.number.DoubleUtils;
  */
 public class Cholesky {
 
-    /** the resultant lower triangular matrix */
+    /**
+     * the resultant lower triangular matrix
+     */
     private LowerTriangularMatrix L;
 
     /**

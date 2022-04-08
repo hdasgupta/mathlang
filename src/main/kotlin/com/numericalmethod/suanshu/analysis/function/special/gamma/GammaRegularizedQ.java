@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,10 +23,12 @@
 package com.numericalmethod.suanshu.analysis.function.special.gamma;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.BivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.ContinuedFraction;
 import com.numericalmethod.suanshu.analysis.sequence.Summation;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.exp;
@@ -46,8 +48,7 @@ import static java.lang.Math.log;
  * The R equivalent function is {@code pgamma}. E.g., {@code pgamma(x, s, lower=FALSE)}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"B Shea." Algorithm AS 239: Chi-squared and Incomplete Gamma Integral," Applied Statistics. Volume 37, Number 3, 1988, pages 466-473."
  * <li><a href="http://en.wikipedia.org/wiki/Regularized_Gamma_function#Regularized_Gamma_functions_and_Poisson_random_variables">Wikipedia: Regularized Gamma functions and Poisson random variables</a>
  * </ul>

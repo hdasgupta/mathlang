@@ -30,6 +30,7 @@ import com.numericalmethod.suanshu.stats.regression.linear.LMProblem;
 import com.numericalmethod.suanshu.stats.regression.linear.ols.OLSRegression;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.SimpleTimeSeries;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix.cbind;
 import static com.numericalmethod.suanshu.stats.timeseries.univariate.UnivariateTimeSeriesUtils.*;
@@ -46,9 +47,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code adf.test} in package {@code tseries}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"S. E. Said and D. A. Dickey, "Testing for Unit Roots in Autoregressive-Moving Average Models of Unknown Order," <i>Biometrika</i>, vol. 71, no. 3, pp.599–607, 1984."
  * <li>"Yin-Wong Cheung, Kon S. Lai, "ESTIMATING FINITE SAMPLE CRITICAL VALUES FOR UNIT ROOT TESTS USING PURE RANDOM WALK PROCESSES," Journal of Time Series Analysis, vol. 16, issue 5, pp.493-498, 1995."
  * </ul>
@@ -87,6 +86,7 @@ public class AugmentedDickeyFuller extends HypothesisTest {
             return support;
         }
     }
+
     /**
      * the trend type
      */
@@ -109,12 +109,12 @@ public class AugmentedDickeyFuller extends HypothesisTest {
     /**
      * Perform the Augmented Dickey-Fuller test statistics to test for the existence of uniroot.
      *
-     * @param xt a time series
-     * @param type the trend type
+     * @param xt       a time series
+     * @param type     the trend type
      * @param lagOrder the lags; when {@code lagOrder} == 0, we perform the standard Dickey-Fuller test.
-     * @param dist the ADF distribution to use; in general, the correct ADF distribution to use depends on the trend type, as well as lag order;
-     * to improve accuracy, the user may generate and use a customized ADF distribution;
-     * {@code null} if to use the default
+     * @param dist     the ADF distribution to use; in general, the correct ADF distribution to use depends on the trend type, as well as lag order;
+     *                 to improve accuracy, the user may generate and use a customized ADF distribution;
+     *                 {@code null} if to use the default
      */
     public AugmentedDickeyFuller(double[] xt, TrendType type, int lagOrder, ADFDistribution dist) {
         this(new SimpleTimeSeries(xt), type, lagOrder, dist);
@@ -129,7 +129,7 @@ public class AugmentedDickeyFuller extends HypothesisTest {
      * <blockquote><code>
      * nLag = (int) Math.pow((series.length - 1, 1.0 / 3.0));
      * </code></blockquote>
-     *
+     * <p>
      * which corresponds to the suggested upper bound on the rate.
      *
      * @param xt a time series

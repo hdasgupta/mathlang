@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -31,6 +31,7 @@ import com.numericalmethod.suanshu.stats.regression.linear.glm.distribution.Fami
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.*;
 
 /**
@@ -55,7 +56,7 @@ public class Residuals extends com.numericalmethod.suanshu.stats.regression.line
 
     /**
      * Perform the residual analysis for a logistic problem.
-     * 
+     *
      * @param problem the logistic problem to be solved
      * @param betaHat β^
      */
@@ -69,7 +70,7 @@ public class Residuals extends com.numericalmethod.suanshu.stats.regression.line
         RealScalarFunction L = new LogLikelihood().function((LogisticProblem) this.problem);
         double ML = L.evaluate(betaHat);//TODO: computed already in Logistic
 
-        deviance = - 2 * (ML);//p.118
+        deviance = -2 * (ML);//p.118
 
         /*
          * The maximum attainable log-likelihood is 0 at fitted=y.

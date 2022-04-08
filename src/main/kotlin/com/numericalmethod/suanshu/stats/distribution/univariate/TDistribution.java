@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.analysis.function.special.beta.LogBeta;
 import com.numericalmethod.suanshu.analysis.function.special.gamma.Digamma;
 import com.numericalmethod.suanshu.analysis.function.special.gamma.LogGamma;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.*;
 
@@ -54,7 +55,9 @@ import static java.lang.Math.*;
  */
 public class TDistribution implements ProbabilityDistribution {
 
-    /** the degree of freedom */
+    /**
+     * the degree of freedom
+     */
     private final double v;
     private final BetaRegularized Ix;
     private final BetaRegularizedInverse IxInv;
@@ -83,7 +86,7 @@ public class TDistribution implements ProbabilityDistribution {
     @Override
     public double mean() {
         SuanShuUtils.assertOrThrow(v > 1 ? null
-                                   : new UnsupportedOperationException("only for v > 1"));
+                : new UnsupportedOperationException("only for v > 1"));
 
         return 0;
     }
@@ -101,7 +104,7 @@ public class TDistribution implements ProbabilityDistribution {
     @Override
     public double variance() {
         SuanShuUtils.assertOrThrow(v >= 2 ? null
-                                   : new UnsupportedOperationException("only for v >= 2"));
+                : new UnsupportedOperationException("only for v >= 2"));
 
         if (v == 2) {
             return Double.POSITIVE_INFINITY;
@@ -118,7 +121,7 @@ public class TDistribution implements ProbabilityDistribution {
     @Override
     public double skew() {
         SuanShuUtils.assertOrThrow(v > 3 ? null
-                                   : new UnsupportedOperationException("only for v > 3"));
+                : new UnsupportedOperationException("only for v > 3"));
 
         return 0;
     }
@@ -131,7 +134,7 @@ public class TDistribution implements ProbabilityDistribution {
     @Override
     public double kurtosis() {
         SuanShuUtils.assertOrThrow(v > 4 ? null
-                                   : new UnsupportedOperationException("only for v > 4"));
+                : new UnsupportedOperationException("only for v > 4"));
 
         return 6 / (v - 4);
     }

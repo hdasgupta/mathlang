@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,12 +23,15 @@
 package com.numericalmethod.suanshu.matrix.doubles.operation;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
+
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.factorization.svd.SVD;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.DiagonalMatrix;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
 
 /**
@@ -60,7 +63,7 @@ public class PseudoInverse extends DenseMatrix {
      *
      * @param A       an <i>m x n</i> matrix
      * @param epsilon a precision parameter: when a number |x| ≤ ε, it is considered 0.
-     * This threshold truncates negligible singular values less than the smaller of ε and (t = machine_ε * max(m,n) * max(D)).
+     *                This threshold truncates negligible singular values less than the smaller of ε and (t = machine_ε * max(m,n) * max(D)).
      * @see <a href="http://en.wikipedia.org/wiki/Moore-Penrose_pseudo-inverse#The_general_case_and_the_SVD_method">Wikipedia: The general case and the SVD method</a>
      */
     public PseudoInverse(Matrix A, double epsilon) {

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,7 +25,9 @@ package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationar
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2rm.RealVectorFunction;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
+
 import com.numericalmethod.suanshu.optimization.problem.C2OptimProblemImpl;
 import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.optimization.unconstrained.NelderMead;
@@ -34,8 +36,10 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.realtime.TimeSeries;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.log;
 import static java.lang.Math.max;
+
 import java.util.Arrays;
 
 /**
@@ -48,7 +52,6 @@ import java.util.Arrays;
  * The R equivalent functions are {@code garch} in {@code tseries} and {@code garchFit} in {@code fGarch}.
  *
  * @author Haksun Li
- *
  * @see "Bollerslev, Tim. <i>Generalized autoregressive conditional heteroskedasticity,</i> Journal of Econometrics, Issue 3, Vol. 31. 1986."
  */
 public class GARCH {//TODO: need to use a constrained version of the BFGS algorithm
@@ -185,7 +188,6 @@ public class GARCH {//TODO: need to use a constrained version of the BFGS algori
      * @param q    the ARCH order
      * @param p    the GARCH part order
      * @return log-likelihood function for a set of observations
-     *
      * @see "Bollerslev, Tim. "Eq. 18. Generalized autoregressive conditional heteroskedasticity," Journal of Econometrics, Issue 3, Vol. 31. 1986."
      */
     private RealScalarFunction logLikelihood(final double[] e_t2, final int p, final int q) {
@@ -247,7 +249,6 @@ public class GARCH {//TODO: need to use a constrained version of the BFGS algori
      * @param p    the number of AR terms
      * @param q    the number of MA terms
      * @return the gradient of the log-likelihood function
-     *
      * @see "Bollerslev, Tim. "Eqs. 19, 21. Generalized autoregressive conditional heteroskedasticity," Journal of Econometrics, Issue 3, Vol. 31. 1986."
      */
     private RealVectorFunction dLogLikelihood(final double[] e_t2, final int p, final int q) {

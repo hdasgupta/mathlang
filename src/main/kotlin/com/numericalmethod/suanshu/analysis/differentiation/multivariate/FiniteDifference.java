@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,11 +23,14 @@
 package com.numericalmethod.suanshu.analysis.differentiation.multivariate;
 
 import static com.numericalmethod.suanshu.Constant.MACH_EPS;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.max;
 import static java.lang.Math.pow;
+
 import java.util.Arrays;
 
 /**
@@ -37,12 +40,11 @@ import java.util.Arrays;
  * \[
  * {\partial^2 \over \partial x_1 \partial x_2} = {\partial \over \partial x_2}({\partial \over \partial x_1})
  * \]
- *
+ * <p>
  * Each of the two univariate derivatives is computed using the central difference method.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Partial_derivative">Wikipedia: Partial derivative</a>
  * <li><a href="http://en.wikipedia.org/wiki/Finite_difference">Wikipedia: Finite difference</a>
  * </ul>

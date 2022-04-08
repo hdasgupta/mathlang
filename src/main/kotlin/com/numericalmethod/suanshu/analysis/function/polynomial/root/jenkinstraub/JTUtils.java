@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.QuadraticMonomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.QuadraticSyntheticDivision;
+
 import static java.lang.Math.abs;
 
 /**
@@ -45,11 +46,17 @@ class JTUtils {
 
         static enum Type {
 
-            /** a1, a3, a7, e, f, g are divided by c */
+            /**
+             * a1, a3, a7, e, f, g are divided by c
+             */
             DIVIDED_BY_C,
-            /** a1, a3, a7, e, f, g are divided by d */
+            /**
+             * a1, a3, a7, e, f, g are divided by d
+             */
             DIVIDED_BY_D,
-            /** The quadratic is almost a factor of K(z) */
+            /**
+             * The quadratic is almost a factor of K(z)
+             */
             UNSCALED
         }
 
@@ -190,9 +197,9 @@ class JTUtils {
         temp = -c4 + a5 + b1 * a4;
         if (temp != 0.0) {
             return new double[]{
-                        -((u * (c3 + c2) + v * (b1 * varSet.a1 + b2 * varSet.a7)) / temp) + u, // new estimate of u
-                        v * (1.0 + c4 / temp) // new estimate of v
-                    };
+                    -((u * (c3 + c2) + v * (b1 * varSet.a1 + b2 * varSet.a7)) / temp) + u, // new estimate of u
+                    v * (1.0 + c4 / temp) // new estimate of v
+            };
         }
 
         return new double[]{0.0, 0.0};

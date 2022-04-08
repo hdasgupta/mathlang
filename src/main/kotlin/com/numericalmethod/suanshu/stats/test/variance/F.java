@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.stats.test.variance;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static java.lang.Math.*;
 
@@ -36,7 +37,6 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code var.test}.
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/FDistribution-test_of_equality_of_variances">Wikipedia: FDistribution-test of equality of variances</a>
  */
 public class F extends HypothesisTest {
@@ -88,10 +88,10 @@ public class F extends HypothesisTest {
 
     /**
      * Perform the FDistribution test to test for equal variance of two normal populations.
-     * 
+     *
      * @param sample1 sample 1
      * @param sample2 sample 2
-     * @param ratio the hypothesized ratio of the population variances of samples 1 and 2
+     * @param ratio   the hypothesized ratio of the population variances of samples 1 and 2
      */
     public F(double[] sample1, double[] sample2, double ratio) {
         super(new double[][]{sample1, sample2});

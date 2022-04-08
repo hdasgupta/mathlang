@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess.arma;
 
 import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
+
 import java.util.Arrays;
 
 /**
@@ -30,7 +31,6 @@ import java.util.Arrays;
  * A linear representation writes the time series as an (infinite) AR model.
  *
  * @author Haksun Li
- *
  * @see "P. J. Brockwell and R. A. Davis, "Eqs. 3.3.3, 3.3.4, Theorem 3.1.1., Chapter 11.3 Multivariate ARMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class LinearRepresentation {
@@ -49,8 +49,8 @@ public class LinearRepresentation {
 
     /**
      * Construct the linear representation of an ARMA model.
-     * 
-     * @param arma an ARMA model
+     *
+     * @param arma  an ARMA model
      * @param nlags number of lags
      */
     public LinearRepresentation(ARMAModel arma, int nlags) {
@@ -88,7 +88,7 @@ public class LinearRepresentation {
 
     /**
      * Get a copy of the linear representation coefficients.
-     * 
+     *
      * @return {ψ<sub>i</sub>}
      */
     public double[] psi() {

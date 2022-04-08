@@ -2,12 +2,16 @@ package com.numericalmethod.suanshu.stats.test.rank;
 
 import com.numericalmethod.suanshu.number.Counter;
 import com.numericalmethod.suanshu.number.DoubleUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
+
 import com.numericalmethod.suanshu.stats.descriptive.rank.Rank;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ChiSquareDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static java.lang.Math.pow;
+
 import java.util.Set;
 
 /**
@@ -26,7 +30,6 @@ import java.util.Set;
  * The R equivalent function is {@code kruskal.test}.
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/Kruskal-Wallis">Wikipedia: Kruskal–Wallis one-way analysis of variance</a>
  */
 public class KruskalWallis extends HypothesisTest {
@@ -43,7 +46,7 @@ public class KruskalWallis extends HypothesisTest {
 
     /**
      * Construct a Kruskal-Wallis test for the equality of median of groups.
-     * 
+     *
      * @param samples samples
      */
     public KruskalWallis(double[]... samples) {

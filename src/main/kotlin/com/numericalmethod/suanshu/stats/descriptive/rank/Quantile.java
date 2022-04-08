@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,11 @@
 package com.numericalmethod.suanshu.stats.descriptive.rank;
 
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
+
 import com.numericalmethod.suanshu.stats.descriptive.Statistic;
+
 import java.util.Arrays;
 
 /**
@@ -41,8 +44,7 @@ import java.util.Arrays;
  * The R equivalent function is {@code quantile}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"R. J. Hyndman, and Y. Fan, "Sample quantiles in statistical packages," American Statistician, 50, 361–365, 1996."
  * <li><a href="http://en.wikipedia.org/wiki/Quantile">Wikipedia: Quantile</a>
  * </ul>
@@ -95,9 +97,13 @@ public class Quantile implements Statistic {
          * for the expected order statistics if the sample is normally distributed
          */
         APPROXIMATELY_UNBIASED_IF_DATA_IS_NORMAL
-    };
+    }
 
-    /** the quantile definition */
+    ;
+
+    /**
+     * the quantile definition
+     */
     private final QuantileType type;
     private double[] sortedData;
 
@@ -224,7 +230,7 @@ public class Quantile implements Statistic {
     public void addData(double... data) {
         int oldLenght = sortedData == null ? 0 : sortedData.length;
         sortedData = sortedData == null ? new double[data.length]
-                     : Arrays.copyOf(sortedData, sortedData.length + data.length);
+                : Arrays.copyOf(sortedData, sortedData.length + data.length);
 
         for (int i = 0; i < data.length; ++i) {
             sortedData[oldLenght + i] = data[i];

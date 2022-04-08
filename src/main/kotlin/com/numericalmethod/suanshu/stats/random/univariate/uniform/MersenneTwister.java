@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -76,8 +76,7 @@ import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
  * </pre>
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/MT2002/CODES/mt19937ar.c">The original C code</a>
  * <li><a href="http://en.wikipedia.org/wiki/Mersenne_twister">Wikipedia: Mersenne twister</a>
  * </ul>
@@ -89,13 +88,21 @@ public class MersenneTwister implements RandomLongGenerator {
     private static final int OFFSET = 397;
     private static final int MATRIX_A = 0x9908b0df;
     private static final int[] MAG01 = {0x0, MATRIX_A};
-    /** most significant w-r bits */
+    /**
+     * most significant w-r bits
+     */
     private static final int UPPER_MASK = 0x80000000;
-    /** least significant r bits */
+    /**
+     * least significant r bits
+     */
     private static final int LOWER_MASK = 0x7fffffff;
-    /** the array for the state vector */
+    /**
+     * the array for the state vector
+     */
     private int[] mt = new int[LENGTH];
-    /** current index in mt[]; mti==LENGTH+1 means mt is not initialized */
+    /**
+     * current index in mt[]; mti==LENGTH+1 means mt is not initialized
+     */
     private int mti = LENGTH + 1;
 
     /**
@@ -155,7 +162,7 @@ public class MersenneTwister implements RandomLongGenerator {
         int i = 1, j = 0, k = Math.max(LENGTH, seeds.length);
         for (; k > 0; --k) {
             long lmt = (unsignedLong(mt[i]) ^ ((unsignedLong(mt[i - 1])
-                                                ^ (unsignedLong(mt[i - 1]) >> 30)) * 1664525l)) + seeds[j] + j;//non-linear
+                    ^ (unsignedLong(mt[i - 1]) >> 30)) * 1664525l)) + seeds[j] + j;//non-linear
             mt[i] = (int) (lmt & 0xffffffffL);
             i++;
             j++;
@@ -170,7 +177,7 @@ public class MersenneTwister implements RandomLongGenerator {
 
         for (k = LENGTH - 1; k > 0; --k) {
             long mtlong = (unsignedLong(mt[i]) ^ ((unsignedLong(mt[i - 1])
-                                                   ^ (unsignedLong(mt[i - 1]) >> 30)) * 1566083941l)) - i;//non-linear
+                    ^ (unsignedLong(mt[i - 1]) >> 30)) * 1566083941l)) - i;//non-linear
             mt[i] = (int) (mtlong & 0xffffffffL);
             i++;
             if (i >= LENGTH) {

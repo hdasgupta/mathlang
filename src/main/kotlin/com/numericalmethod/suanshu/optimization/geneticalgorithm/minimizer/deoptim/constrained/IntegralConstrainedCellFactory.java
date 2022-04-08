@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.optimization.constrained.integer.IPProblem;
 import com.numericalmethod.suanshu.optimization.geneticalgorithm.minimizer.deoptim.DEOptimCellFactory;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,14 +60,16 @@ public class IntegralConstrainedCellFactory extends ConstrainedCellFactory {//TO
 
             return z;
         }
-    };
+    }
+
+    ;
 
     /**
      * This integral constraint makes some variables in the objective function integral variables.
      */
     public static class SomeIntegers implements IntegerConstraint {
 
-        private final Set<Integer> indices = new HashSet< Integer>();//the integral indices
+        private final Set<Integer> indices = new HashSet<Integer>();//the integral indices
 
         /**
          * Construct the integral constraint from an Integer Programming problem.
@@ -91,7 +94,9 @@ public class IntegralConstrainedCellFactory extends ConstrainedCellFactory {//TO
 
             return z;
         }
-    };
+    }
+
+    ;
 
     private final IntegerConstraint constraint;
 

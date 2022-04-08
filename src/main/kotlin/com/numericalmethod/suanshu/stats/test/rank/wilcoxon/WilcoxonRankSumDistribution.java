@@ -24,7 +24,9 @@ package com.numericalmethod.suanshu.stats.test.rank.wilcoxon;
 
 import com.numericalmethod.suanshu.number.big.BigIntegerUtils;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import java.math.BigInteger;
+
 import static java.lang.Math.*;
 
 /**
@@ -39,7 +41,6 @@ import static java.lang.Math.*;
  * The R equivalent functions are {@code dwilcox, pwilcox, qwilcox, rwilcox}.
  *
  * @author Chun Yip Yau
- *
  * @see "Zbynek Sidak, Pranab K. Sen, Jaroslav Hajek. Theory of Rank Tests. Theorems 1, Section 5.3, p.173."
  */
 public class WilcoxonRankSumDistribution implements ProbabilityDistribution {
@@ -56,7 +57,7 @@ public class WilcoxonRankSumDistribution implements ProbabilityDistribution {
 
     /**
      * Construct a Wilcoxon Rank Sum distribution for sample sizes {@code M} and {@code N}.
-     * 
+     *
      * @param M number of observations in group 1
      * @param N number of observations in group 2
      */
@@ -208,7 +209,7 @@ public class WilcoxonRankSumDistribution implements ProbabilityDistribution {
 
     /**
      * Compute the two-sided p-value for a critical value.
-     * 
+     *
      * @param x a critical value
      * @return the two-sided p-value
      */

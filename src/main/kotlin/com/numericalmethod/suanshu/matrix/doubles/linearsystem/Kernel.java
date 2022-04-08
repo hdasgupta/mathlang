@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -28,6 +28,7 @@ import com.numericalmethod.suanshu.matrix.doubles.factorization.qr.HouseholderRe
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.*;
 
 /**
@@ -50,8 +51,7 @@ import java.util.*;
  * <i>x</i> is a particular solution.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Kernel_(matrix)#Nonhomogeneous_equations">Wikipedia: Kernel (matrix)</a>
  * <li><a href="http://en.wikipedia.org/wiki/Rank-nullity_theorem">Wikipedia: Rank–nullity theorem</a>
  * </ul>
@@ -93,7 +93,7 @@ public class Kernel {
      * @param A       a matrix
      * @param method  the kernel computation method
      * @param epsilon a precision parameter: when a number |x| ≤ ε, it is considered 0;
-     * the ε is used to determine the numerical rank of the linear space
+     *                the ε is used to determine the numerical rank of the linear space
      */
     public Kernel(Matrix A, Method method, double epsilon) {
         SuanShuUtils.assertArgument(A.nCols() >= A.nRows(), "cannot compute for an over-determined system");

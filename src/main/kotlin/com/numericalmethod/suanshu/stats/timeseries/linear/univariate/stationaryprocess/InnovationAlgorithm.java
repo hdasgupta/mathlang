@@ -41,7 +41,6 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * </ul>
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. Brockwell and R. A. Davis, "Proposition. 5.2.2. Chapter 5. Multivariate Time Series," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class InnovationAlgorithm {
@@ -52,7 +51,7 @@ public class InnovationAlgorithm {
      * Construct an instance of <tt>InnovationAlgorithm</tt> for a univariate time series with known auto-covariance structure.
      *
      * @param Xt an univariate time series, length <i>t</i>
-     * @param K the auto-covariance function
+     * @param K  the auto-covariance function
      */
     public InnovationAlgorithm(TimeSeries Xt, final AutoCovarianceFunction K) {
         com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.AutoCovarianceFunction multiK =

@@ -36,19 +36,18 @@ import com.numericalmethod.suanshu.stats.timeseries.linear.univariate.arima.ARIM
  * The R equivalent function are {@code ARMAacf} and {@code TacvfAR} in package {@code FitAR}.
  *
  * @author Haksun Li, Kevin Sun
- *
  * @see "P. J. Brockwell and R. A. Davis, "p. 420. Eq. 11.3.15. The Covariance Matrix Function of a Causal ARMA Process. Chapter 11.3. Multivariate Time Series," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class AutoCovariance extends AutoCovarianceFunction {//TODO: solve the 1D Yule-Walker equations directly for performance
 
     private com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.stationaryprocess.arma.AutoCovariance ACVF;
 
-    /** 
+    /**
      * Compute the auto-covariance function of an ARMA model.
-     * 
-     * @param model an ARIMA specification
+     *
+     * @param model      an ARIMA specification
      * @param wnVariance white noise variance
-     * @param nLags the number of lags in the result
+     * @param nLags      the number of lags in the result
      */
     public AutoCovariance(ARIMAModel model, double wnVariance, int nLags) {
         //cast the parameters to multivariates variables

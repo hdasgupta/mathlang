@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,8 +37,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * The Hessian is updated by analyzing successive gradient vectors instead.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou, Wu-Sheng Lu, "Eq. 7.57, Section 7.6," Practical Optimization: Algorithms and Engineering Applications."
  * <li><a href="http://en.wikipedia.org/wiki/BFGS">Wikipedia: BFGS method</a>
  * </ul>
@@ -148,7 +147,9 @@ public class BFGS extends QuasiNewton {
         }
     }
 
-    /** {@code true} if Fletcher's modification to switch between BFGS and DFP is applied */
+    /**
+     * {@code true} if Fletcher's modification to switch between BFGS and DFP is applied
+     */
     private final boolean isFletcherSwitch;
 
     /**

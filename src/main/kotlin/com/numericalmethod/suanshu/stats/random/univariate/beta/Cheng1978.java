@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,10 @@
 package com.numericalmethod.suanshu.stats.random.univariate.beta;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+
 import static java.lang.Math.exp;
 import static java.lang.Math.log;
 
@@ -35,8 +37,7 @@ import static java.lang.Math.log;
  * especially for "difficult" combinations of parameter values.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"R. C. H. Cheng, "Generating beta variates with nonintegral shape parameters," Communications of the ACM 21, 317-322. 1978."
  * <li>"http://svn.r-project.org/R/trunk/src/nmath/rbeta.c"
  * </ul>
@@ -126,7 +127,7 @@ public class Cheng1978 implements RandomBetaGenerator {
         double u1, u2, y, z;// declaration here to speed up performance by avoiding allocation and deallocation of local variables in the loop?
         double v, w;
 
-        for (;;) {
+        for (; ; ) {
             u1 = uniform.nextDouble();
             u2 = uniform.nextDouble();
             if (u1 < 0.5) {

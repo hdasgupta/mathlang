@@ -27,10 +27,13 @@ import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.factorization.svd.SVD;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,8 +76,7 @@ import java.util.List;
  * <i>x_particular</i>.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a
  * href="http://en.wikipedia.org/wiki/System_of_linear_equations">Wikipedia:
  * System of linear equations</a>
@@ -88,13 +90,16 @@ import java.util.List;
  */
 public class LinearSystemSolver {
 
-    /** This is the runtime exception thrown when it fails to solve a system of linear
-     * equations. */
+    /**
+     * This is the runtime exception thrown when it fails to solve a system of linear
+     * equations.
+     */
     public static class NoSolution extends RuntimeException {
 
         private static final long serialVersionUID = 1L;
 
-        /** Construct an {@code LinearSystemSolver.NoSolution} exception.
+        /**
+         * Construct an {@code LinearSystemSolver.NoSolution} exception.
          *
          * @param msg the error message
          */
@@ -132,7 +137,7 @@ public class LinearSystemSolver {
      * Construct a solver for a linear system of equations.
      *
      * @param epsilon a precision parameter: when a number |x| ≤ ε, it is
-     * considered 0
+     *                considered 0
      */
     public LinearSystemSolver(double epsilon) {
         this.epsilon = epsilon;
@@ -142,7 +147,7 @@ public class LinearSystemSolver {
      * Get a particular solution for the linear system, <i>Ax = b</i>.
      *
      * @param A0 a matrix representing a linear system of equations (the
-     * homogeneous part)
+     *           homogeneous part)
      * @return a particular solution
      */
     public Solution solve(final Matrix A0) {
@@ -158,8 +163,9 @@ public class LinearSystemSolver {
                 }
 
                 SuanShuUtils.assertArgument(A.nRows() <= A.nCols(),
-                                            "Ax = b is an over-determined system. Please consider using the OLS method");
+                        "Ax = b is an over-determined system. Please consider using the OLS method");
             }
+
             Kernel nullspace = new Kernel(A, Kernel.Method.QR, epsilon);
             boolean isFullRank = nullspace.isZero();//is A a full rank matrix, i.e., det(A) != 0
             List<Vector> basis = nullspace.basis();//solution for the homogeneous part, Ax = 0

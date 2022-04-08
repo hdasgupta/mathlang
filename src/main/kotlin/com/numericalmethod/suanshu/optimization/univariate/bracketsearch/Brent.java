@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,8 +24,10 @@ package com.numericalmethod.suanshu.optimization.univariate.bracketsearch;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
 import static com.numericalmethod.suanshu.Constant.GOLDEN_RATIO;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.optimization.problem.C2OptimProblem;
+
 import static java.lang.Math.abs;
 
 /**
@@ -83,7 +85,7 @@ public class Brent extends BracketSearch {
 
         /**
          * {@inheritDoc}
-         *
+         * <p>
          * The search stops when
          * <ul>
          * \((x_u - x_l) < 2 \left | x \right | \varepsilon \)
@@ -143,7 +145,7 @@ public class Brent extends BracketSearch {
                  * </ul>
                  */
                 if (abs(p) < abs(0.5 * q * incLast)
-                    && (p > q * (xl - x)) && (p < q * (xu - x))) {
+                        && (p > q * (xl - x)) && (p < q * (xu - x))) {
                     inc = p / q;//here, q != 0
                     double u = xmin + inc;
 

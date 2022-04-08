@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -40,7 +40,9 @@ import com.numericalmethod.suanshu.stats.random.univariate.RandomNumberGenerator
 import com.numericalmethod.suanshu.stats.random.univariate.beta.Cheng1978;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.log;
+
 import java.util.Arrays;
 
 /**
@@ -57,9 +59,13 @@ public class BetaDistribution implements HMMDistribution {
      */
     public static class Lambda {
 
-        /** α: the shape parameter */
+        /**
+         * α: the shape parameter
+         */
         public final double alpha;
-        /** β: the shape parameter */
+        /**
+         * β: the shape parameter
+         */
         public final double beta;
 
         /**
@@ -188,7 +194,7 @@ public class BetaDistribution implements HMMDistribution {
                             double gamma_a = gamma.evaluate(a);
                             double gamma_b = gamma.evaluate(b);
                             double fx = log(gamma_ab) - log(gamma_a) - log(gamma_b)
-                                        + (a - 1) * y_1j + (b - 1) * y_2j; //to be maximized
+                                    + (a - 1) * y_1j + (b - 1) * y_2j; //to be maximized
                             fx = -fx; //minimize
                             return fx;
                         }
@@ -264,7 +270,9 @@ public class BetaDistribution implements HMMDistribution {
         return new BetaDistribution(lambda1, isAlphaEstimated, isBetaEstimated, epsilon, maxIterations);
     }
 
-    /** the gradient of the log-likelihood */
+    /**
+     * the gradient of the log-likelihood
+     */
     private RealVectorFunction dF(final double log_x1_bar, final double log_x2_bar) {
         return new RealVectorFunction() {
 
@@ -291,7 +299,9 @@ public class BetaDistribution implements HMMDistribution {
         };
     }
 
-    /** the Hessian of the log-likelihood */
+    /**
+     * the Hessian of the log-likelihood
+     */
     private RntoMatrix d2F() {
         return new RntoMatrix() {
 

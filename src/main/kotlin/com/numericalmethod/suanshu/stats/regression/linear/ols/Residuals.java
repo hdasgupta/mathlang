@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,12 +24,15 @@ package com.numericalmethod.suanshu.stats.regression.linear.ols;
 
 import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.CongruentMatrix;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.sum;
+
 import com.numericalmethod.suanshu.stats.regression.linear.LMProblem;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
+
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
@@ -43,9 +46,7 @@ import static java.lang.Math.sqrt;
  * Statistical significance can be checked by an F-test of the overall fit, followed by t-tests of individual parameters.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Regression_analysis#Regression_diagnostics">Wikipedia: Regression diagnostics</a>
  * <li><a href="http://en.wikipedia.org/wiki/R_square">Wikipedia: Coefficient of determination</a>
  * <li><a href="http://en.wikipedia.org/wiki/Residual_sum_of_squares">Wikipedia: Residual sum of squares</a>
@@ -179,9 +180,7 @@ public class Residuals extends com.numericalmethod.suanshu.stats.regression.line
      * studentized residual = standardized * sqrt((n-m-1) / (n-m-standardized^2))
      *
      * @return studentized residuals
-     *
-     * @see
-     * <ul>
+     * @see <ul>
      * <li>"p.90 (4.15). Section 4.3. Regression Analysis by Example, 3rd edition, 2000. Chatterjee, Hadi and Price. Wiley Series in Probability and Statistics."
      * <li>@see <a href="http://en.wikipedia.org/wiki/Studentized_residual">Wikipedia: Studentized residual</a>
      * </ul>

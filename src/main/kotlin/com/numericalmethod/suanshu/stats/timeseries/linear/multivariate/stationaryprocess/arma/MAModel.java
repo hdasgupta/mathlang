@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -38,7 +38,7 @@ public class MAModel extends ARMAModel {
     /**
      * Construct a multivariate MA model.
      *
-     * @param mu the intercept (constant) vector
+     * @param mu    the intercept (constant) vector
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficients
      * @param sigma the covariance matrix of white noise
      */
@@ -49,7 +49,7 @@ public class MAModel extends ARMAModel {
     /**
      * Construct a multivariate MA model with unit variance.
      *
-     * @param mu the intercept (constant) vector
+     * @param mu    the intercept (constant) vector
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficients
      */
     public MAModel(Vector mu, Matrix[] theta) {

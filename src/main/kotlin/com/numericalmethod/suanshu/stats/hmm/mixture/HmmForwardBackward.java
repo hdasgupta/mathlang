@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,6 +29,7 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.Diag
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.log;
 
 /**
@@ -36,8 +37,7 @@ import static java.lang.Math.log;
  * give a sequence of observations and the hmm model.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li>L. R. Rabiner, "A tutorial on hidden Markov models and selected applications in speech recognition," Proceedings of the IEEE, Volume: 77, Issue:2, 257 - 286, Feb 1989."
  * <li>W. Zucchini and I. L. MacDonald, "Hidden Markov Models for Time Series: An Introduction Using R," Boca Raton, Florida, CRC Press, 2009.
  * </ul>
@@ -45,11 +45,17 @@ import static java.lang.Math.log;
 public class HmmForwardBackward {
 
     private final HiddenMarkovModel model;
-    /** the log-transformed forward probabilities */
+    /**
+     * the log-transformed forward probabilities
+     */
     private ImmutableMatrix logForward = null;
-    /** the log-transformed backward probabilities */
+    /**
+     * the log-transformed backward probabilities
+     */
     private ImmutableMatrix logBackward = null;
-    /** the log-likelihood */
+    /**
+     * the log-likelihood
+     */
     private double logLikelihood = Double.NaN;
 
     /**

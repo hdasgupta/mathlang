@@ -28,9 +28,13 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.DiagonalMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.SymmetricMatrix;
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.subVector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,13 +125,13 @@ public class CreateMatrix {
 //    public static DenseMatrix cbind(List<Matrix> matrices) {
 //        return cbind(matrices.toArray(new Matrix[0]));
 //    }
+
     /**
      * Combine an array of vectors by rows.
      * The vectors must have the same length.
      *
      * @param vectors an array of vector, e.g., <i>v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub>, ...</i>
-     * @return
-     * \[
+     * @return \[
      * \begin{bmatrix}
      * v_1\\
      * v_2\\
@@ -165,8 +169,7 @@ public class CreateMatrix {
      * The vectors must have the same length.
      *
      * @param vectors a list of vector, e.g., <i>v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub>, ...</i>
-     * @return
-     * \[
+     * @return \[
      * \begin{bmatrix}
      * v_1\\
      * v_2\\
@@ -191,8 +194,7 @@ public class CreateMatrix {
      * The matrices must have the same number of columns.
      *
      * @param matrices an array of matrices, e.g., <i>A<sub>1</sub>, A<sub>2</sub>, A<sub>3</sub>, ...</i>
-     * @return
-     * \[
+     * @return \[
      * \begin{bmatrix}
      * A_1\\
      * A_2\\
@@ -234,6 +236,7 @@ public class CreateMatrix {
 //    public static DenseMatrix rbind(List<Matrix> matrices) {
 //        return rbind(matrices.toArray(new Matrix[0]));
 //    }
+
     /**
      * Construct a sub-matrix from the four corners of a matrix.
      *
@@ -345,17 +348,17 @@ public class CreateMatrix {
         int ncols = colTo - colFrom + 1;
 
         assertArgument(rowFrom <= rowTo,
-                       "invalid row indices");
+                "invalid row indices");
         assertArgument(colFrom <= colTo,
-                       "invalid column indices");
+                "invalid column indices");
         assertArgument(replacement.nRows() == nrows,
-                       String.format("the replacement matrix does not have %d rows", nrows));
+                String.format("the replacement matrix does not have %d rows", nrows));
         assertArgument(replacement.nCols() == ncols,
-                       String.format("the replacement matrix does not have %d columns", ncols));
+                String.format("the replacement matrix does not have %d columns", ncols));
         assertArgument(rowTo <= original.nRows(),
-                       "rowTo exceeds the boundary");
+                "rowTo exceeds the boundary");
         assertArgument(colTo <= original.nCols(),
-                       "colTo exceeds the boundary");
+                "colTo exceeds the boundary");
 
         for (int i = 1, m = rowFrom; i <= nrows; ++i, ++m) {
             for (int j = 1, n = colFrom; j <= ncols; ++j, ++n) {

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.Univariate
 import com.numericalmethod.suanshu.analysis.function.tuple.BinaryRelation;
 import com.numericalmethod.suanshu.analysis.interpolation.NevilleTable;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.relativeError;
 
 /**
@@ -38,9 +39,13 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.relativeError;
  */
 public class Romberg implements Integrator {//TODO: is this really the Romberg formula, or just Neville?
 
-    /** the iterative integrator */
+    /**
+     * the iterative integrator
+     */
     private IterativeIntegrator integrator;
-    /** the extrapolation formula */
+    /**
+     * the extrapolation formula
+     */
     private final NevilleTable neville;
 
     /**
@@ -68,7 +73,7 @@ public class Romberg implements Integrator {//TODO: is this really the Romberg f
             sum0 = getLastExtrapolationPoint();
 
             if ((i > 3)//avoid spurious convergence by doing at least a few iterations; TODO: why 3?
-                && relativeError(sum1, sum0) < getPrecision()) {//the convergence criterion
+                    && relativeError(sum1, sum0) < getPrecision()) {//the convergence criterion
                 break;//converged
             }
         }
@@ -81,7 +86,9 @@ public class Romberg implements Integrator {//TODO: is this really the Romberg f
         return integrator.getPrecision();
     }
 
-    /** Extrapolate the integral value with a newly added item. */
+    /**
+     * Extrapolate the integral value with a newly added item.
+     */
     private double addPointToExtrapolation(double h, double sum) {
         neville.addData(new BinaryRelation(new double[]{h}, new double[]{sum}));
 
@@ -92,7 +99,9 @@ public class Romberg implements Integrator {//TODO: is this really the Romberg f
         return result;
     }
 
-    /** Get the last extrapolated sum. */
+    /**
+     * Get the last extrapolated sum.
+     */
     private double getLastExtrapolationPoint() {
         final int N = neville.N();
         double result = Double.NaN;//Double.NaN is > Double.POSITIVE_INFINITY

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.analysis.function.special.gamma.GammaRegulari
 import com.numericalmethod.suanshu.analysis.function.special.gamma.GammaRegularizedPInverse;
 import com.numericalmethod.suanshu.analysis.function.special.gamma.LogGamma;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.*;
 
@@ -41,7 +42,9 @@ import static java.lang.Math.*;
  */
 public class ChiSquareDistribution implements ProbabilityDistribution {
 
-    /** the degree of freedom */
+    /**
+     * the degree of freedom
+     */
     private final double k;
     private static final LogGamma lgamma = new LogGamma();
     private static final GammaRegularizedP pgamma = new GammaRegularizedP();

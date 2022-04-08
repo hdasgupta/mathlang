@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,7 +29,9 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.Diag
 import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Inverse;
 import com.numericalmethod.suanshu.misc.R;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
@@ -42,7 +44,6 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * Most commonly, linear regression refers to a model in which the conditional mean of <i>y</i> given the value of <i>y</i> is an affine function of <i>y</i>.
  *
  * @author Haksun Li
- *
  * @see <a href="http://en.wikipedia.org/wiki/Linear_regression">Wikipedia: Linear regression</a>
  */
 public class LMProblem {
@@ -97,8 +98,8 @@ public class LMProblem {
         //add intercept
         this.A = new ImmutableMatrix(
                 (!addIntercept) ? X
-                : CreateMatrix.cbind(X,//append A with a column vector of constant 1
-                                     new DenseMatrix(R.rep(1.0, X.nRows()), X.nRows(), 1)));
+                        : CreateMatrix.cbind(X,//append A with a column vector of constant 1
+                        new DenseMatrix(R.rep(1.0, X.nRows()), X.nRows(), 1)));
 
         this.weights = weights != null ? !(weights instanceof ImmutableVector) ? new ImmutableVector(weights) : (ImmutableVector) weights : null;
 
@@ -208,7 +209,7 @@ public class LMProblem {
     /**
      * (wA' %*% wA)<sup>-1</sup>
      *
-     * @return (wA' %*% wA)<sup>-1</sup>
+     * @return (wA ' % * % wA)<sup>-1</sup>
      */
     public ImmutableMatrix invOfwAtwA() {
         if (invOfwAtwA == null) {

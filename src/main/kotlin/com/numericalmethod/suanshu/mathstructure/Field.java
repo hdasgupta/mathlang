@@ -42,7 +42,9 @@ public interface Field<F> extends Ring<F> {
 
         private static final long serialVersionUID = 1L;
 
-        /** Construct an instance of {@code InverseNonExistent} */
+        /**
+         * Construct an instance of {@code InverseNonExistent}
+         */
         public InverseNonExistent() {
             super("inverse does not exist");
         }

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.stats.regression.linear.ols;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
+
 import static java.lang.Math.*;
 
 /**
@@ -42,9 +43,7 @@ import static java.lang.Math.*;
  * Hadi proposed a measure of influence of the i-th observation based on the fact that influential observations are outliers in either the response variable or in the predictors, or both.
  *
  * @author Haksun Li
- *
- * @see
- * <ul><a href="http://en.wikipedia.org/wiki/Cook%27s_distance">Wikipedia: Cook's distance</a>
+ * @see <ul><a href="http://en.wikipedia.org/wiki/Cook%27s_distance">Wikipedia: Cook's distance</a>
  * <li><a href="http://en.wikipedia.org/wiki/DFFITS">Wikipedia: DFFITS</a>
  * </ul>
  */
@@ -53,8 +52,7 @@ public class Diagnostics {
     /**
      * DFFITS, Welsch and Kuh Measure
      *
-     * @see
-     * <ul>
+     * @see <ul>
      * <li>"p.105 (4.23). Section 4.9.2. Regression Analysis by Example, 3rd edition, 2000. Chatterjee, Hadi and Price. Wiley Series in Probability and Statistics."
      * <li>Belsley, David A.; Edwin Kuh, Roy E. Welsch. Regression diagnostics : identifying influential data and sources of collinearity. Wiley series in probability and mathematical statistics. New York: John Wiley & Sons. ISBN 0471058564. 1980.
      * </ul>
@@ -75,7 +73,7 @@ public class Diagnostics {
 
     /**
      * Construct an instance of the <tt>Diagnostics</tt> from the results of the residual analysis.
-     * 
+     *
      * @param residuals the residual analysis of a linear regression problem
      */
     Diagnostics(Residuals residuals) {

@@ -23,12 +23,15 @@
 package com.numericalmethod.suanshu.stats.test.rank.wilcoxon;
 
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.number.Counter;
 import com.numericalmethod.suanshu.stats.descriptive.rank.Rank;
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static java.lang.Math.*;
 
 /**
@@ -42,9 +45,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code wilcox.test}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Gibbons and Chakraborti, Nonparameric statistical inference (2003), Chapter 5.7, p.197."
  * <li><a href="http://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test">Wikipedia: Wilcoxon signed-rank test</a>
  * </ul>
@@ -75,7 +76,7 @@ public class WilcoxonSignedRank extends HypothesisTest {//TODO: exact distributi
      *
      * @param sample1 sample 1
      * @param sample2 sample 2
-     * @param mu the hypothetical median that the distribution is symmetric about
+     * @param mu      the hypothetical median that the distribution is symmetric about
      * @param isExact {@code true} if to use the exact distribution; otherwise, normal approximation is used
      */
     public WilcoxonSignedRank(double[] sample1, double[] sample2, double mu, boolean isExact) {
@@ -151,7 +152,7 @@ public class WilcoxonSignedRank extends HypothesisTest {//TODO: exact distributi
      * Perform the Wilcoxon Signed Rank test to test for the equality of medians.
      *
      * @param sample a sample
-     * @param mu the hypothetical median that the distribution is symmetric about
+     * @param mu     the hypothetical median that the distribution is symmetric about
      */
     public WilcoxonSignedRank(double[] sample, int mu) {
         this(sample, null, mu, sample.length < 50);

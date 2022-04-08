@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,8 +24,10 @@ package com.numericalmethod.suanshu.analysis.differentiation.univariate;
 
 import static com.numericalmethod.suanshu.Constant.MACH_EPS;
 import static com.numericalmethod.suanshu.analysis.function.FunctionOps.combination;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static java.lang.Math.*;
 
 /**
@@ -36,8 +38,7 @@ import static java.lang.Math.*;
  * For example, approximating the 5-th derivative is much less accurate than approximating the 1st derivative.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Finite_difference">Wikipedia: Finite difference</a>
  * <li><a href="http://en.wikipedia.org/wiki/Difference_operator">Wikipedia: Difference operator</a>
  * <li><a href="http://en.wikipedia.org/wiki/Numerical_differentiation#Practical_considerations">Wikipedia: Practical considerations</a>
@@ -45,16 +46,26 @@ import static java.lang.Math.*;
  */
 public class FiniteDifference extends UnivariateRealFunction {
 
-    /** the types of finite difference available */
+    /**
+     * the types of finite difference available
+     */
     public static enum Type {
 
-        /** forward difference */
+        /**
+         * forward difference
+         */
         FORWARD,
-        /** backward difference */
+        /**
+         * backward difference
+         */
         BACKWARD,
-        /** central difference */
+        /**
+         * central difference
+         */
         CENTRAL
-    };
+    }
+
+    ;
 
     private final UnivariateRealFunction f;//the univariate function to take the derivative of
     private final int order;//the order of the derivative

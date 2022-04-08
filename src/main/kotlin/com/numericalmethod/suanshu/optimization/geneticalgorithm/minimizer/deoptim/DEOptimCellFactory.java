@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.optimization.geneticalgorithm.Chromosome;
 import com.numericalmethod.suanshu.optimization.geneticalgorithm.minimizer.simplegrid.SimpleCellFactory;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import java.util.Collections;
 import java.util.List;
 

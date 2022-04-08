@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -31,10 +31,13 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Householder;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Householder.Context;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.concat;
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.subVector;
 
@@ -78,7 +81,7 @@ public class HouseholderReflection implements QRDecomposition {
      */
     public HouseholderReflection(Matrix A, double epsilon) {
         SuanShuUtils.assertArgument((A.nRows() >= A.nCols()),
-                                    "QR decomposition by Householder Reflection applies to matrix where the number of rows >= the number of columns");
+                "QR decomposition by Householder Reflection applies to matrix where the number of rows >= the number of columns");
 
         this.nRows = A.nRows();
         this.nCols = A.nCols();

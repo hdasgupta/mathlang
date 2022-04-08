@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import static java.lang.Math.log;
 
 /**
@@ -36,8 +37,7 @@ import static java.lang.Math.log;
  * especially in the context of Markov information sources and hidden Markov models.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li>Rabiner, L.R. "A tutorial on hidden Markov models and selected applications in speech recognition," Proceedings of the IEEE. Volume 77, Issue 2, 257 - 286. Feb 1989.
  * <li>W. Zucchini and I. L. MacDonald, "Hidden Markov Models for Time Series: An Introduction Using R," Boca Raton, Florida, CRC Press, 2009.
  * <li><a href="http://en.wikipedia.org/wiki/Viterbi_algorithm">Wikipedia: Viterbi algorithm</a>
@@ -45,7 +45,9 @@ import static java.lang.Math.log;
  */
 public class HmmViterbi {
 
-    /** the underlying hidden Markov model */
+    /**
+     * the underlying hidden Markov model
+     */
     private final HiddenMarkovModel model;
 
     /**

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,8 +24,10 @@ package com.numericalmethod.suanshu.matrix.doubles.factorization.eigen.qr;
 
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
 import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
+
 import java.util.ArrayList;
 
 /**
@@ -227,7 +229,9 @@ public class Hessenberg {
             this.lr = lr;
             this.isQuasiTriangular = (ul == 0 && lr == 0) ? true : false;
         }
-    };
+    }
+
+    ;
 
     /**
      * Find <i>H<sub>22</sub></i> such that <i>H<sub>22</sub></i> is the largest unreduced Hessenberg sub-matrix.
@@ -244,7 +248,7 @@ public class Hessenberg {
         int ul = n;
         int lr = n;
 
-        for (; ul >= 1;) {
+        for (; ul >= 1; ) {
             if (ul == 1 || deflationCriterion.isNegligible(H, ul, ul - 1, epsilon)) {//reducible; deflation point
                 if (lr != 2 &&//no need to do rounding for the leading 2x2 matrix
                         ul > 1) {//avoid invalid index
@@ -253,7 +257,7 @@ public class Hessenberg {
                 }
 
                 if (ul == lr - 1//process a 2x2 block
-                    || (ul == lr)) {//process a 1x1 block
+                        || (ul == lr)) {//process a 1x1 block
                     /*
                      * process a 2x2 block
                      *

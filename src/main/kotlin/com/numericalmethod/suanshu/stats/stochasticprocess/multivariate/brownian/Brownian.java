@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,7 +29,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**
  * A multivariate Brownian motion is a stochastic process with the following properties.
- * 
+ *
  * <ul>
  * <li>B(0) = 0;
  * <li>B(t), t >= 0, are continuous functions of t;
@@ -38,7 +38,6 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * </ul>
  *
  * @author Haksun Li
- *
  * @see "Fima C. Klebaner. Introduction to Stochastic Calculus with Applications. 2nd ed. Section 3.1. Imperial College Press. 2006."
  */
 public class Brownian implements DiscretizedSDE {
@@ -58,7 +57,7 @@ public class Brownian implements DiscretizedSDE {
 
     /**
      * Construct a multi-dimensional Brownian motion.
-     * 
+     *
      * @param d the dimension
      */
     public Brownian(int d) {
@@ -69,8 +68,8 @@ public class Brownian implements DiscretizedSDE {
 
     /**
      * Construct a multi-dimensional Brownian motion with μ and σ.
-     * 
-     * @param mu μ
+     *
+     * @param mu    μ
      * @param sigma σ
      */
     public Brownian(Vector mu, Matrix sigma) {

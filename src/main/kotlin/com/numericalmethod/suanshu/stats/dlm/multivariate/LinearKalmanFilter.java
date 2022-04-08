@@ -42,7 +42,9 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  */
 public class LinearKalmanFilter {
 
-    /** the DLM model */
+    /**
+     * the DLM model
+     */
     private final DLM model;
     /**
      * the state predictions
@@ -72,7 +74,9 @@ public class LinearKalmanFilter {
      * </i></blockquote>
      */
     private Matrix[] V_yt_tlag;
-    /** the optimal Kalman gain matrices */
+    /**
+     * the optimal Kalman gain matrices
+     */
     private Matrix[] KalmanGain;
     /**
      * the state updates

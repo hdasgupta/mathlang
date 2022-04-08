@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfDifferentDimension;
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfIncompatible4Multiplication;
+
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
@@ -38,6 +39,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 public class DiagonalMatrix extends DiagonalDataMatrix {
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
+
     /**
      * Construct a diagonal matrix from a {@code double[]}.
      * For example,

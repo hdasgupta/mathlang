@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,12 +24,16 @@ package com.numericalmethod.suanshu.stats.test.distribution.normality;
 
 import com.numericalmethod.suanshu.analysis.function.FunctionOps;
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.descriptive.moment.Mean;
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import java.util.Arrays;
+
 import static java.lang.Math.*;
 
 /**
@@ -42,9 +46,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code shapiro.test}.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">Wikipedia: Shapiro–Wilk test</a>
  * <li>Patrick Royston. "A Remark on Algorithm AS 181: The W Test for Normality," Applied Statistics, 44, 547–551. 1995.
  * <li>Patrick Royston. "Approximating the Shapiro-Wilk W-test for non-normality," Statistics and Computing, Volume 2, Number 3, 117-119. 1992.
@@ -72,7 +74,7 @@ public class ShapiroWilk extends HypothesisTest {
 
     /**
      * Perform the Shapiro-Wilk test to test for the null hypothesis that a sample comes from a normally distributed population.
-     * 
+     *
      * @param sample a sample
      */
     public ShapiroWilk(double[] sample) {

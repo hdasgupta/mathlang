@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.analysis.integration.univariate.riemann.substitution;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
+
 import static java.lang.Math.cosh;
 import static java.lang.Math.sinh;
 
@@ -52,7 +53,9 @@ public class DoubleExponential4RealLine extends DoubleExponential {
         super(xt(c), dxdt(c), f, a, b, c);
     }
 
-    /** x(t) */
+    /**
+     * x(t)
+     */
     private static UnivariateRealFunction xt(final double c) {
         return new UnivariateRealFunction() {
 
@@ -63,7 +66,9 @@ public class DoubleExponential4RealLine extends DoubleExponential {
         };
     }
 
-    /** x'(t) = dx(t)/dt */
+    /**
+     * x'(t) = dx(t)/dt
+     */
     private static UnivariateRealFunction dxdt(final double c) {
         return new UnivariateRealFunction() {
 

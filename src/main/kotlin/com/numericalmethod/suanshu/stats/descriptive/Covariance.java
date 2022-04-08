@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -36,8 +36,7 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
  * This implementation uses Pébay's update formula to incrementally compute the new statistic.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Covariance">Wikipedia: Covariance</a>
  * <li><a href="http://en.wikipedia.org/wiki/Correlation">Wikipedia: Correlation</a>
  * </ul>
@@ -97,16 +96,16 @@ public class Covariance implements Statistic {
      * <p/>
      * For example, suppose we want to do
      * <blockquote><code>
-     *        addData(new double[][]{
-     *              {1, 2, 3},
-     *              {4, 5, 6}
-     *          });
+     * addData(new double[][]{
+     * {1, 2, 3},
+     * {4, 5, 6}
+     * });
      * </code></blockquote>
      * We can also write
      * <blockquote><code>
-     *        addData(new double[]{
-     *              {1, 2, 3, 4, 5, 6}
-     *          });
+     * addData(new double[]{
+     * {1, 2, 3, 4, 5, 6}
+     * });
      * </code></blockquote>
      * In the latter case, there must be an even number of data points.
      *
@@ -184,8 +183,8 @@ public class Covariance implements Statistic {
     @Override
     public String toString() {
         return String.format("covariance: %f; correlation: %f, N: %d",
-                             value(),
-                             correlation(),
-                             N);
+                value(),
+                correlation(),
+                N);
     }
 }

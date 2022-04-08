@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu;
 
 import com.numericalmethod.suanshu.number.ScientificNotation;
+
 import static java.lang.Math.*;
 
 /**
@@ -37,6 +38,7 @@ public class Constant {
         MACH_EPS = getMachineEpsilon();
         MACH_SCALE = abs(new ScientificNotation(Constant.MACH_EPS).exponent()) + 1;
     }
+
     /**
      * the machine epsilon
      * <p/>
@@ -45,17 +47,29 @@ public class Constant {
      * @see <a href="http://en.wikipedia.org/wiki/Machine_epsilon">Wikipedia: Machine epsilon</a>
      */
     public static final double MACH_EPS;
-    /** the scale for the machine epsilon */
+    /**
+     * the scale for the machine epsilon
+     */
     public static final int MACH_SCALE;
-    /** the default epsilon used in this library */
+    /**
+     * the default epsilon used in this library
+     */
     public static final double EPSILON = pow(10, new ScientificNotation(MACH_EPS).exponent() + 1);
-    /** \(\sqrt{2}\) */
+    /**
+     * \(\sqrt{2}\)
+     */
     public static final double ROOT_2 = sqrt(2d);
-    /** \(\sqrt{2\pi}\) */
+    /**
+     * \(\sqrt{2\pi}\)
+     */
     public static final double ROOT_2_PI = sqrt(2d * PI);
-    /** \(\sqrt{\pi}\) */
+    /**
+     * \(\sqrt{\pi}\)
+     */
     public static final double ROOT_PI = sqrt(PI);
-    /** \(\pi^2\) */
+    /**
+     * \(\pi^2\)
+     */
     public static final double PI_SQ = PI * PI;
     /**
      * the Euler–Mascheroni constant

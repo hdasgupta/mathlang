@@ -36,9 +36,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * which is an efficient way of obtaining a one step least square linear predictor.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"P. J. Brockwell and R. A. Davis, "Chapter 5.3. Recursive Prediction of an ARMA(p,q) Process," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  * <li>"P. J. Brockwell and R. A. Davis, "Eqs. 11.4.26, 11.4.27, 11.4.28, Chapter 11.4 Recursive Prediction of an ARMA(p,q) Process, Best Linear Predictors of Second Order Random Vectors," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  * </ul>
@@ -47,8 +45,8 @@ public class InnovationAlgorithm extends InnovationAlgorithmImpl {
 
     /**
      * Construct an instance of <tt>InnovationAlgorithm</tt> for a multivariate ARMA time series.
-     * 
-     * @param Xt an m-dimensional time series, length <i>t</i>
+     *
+     * @param Xt    an m-dimensional time series, length <i>t</i>
      * @param model the ARMA model
      */
     public InnovationAlgorithm(MultiVariateTimeSeries Xt, ARMAModel model) {

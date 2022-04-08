@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,7 +29,9 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.matrix.doubles.operation.positivedefinite.CholeskyWang2006;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.stats.random.univariate.normal.BoxMuller;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
@@ -48,8 +50,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * The R equivalent function is {@code rmvnorm} in package {@code mvtnorm}.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Multivariate_normal_distribution">Wikipedia: Multivariate normal distribution</a>
  * <li>"Jin Wang, Chunlei Liu. "Generating Multivariate Mixture of Normal Distributions using a Modified Cholesky Decomposition," Simulation Conference, 2006. WSC 06. Proceedings of the Winter. p. 342 - 347. 3-6 Dec. 2006."
  * </ul>
@@ -71,7 +72,7 @@ public class NormalRvg implements RandomVectorGenerator {
      */
     public NormalRvg(Vector mu, Matrix sigma, RandomLongGenerator uniform, double epsilon) {
         assertArgument((sigma.nRows() == mu.size()) && (sigma.nCols() == mu.size()),
-                       "sigma should be a square matrix of dimension mu.size() by mu.size()");
+                "sigma should be a square matrix of dimension mu.size() by mu.size()");
 
         this.size = mu.size();
         this.mu = new ImmutableVector(mu);
@@ -96,7 +97,7 @@ public class NormalRvg implements RandomVectorGenerator {
      */
     public NormalRvg(int dim) {
         this(new DenseVector(R.rep(0., dim)),
-             new DiagonalMatrix(dim).ONE());
+                new DiagonalMatrix(dim).ONE());
     }
 
     @Override

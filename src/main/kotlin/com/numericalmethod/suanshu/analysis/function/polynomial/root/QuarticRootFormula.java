@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.root.QuarticRoot.QuarticSolver;
 import com.numericalmethod.suanshu.number.complex.Complex;
 import com.numericalmethod.suanshu.number.complex.ElementaryFunction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class QuarticRootFormula implements QuarticSolver {
 
         Complex v = ElementaryFunction.pow(
                 ElementaryFunction.sqrt(new Complex(-4. * s * s * s + t * t, 0.)).
-                add(new Complex(t, 0.)),
+                        add(new Complex(t, 0.)),
                 new Complex(ONE_THIRD, 0.));
 
         Complex w1 = new Complex(CUBIC_ROOT_2 * ONE_THIRD * s / a, 0.).divide(v);
@@ -98,9 +99,9 @@ public class QuarticRootFormula implements QuarticSolver {
      */
     public List<Number> solve(Polynomial polynomial) {
         return solve(polynomial.getCoefficient(5),
-                     polynomial.getCoefficient(4),
-                     polynomial.getCoefficient(3),
-                     polynomial.getCoefficient(2),
-                     polynomial.getCoefficient(1));
+                polynomial.getCoefficient(4),
+                polynomial.getCoefficient(3),
+                polynomial.getCoefficient(2),
+                polynomial.getCoefficient(1));
     }
 }

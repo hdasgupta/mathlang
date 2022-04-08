@@ -53,9 +53,7 @@ import com.numericalmethod.suanshu.stats.test.HypothesisTest;
  * The R equivalent function is {@code ks.test}.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>Nonparametric Statistical Inference. 4th edition. Jean Dickinson Gibbons, Subhabrata Chakraborti. CRC.
  * <li><a href="http://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test">Wikipedia: Kolmogorov–Smirnov test</a>
  * </ul>
@@ -106,6 +104,7 @@ public class KolmogorovSmirnov extends HypothesisTest {//TODO: confidence interv
          */
         LESS
     }
+
     /**
      * the type of Kolmogorov-Smirnov test to be performed
      */
@@ -169,10 +168,10 @@ public class KolmogorovSmirnov extends HypothesisTest {//TODO: confidence interv
 
     /**
      * Construct an instance of the Kolmogorov-Smirnov test.
-     * 
+     *
      * @param samples two samples
-     * @param side indicate whether this is a one (less or greater) or two (equal) sided test
-     * @param type indicate whether it is a one or two sample test
+     * @param side    indicate whether this is a one (less or greater) or two (equal) sided test
+     * @param type    indicate whether it is a one or two sample test
      */
     KolmogorovSmirnov(double[][] samples, Side side, Type type) {
         super(samples);

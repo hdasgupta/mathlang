@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,11 +23,14 @@
 package com.numericalmethod.suanshu.number;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
+
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +49,7 @@ public class DoubleUtils {
     }
 
     //<editor-fold defaultstate="collapsed" desc="comparison">
+
     /**
      * Compares two {@code double}s up to a precision.
      * This implementation is preferred to {@link Double#compare(double, double)} because
@@ -196,6 +200,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="operations on doubles">
+
     /**
      * Get the index of the maximum of the values.
      *
@@ -367,6 +372,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="check properties">
+
     /**
      * Check if a {@code double} array contains only 0s, entry-by-entry.
      *
@@ -446,6 +452,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="casting">
+
     /**
      * Convert a {@code double} array to an {@code int} array, rounding down if necessary.
      *
@@ -558,6 +565,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="rounding">
+
     /**
      * the schemes available to round a number.
      */
@@ -624,6 +632,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="errors">
+
     /**
      * Compute the absolute difference between {@code x1} and {@code x0}. This function is symmetric.
      * <blockquote><i>
@@ -655,6 +664,7 @@ public class DoubleUtils {
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="printing">
+
     /**
      * Print out numbers to a string.
      *

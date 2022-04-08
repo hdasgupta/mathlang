@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -28,7 +28,9 @@ import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.random.univariate.LogNormalRng;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomNumberGenerator;
+
 import static java.lang.Math.*;
+
 import java.util.Arrays;
 
 /**
@@ -45,9 +47,13 @@ public class LogNormalDistribution implements HMMDistribution {
      */
     public static class Lambda {
 
-        /** the log-mean μ ∈ R */
+        /**
+         * the log-mean μ ∈ R
+         */
         public final double logMu;
-        /** the log-standard deviation; shape */
+        /**
+         * the log-standard deviation; shape
+         */
         public final double logSigma;
 
         /**

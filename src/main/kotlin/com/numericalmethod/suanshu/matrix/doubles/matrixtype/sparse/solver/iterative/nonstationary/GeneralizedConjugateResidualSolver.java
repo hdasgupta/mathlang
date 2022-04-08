@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -96,7 +96,7 @@ public class GeneralizedConjugateResidualSolver implements IterativeLinearSystem
      */
     public GeneralizedConjugateResidualSolver(int maxIteration, Tolerance tolerance) {
         this(Integer.MAX_VALUE,//never restart
-             maxIteration, tolerance);
+                maxIteration, tolerance);
     }
 
     public IterativeLinearSystemSolver.Solution solve(LSProblem problem) throws ConvergenceFailure {
@@ -110,8 +110,8 @@ public class GeneralizedConjugateResidualSolver implements IterativeLinearSystem
             private final Matrix A = problem.A();
             private final Vector b = problem.b();
             private final int maxIteration = (m0 >= problem.A().nCols())
-                                             ? Math.min(problem.getMaxIteration(), problem.A().nCols()) // full: guaranteed to converge in n iterations
-                                             : maxIteration0; // restarted
+                    ? Math.min(problem.getMaxIteration(), problem.A().nCols()) // full: guaranteed to converge in n iterations
+                    : maxIteration0; // restarted
             private final Preconditioner M = leftPreconditionerFactory.newInstance(A);
             private final int m = Math.min(m0, A.nCols()); // use restart or full version
             private Vector x; // initial guess
@@ -137,7 +137,7 @@ public class GeneralizedConjugateResidualSolver implements IterativeLinearSystem
 
                 int i = 1;
                 for (; i <= m && count < maxIteration && !isConverged;
-                        ++i, ++count, isConverged = tolerance.isResidualSmall(r.norm())) { // inner iterations; restart every m iterations
+                     ++i, ++count, isConverged = tolerance.isResidualSmall(r.norm())) { // inner iterations; restart every m iterations
 
                     monitor.addIterate(x);
 
@@ -176,7 +176,7 @@ public class GeneralizedConjugateResidualSolver implements IterativeLinearSystem
                 setInitials(initials);
 
                 for (; count < maxIteration && !isConverged;
-                        isConverged |= tolerance.isResidualSmall(r.norm())) {
+                     isConverged |= tolerance.isResidualSmall(r.norm())) {
                     step();
                 }
 

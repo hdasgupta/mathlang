@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.ScaledPolynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.root.LinearRoot;
 import com.numericalmethod.suanshu.analysis.function.polynomial.root.QuadraticRoot;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,7 @@ import java.util.List;
  * The Jenkins-Traub algorithm is a fast globally convergent iterative method for solving for polynomial roots.
  *
  * @author Ken Yiu
- * @see
- * <ul>
+ * @see <ul>
  * <li>Jenkins, M. A. and Traub, J. F. (1970), A Three-Stage Algorithm for Real Polynomials Using QuadraticRoot Iteration, SIAM J. Numer. Anal., 7(4), 545-566.
  * <li>Jenkins, M. A. (1975), Algorithm 493: Zeros of a Real Polynomial, ACM TOMS, 1, 178-189.
  * <li><a href="http://en.wikipedia.org/wiki/Jenkins-Traub_Algorithm_for_Polynomial_Zeros">Wikipedia: Jenkins-Traub algorithm</a>

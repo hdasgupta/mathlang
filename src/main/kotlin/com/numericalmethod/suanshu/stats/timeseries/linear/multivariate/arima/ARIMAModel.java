@@ -39,9 +39,9 @@ public class ARIMAModel extends ARIMAXModel {
     /**
      * Construct a multivariate ARIMA model.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      * @param sigma the covariance matrix of white noise
      */
@@ -52,9 +52,9 @@ public class ARIMAModel extends ARIMAXModel {
     /**
      * Construct a multivariate ARIMA model with unit variance.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      */
     public ARIMAModel(Vector mu, Matrix[] phi, int d, Matrix[] theta) {
@@ -65,8 +65,8 @@ public class ARIMAModel extends ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARIMA model.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      * @param sigma the covariance matrix of white noise
      */
@@ -78,15 +78,15 @@ public class ARIMAModel extends ARIMAXModel {
     /**
      * Construct a zero-intercept (mu) multivariate ARIMA model with unit variance.
      *
-     * @param phi the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
-     * @param d the order of integration
+     * @param phi   the AR coefficients (excluding the initial 1); {@code null} if no AR coefficient
+     * @param d     the order of integration
      * @param theta the MA coefficients (excluding the initial 1); {@code null} if no MA coefficient
      */
     public ARIMAModel(Matrix[] phi, int d, Matrix[] theta) {
         this(phi, d, theta,
                 new DenseMatrix(
-                phi != null ? phi[0].nRows() : theta[0].nRows(),
-                phi != null ? phi[0].nRows() : theta[0].nRows()).ONE());//sigma
+                        phi != null ? phi[0].nRows() : theta[0].nRows(),
+                        phi != null ? phi[0].nRows() : theta[0].nRows()).ONE());//sigma
     }
 
     /**

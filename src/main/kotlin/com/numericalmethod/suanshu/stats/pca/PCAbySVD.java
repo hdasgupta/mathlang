@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,9 +37,7 @@ import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
  * The R equivalent function is {@code prcomp}.
  *
  * @author Kevin Sun
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li> K. V. Mardia, J. T. Kent and J. M. Bibby, "Multivariate Analysis," London, Academic Press, 1979.
  * <li> W. N. Venables and B. D. Ripley, "Modern Applied Statistics with S," New York, Springer-Verlag, 2002.
  * <li> <a href="http://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia: Principal component analysis</a>
@@ -56,12 +54,12 @@ public class PCAbySVD extends PCAImpl {
      * Perform a Principal Component Analysis, using the preferred SVD method,
      * on a given data matrix with (optional) mean vector and scaling vector provided.
      *
-     * @param data a matrix which provides the original data for the principal component analysis
+     * @param data     a matrix which provides the original data for the principal component analysis
      * @param centered a logical value indicating whether the variables should be shifted to be zero centered
-     * @param scaled a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
-     * (N.B. in general scaling is advisable; however, it should only be used if there is no constant variable)
-     * @param mean an optional mean vector (of length equal to nFactors) to be subtracted regardless of the flag 'centered'
-     * @param scale an optional scaling vector (of length equal to nFactors) to be divided regardless of the flag 'scaled'
+     * @param scaled   a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
+     *                 (N.B. in general scaling is advisable; however, it should only be used if there is no constant variable)
+     * @param mean     an optional mean vector (of length equal to nFactors) to be subtracted regardless of the flag 'centered'
+     * @param scale    an optional scaling vector (of length equal to nFactors) to be divided regardless of the flag 'scaled'
      */
     public PCAbySVD(Matrix data, boolean centered, boolean scaled, Vector mean, Vector scale) {
         super(data);
@@ -75,10 +73,10 @@ public class PCAbySVD extends PCAImpl {
     /**
      * Perform a principal component analysis, using the preferred SVD method, on a given data matrix (possibly centered and/or scaled).
      *
-     * @param data a matrix which provides the original data for the principal component analysis
+     * @param data     a matrix which provides the original data for the principal component analysis
      * @param centered a logical value indicating whether the variables should be shifted to be zero centered
-     * @param scaled a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
-     * (N.B. in general scaling is advisable; however, it should only be used if there is no constant variable)
+     * @param scaled   a logical value indicating whether the variables should be scaled to have unit variance before the analysis takes place
+     *                 (N.B. in general scaling is advisable; however, it should only be used if there is no constant variable)
      */
     public PCAbySVD(Matrix data, boolean centered, boolean scaled) {
         this(data, centered, scaled, null, null);
@@ -141,7 +139,7 @@ public class PCAbySVD extends PCAImpl {
     }
 
     /**
-     * Get the standard deviations of the principal components 
+     * Get the standard deviations of the principal components
      * (i.e., the square roots of the eigenvalues of the correlation (or covariance) matrix,
      * though the calculation is actually done with the singular values of the data matrix)
      *

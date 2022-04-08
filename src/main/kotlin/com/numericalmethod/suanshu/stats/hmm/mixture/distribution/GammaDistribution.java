@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -40,8 +40,10 @@ import com.numericalmethod.suanshu.stats.random.univariate.RandomNumberGenerator
 import com.numericalmethod.suanshu.stats.random.univariate.gamma.MarsagliaTsang2000;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.log;
+
 import java.util.Arrays;
 
 /**
@@ -58,9 +60,13 @@ public class GammaDistribution implements HMMDistribution {
      */
     public static class Lambda {
 
-        /** the shape parameter */
+        /**
+         * the shape parameter
+         */
         public final double k;
-        /** the scale parameter */
+        /**
+         * the scale parameter
+         */
         public final double theta;
 
         /**
@@ -187,7 +193,7 @@ public class GammaDistribution implements HMMDistribution {
                         public double evaluate(double k, double theta) {
                             double gamma_k = new GammaLanczosQuick().evaluate(k);
                             double fx = k * log(1. / theta) - log(gamma_k)
-                                        + (k - 1) * y_2j - (1. / theta) * y_1j; //to be maximized
+                                    + (k - 1) * y_2j - (1. / theta) * y_1j; //to be maximized
                             fx = -fx; //minimize
                             return fx;
                         }
@@ -256,7 +262,9 @@ public class GammaDistribution implements HMMDistribution {
         return new GammaDistribution(lambda1, isShapeEstimated, isScaleEstimated, epsilon, maxIterations);
     }
 
-    /** the gradient of the log-likelihood */
+    /**
+     * the gradient of the log-likelihood
+     */
     private RealVectorFunction dF(final double x_bar, final double log_x_bar) {
         return new RealVectorFunction() {
 
@@ -284,7 +292,9 @@ public class GammaDistribution implements HMMDistribution {
         };
     }
 
-    /** the Hessian of the log-likelihood */
+    /**
+     * the Hessian of the log-likelihood
+     */
     private RntoMatrix d2F() {
         return new RntoMatrix() {
 

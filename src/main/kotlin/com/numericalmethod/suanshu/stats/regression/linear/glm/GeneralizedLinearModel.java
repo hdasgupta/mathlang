@@ -36,18 +36,16 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * <blockquote><code><pre>
  * E(Y) = μ = g<sup>-1</sup>(Xβ)
  * </pre></code></blockquote>
- *
+ * <p>
  * where <i>E(Y)</i> is the expected value of <i>Y</i>;
  * <i>Xβ</i> is the linear predictor, a linear combination of unknown parameters, <i>β</i>;
  * <i>g</i> is the link function.
- * 
+ *
  * <p>
  * The R equivalent function is {@code glm}.
  *
  * @author Chun Yip Yau, Ken Yiu, Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Generalized_linear_model">Wikipedia: Generalized linear model</a>
  * <li>"P. J. MacCullagh and J. A. Nelder. An algorithm for fitting generalized linear models," in <i>Generalized Linear Models</i>, 2nd ed. pp.40. Section 2.5."
  * </ul>

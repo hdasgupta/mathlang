@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -29,6 +29,7 @@ import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.Univariate
 import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.distribution.link.LinkFunction;
 import com.numericalmethod.suanshu.stats.regression.linear.ols.OLSRegression;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.foreach;
 
 /**
@@ -39,9 +40,7 @@ import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateV
  * The R equivalent function is {@code glm.fit}.
  *
  * @author Chun Yip Yau, Ken Yiu, Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"P. J. MacCullagh and J. A. Nelder. An algorithm for fitting generalized linear models. Generalized Linear Models. 2nd ed. pp.40. Section 2.5."
  * <li><a href="http://en.wikipedia.org/wiki/Generalized_linear_model#Maximum_likelihood">Wikipedia: Maximum likelihood</a>
  * </ul>
@@ -119,7 +118,7 @@ public class IWLS implements Fitting {
             boolean converged = false;
             for (int iter = 0; !converged && iter < maxIterations; iter++, logLikelihood0 = logLikelihood1, beta0 = beta1) {
                 eta = iter == 0 ? new DenseVector(nObs, 0.05)//initial estimate of η; avoid 0 values
-                      : problem.A.multiply(beta0);//the linear prediction, η = Xβ
+                        : problem.A.multiply(beta0);//the linear prediction, η = Xβ
 
                 try {
                     mu = mu(eta);//the non-linear prediction μ
@@ -193,7 +192,6 @@ public class IWLS implements Fitting {
          * @param weights weights
          * @param dg      d(link)
          * @return a new estimate of ß
-         *
          * @see "P. J. MacCullagh and J. A. Nelder. An algorithm for fitting generalized linear models. Generalized Linear Models. 2nd ed. pp.40. Section 2.5."
          */
         private Vector beta1(Vector eta, Vector mu, Vector weights, Vector dg) {
@@ -210,11 +208,10 @@ public class IWLS implements Fitting {
          *   = 1 / V(μ) / (dη/dμ)^2
          * </pre></i></blockquote>
          *
-         * @see "P. J. MacCullagh and J. A. Nelder. An algorithm for fitting generalized linear models. Generalized Linear Models. 2nd ed. pp.40. Eq. 2.12. Section 2.5."
-         *
          * @param mu μ
          * @param dg d(link) = dη/dμ
          * @return the weights
+         * @see "P. J. MacCullagh and J. A. Nelder. An algorithm for fitting generalized linear models. Generalized Linear Models. 2nd ed. pp.40. Eq. 2.12. Section 2.5."
          */
         private Vector weights(Vector mu, Vector dg) {
             Vector oneOverVariance = foreach(mu, new UnivariateRealFunction() {

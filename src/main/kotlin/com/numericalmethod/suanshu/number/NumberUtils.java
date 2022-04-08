@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.number;
 
 import com.numericalmethod.suanshu.number.complex.Complex;
+
 import java.lang.reflect.Constructor;
 
 /**
@@ -48,7 +49,7 @@ public class NumberUtils {
          * Compare {@code this} and {@code that} numbers up to a precision.
          *
          * @param that    a {@link Number}.
-         * As a number can be represented in multiple ways, e.g., <i>0 = 0 + 0i</i>, the implementation may need to check {@link Object} type.
+         *                As a number can be represented in multiple ways, e.g., <i>0 = 0 + 0i</i>, the implementation may need to check {@link Object} type.
          * @param epsilon a precision parameter: when a number |x| ≤ ε, it is considered 0
          * @return 0 if both numbers are close enough; +1 if {@code this} is bigger; -1 if {@code that} is bigger
          */

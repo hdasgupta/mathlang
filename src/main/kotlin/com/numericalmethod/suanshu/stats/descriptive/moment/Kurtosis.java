@@ -36,8 +36,7 @@ import com.numericalmethod.suanshu.stats.descriptive.Statistic;
  * The R equivalent function is {@code kurtosis}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Kurtosis">Wikipedia: Kurtosis</a>
  * <li><a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Wikipedia: Algorithms for calculating variance</a>
  * <li>"Tony F, Chan, Gene H, Golub, Randall J, LeVeque, "Updating Formulae and a Pairwise Algorithm for Computing Sample Variances," Technical Report STAN-CS-79-773, Department of Computer Science, Stanford University, 1979."
@@ -102,7 +101,7 @@ public class Kurtosis implements Statistic {
     @Override
     public String toString() {
         return String.format("kurtosis: %f; N: %d",
-                             value(),
-                             N());
+                value(),
+                N());
     }
 }

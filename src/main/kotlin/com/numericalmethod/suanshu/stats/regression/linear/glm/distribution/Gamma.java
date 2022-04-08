@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -27,6 +27,7 @@ import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.distribution.link.Inverse;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.distribution.link.LinkFunction;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import static java.lang.Math.*;
 
 /**
@@ -51,7 +52,7 @@ public class Gamma extends Family {
 
     /**
      * Construct an instance of {@code Gamma} with an overriding link function.
-     * 
+     *
      * @param link the overriding link function
      */
     public Gamma(LinkFunction link) {

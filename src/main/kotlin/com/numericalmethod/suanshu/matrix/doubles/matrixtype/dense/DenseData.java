@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -43,10 +43,12 @@ public abstract class DenseData implements MatrixAccess, DeepCopyable {
     private static final int SIZE_THRESHOLD = 100 * 100;
     private static final DoubleArrayOperation DEFAULT_OPERATION =
             new CompositeDoubleArrayOperation(
-            SIZE_THRESHOLD,
-            new SimpleDoubleArrayOperation(),
-            new ParallelDoubleArrayOperation());
-    /** stores the values of matrix entries */
+                    SIZE_THRESHOLD,
+                    new SimpleDoubleArrayOperation(),
+                    new ParallelDoubleArrayOperation());
+    /**
+     * stores the values of matrix entries
+     */
     private double[] data = null; //caller throws NullPointerException if data is not initialized
     private final DoubleArrayOperation doubleArrayOperation;
 

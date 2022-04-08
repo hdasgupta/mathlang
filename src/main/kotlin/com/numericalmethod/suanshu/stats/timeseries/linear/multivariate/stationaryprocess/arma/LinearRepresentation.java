@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.station
 
 import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
+
 import static java.lang.Math.*;
 
 /**
@@ -31,7 +32,6 @@ import static java.lang.Math.*;
  * A linear representation writes the time series as an (infinite) AR model.
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. Brockwell and R. A. Davis, "Eq. 11.3.12., Theorem 11.3.1., Chapter 11.3 Multivariate ARMA Processes," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class LinearRepresentation {
@@ -47,7 +47,7 @@ public class LinearRepresentation {
 
     /**
      * Construct the linear representation of an ARMA model.
-     *    
+     *
      * @param model the ARMA model
      * @param nLags the number of lags in the series
      */

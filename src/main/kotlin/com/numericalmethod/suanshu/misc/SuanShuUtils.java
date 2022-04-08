@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.matrix.doubles.MatrixTable;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 

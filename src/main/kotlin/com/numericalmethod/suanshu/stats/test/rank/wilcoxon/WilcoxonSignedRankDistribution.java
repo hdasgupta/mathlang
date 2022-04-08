@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.test.rank.wilcoxon;
 
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import static java.lang.Math.*;
 
 /**
@@ -37,7 +38,6 @@ import static java.lang.Math.*;
  * The R equivalent functions are {@code dsignrank, pdsignrank, qdsignrank, rdsignrank}.
  *
  * @author Chun Yip Yau
- *
  * @see "Zbynek Sidak, Pranab K. Sen, Jaroslav Hajek. Theory of Rank Tests. Theorems 2, Section 5.3, p.173."
  */
 public class WilcoxonSignedRankDistribution implements ProbabilityDistribution {

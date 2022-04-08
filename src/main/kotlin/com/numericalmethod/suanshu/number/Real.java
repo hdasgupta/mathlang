@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.number;
 import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.mathstructure.Field;
 import com.numericalmethod.suanshu.mathstructure.Field.InverseNonExistent;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -38,9 +39,13 @@ import java.math.BigInteger;
  */
 public class Real extends Number implements Field<Real>, Comparable<Real> {
 
-    /** a number representing <i>0</i> */
+    /**
+     * a number representing <i>0</i>
+     */
     public static final Real ZERO = new Real(BigDecimal.ZERO);
-    /** a number representing <i>1</i> */
+    /**
+     * a number representing <i>1</i>
+     */
     public static final Real ONE = new Real(BigDecimal.ONE);
     private final BigDecimal value;
     private static final long serialVersionUID = 1L;

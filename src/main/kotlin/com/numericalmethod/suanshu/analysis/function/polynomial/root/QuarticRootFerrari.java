@@ -25,9 +25,12 @@ package com.numericalmethod.suanshu.analysis.function.polynomial.root;
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.polynomial.root.QuarticRoot.QuarticSolver;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
+
 import com.numericalmethod.suanshu.number.complex.Complex;
 import com.numericalmethod.suanshu.number.complex.ElementaryFunction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +38,7 @@ import java.util.List;
  * This is a quartic equation solver that solves \(ax^4 + bx^3 + cx^2 + dx + e = 0\) using the Ferrari method.
  *
  * @author Ken Yiu
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Quartic_function#Ferrari.27s_solution">Wikipedia: Ferrari's solution</a>
  * <li><a href="http://mathworld.wolfram.com/QuarticEquation.html">QuarticRoot Equation from Wolfram MathWorld</a>
  * </ul>
@@ -128,8 +130,8 @@ public class QuarticRootFerrari implements QuarticSolver {
              */
             Complex y = new Complex(-5. * alpha / 6., 0.).add(u).
                     minus(u.equals(u.ZERO())
-                          ? ElementaryFunction.pow(new Complex(q, 0.), new Complex(ONETHIRD, 0.))
-                          : new Complex(p / 3., 0.).divide(u));
+                            ? ElementaryFunction.pow(new Complex(q, 0.), new Complex(ONETHIRD, 0.))
+                            : new Complex(p / 3., 0.).divide(u));
             Complex w = ElementaryFunction.sqrt(new Complex(alpha, 0.).add(new Complex(y.real() * 2., y.imaginary() * 2.)));
 
             Complex z1 = new Complex(-b / 4. / a, 0.);
@@ -164,9 +166,9 @@ public class QuarticRootFerrari implements QuarticSolver {
      */
     public List<Number> solve(Polynomial polynomial) {
         return solve(polynomial.getCoefficient(5),
-                     polynomial.getCoefficient(4),
-                     polynomial.getCoefficient(3),
-                     polynomial.getCoefficient(2),
-                     polynomial.getCoefficient(1));
+                polynomial.getCoefficient(4),
+                polynomial.getCoefficient(3),
+                polynomial.getCoefficient(2),
+                polynomial.getCoefficient(1));
     }
 }

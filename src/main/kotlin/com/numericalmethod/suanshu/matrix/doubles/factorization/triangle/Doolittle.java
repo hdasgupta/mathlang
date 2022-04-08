@@ -30,7 +30,9 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.Lowe
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.UpperTriangularMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -32,12 +32,16 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.diagonal.Diag
 import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.SubMatrixRef;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
 import static com.numericalmethod.suanshu.number.DoubleUtils.hasZero;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.diagonal;
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.superDiagonal;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -135,8 +139,8 @@ public class GloubKahanSVD implements SVDDecomposition {
                 //apply the Gloub-Kahan step on B22
                 BidiagonalMatrix B22 = new BidiagonalMatrix(
                         new double[][]{
-                            superDiagonal(B22ref).toArray(),
-                            diagonal(B22ref).toArray()});
+                                superDiagonal(B22ref).toArray(),
+                                diagonal(B22ref).toArray()});
                 GloubKahanSVDStep gkStep = new GloubKahanSVDStep(B22);
                 CreateMatrix.replace(Mut, ul, lr, ul, lr, gkStep.U().t());
                 CreateMatrix.replace(Mv, ul, lr, ul, lr, gkStep.V());
@@ -307,7 +311,7 @@ public class GloubKahanSVD implements SVDDecomposition {
     @Override
     public Matrix U() {
         SuanShuUtils.assertOrThrow(doUV ? null
-                                   : new RuntimeException("only singular values were computed; U not available"));
+                : new RuntimeException("only singular values were computed; U not available"));
 
         return Ut.t();
     }
@@ -315,7 +319,7 @@ public class GloubKahanSVD implements SVDDecomposition {
     @Override
     public Matrix Ut() {
         SuanShuUtils.assertOrThrow(doUV ? null
-                                   : new RuntimeException("only singular values were computed; U not available"));
+                : new RuntimeException("only singular values were computed; U not available"));
 
         return Ut.deepCopy();
     }
@@ -323,7 +327,7 @@ public class GloubKahanSVD implements SVDDecomposition {
     @Override
     public Matrix V() {
         SuanShuUtils.assertOrThrow(doUV ? null
-                                   : new RuntimeException("only singular values were computed; V not available"));
+                : new RuntimeException("only singular values were computed; V not available"));
 
         return V.deepCopy();
     }

@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.stats.descriptive.moment.Mean;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Variance;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static java.lang.Math.*;
 
@@ -39,9 +40,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code t.test}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>Richard D. De Veaux, Paul F. Velleman, David E. Bock. "Stats: Data and Models", Chapter 24.
  * <li><a href="http://en.wikipedia.org/wiki/Student's_t-test">Student's t-test</a>
  * <li><a href="http://en.wikipedia.org/wiki/Welch%27s_t_test">Welch's t test</a>

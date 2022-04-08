@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -52,8 +52,8 @@ public class ChangeOfVariable implements Integrator {
      *
      * @param change     the substitution formula
      * @param integrator the integrator.
-     * If there is a singularity at an endpoint, the integrator should use an <em>open</em> formula such as {@link Midpoint};
-     * otherwise, use an integrator with a <em>closed</em> formula such as {@link Trapezoidal}.
+     *                   If there is a singularity at an endpoint, the integrator should use an <em>open</em> formula such as {@link Midpoint};
+     *                   otherwise, use an integrator with a <em>closed</em> formula such as {@link Trapezoidal}.
      */
     public ChangeOfVariable(SubstitutionRule change, Integrator integrator) {
         this.integrator = integrator;

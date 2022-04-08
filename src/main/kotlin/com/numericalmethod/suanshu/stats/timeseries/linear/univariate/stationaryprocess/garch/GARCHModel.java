@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,11 +25,12 @@ package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationar
 import static com.numericalmethod.suanshu.analysis.function.FunctionOps.dotProduct;
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.min;
+
 import java.util.Arrays;
 
 /**
  * This class represents a GARCH specification.
- *
+ * <p>
  * The GARCH(p, q) model (where p is the order of the GARCH terms h_(t-i) and q is the order of the ARCH terms e_(t-i)^2) is given by
  *
  * <blockquote><code><pre>
@@ -37,7 +38,6 @@ import java.util.Arrays;
  * </pre></code></blockquote>
  *
  * @author Haksun Li
- *
  * @see <a href="http://en.wikipedia.org/wiki/Autoregressive_conditional_heteroskedasticity#GARCH">Wikipedia: GARCH</a>
  */
 public class GARCHModel {
@@ -59,8 +59,8 @@ public class GARCHModel {
      * Construct a GARCH model.
      *
      * @param a0 the constant term
-     * @param a the ARCH coefficients; {@code null} if no ARCH coefficients
-     * @param b the GARCH coefficients; {@code null} if no GARCH coefficients
+     * @param a  the ARCH coefficients; {@code null} if no ARCH coefficients
+     * @param b  the GARCH coefficients; {@code null} if no GARCH coefficients
      */
     public GARCHModel(double a0, double[] a, double[] b) {//TODO: use Vector
         assertArgument(a0 > 0, "a0 > 0");
@@ -170,7 +170,7 @@ public class GARCHModel {
     /**
      * Compute the conditional variance based on the past information.
      *
-     * @param e2 the last q squared observations
+     * @param e2         the last q squared observations
      * @param sigma2_lag the last p conditional variance
      * @return the conditional variance, <i>h(t | F<sub>t</sub>)</i>
      */

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -31,8 +31,7 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
  *
  * @author Ken Yiu
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Square_root#Square_roots_of_negative_and_complex_numbers">Wikipedia: Square roots of negative and complex numbers</a>
  * <li><a href="http://en.wikipedia.org/wiki/Logarithm">Wikipedia: Logarithm</a>
  * <li><a href="http://en.wikipedia.org/wiki/Exponentiation">Wikipedia: Exponentiation</a>
@@ -47,8 +46,8 @@ public class ElementaryFunction {
      *
      * @param z a complex number
      * @return the square root of the number
-     * @see <a href="http://en.wikipedia.org/wiki/Square_root#Square_roots_of_negative_and_complex_numbers">Wikipedia: Square roots of negative and complex numbers</a>
      * @throws IllegalArgumentException if {@code z} is a {@code NaN} or <i>∞</i>
+     * @see <a href="http://en.wikipedia.org/wiki/Square_root#Square_roots_of_negative_and_complex_numbers">Wikipedia: Square roots of negative and complex numbers</a>
      */
     public static Complex sqrt(Complex z) {
         isValid(z);
@@ -206,14 +205,14 @@ public class ElementaryFunction {
      *
      * @param z a complex number
      * @return <i>sin<sup>-1</sup>(z)</i>
-     * @see <a href="http://mathworld.wolfram.com/InverseSine.html">Inverse Sine from Wolfram MathWorld</a>
      * @throws IllegalArgumentException if {@code z} is a {@code NaN} or <i>∞</i>
+     * @see <a href="http://mathworld.wolfram.com/InverseSine.html">Inverse Sine from Wolfram MathWorld</a>
      */
     public static Complex asin(Complex z) {
         isValid(z);
         return Complex.I.opposite().multiply(
                 log(Complex.I.multiply(z).
-                add(sqrt(z.ONE().minus(z.multiply(z))))));
+                        add(sqrt(z.ONE().minus(z.multiply(z))))));
     }
 
     /**
@@ -225,8 +224,8 @@ public class ElementaryFunction {
      *
      * @param z a complex number
      * @return <i>cos<sup>-1</sup>(z)</i>
-     * @see <a href="http://mathworld.wolfram.com/InverseCosine.html">Inverse Cosine from Wolfram MathWorld</a>
      * @throws IllegalArgumentException if {@code z} is a {@code NaN} or <i>∞</i>
+     * @see <a href="http://mathworld.wolfram.com/InverseCosine.html">Inverse Cosine from Wolfram MathWorld</a>
      */
     public static Complex acos(Complex z) {
         isValid(z);
@@ -241,8 +240,8 @@ public class ElementaryFunction {
      *
      * @param z a complex number
      * @return <i>tan<sup>-1</sup>(z)</i>
-     * @see <a href="http://mathworld.wolfram.com/InverseTangent.html">Inverse Tangent from Wolfram MathWorld</a>
      * @throws IllegalArgumentException if {@code z} is a {@code NaN} or <i>∞</i>
+     * @see <a href="http://mathworld.wolfram.com/InverseTangent.html">Inverse Tangent from Wolfram MathWorld</a>
      */
     public static Complex atan(Complex z) {
         isValid(z);

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.analysis.integration.univariate.riemann.substitution;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
+
 import static java.lang.Math.*;
 
 /**
@@ -93,7 +94,7 @@ public class DoubleExponential implements SubstitutionRule {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The accuracy of using the double exponential transformation lies in choosing the correct region of <i>t</i> for integration.
      * It is very hard to determine the region without knowing about the function, such as where the singularities are.
      * If the region of <i>t</i> is known, override this function.
@@ -116,7 +117,7 @@ public class DoubleExponential implements SubstitutionRule {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * The accuracy of using the double exponential transformation lies in choosing the correct region of <i>t</i> for integration.
      * It is very hard to determine the region without knowing about the function, such as where the singularities are.
      * If the region of <i>t</i> is known, override this function.
@@ -137,7 +138,9 @@ public class DoubleExponential implements SubstitutionRule {
         return t;
     }
 
-    /** g(t) = f(x(t)) * x'(t) */
+    /**
+     * g(t) = f(x(t)) * x'(t)
+     */
     private double g(double t) {
         double xt = x.evaluate(t);//x(t)
         double dxdt = dx.evaluate(t);//x'(t) = dx(t)
@@ -147,7 +150,9 @@ public class DoubleExponential implements SubstitutionRule {
         return gt;
     }
 
-    /** x(t) */
+    /**
+     * x(t)
+     */
     private static UnivariateRealFunction xt(final double a, final double b, final double c) {
         return new UnivariateRealFunction() {
 
@@ -158,7 +163,9 @@ public class DoubleExponential implements SubstitutionRule {
         };
     }
 
-    /** x'(t) = dx(t)/dt */
+    /**
+     * x'(t) = dx(t)/dt
+     */
     private static UnivariateRealFunction dxdt(final double a, final double b, final double c) {
         return new UnivariateRealFunction() {
 

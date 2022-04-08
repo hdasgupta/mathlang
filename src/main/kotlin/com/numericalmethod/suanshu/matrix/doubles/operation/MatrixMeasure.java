@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.matrix.doubles.operation;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.isSquare;
+
 import com.numericalmethod.suanshu.matrix.MatrixSingularityException;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.factorization.svd.SVD;
@@ -107,11 +108,11 @@ public class MatrixMeasure {
         } else if (A.nRows() == 3) {
             det =
                     A.get(1, 1) * A.get(2, 2) * A.get(3, 3)
-                    - A.get(1, 1) * A.get(2, 3) * A.get(3, 2)
-                    - A.get(1, 2) * A.get(2, 1) * A.get(3, 3)
-                    + A.get(1, 2) * A.get(2, 3) * A.get(3, 1)
-                    + A.get(1, 3) * A.get(2, 1) * A.get(3, 2)
-                    - A.get(1, 3) * A.get(2, 2) * A.get(3, 1);
+                            - A.get(1, 1) * A.get(2, 3) * A.get(3, 2)
+                            - A.get(1, 2) * A.get(2, 1) * A.get(3, 3)
+                            + A.get(1, 2) * A.get(2, 3) * A.get(3, 1)
+                            + A.get(1, 3) * A.get(2, 1) * A.get(3, 2)
+                            - A.get(1, 3) * A.get(2, 2) * A.get(3, 1);
         } else {
             try {
                 LU lu = new LU(A);

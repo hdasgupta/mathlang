@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -32,7 +32,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
 /**
  * A heteroskedasticity test is used to test for heteroskedasticity in a linear regression model.
  * It tests whether the estimated variance of the residuals from a regression are dependent on the values of the independent variables (regressors).
- *
+ * <p>
  * The test statistics is computed by regressing transformed residuals from the original regression against the original regressors (plus intercept).
  * The test distribution is a Chi-squared distribution.
  *
@@ -41,6 +41,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
 abstract class Heteroskedasticity extends HypothesisTest {
 
     protected abstract OLSRegression getAuxiliaryRegression();
+
     protected final Residuals residuals;
     /**
      * number of observations

@@ -32,6 +32,7 @@ import com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.AutoCova
 import com.numericalmethod.suanshu.stats.timeseries.linear.multivariate.arima.ARIMAModel;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.Arrays;
 
 /**
@@ -45,7 +46,6 @@ import java.util.Arrays;
  * The R equivalent function are {@code ARMAacf} and {@code TacvfAR} in package {@code FitAR}.
  *
  * @author Haksun Li, Kevin Sun
- *
  * @see "P. J. Brockwell and R. A. Davis, "p. 420. Eq. 11.3.15. The Covariance Matrix Function of a Causal ARMA Process. Chapter 11.3. Multivariate Time Series," in <i>Time Series: Theory and Methods</i>, Springer, 2006."
  */
 public class AutoCovariance extends AutoCovarianceFunction {
@@ -64,13 +64,13 @@ public class AutoCovariance extends AutoCovarianceFunction {
     private final int p1mm;
     private LinearRepresentation linearRep;
 
-    /** 
+    /**
      * Compute the auto-covariance function of a vector ARMA model.
      *
      * <p>
      * To solve Eq. 11.3.15, we "expand" the (p+1) matrix equations into (p+1)*m*m linear equations.
      * m is the dimension of Gamma (ACVF).
-     * 
+     *
      * @param model an ARIMA specification
      * @param nLags the number of lags in the result
      */
@@ -161,10 +161,9 @@ public class AutoCovariance extends AutoCovarianceFunction {
     }
 
     /**
-     *
-     * @param g index to Γ
-     * @param row row index in a Γ
-     * @param col column index in a Γ
+     * @param g          index to Γ
+     * @param row        row index in a Γ
+     * @param col        column index in a Γ
      * @param transposed indicate to use Γ(g) or Γ(g).t()
      * @return
      */

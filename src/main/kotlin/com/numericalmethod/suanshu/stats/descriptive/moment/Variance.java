@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -35,8 +35,7 @@ import com.numericalmethod.suanshu.stats.descriptive.Statistic;
  * The R equivalent function is {@code var}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Variance">Wikipedia: Variance</a>
  * <li><a href="http://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Wikipedia: Algorithms for calculating variance</a>
  * <li>"Tony F. Chan, Gene H. Golub, Randall J. LeVeque, "Updating Formulae and a Pairwise Algorithm for Computing Sample Variances," Technical Report STAN-CS-79-773, Department of Computer Science, Stanford University, 1979."
@@ -44,7 +43,9 @@ import com.numericalmethod.suanshu.stats.descriptive.Statistic;
  */
 public class Variance implements Statistic {
 
-    /** indicate whether the variance calculation is unbiased or not; {@code true} if unbiased */
+    /**
+     * indicate whether the variance calculation is unbiased or not; {@code true} if unbiased
+     */
     private final boolean unbiased;
     private long N = 0;
     private double m2 = 0;//the sum of squares of differences from the mean
@@ -143,8 +144,8 @@ public class Variance implements Statistic {
     @Override
     public String toString() {
         return String.format("var: %f, stdev: %f, N: %d",
-                             value(),
-                             standardDeviation(),
-                             N);
+                value(),
+                standardDeviation(),
+                N);
     }
 }

@@ -19,10 +19,10 @@ import javax.swing.JTextField
 import javax.swing.SwingUtilities
 import javax.swing.border.LineBorder
 
-
-fun main(args: Array<String>) {
-    ResultsFrame(sin(mul(a, x)))
-}
+//
+//fun main(args: Array<String>) {
+//    ResultsFrame(sin(mul(a, x)))
+//}
 
 class ResultsFrame(val operand: Operand) : JFrame() {
     private var formula = OperandPanel(Differentiate(operand = operand))

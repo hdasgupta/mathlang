@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -28,11 +28,15 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Householder;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Householder.Context;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixMeasure;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.max;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.concat;
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.subVector;
+
 import java.util.ArrayList;
 
 /**
@@ -60,10 +64,10 @@ class FrancisQRStep {
      * Run a Francis-QR step on a real, unreduced, <em>upper</em> Hessenberg matrix.
      *
      * @param H a real, unreduced, <em>upper</em> Hessenberg matrix;
-     * It is necessary to make sure that
-     * <pre><code>
-     * Hessenberg.isHessenberg(H, ε) == true
-     * </code></pre>
+     *          It is necessary to make sure that
+     *          <pre><code>
+     *          Hessenberg.isHessenberg(H, ε) == true
+     *          </code></pre>
      */
     FrancisQRStep(Matrix H) {
         this.H = H;
@@ -83,23 +87,23 @@ class FrancisQRStep {
 
             //reflect columns
             Matrix Hsub = CreateMatrix.subMatrix(result,
-                                                 k, Math.min(k + 2, n),//rows
-                                                 Math.max(k - 1, 1), n);//columns
+                    k, Math.min(k + 2, n),//rows
+                    Math.max(k - 1, 1), n);//columns
             Matrix HsubReflected = hh.reflect(Hsub);
             CreateMatrix.replace(result,
-                                 k, Math.min(k + 2, n),
-                                 Math.max(k - 1, 1), n,
-                                 HsubReflected);
+                    k, Math.min(k + 2, n),
+                    Math.max(k - 1, 1), n,
+                    HsubReflected);
 
             //reflect rows
             Hsub = CreateMatrix.subMatrix(result,
-                                          1, Math.min(k + 3, n),//rows
-                                          k, Math.min(k + 2, n));//columns
+                    1, Math.min(k + 3, n),//rows
+                    k, Math.min(k + 2, n));//columns
             HsubReflected = hh.reflectRows(Hsub);
             CreateMatrix.replace(result,
-                                 1, Math.min(k + 3, n),
-                                 k, Math.min(k + 2, n),
-                                 HsubReflected);
+                    1, Math.min(k + 3, n),
+                    k, Math.min(k + 2, n),
+                    HsubReflected);
 
             if (k < n - 1) {//to prevent array out of bound (for the last iteration)
                 col1.set(1, result.get(k + 1, k));

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.stats.distribution.univariate;
 
 import static com.numericalmethod.suanshu.Constant.*;
+
 import com.numericalmethod.suanshu.analysis.function.special.gaussian.Erf;
+
 import static java.lang.Math.*;
 
 /**
@@ -35,7 +37,9 @@ import static java.lang.Math.*;
  */
 public class RayleighDistribution implements ProbabilityDistribution {
 
-    /** the standard deviation */
+    /**
+     * the standard deviation
+     */
     private final double sigma;
 
     /**
@@ -102,6 +106,6 @@ public class RayleighDistribution implements ProbabilityDistribution {
     public double moment(double t) {
         Erf erf = new Erf();
         return 1d + sigma * t * exp(sigma * sigma * t * t / 2) * sqrt(Math.PI / 2d)
-                    * (erf.evaluate(sigma * t / ROOT_2) + 1d);
+                * (erf.evaluate(sigma * t / ROOT_2) + 1d);
     }
 }

@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.timeseries.linear.univariate.stationaryprocess;
 
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.dsp.univariate.operation.system.doubles.Filter;
 import com.numericalmethod.suanshu.dsp.univariate.operation.system.doubles.MovingAverage;
 import com.numericalmethod.suanshu.stats.descriptive.moment.Mean;
@@ -40,7 +41,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * <blockquote><code><pre>
  * X<sub>t</sub> = m<sub>t</sub> + s<sub>t</sub> + Y<sub>t</sub>
  * </pre></code></blockquote>
- *
+ * <p>
  * We have
  * <ul>
  * EY<sub>t</sub> = 0
@@ -52,7 +53,6 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * The R equivalent function is {@code decompose}.
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. Brockwell and R. A. Davis, "p. 23. Chapter 1.4. Elimination of both Trend and Seasonality," in <i>Time Series: Theory and Methods</i>, 2nd ed. Springer, 2006."
  */
 public class MADecomposition {
@@ -72,10 +72,10 @@ public class MADecomposition {
 
     /**
      * Decompose a time series into the trend, seasonal and the stationary random components using the Moving Average Estimation.
-     * 
-     * @param Xt a time series
+     *
+     * @param Xt       a time series
      * @param MAFilter the moving average filter to smooth the time series
-     * @param period the period of the time series; if aperiodic, use 1
+     * @param period   the period of the time series; if aperiodic, use 1
      */
     public MADecomposition(TimeSeries Xt, double[] MAFilter, int period) {
         assertArgument(MAFilter.length > 0, "MAFilter must be supplied");
@@ -138,7 +138,7 @@ public class MADecomposition {
     /**
      * Decompose a periodic time series into the seasonal and stationary random components using no MA filter.
      *
-     * @param Xt a time series
+     * @param Xt     a time series
      * @param period the period of the time series; if aperiodic, use 0
      */
     public MADecomposition(TimeSeries Xt, int period) {
@@ -148,10 +148,9 @@ public class MADecomposition {
     /**
      * Decompose a time series into the trend, seasonal and the stationary random components using the default filter.
      *
-     * @param Xt a time series
+     * @param Xt      a time series
      * @param MAOrder the length of the MA filter (automatically increased by 1 for even {@code MAOrder})
-     * @param period the period of the time series; if aperiodic, use 0
-     *
+     * @param period  the period of the time series; if aperiodic, use 0
      * @see "P. J. Brockwell and R. A. Davis, "Eq. 1.4.16. Chapter 1.4. Elimination of both Trend and Seasonality," in <i>Time Series: Theory and Methods</i>, 2nd ed. Springer, 2006."
      */
     public MADecomposition(TimeSeries Xt, int MAOrder, int period) {

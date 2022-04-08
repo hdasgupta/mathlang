@@ -26,11 +26,16 @@ import com.numericalmethod.suanshu.analysis.function.FunctionOps;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.matrix.doubles.AreMatrices;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.foreach;
+
 import com.numericalmethod.suanshu.number.Real;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.*;
+
 import com.numericalmethod.suanshu.vector.doubles.IsVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import java.util.Arrays;
 
 /**
@@ -41,13 +46,18 @@ import java.util.Arrays;
  */
 public class DenseVector implements Vector {//TODO: java.io.Serializable {
 
-    /** data storage */
+    /**
+     * data storage
+     */
     private double[] data;
-    /** the length of this vector, counting from 1 */
+    /**
+     * the length of this vector, counting from 1
+     */
     private final int length;
     private VectorMathOperation math = new VectorMathOperation();
 
     //<editor-fold defaultstate="collapsed" desc="Ctors">
+
     /**
      * Construct a vector.
      *

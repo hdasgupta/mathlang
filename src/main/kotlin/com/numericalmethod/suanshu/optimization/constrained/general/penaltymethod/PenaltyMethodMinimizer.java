@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -48,8 +48,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * It can be shown that if the penalty is large enough, the original and modified problems have the same solution.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>@see <a href="http://en.wikipedia.org/wiki/Penalty_method">Wikipedia: Penalty method</a>
  * <li>"R. Fletcher, "Section 22.4, Penalty Methods, Chapter 22, Non-differentiable Optimization," Practical Methods of Optimization. 2nd ed. Wiley. May 2000."
  * </ul>
@@ -84,8 +83,8 @@ public class PenaltyMethodMinimizer implements ConstrainedMinimizer<ConstrainedO
 
                     PenaltyFunction penaltyFunction =
                             new SumOfPenalties(
-                            problem.getEqualityConstraints() != null ? new Courant(problem.getEqualityConstraints()) : new ZERO(problem.dimension()),
-                            problem.getLessThanConstraints() != null ? new Fletcher(problem.getLessThanConstraints()) : new ZERO(problem.dimension()));
+                                    problem.getEqualityConstraints() != null ? new Courant(problem.getEqualityConstraints()) : new ZERO(problem.dimension()),
+                                    problem.getLessThanConstraints() != null ? new Fletcher(problem.getLessThanConstraints()) : new ZERO(problem.dimension()));
 
                     return penaltyFunction;
                 }

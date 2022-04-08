@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.stats.stochasticprocess.univariate;
 
 import com.numericalmethod.suanshu.stats.random.univariate.normal.StandardNormalRng;
+
 import static java.lang.Math.sqrt;
 
 /**
@@ -42,7 +43,7 @@ public interface Realization extends com.numericalmethod.suanshu.stats.timeserie
      * This <tt>Iterator</tt> support lazy evaluation/generation of a realization from a stochastic process.
      * For a given filtration, a stochastic process gives arise to a particular realization,
      * which is a (deterministic) time series.
-     *
+     * <p>
      * A realization is therefore only created on demand.
      * For example, we create a realization when an <tt>Iterator</tt> is constructed.
      */
@@ -97,7 +98,7 @@ public interface Realization extends com.numericalmethod.suanshu.stats.timeserie
 
         /**
          * Get a Gaussian innovation.
-         * 
+         *
          * @return a Gaussian innovation
          */
         protected double Zt() {

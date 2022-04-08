@@ -25,10 +25,13 @@ package com.numericalmethod.suanshu.analysis.function.polynomial;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
 import com.numericalmethod.suanshu.mathstructure.Ring;
 import com.numericalmethod.suanshu.mathstructure.VectorSpace;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.equal;
+
 import com.numericalmethod.suanshu.number.Real;
 import com.numericalmethod.suanshu.number.complex.Complex;
 import com.numericalmethod.suanshu.number.complex.ElementaryFunction;
+
 import java.util.Arrays;
 
 /**
@@ -45,9 +48,13 @@ import java.util.Arrays;
  */
 public class Polynomial extends UnivariateRealFunction implements Ring<Polynomial>, VectorSpace<Polynomial, Real> {
 
-    /** a polynomial representing <i>0</i> */
+    /**
+     * a polynomial representing <i>0</i>
+     */
     public static final Polynomial ZERO = new Polynomial(0);
-    /** a polynomial representing <i>1</i> */
+    /**
+     * a polynomial representing <i>1</i>
+     */
     public static final Polynomial ONE = new Polynomial(1);
     private int degree;
     private final double coefficients[];

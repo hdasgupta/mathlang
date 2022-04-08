@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,17 +37,20 @@ import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
  * hence, strictly increasing and its inverse well defined.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Paul Glasserman. "p. 44," Monte Carlo Methods in Financial Engineering, 2004."
  * <li><a href="http://en.wikipedia.org/wiki/Inverse_transform_method">Wikipedia: Inverse transform sampling</a>
  * </ul>
  */
 public class InverseTransformSampling implements RandomNumberGenerator {
 
-    /** the distribution to sample random numbers from */
+    /**
+     * the distribution to sample random numbers from
+     */
     private final ProbabilityDistribution distribution;
-    /** a uniform random number generator */
+    /**
+     * a uniform random number generator
+     */
     private final RandomLongGenerator uniform;
 
     /**

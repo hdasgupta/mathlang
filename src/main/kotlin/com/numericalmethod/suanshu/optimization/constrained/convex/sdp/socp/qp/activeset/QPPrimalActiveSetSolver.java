@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -42,6 +42,7 @@ import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
 import com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,8 +54,7 @@ import java.util.Map;
  * A bottleneck is that only one constraint can be added or removed from the working set per iteration.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Andreas Antoniou, Wu-Sheng Lu, "Algorithm 13.1, Quadratic and Convex Programming," Practical Optimization: Algorithms and Engineering Applications."
  * <li>"Jorge Nocedal, Stephen Wright, "Algorithm 16.3," Numerical Optimization."
  * <li><a href="http://en.wikipedia.org/wiki/Active_set">Wikipedia: Active set</a>
@@ -78,7 +78,7 @@ public class QPPrimalActiveSetSolver implements ConstrainedMinimizer<QPProblem, 
         private final ImmutableMatrix A;
         private final ImmutableVector b;
         private final ImmutableMatrix Aeq;
-//    private final ImmutableVector beq;
+        //    private final ImmutableVector beq;
         private final Matrix H;
         private final Vector p;
 
@@ -259,7 +259,7 @@ public class QPPrimalActiveSetSolver implements ConstrainedMinimizer<QPProblem, 
             return problem.f().evaluate(x);//TODO: cache result
         }
 
-//    // check rank condition, eq. 13.21
+        //    // check rank condition, eq. 13.21
 //    private boolean isRankConditionMet(Matrix Aa, Vector g) {
 //        Matrix Aat = Aa.t();
 //        Matrix Aatg = CreateMatrix.cbind(Aat, new DenseMatrix(g));
@@ -278,7 +278,9 @@ public class QPPrimalActiveSetSolver implements ConstrainedMinimizer<QPProblem, 
             return true;
         }
 
-        /** Bland's anti-cycling rule. */
+        /**
+         * Bland's anti-cycling rule.
+         */
         private int getMostNegativeLagrangeMultiplier(Vector mu, int size) {
             int index = 0;
             double min = Double.POSITIVE_INFINITY;

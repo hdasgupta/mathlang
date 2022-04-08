@@ -32,6 +32,7 @@ import com.numericalmethod.suanshu.stats.descriptive.rank.Quantile;
 import com.numericalmethod.suanshu.stats.distribution.univariate.FDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.*;
 import static java.lang.Math.*;
@@ -43,9 +44,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code levene.test}.
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Levene's_test">Wikipedia: Levene's test</a>
  * <li><a href="http://www.itl.nist.gov/div898/handbook/eda/section3/eda35a.htm">Levene Test for Equality of Variances</a>
  * </ul>
@@ -80,6 +79,7 @@ public class Levene extends HypothesisTest {
     public String getAlternativeHypothesis() {
         return "at least two variances are different";
     }
+
     /**
      * the degree of freedoms
      */
@@ -94,7 +94,7 @@ public class Levene extends HypothesisTest {
      *
      * <p>
      * The absolute deviations are computed from the medians.
-     * 
+     *
      * @param samples samples
      */
     public Levene(double... samples) {
@@ -104,7 +104,7 @@ public class Levene extends HypothesisTest {
     /**
      * Perform the Levene test to test for homeogeneity of variance across groups.
      *
-     * @param type the implementation chosen
+     * @param type    the implementation chosen
      * @param samples samples
      */
     public Levene(Type type, double[]... samples) {
@@ -148,7 +148,7 @@ public class Levene extends HypothesisTest {
 
     /**
      * Compute the medians for each sample.
-     * 
+     *
      * @param samples samples
      * @return the sample medians
      */

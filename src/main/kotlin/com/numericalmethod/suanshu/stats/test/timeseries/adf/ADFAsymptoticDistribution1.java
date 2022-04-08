@@ -37,6 +37,7 @@ import com.numericalmethod.suanshu.stats.stochasticprocess.timepoints.EvenlySpac
 import com.numericalmethod.suanshu.stats.stochasticprocess.timepoints.TimeGrid;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.pow;
 
 /**
@@ -46,13 +47,10 @@ import static java.lang.Math.pow;
  * The p-values in R are interpolated using the values from Table 4.2, p. 103 of Banerjee et al. (1993).
  *
  * @author Chun Yip Yau
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Wayne A. Fuller. "Introduction to Statistical Time Series". Chapter 10. pp.553, 554, 561, 568."
  * <li>"A. Banerjee, J. J. Dolado, J. W. Galbraith, and D. F. Hendry. "Cointegration, Error Correction, and the Econometric Analysis of Non-Stationary Data", 1993. Oxford University Press, Oxford."
  * </ul>
- * 
  * @deprecated use instead {@link ADFAsymptoticDistribution}
  */
 @Deprecated
@@ -80,11 +78,12 @@ public class ADFAsymptoticDistribution1 extends EmpiricalDistribution {//TODO: 1
     public static enum Type {
 
         DICKEY_FULLER,
-        AUGMENTED_DICKEY_FULLER,}
+        AUGMENTED_DICKEY_FULLER,
+    }
 
     /**
      * Construct the asymptotic distribution for the Augmented Dickey Fuller test statistics.
-     * 
+     *
      * @param type the type of Dickey-Fuller test
      */
     public ADFAsymptoticDistribution1(Type type) {
@@ -93,8 +92,8 @@ public class ADFAsymptoticDistribution1 extends EmpiricalDistribution {//TODO: 1
 
     /**
      * Construct the asymptotic distribution for the Augmented Dickey Fuller test statistics.
-     * 
-     * @param nT the number of grid point in interval [0, 1]
+     *
+     * @param nT   the number of grid point in interval [0, 1]
      * @param nSim the number of simulations
      * @param type the types of Dickey-Fuller tests available
      * @param seed the seed
@@ -111,7 +110,7 @@ public class ADFAsymptoticDistribution1 extends EmpiricalDistribution {//TODO: 1
      * This is an implementation of "Wayne A. Fuller. "Introduction to Statistical Time Series". Chapter 10. pp.553, 554, 561, 568."
      * It computes the distribution by Monte Carlo simulation.
      *
-     * @param nT the number of grid point in interval [0, 1]
+     * @param nT   the number of grid point in interval [0, 1]
      * @param nSim the number of simulations
      * @param type the types of Dickey-Fuller tests available
      * @param seed the seed
@@ -138,10 +137,10 @@ public class ADFAsymptoticDistribution1 extends EmpiricalDistribution {//TODO: 1
                     }
                 },
                 new ConstantSigma1(new DenseMatrix(new double[][]{
-                    {0},
-                    {1},//dT; Fuller, p.553, eq. 10.1.14
-                    {0},
-                    {0}
+                        {0},
+                        {1},//dT; Fuller, p.553, eq. 10.1.14
+                        {0},
+                        {0}
                 })),
                 1) {//1 driving Brownian motion
 

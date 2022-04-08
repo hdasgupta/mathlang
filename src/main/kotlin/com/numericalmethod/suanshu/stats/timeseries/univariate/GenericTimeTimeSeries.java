@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.stats.timeseries.univariate;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
 import com.numericalmethod.suanshu.stats.timeseries.univariate.TimeSeries.Entry;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +51,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements T
      */
     public GenericTimeTimeSeries(T[] timestamps, double[] values) {
         SuanShuUtils.assertArgument(timestamps.length == values.length,
-                                    "number of values and numbers of timestamps do not match");
+                "number of values and numbers of timestamps do not match");
 
         for (int i = 0; i < timestamps.length; ++i) {
             ts.add(new TimeSeries.Entry<T>(timestamps[i], values[i]));
@@ -193,8 +194,8 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements T
         for (int i = 0; i < size; ++i) {
             TimeSeries.Entry<T> pair = ts.get(i);
             result.append(String.format("%s: %f; ",
-                                        pair.getTime().toString(),
-                                        pair.getValue()));
+                    pair.getTime().toString(),
+                    pair.getValue()));
         }
 
         result.append("]");
@@ -210,8 +211,7 @@ public class GenericTimeTimeSeries<T extends Comparable<? super T>> implements T
         if (getClass() != obj.getClass()) {
             return false;
         }
-        @SuppressWarnings("unchecked")
-        final GenericTimeTimeSeries<T> other = (GenericTimeTimeSeries<T>) obj;
+        @SuppressWarnings("unchecked") final GenericTimeTimeSeries<T> other = (GenericTimeTimeSeries<T>) obj;
         if (this.ts != other.ts && (this.ts == null || !this.ts.equals(other.ts))) {
             return false;
         }

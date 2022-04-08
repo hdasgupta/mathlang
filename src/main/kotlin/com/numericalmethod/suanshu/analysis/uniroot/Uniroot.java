@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -40,8 +40,8 @@ public interface Uniroot {
      * @param lower the lower bound of the bracketing interval
      * @param upper the upper bound of the bracketing interval
      * @param guess an initial guess of the root within <i>[lower, upper]</i>.
-     * Note that {@code guess} is a {@code double[]}.
-     * This signature allows multiple initial guesses for certain types of uniroot algorithms, e.g., Brent's algorithm.
+     *              Note that {@code guess} is a {@code double[]}.
+     *              This signature allows multiple initial guesses for certain types of uniroot algorithms, e.g., Brent's algorithm.
      * @return an approximate root
      * @throws NoRootFoundException when the search fails to find a root
      */

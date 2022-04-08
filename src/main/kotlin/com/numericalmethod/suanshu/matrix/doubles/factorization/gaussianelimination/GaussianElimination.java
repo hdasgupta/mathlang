@@ -27,7 +27,9 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.PermutationMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.ElementaryOperation;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
+
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 
 /**
@@ -48,8 +50,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * where <i>P</i> is the permutation matrix, <i>U</i> is lower triangular, <i>U</i> is in the row echelon form.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li><a href="http://en.wikipedia.org/wiki/Gaussian_elimination">Wikipedia: Gaussian elimination</a>
  * <li><a href="http://en.wikipedia.org/wiki/Reduced_row_echelon_form#Reduced_row_echelon_form">Wikipedia: Row echelon form</a>
  * </ul>
@@ -70,9 +71,9 @@ public class GaussianElimination {
      *
      * @param A           a matrix
      * @param usePivoting {@code true} if to use partial pivoting, e.g., for numerical stability.
-     * In general, no pivoting means no row interchanges.
-     * It can be done only if Gaussian elimination never runs into zeros on the diagonal.
-     * Since division by zero is a fatal error we usually avoid no pivoting.
+     *                    In general, no pivoting means no row interchanges.
+     *                    It can be done only if Gaussian elimination never runs into zeros on the diagonal.
+     *                    Since division by zero is a fatal error we usually avoid no pivoting.
      * @param epsilon     a precision parameter: when a number |x| ≤ ε, it is considered 0
      */
     public GaussianElimination(Matrix A, boolean usePivoting, double epsilon) {
@@ -143,7 +144,7 @@ public class GaussianElimination {
      * p. 95 - 96
      */
     private void run() {
-        for (int i = 1, j = 1; i <= nRows && j <= nCols;) {
+        for (int i = 1, j = 1; i <= nRows && j <= nCols; ) {
             int maxRow = i;
             if (usePivoting) {
                 for (int k = i + 1; k <= nRows; ++k) {

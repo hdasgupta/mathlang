@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,7 +37,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * <blockquote><code>
  * Y_t = μ + Σ φ_i * Y_{t-i} + ψ * D_t + ε_t,
  * </code></blockquote>
- *
+ * <p>
  * where Y_s, μ and ε_s are n-dimensional vectors;
  * (n * n) matrices {φ_i} (i = 1, 2, ..., p) denote the AR coefficients;
  * D_t is an (m * 1) vector which contains all exogenous variables at time t (excl. the intercept term),
@@ -47,9 +47,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * This class also provides conversion methods between a VARX(p) model and a VECM(p) (long-run or transitory).
  *
  * @author Kevin Sun
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li> S. Johansen, “Likelihood-Based Inference in Cointegrated Vector Autoregressive Models,” Oxford, Oxford University Press, 1995, ch. 2-4, pp. 11-88.
  * <li> S. Johansen and K. Juselius, "Maximum Likelihood Estimation and Inference on Cointegration - with Applications to the Demand for Money," Oxford Bull. of Econ. and Stat, vol. 52, 169–210, 1990.
  * </ul>
@@ -59,9 +57,9 @@ public class VARXModel extends ARMAXModel {
     /**
      * Construct a VARX model.
      *
-     * @param mu the intercept (constant) vector
-     * @param phi the AR coefficients (excluding the initial 1)
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param mu    the intercept (constant) vector
+     * @param phi   the AR coefficients (excluding the initial 1)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public VARXModel(Vector mu, Matrix[] phi, Matrix psi, Matrix sigma) {
@@ -71,7 +69,7 @@ public class VARXModel extends ARMAXModel {
     /**
      * Construct a VARX model with unit variance.
      *
-     * @param mu the intercept (constant) vector
+     * @param mu  the intercept (constant) vector
      * @param phi the AR coefficients (excluding the initial 1)
      * @param psi the coefficients of the deterministic terms (excluding the intercept term)
      */
@@ -83,8 +81,8 @@ public class VARXModel extends ARMAXModel {
     /**
      * Construct a zero-mean VARX model.
      *
-     * @param phi the AR coefficients (excluding the initial 1)
-     * @param psi the coefficients of the deterministic terms (excluding the intercept term)
+     * @param phi   the AR coefficients (excluding the initial 1)
+     * @param psi   the coefficients of the deterministic terms (excluding the intercept term)
      * @param sigma the covariance matrix of white noise
      */
     public VARXModel(Matrix[] phi, Matrix psi, Matrix sigma) {
@@ -105,7 +103,7 @@ public class VARXModel extends ARMAXModel {
 
     /**
      * Construct a VARX(p) from a transitory VECM(p).
-     * 
+     *
      * @param vecm a transitory VECM(p)
      */
     public VARXModel(VECMTransitory vecm) {

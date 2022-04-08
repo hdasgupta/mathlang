@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.stats.stochasticprocess.multivariate;
 import com.numericalmethod.suanshu.stats.random.univariate.normal.StandardNormalRng;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.*;
 
 /**
@@ -38,7 +39,6 @@ import static java.lang.Math.*;
  * </ul>
  *
  * @author Haksun Li
- *
  * @see <a href="http://en.wikipedia.org/wiki/L%C3%A9vy_process#L.C3.A9vy.E2.80.93It.C5.8D_decomposition">Lévy–Itō decomposition</a>
  */
 public interface MultiVariateRealization extends com.numericalmethod.suanshu.stats.timeseries.multivariate.realtime.MultiVariateRealization {
@@ -47,7 +47,7 @@ public interface MultiVariateRealization extends com.numericalmethod.suanshu.sta
      * This <tt>Iterator</tt> support lazy evaluation/generation of a realization from a stochastic process.
      * For a given filtration, a stochastic process gives arise to a particular realization,
      * which is a (deterministic) time series.
-     *
+     * <p>
      * A realization is therefore only created on demand.
      * For example, we create a realization when an <tt>Iterator</tt> is constructed.
      */
@@ -71,7 +71,7 @@ public interface MultiVariateRealization extends com.numericalmethod.suanshu.sta
 
         /**
          * Get the current value of the realization.
-         * 
+         *
          * @param index the index to the current <tt>Entry</tt>
          * @return the current value
          */
@@ -80,7 +80,7 @@ public interface MultiVariateRealization extends com.numericalmethod.suanshu.sta
         /**
          * Construct a realization of a multivariate stochastic process.
          *
-         * @param d the dimension of the Brownian motion
+         * @param d    the dimension of the Brownian motion
          * @param size the length of the time series
          * @param seed seeding the same {@code seed} gives arise to the same realization
          */
@@ -108,7 +108,7 @@ public interface MultiVariateRealization extends com.numericalmethod.suanshu.sta
 
         /**
          * Get a d-dimension Gaussian innovation.
-         * 
+         *
          * @return a Gaussian innovation
          */
         protected Vector Zt() {
@@ -135,7 +135,7 @@ public interface MultiVariateRealization extends com.numericalmethod.suanshu.sta
     /**
      * Get the ending value of a realization,
      * i.e., the value at the end of the time interval, e.g., ω(T).
-     * 
+     *
      * @return the ending value of a realization
      */
     public abstract Vector lastValue();

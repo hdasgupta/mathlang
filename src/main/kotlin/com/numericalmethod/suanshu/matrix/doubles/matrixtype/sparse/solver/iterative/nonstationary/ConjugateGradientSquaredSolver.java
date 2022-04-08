@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -43,16 +43,16 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * both to the same vectors. Ideally, this would double the convergence rate,
  * but in practice convergence may be much more irregular than for BiCG.
  * This may sometimes lead to unreliable results.
- *
+ * <p>
  * A practical advantage is that the CGS method does not need the multiplications
  * with the transpose of the coefficient matrix. In some applications of CG
  * methods, <i>A</i> is available only through some approximations but not
  * explicitly. In such situations, the transpose of <i>A</i>, i.e.,
  * <i>A<sup>t</sup></i>, is usually not available.
- *
+ * <p>
  * In addition, the rounding errors in the CGS method tend to be more damaging than in the
  * standard BiCG algorithm.
- *
+ * <p>
  * <p/>
  * Only left preconditioning is supported in this implementation.
  *
@@ -179,7 +179,7 @@ public class ConjugateGradientSquaredSolver implements IterativeLinearSystemSolv
             @Override
             public Vector search(Vector... initials) throws ConvergenceFailure {
                 for (; count < maxIteration && !isConverged;
-                        ++count, isConverged = tolerance.isResidualSmall(r.norm())) {
+                     ++count, isConverged = tolerance.isResidualSmall(r.norm())) {
                 }
 
                 monitor.addIterate(x);

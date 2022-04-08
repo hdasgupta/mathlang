@@ -5,6 +5,7 @@ import com.numericalmethod.suanshu.stats.distribution.univariate.ChiSquareDistri
 import com.numericalmethod.suanshu.stats.distribution.univariate.NormalDistribution;
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
 import com.numericalmethod.suanshu.stats.test.HypothesisTest;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
 
 /**
@@ -15,7 +16,6 @@ import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
  * These are called normal scores and the test is computed from these normal scores.
  *
  * @author Chun Yip Yau
- *
  * @see <a href="http://en.wikipedia.org/wiki/Van_der_Waerden_test">Wikipedia: Van der Waerden test</a>
  */
 public class VanDerWaerden extends HypothesisTest {

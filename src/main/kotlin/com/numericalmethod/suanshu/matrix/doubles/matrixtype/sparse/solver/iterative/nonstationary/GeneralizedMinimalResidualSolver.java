@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -41,7 +41,9 @@ import com.numericalmethod.suanshu.matrix.doubles.operation.CreateMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.SubMatrixRef;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static com.numericalmethod.suanshu.vector.doubles.dense.operation.CreateVector.subVector;
+
 import java.util.Arrays;
 
 /**
@@ -67,7 +69,9 @@ import java.util.Arrays;
  */
 public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSolver {
 
-    /** restart parameter of GMRES */
+    /**
+     * restart parameter of GMRES
+     */
     private final int m0;
     private final PreconditionerFactory leftPreconditionerFactory;
     private final int maxIteration0;
@@ -78,9 +82,9 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
      *
      * @param leftPreconditionerFactory constructs a new left preconditioner
      * @param m                         the solver restarts every {@code m} iterations;
-     * Practically, as {@code m} increases, the computational
-     * cost increases at least by <i>O(m<sup>2</sup>)n</i> because of the
-     * Gram-Schmidt orthogonalization. The memory cost increases by <i>O(mn)</i>.
+     *                                  Practically, as {@code m} increases, the computational
+     *                                  cost increases at least by <i>O(m<sup>2</sup>)n</i> because of the
+     *                                  Gram-Schmidt orthogonalization. The memory cost increases by <i>O(mn)</i>.
      * @param maxIteration              the maximum number of iterations
      * @param tolerance                 the convergence threshold
      */
@@ -95,9 +99,9 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
      * Construct a GMRES solver with restarts.
      *
      * @param m            the solver restarts every {@code m} iterations;
-     * Practically, as {@code m} increases, the computational
-     * cost increases at least by <i>O(m<sup>2</sup>)n</i> because of the
-     * Gram-Schmidt orthogonalization. The memory cost increases by <i>O(mn)</i>.
+     *                     Practically, as {@code m} increases, the computational
+     *                     cost increases at least by <i>O(m<sup>2</sup>)n</i> because of the
+     *                     Gram-Schmidt orthogonalization. The memory cost increases by <i>O(mn)</i>.
      * @param maxIteration the maximum number of iterations
      * @param tolerance    the convergence threshold
      */
@@ -121,7 +125,7 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
      */
     public GeneralizedMinimalResidualSolver(int maxIteration, Tolerance tolerance) {
         this(Integer.MAX_VALUE,//never restart
-             maxIteration, tolerance);
+                maxIteration, tolerance);
     }
 
     public IterativeLinearSystemSolver.Solution solve(LSProblem problem) throws ConvergenceFailure {
@@ -135,8 +139,8 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
             private final Matrix A = problem.A();
             private final Vector b = problem.b();
             private final int maxIteration = (m0 >= problem.A().nCols())
-                                             ? Math.min(maxIteration0, problem.A().nCols()) // full: guaranteed to converge in n iterations
-                                             : maxIteration0; // restarted
+                    ? Math.min(maxIteration0, problem.A().nCols()) // full: guaranteed to converge in n iterations
+                    : maxIteration0; // restarted
             private final Preconditioner M = leftPreconditionerFactory.newInstance(A);
             private final int m = Math.min(m0, A.nCols()); // use restart or full version
             private Vector[] V = new Vector[m + 1]; // basis from Krylov subspace {v, A*v, A^2*v, ..., A^m*v}
@@ -165,7 +169,7 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
 
                 int i = 1;
                 for (; i <= m && count < maxIteration && !isConverged;
-                        ++i, ++count, isConverged = tolerance.isResidualSmall(rNorm)) { // inner iterations; restart every m iterations
+                     ++i, ++count, isConverged = tolerance.isResidualSmall(rNorm)) { // inner iterations; restart every m iterations
 
                     monitor.addIterate(x); // Note: GMRES does not compute intermediate iterates
 
@@ -229,7 +233,7 @@ public class GeneralizedMinimalResidualSolver implements IterativeLinearSystemSo
             public Vector search(Vector... initials) throws ConvergenceFailure {
                 setInitials(initials);
                 for (; count < maxIteration && !isConverged;
-                        isConverged |= tolerance.isResidualSmall(rNorm)) {
+                     isConverged |= tolerance.isResidualSmall(rNorm)) {
                     step();
                 }
 

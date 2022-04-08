@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -37,6 +37,7 @@ import com.numericalmethod.suanshu.optimization.constrained.integer.linear.probl
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -82,19 +83,19 @@ public class ILPNode implements BBNode {
     @Override
     public double value() {
         return minimizer != null ? minimizer.minimum()
-               : Double.POSITIVE_INFINITY;//infeasible
+                : Double.POSITIVE_INFINITY;//infeasible
     }
 
     @Override
     public boolean isCandidate() {
         return minimizer != null
-               ? problem.getNonIntegralIndices(minimizer.minimizer().toArray()).length == 0//all integral constraints satisfied
-               : false;
+                ? problem.getNonIntegralIndices(minimizer.minimizer().toArray()).length == 0//all integral constraints satisfied
+                : false;
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * <p/>
      * This implementation assumes
      * <ul>

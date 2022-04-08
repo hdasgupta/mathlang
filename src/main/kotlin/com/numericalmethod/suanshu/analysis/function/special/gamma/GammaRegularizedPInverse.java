@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,6 +23,7 @@
 package com.numericalmethod.suanshu.analysis.function.special.gamma;
 
 import static com.numericalmethod.suanshu.Constant.EPSILON;
+
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.BivariateRealFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.univariate.UnivariateRealFunction;
@@ -30,6 +31,7 @@ import com.numericalmethod.suanshu.analysis.function.special.gaussian.ErfInverse
 import com.numericalmethod.suanshu.analysis.uniroot.Halley;
 import com.numericalmethod.suanshu.analysis.uniroot.NoRootFoundException;
 import com.numericalmethod.suanshu.misc.SuanShuUtils;
+
 import static com.numericalmethod.suanshu.number.DoubleUtils.compare;
 import static com.numericalmethod.suanshu.number.DoubleUtils.isZero;
 import static java.lang.Math.*;
@@ -48,8 +50,7 @@ import static java.lang.Math.*;
  * The R equivalent function is {@code qgamma}. E.g., {@code qgamma(u, s, lower=TRUE)}.
  *
  * @author Haksun Li
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Amparo Gil, Javier Segura, and Nico M. Temme. "Sections 8.3, 10.3.1, 10.6," Numerical Methods for Special Functions."
  * <li><a href="http://en.wikipedia.org/wiki/Regularized_Gamma_function#Regularized_Gamma_functions_and_Poisson_random_variables">Wikipedia: Regularized Gamma functions and Poisson random variables</a>
  * </ul>
@@ -63,7 +64,7 @@ public class GammaRegularizedPInverse extends BivariateRealFunction {
     private static final Polynomial p1 = new Polynomial(new double[]{-11 / 382725d, 5 / 18144d, -7 / 6480d, 1 / 1620d, 1 / 36d, -1 / 3d});
     private static final Polynomial p2 = new Polynomial(new double[]{109 / 1749600d, -1579 / 2099520d, 533 / 204120d, -7 / 2592d, -7 / 405d});
     private static final Polynomial p3 = new Polynomial(new double[]{346793 / 5290790400d, 29233 / 36741600d, -63149 / 20995200d, 449 / 102060d});
-//        private static final Polynomial p4 = new Polynomial(new double[]{636178018081d / 48260539847520000d, -16004851139d / 26398927779840000d, -16968489929d / 194992080192000d, 1981235233 / 6666395904000d, -449882243 / 982102968000d, -269383 / 4232632320d, 319 / 183708d});
+    //        private static final Polynomial p4 = new Polynomial(new double[]{636178018081d / 48260539847520000d, -16004851139d / 26398927779840000d, -16968489929d / 194992080192000d, 1981235233 / 6666395904000d, -449882243 / 982102968000d, -269383 / 4232632320d, 319 / 183708d});
     private static final Polynomial p4 = new Polynomial(new double[]{1981235233 / 6666395904000d, -449882243 / 982102968000d, -269383 / 4232632320d, 319 / 183708d});
     //a rough approximation from eq. 10.42; might not even give +ve lambda for some eta
     private static final Polynomial pLambda = new Polynomial(new double[]{1 / 4320d, -1 / 270d, 1 / 36d, 1 / 3d, 1, 1});

@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.misc.R;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GeneralizedLinearModel;
 import com.numericalmethod.suanshu.stats.regression.linear.glm.GLMProblem;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.*;
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
 
@@ -57,8 +58,8 @@ public class Backward extends SingleFactorSelection {
 
     /**
      * Construct automatically a GLM getModel using the backward selection method.
-     * 
-     * @param problem a GLM problem
+     *
+     * @param problem      a GLM problem
      * @param significance a critical value to determine whether a factor is significant (to be included in the getModel)
      */
     public Backward(GLMProblem problem, double significance) {

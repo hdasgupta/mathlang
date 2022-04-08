@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -31,7 +31,9 @@ import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.triangle.LowerTriangularMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.CongruentMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.Inverse;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.timeseries.multivariate.realtime.SimpleMultiVariateTimeSeries;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
@@ -53,8 +55,7 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  * This test permits more than one cointegrating relationship. It is more generally applicable than the Engle–Granger test.
  *
  * @author Kevin Sun
- * @see
- * <ul>
+ * @see <ul>
  * <li>Søren Johansen, Likelihood-Based Inference in Cointegrated Vector Autoregressive Models, Oxford University Press, USA. February 1, 1996.
  * <li>Kevin Sun, Notes on Cointegration, February 23, 2011.
  * <li><a href="http://en.wikipedia.org/wiki/Cointegration">Wikipedia: Cointegration</a>
@@ -63,12 +64,18 @@ import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
  */
 public class CointegrationMLE {
 
-    /** This is the loading matrix (read by columns). Speed of adjustment. */
+    /**
+     * This is the loading matrix (read by columns). Speed of adjustment.
+     */
     private final ImmutableMatrix alpha;
-    /** These (columns) are the cointegration relations. */
+    /**
+     * These (columns) are the cointegration relations.
+     */
     private final DenseMatrix beta;
     private final ImmutableVector eigenvalues;
-    /** the number of rows of the multivariate time series used in regression */
+    /**
+     * the number of rows of the multivariate time series used in regression
+     */
     private final int n;
 
     /**

@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,16 +25,20 @@ package com.numericalmethod.suanshu.optimization.minmax;
 import com.numericalmethod.suanshu.analysis.differentiation.multivariate.Gradient;
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
 import com.numericalmethod.suanshu.analysis.function.rn2rm.RealVectorFunction;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.abs;
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.max;
+
 import com.numericalmethod.suanshu.optimization.problem.C2OptimProblemImpl;
 import com.numericalmethod.suanshu.optimization.problem.IterativeMinimizer;
 import com.numericalmethod.suanshu.optimization.unconstrained.quasinewton.BFGS;
 import com.numericalmethod.suanshu.vector.doubles.ImmutableVector;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
+
 import java.util.List;
 
 /**
@@ -115,7 +119,9 @@ public class LeastPth<T> implements MinMaxMinimizer<T> {
             return Ek1;
         }
 
-        /** Apply eq. 8.6b to <i>x</i> for different <i>ω ∈ S</i>. */
+        /**
+         * Apply eq. 8.6b to <i>x</i> for different <i>ω ∈ S</i>.
+         */
         private double[] ei(Vector x) {
             int K = omega.size();
             double[] e = new double[K];
@@ -217,7 +223,9 @@ public class LeastPth<T> implements MinMaxMinimizer<T> {
             return g_psi_k;
         }
 
-        /** <i>∇Ψ<sub>k</sub>(x)</i> */
+        /**
+         * <i>∇Ψ<sub>k</sub>(x)</i>
+         */
         private RealVectorFunction getNumericalGradient() {
             RealVectorFunction g_psi_k = new RealVectorFunction() {
 

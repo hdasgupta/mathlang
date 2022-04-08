@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -42,7 +42,6 @@ import com.numericalmethod.suanshu.stats.test.HypothesisTest;
  * The R equivalent function is {@code rjb.test} in package {@code lawstat}, or  {@code jarque.bera.test} in package {@code tseries} for N > 2000.
  *
  * @author Haksun Li
- *
  * @see <a href="http://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Wikipedia: Jarque–Bera test</a>
  */
 public class JarqueBera extends HypothesisTest {
@@ -62,7 +61,7 @@ public class JarqueBera extends HypothesisTest {
     /**
      * Perform the Jarque-Bera test to test for the departure from normality.
      *
-     * @param sample a sample
+     * @param sample  a sample
      * @param isExact indicate whether the exact Jarque-Bera distribution is to be used
      */
     public JarqueBera(double[] sample, boolean isExact) {

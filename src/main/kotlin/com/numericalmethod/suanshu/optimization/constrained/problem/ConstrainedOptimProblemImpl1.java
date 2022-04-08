@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,7 +23,9 @@
 package com.numericalmethod.suanshu.optimization.constrained.problem;
 
 import com.numericalmethod.suanshu.analysis.function.rn2r1.RealScalarFunction;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.optimization.constrained.constraint.EqualityConstraints;
 import com.numericalmethod.suanshu.optimization.constrained.constraint.LessThanConstraints;
 import com.numericalmethod.suanshu.optimization.problem.C2OptimProblemImpl;
@@ -44,9 +46,13 @@ import com.numericalmethod.suanshu.optimization.problem.C2OptimProblemImpl;
 public class ConstrainedOptimProblemImpl1 implements ConstrainedOptimProblem {
 
     private final C2OptimProblemImpl problem;
-    /** the equality constraints */
+    /**
+     * the equality constraints
+     */
     private final EqualityConstraints equal;
-    /** the less-than-or-equal-to constraints */
+    /**
+     * the less-than-or-equal-to constraints
+     */
     private final LessThanConstraints less;
 
     /**
@@ -58,11 +64,11 @@ public class ConstrainedOptimProblemImpl1 implements ConstrainedOptimProblem {
      */
     public ConstrainedOptimProblemImpl1(RealScalarFunction f, EqualityConstraints equal, LessThanConstraints less) {
         assertArgument(equal == null
-                       || f.dimensionOfDomain() == equal.getConstraints().get(0).dimensionOfDomain(),
-                       "dimension of equalities does not match that of the objective function");
+                        || f.dimensionOfDomain() == equal.getConstraints().get(0).dimensionOfDomain(),
+                "dimension of equalities does not match that of the objective function");
         assertArgument(less == null
-                       || f.dimensionOfDomain() == less.getConstraints().get(0).dimensionOfDomain(),
-                       "dimension of less-than inequalities does not match that of the objective function");
+                        || f.dimensionOfDomain() == less.getConstraints().get(0).dimensionOfDomain(),
+                "dimension of less-than inequalities does not match that of the objective function");
 
         this.problem = new C2OptimProblemImpl(f);
         this.equal = equal;

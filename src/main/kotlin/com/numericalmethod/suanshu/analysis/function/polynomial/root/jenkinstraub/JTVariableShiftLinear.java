@@ -25,6 +25,7 @@ package com.numericalmethod.suanshu.analysis.function.polynomial.root.jenkinstra
 import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.analysis.function.polynomial.HornerScheme;
 import com.numericalmethod.suanshu.analysis.function.polynomial.Polynomial;
+
 import static java.lang.Math.abs;
 
 /**
@@ -40,7 +41,9 @@ class JTVariableShiftLinear extends JTStep {
     private final double initialS;
     private final int maxIterations;
     private double finalS = 0.0;
-    /** flag to indicate a pair of zeros near real axis */
+    /**
+     * flag to indicate a pair of zeros near real axis
+     */
     private boolean areZerosNearRealAxis = false;
 
     JTVariableShiftLinear(Polynomial pPoly, Polynomial kPoly, double s, int maxIterations) {

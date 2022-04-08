@@ -29,6 +29,7 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.stats.regression.linear.LMProblem;
 import com.numericalmethod.suanshu.stats.regression.linear.Residuals;
 import com.numericalmethod.suanshu.stats.regression.linear.ols.OLSRegression;
+
 import static java.lang.Math.pow;
 
 /**
@@ -41,9 +42,7 @@ import static java.lang.Math.pow;
  * If the White test shows that there is conditional heteroskedasticity, we can consider a GARCH model.
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>White, H. "A Heteroskedasticity-Consistent Covariance Matrix Estimator and a Direct Test for Heteroskedasticity," Econometrica 48 (4): 817–838. MR575027 JSTOR 1912934. 1980.
  * <li>R. Koenker. "A Note on Studentizing a Test for Heteroskedasticity," Journal of Econometrics 17, 107–112. 1981.
  * <li><a href="http://en.wikipedia.org/wiki/White_test">Wikipedia: White test</a>

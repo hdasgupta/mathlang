@@ -44,7 +44,6 @@ import com.numericalmethod.suanshu.vector.doubles.Vector;
  * Note that AIC is not computed for the quasi-GLM because there is no 'real' likelihood function.
  *
  * @author Chun Yip Yau
- *
  * @see "P. J. MacCullagh and J. A. Nelder, "An algorithm for fitting generalized linear models," in <i>Generalized Linear Models</i>, 2nd ed. Chapter 9."
  */
 public class GeneralizedLinearModelQuasiFamily {

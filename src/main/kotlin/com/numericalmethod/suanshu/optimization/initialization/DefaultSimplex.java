@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.optimization.initialization;
 
 import com.numericalmethod.suanshu.vector.doubles.Vector;
 import com.numericalmethod.suanshu.vector.doubles.dense.DenseVector;
+
 import static java.lang.Math.abs;
 
 /**

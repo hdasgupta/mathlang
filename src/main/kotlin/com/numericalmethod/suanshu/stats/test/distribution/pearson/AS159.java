@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -25,14 +25,19 @@ package com.numericalmethod.suanshu.stats.test.distribution.pearson;
 import com.numericalmethod.suanshu.matrix.doubles.ImmutableMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
+
 import static com.numericalmethod.suanshu.number.doublearray.DoubleArrayMath.sum;
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
+
 import com.numericalmethod.suanshu.stats.distribution.ProbabilityMassFunction;
 import com.numericalmethod.suanshu.stats.random.univariate.RandomLongGenerator;
 import com.numericalmethod.suanshu.stats.sampling.discrete.DiscreteSampling;
+
 import static com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils.*;
+
 import com.numericalmethod.suanshu.number.DoubleUtils;
 import com.numericalmethod.suanshu.stats.random.univariate.uniform.UniformRng;
+
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -51,7 +56,6 @@ import java.util.Iterator;
  * </ul>
  *
  * @author Haksun Li
- *
  * @see "WM Patefield. "Algorithm AS 159: An Efficient Method of Generating RXC Tables with Given Row and Column Totals," Applied Statistics, Volume 30, Number 1, 1981, pages 91-97."
  */
 public class AS159 {
@@ -75,6 +79,7 @@ public class AS159 {
             this.prob = prob;
         }
     }
+
     private final RandomLongGenerator rng;
     private final int[] rowSums;
     private final int[] colSums;
@@ -83,7 +88,7 @@ public class AS159 {
 
     /**
      * Construct a random table generator according to row and column totals.
-     * 
+     *
      * @param rowSums row totals
      * @param colSums column totals
      */
@@ -93,10 +98,10 @@ public class AS159 {
 
     /**
      * Construct a random table generator according to row and column totals.
-     * 
+     *
      * @param rowSums row totals
      * @param colSums column totals
-     * @param rng a uniform random number generator
+     * @param rng     a uniform random number generator
      */
     public AS159(int[] rowSums, int[] colSums, RandomLongGenerator rng) {
         this.rng = rng;
@@ -142,7 +147,7 @@ public class AS159 {
 
     /**
      * Check whether a matrix satisfies the row and column sums.
-     * 
+     *
      * @param A a matrix
      * @return {@code true} if A satisfies the constraints
      */
@@ -263,7 +268,7 @@ public class AS159 {
                 ConditionalDistribution dist = new ConditionalDistribution(remainingRowSum_l, remainingColSums[m], big, small, right, below);
                 DiscreteSampling<Integer> sampler = new DiscreteSampling<Integer>(dist, dist);
                 Integer a_lm = null;
-                for (; a_lm == null;) {
+                for (; a_lm == null; ) {
                     a_lm = sampler.getSample(rng.nextDouble());
                 }
 
@@ -311,14 +316,14 @@ public class AS159 {
             //compute the condition probability according to eq. 1
             this.Plm = Math.exp(
                     logFactorials[remainingRowSum_l]
-                    + logFactorials[below]
-                    + logFactorials[remainingColSums_m]
-                    + logFactorials[right]
-                    - logFactorials[Elm]
-                    - logFactorials[remainingColSums_m - Elm]
-                    - logFactorials[remainingRowSum_l - Elm]
-                    - logFactorials[small + Elm]
-                    - logFactorials[big]);
+                            + logFactorials[below]
+                            + logFactorials[remainingColSums_m]
+                            + logFactorials[right]
+                            - logFactorials[Elm]
+                            - logFactorials[remainingColSums_m - Elm]
+                            - logFactorials[remainingRowSum_l - Elm]
+                            - logFactorials[small + Elm]
+                            - logFactorials[big]);
 
             this.inc_lm = this.Elm;
             this.dec_lm = this.Elm;

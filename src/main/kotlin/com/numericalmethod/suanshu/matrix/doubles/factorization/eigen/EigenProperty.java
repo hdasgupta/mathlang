@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,6 +26,7 @@ import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.linearsystem.LinearSystemSolver;
 import com.numericalmethod.suanshu.number.NumberUtils;
 import com.numericalmethod.suanshu.vector.doubles.Vector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,14 @@ import java.util.List;
  */
 public class EigenProperty {
 
-    /** the eigenvalue, real or complex */
+    /**
+     * the eigenvalue, real or complex
+     */
     private final Number eigenvalue;
-    /** algebraic multiplicity of an eigenvalue is defined as the multiplicity of the
-     * root of the characteristic polynomial */
+    /**
+     * algebraic multiplicity of an eigenvalue is defined as the multiplicity of the
+     * root of the characteristic polynomial
+     */
     private final int multiplicity;
     /**
      * list of basis of the eigenvector space of this eigenvalue;
@@ -56,7 +61,7 @@ public class EigenProperty {
      * @param multiplicity the algebraic multiplicity
      * @param A            the matrix
      * @param epsilon      a precision parameter: when a number |x| ≤ ε, it is
-     * considered 0
+     *                     considered 0
      */
     EigenProperty(Number eigenvalue, int multiplicity, Matrix A, double epsilon) {
         this.eigenvalue = eigenvalue;

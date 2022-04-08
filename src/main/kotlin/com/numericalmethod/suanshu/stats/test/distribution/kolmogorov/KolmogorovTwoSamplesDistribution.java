@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -23,8 +23,11 @@
 package com.numericalmethod.suanshu.stats.test.distribution.kolmogorov;
 
 import static com.numericalmethod.suanshu.number.DoubleUtils.concat;
+
 import com.numericalmethod.suanshu.stats.distribution.univariate.ProbabilityDistribution;
+
 import static java.lang.Math.*;
+
 import java.util.Arrays;
 
 /**
@@ -41,9 +44,7 @@ import java.util.Arrays;
  * </code>
  *
  * @author Haksun Li
- *
- * @see
- * <ul>
+ * @see <ul>
  * <li>"Algorithm AS 288: Exact Smirnov Two-Sample Tests for Arbitrary Distributions. Andrei M. Nikiforov, 1994. Royal Statistical Society."
  * <li>"Section 6.3. Nonparametric Statistical Inference. 4th edition. Jean Dickinson Gibbons, Subhabrata Chakraborti. CRC."
  * </ul>
@@ -67,7 +68,9 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
          * two-sample; one-sided
          */
         LESS
-    };
+    }
+
+    ;
     /**
      * the type of KolmogorovDistribution two-sample distribution, i.e., equal, greater, less
      */
@@ -97,10 +100,10 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
     /**
      * Construct a two-sample KolmogorovDistribution distribution.
      *
-     * @param n1 size of sample 1
-     * @param n2 size of sample 2
+     * @param n1      size of sample 1
+     * @param n2      size of sample 2
      * @param samples the concatenate of the two samples in <em>ascending</em> order
-     * @param bigN when <code>n > bigN</code>, we use the asymptotic distribution
+     * @param bigN    when <code>n > bigN</code>, we use the asymptotic distribution
      */
     public KolmogorovTwoSamplesDistribution(int n1, int n2, double[] samples, Side side, int bigN) {
         this.n1 = n1;
@@ -115,8 +118,8 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
      * Construct a two-sample KolmogorovDistribution distribution,
      * assuming that there is no tie in the samples.
      *
-     * @param n1 size of sample 1
-     * @param n2 size of sample 2
+     * @param n1   size of sample 1
+     * @param n2   size of sample 2
      * @param bigN when <code>n > bigN</code>, we use the asymptotic distribution
      */
     public KolmogorovTwoSamplesDistribution(int n1, int n2, Side side, int bigN) {
@@ -125,10 +128,10 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
 
     /**
      * Construct a two-sample KolmogorovDistribution distribution.
-     * 
-     * @param n1 size of sample 1
-     * @param n2 size of sample 2
-     * @param side the type of KolmogorovDistribution two-sample test
+     *
+     * @param n1      size of sample 1
+     * @param n2      size of sample 2
+     * @param side    the type of KolmogorovDistribution two-sample test
      * @param samples the concatenate of the two samples in <em>ascending</em> order
      */
     public KolmogorovTwoSamplesDistribution(int n1, int n2, Side side, double[] samples) {
@@ -140,7 +143,7 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
      *
      * @param sample1 sample 1
      * @param sample2 sample 2
-     * @param side the type of KolmogorovDistribution two-sample test
+     * @param side    the type of KolmogorovDistribution two-sample test
      */
     public KolmogorovTwoSamplesDistribution(double[] sample1, double[] sample2, Side side) {
         this(sample1.length, sample2.length, sortSamples(sample1, sample2), side, 200);
@@ -203,10 +206,8 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
     }
 
     /**
-     *
      * @param c critical value
      * @return <code>P(D<sub>m,n</sub> < c | H0)</code>
-     *
      * @see "Jean Dickinson Gibbons, Subhabrata Chakraborti. "Section 6.3," Nonparametric Statistical Inference, 4th ed., CRC."
      */
     private double Nikiforov(double c) {
@@ -255,11 +256,9 @@ public class KolmogorovTwoSamplesDistribution implements ProbabilityDistribution
     }
 
     /**
-     * 
      * @param x x-coordinate in the grid
      * @param y y-coordinate in the grid
      * @return distance to the boundary/boundaries
-     *
      * @see "Andrei M. Nikiforov. "Algorithm AS 288: Exact Smirnov Two-Sample Tests for Arbitrary Distributions," Royal Statistical Society, p. 266."
      */
     private double distance(int x, int y) {

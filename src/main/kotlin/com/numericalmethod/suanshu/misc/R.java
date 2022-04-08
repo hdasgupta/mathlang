@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -26,9 +26,12 @@ import com.numericalmethod.suanshu.Constant;
 import com.numericalmethod.suanshu.matrix.doubles.Matrix;
 import com.numericalmethod.suanshu.matrix.doubles.matrixtype.dense.DenseMatrix;
 import com.numericalmethod.suanshu.matrix.doubles.operation.MatrixUtils;
+
 import static com.numericalmethod.suanshu.misc.SuanShuUtils.assertArgument;
 import static com.numericalmethod.suanshu.number.DoubleUtils.*;
+
 import com.numericalmethod.suanshu.stats.descriptive.rank.Rank;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -124,7 +127,7 @@ public class R {
 
         int j = 0;
 
-        for (int i = from;;) {
+        for (int i = from; ; ) {
             result[j++] = i;
             i += inc;
 
@@ -155,8 +158,8 @@ public class R {
      * @param arr   an array, {@code double[]}
      * @param lag   an integer indicating which lag to use
      * @param order an integer indicating the order of the difference.
-     * This is the number of times {@code diff} is applied to the data.
-     * E.g., {@code diff(x, 1, 2) = diff(diff(x, 1, 1), 1, 1)}.
+     *              This is the number of times {@code diff} is applied to the data.
+     *              E.g., {@code diff(x, 1, 2) = diff(diff(x, 1, 1), 1, 1)}.
      * @return the lagged and iterated differences
      */
     public static double[] diff(double[] arr, int lag, int order) {//TODO: make this iterative?
@@ -192,8 +195,8 @@ public class R {
      * @param arr   a {@code double[][]}; row view; must not be jagged
      * @param lag   an integer indicating which lag to use
      * @param order an integer indicating the order of the difference.
-     * This is the number of times {@code diff} is applied to the data.
-     * E.g., {@code diff(x, 1, 2) = diff(diff(x, 1, 1), 1, 1)}.
+     *              This is the number of times {@code diff} is applied to the data.
+     *              E.g., {@code diff(x, 1, 2) = diff(diff(x, 1, 1), 1, 1)}.
      * @return the lagged and iterated differences
      */
     public static double[][] diff(double[][] arr, int lag, int order) {//TODO: make more efficient?

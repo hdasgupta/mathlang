@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
- * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT, 
+ * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -102,7 +102,7 @@ public class FerrisMangasarianWrightPhase1 {
         table0.addColAt(1, SimplexTable.ARTIFICIAL);
         for (int i = 1; i < table0.nRows() - 1; ++i) {//ignore rows COST and ARTIFICIAL_COST
             if (table0.get(i, table0.getIndexFromColLabel(SimplexTable.B)) < 0
-                && (table0.getRowLabel(i).type == LabelType.BASIC || table0.getRowLabel(i).type == LabelType.NON_BASIC)) {//TODO: sure about the NON_BASIC? do we ever switch variable (NON_BASIC) back to column?          
+                    && (table0.getRowLabel(i).type == LabelType.BASIC || table0.getRowLabel(i).type == LabelType.NON_BASIC)) {//TODO: sure about the NON_BASIC? do we ever switch variable (NON_BASIC) back to column?
                 table0.set(i, 1, 1);
             }
         }
@@ -116,7 +116,7 @@ public class FerrisMangasarianWrightPhase1 {
         double minB = Double.POSITIVE_INFINITY;
         for (int i = 1; i <= table0.nRows() - 2; ++i) {
             if (table0.getRowLabel(i).type == SimplexTable.LabelType.BASIC
-                || table0.getRowLabel(i).type == SimplexTable.LabelType.NON_BASIC) {
+                    || table0.getRowLabel(i).type == SimplexTable.LabelType.NON_BASIC) {
                 double b = table0.getBCol(i);
                 if (b < minB) {
                     minB = b;

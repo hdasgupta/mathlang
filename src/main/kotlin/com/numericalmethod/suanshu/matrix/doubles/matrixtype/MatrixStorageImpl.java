@@ -1,19 +1,19 @@
 /*
  * Copyright (c) Numerical Method Inc.
  * http://www.numericalmethod.com/ * Copyright (c)
- * 
+ *
  * THIS SOFTWARE IS LICENSED, NOT SOLD.
- * 
+ *
  * YOU MAY USE THIS SOFTWARE ONLY AS DESCRIBED IN THE LICENSE.
  * IF YOU ARE NOT AWARE OF AND/OR DO NOT AGREE TO THE TERMS OF THE LICENSE,
  * DO NOT USE THIS SOFTWARE.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITH NO WARRANTY WHATSOEVER,
  * EITHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION,
  * ANY WARRANTIES OF ACCURACY, ACCESSIBILITY, COMPLETENESS,
  * FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, NON-INFRINGEMENT,
  * TITLE AND USEFULNESS.
- * 
+ *
  * IN NO EVENT AND UNDER NO LEGAL THEORY,
  * WHETHER IN ACTION, CONTRACT, NEGLIGENCE, TORT, OR OTHERWISE,
  * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
@@ -24,6 +24,7 @@ package com.numericalmethod.suanshu.matrix.doubles.matrixtype;
 
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfInvalidColumn;
 import static com.numericalmethod.suanshu.datastructure.DimensionCheck.throwIfInvalidRow;
+
 import com.numericalmethod.suanshu.datastructure.Table;
 import com.numericalmethod.suanshu.matrix.MatrixAccessException;
 import com.numericalmethod.suanshu.matrix.doubles.MatrixAccess;
@@ -94,7 +95,7 @@ public class MatrixStorageImpl implements Table, MatrixAccess {
         if (values.length != nCols) {
             throw new MatrixAccessException(
                     String.format("the number of values (%d) does not match the column size (%d)",
-                                  values.length, nCols));
+                            values.length, nCols));
         }
 
         for (int j = 1; j <= values.length; ++j) {
@@ -116,7 +117,7 @@ public class MatrixStorageImpl implements Table, MatrixAccess {
         if (size != nCols) {
             throw new MatrixAccessException(
                     String.format("the number of values (%d) does not match the column size (%d)",
-                                  size, nCols));
+                            size, nCols));
         }
 
         for (int j = 1; j <= size; ++j) {
@@ -154,7 +155,7 @@ public class MatrixStorageImpl implements Table, MatrixAccess {
         if (values.length != nRows) {
             throw new MatrixAccessException(
                     String.format("the number of values (%d) does not match the row size (%d)",
-                                  values.length, nRows));
+                            values.length, nRows));
         }
 
         for (int i = 1; i <= values.length; ++i) {
@@ -176,7 +177,7 @@ public class MatrixStorageImpl implements Table, MatrixAccess {
         if (size != nRows) {
             throw new MatrixAccessException(
                     String.format("the number of values (%d) does not match the row size (%d)",
-                                  size, nRows));
+                            size, nRows));
         }
 
         for (int i = 1; i <= size; ++i) {
