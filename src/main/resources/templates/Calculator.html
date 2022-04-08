@@ -7,30 +7,63 @@
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
 
     <script>
-        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
-        function load(elem, json, url, succCallBack, errCallBack) {
-            $(document).ready(function() {
-                $.post(url,
-                            json,
-                            function (response, status) {
+        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/calculator-'+${type}+'-result'}]]"
+        var commandQueue = []
+        var readingIndex = -1
+        var processing = false
+
+        function enqueue(command) {
+            commandQueue.push(command)
+        }
+
+        function dequeue() {
+            if(readingIndex >= commandQueue.length) {
+                commandQueue = []
+                readingIndex = -1
+                return false
+            } else {
+                return commandQueue[++readingIndex]
+            }
+        }
+        function apply(command) {
+            enqueue(command)
+            process()
+        }
+
+        function process() {
+            if(!processing) {
+                processing = true
+                unitProcess()
+            }
+        }
+
+        function unitProcess() {
+            var currentCommand = dequeue()
+            if(currentCommand) {
+                $(document).ready(function() {
+                    $.post(url,
+                                {'command': currentCommand},
+                                function (response, status) {
 
 
-                            }
-                    )
-                    .done(function(response) {
-                        if($(elem).html() !== response) {
-                            $(elem).html(response)
-                            if(!!succCallBack) {
-                                succCallBack()
-                            }
-                        }
-                    })
-                    .fail(function() {
-                        if(!!errCallBack) {
-                            errCallBack()
-                        }
-                    })
-            })
+                                }
+                        )
+                        .done(function(response) {
+                            $("#result").val(response.result)
+                            unitProcess()
+                        })
+                        .fail(function() {
+                            commandQueue = []
+                            readingIndex = -1
+                            processing = false
+                        })
+                })
+            } else {
+                commandQueue = []
+                readingIndex = -1
+                processing = false
+            }
+
         }
 
         function loadHtml(elem, html) {
@@ -78,21 +111,29 @@
     <title>Differentiation Page</title>
 </head>
 <body style="font-family: 'Orbitron'; font-size: 32px">
-<div id="display">
-    <div th:replace="DifferentiationResult"/>
+<div class="input-group input-group-lg">
+    <input type="text"
+           class="form-control" th:id="result" th:name="result"
+           th:value="${result}" placeholder="0"
+           readonly="readonly" style="text-align: right"
+           aria-label="Large">
 </div>
 <center>
     <table>
         <tr>
             <td th:colspan="${columnCount}">
-                <div class="btn-group">
-                    <a th:each="t: ${types}" th:if="${t != type}" th:href="${'/calculator-'+t}" class="btn btn-primary">[[${t.text}]] Calculator</a>
-                </div>
+                <table>
+                    <tr>
+                        <td th:width="${100/(types.length-1)+'%'}" th:each="t: ${types}"  th:if="${t != type}" >
+                            <a  style="white-space: nowrap;" th:href="${'/calculator-'+t}" class="btn btn-primary btn-block cbb">[[${t.text}]] Calculator</a>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr th:each="buttonRow: ${buttons}">
-            <td th:each="button: ${buttonRow} " th:if="${button.command!=null}" th:rowspan="${button.rowSpan}" th:colspan="${button.colSpan}">
-                <div class="btn btn-primary btn-block">
+            <td th:each="button: ${buttonRow} " th:width="${(100*button.colSpan)/columnCount+'%'}" th:if="${button.command!=null}" th:rowspan="${button.rowSpan}" th:colspan="${button.colSpan}">
+                <div class="btn btn-primary btn-block" th:onclick="apply([[${button.command.name()}]])">
                     [[${button.command.text}]]
                 </div>
             </td>
