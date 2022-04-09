@@ -85,9 +85,9 @@ class ExpressionConstants {
 
         fun ln(operand: Operand): Operation = op(Operators.ln, operand)
 
-        fun neg(vararg operand: Operand): Operation = op(Operators.neg, operand[0])
+        fun neg(vararg operand: Operand): Operand = Operand.negate(operand[0])
 
-        fun inv(operand: Operand): Operation = op(Operators.div, one, operand)
+        fun inv(operand: Operand): Operand = Operand.invert(operand)
 
         fun sin(operand: Operand): Operation = op(Operators.sin, operand)
 

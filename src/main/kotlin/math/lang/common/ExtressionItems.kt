@@ -6,12 +6,16 @@ import kotlinx.coroutines.SupervisorJob
 import math.lang.Results
 import math.lang.common.ExpressionConstants.Companion.varIn
 import math.lang.diff
+import math.lang.tokenizer.Token
+import math.lang.tokenizer.TokenNode
+import math.lang.tokenizer.getOperand
+import org.apache.el.parser.AstNegative
 import org.jetbrains.annotations.NotNull
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.util.Objects
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import kotlin.math.pow
 
 class NoOperandOperatorException : Exception("Operator with no argument is not allowed")
 
@@ -209,23 +213,78 @@ enum class Operators(val symbol: String, val reduce: (numbers:List<BigDecimal>, 
         }}, 1),
  }
 
-abstract class Operand(val leaf: Boolean = true) : Comparable<Operand> {
+abstract class Operand(val leaf: Boolean = true, negative: Boolean = false, inverted : Boolean = false) : Comparable<Operand> {
     protected val id:Int = counter.getNext()
+    private var negative: Boolean = negative
+    private var inverted: Boolean = inverted
+
     override fun compareTo(other: Operand): Int {
         return id.compareTo(other.id)
     }
 
-    private companion object {
-         val counter: Counter = Counter()
+    companion object {
+        private val counter: Counter = Counter()
+        fun negate(op:Operand): Operand {
+            op.negative = op.negative.not()
+            return op
+        }
+        fun invert(op:Operand): Operand {
+            op.inverted = op.inverted.not()
+            return op
+        }
     }
 
     open fun funcOf(): Set<Variable> = setOf()
 
-    abstract override fun toString(): String
+    override fun toString(): String {
+        return if(negative) {
+            if(inverted) {
+                "(-1/${string()})"
+            } else {
+                "(-${string()})"
+            }
+        } else {
+            if(inverted) {
+                "(1/${string()})"
+            } else {
+                "${string()}"
+            }
+        }
+    }
+
+    abstract fun string(): String
 
     open fun toTypeString(): String = this.javaClass.simpleName
+
+    open fun toOperatorString(level: Int) : String = ""
     
     abstract fun calc(): Number
+
+    abstract fun deepEquals(operand: Operand ): Boolean
+
+    fun isNegative(): Boolean = negative
+
+    fun isInverted(): Boolean = inverted
+
+    fun negate(): Operand {
+
+        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
+        op.negative = op.negative.not()
+        return op
+    }
+
+    fun invert(): Operand {
+        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
+        op.inverted = op.inverted.not()
+        return op
+    }
+
+    fun positive(): Operand {
+        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
+        op.negative = false
+        return op
+    }
+
 }
 
 class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand) : Operand(false) {
@@ -254,7 +313,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         return variables
     }
 
-    override fun toString(): String {
+    override fun string(): String {
         return when(operands.size) {
             1 -> "${operator.symbol}${if(operands[0] is Operation) "${operands[0]}" else "(${operands[0]})"}"
             else -> "(${operands.joinToString(separator = operator.symbol) { o -> o.toString() }})"
@@ -268,6 +327,15 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         }
     }
 
+    override fun toOperatorString(level: Int): String {
+        return if(operands.any { it is Operation } && level > 0) {
+            "(${operands.filterIsInstance<Operation>().map { it.toOperatorString(level -1 ) }.distinct().sorted().joinToString("|")}$operator)"
+
+        } else {
+            "($operator)"
+        }
+    }
+
     override fun calc(): Number {
         val numbers:List<Number> = operands.map { it.calc() }.toList()
         val isReal: Boolean = numbers.any { it is BigDecimal }
@@ -276,6 +344,22 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         val result = operator.reduce(dnumbers, isReal)
 
         return if(isReal || operator==Operators.div) BigDecimal(result) else BigInteger(result)
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is Operation) {
+            return false
+        }
+        if(operand.operator != operator) {
+            return false
+        }
+        if(operands.size != operand.operands.size) {
+            return false
+        }
+        if(operands.indices.any { !operands[it].deepEquals(operand.operands[it]) }) {
+            return false
+        }
+        return true
     }
 }
 
@@ -296,10 +380,24 @@ class Constant(name: String): UnitOperand(name, false) {
     constructor(lit: BooleanLiteral) : this("a"+ counter.getNext()){
         this.lit = lit as Literal<out Object>
     }
-    override fun toString(): String = "${lit ?: name}"
+    override fun string(): String = "${lit ?: name}"
 
     override fun calc(): Number {
         return lit?.calc() ?: throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is Constant) {
+            return false
+        }
+        if(Objects.equals(lit, operand.lit)) {
+            return true
+        }
+        if(Objects.isNull(lit) && Objects.isNull(operand.lit) &&  !name.equals(operand.name)) {
+            return false
+        }
+
+        return Objects.isNull(lit) && Objects.isNull(operand.lit)
     }
 
     private companion object {
@@ -317,10 +415,20 @@ class Variable(name: String): UnitOperand(name(name), true) {
         return setOf(this)
     }
 
-    override fun toString(): String = "${name ?: ""}${index ?: ""}"
+    override fun string(): String = "${name ?: ""}${index ?: ""}"
 
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is Variable) {
+            return false
+        }
+        if(index==operand.index) {
+            return Objects.equals(name, operand.name)
+        }
+        return false
     }
 
     fun new(): Variable = Variable(this.name ?: "y", counter.getNext())
@@ -356,10 +464,20 @@ class Function(private val nm: String, val variables: Set<Variable>? = null, val
         return variables ?: function?.variables ?: setOf()
     }
 
-    override fun toString(): String = "$name(${variables?.joinToString(",") { variable -> variable.name ?: "" } ?: function})"
+    override fun string(): String = "$name(${variables?.joinToString(",") { variable -> variable.name ?: "" } ?: function})"
 
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is math.lang.common.Function) {
+            return false
+        }
+        if(Objects.equals(nam, operand.nam) && Objects.equals(idx, operand.idx)) {
+            return true
+        }
+        return false
     }
 
     private companion object {
@@ -374,10 +492,23 @@ class Differentiate(val function: Function? = null, val operand: Operand? = null
         return if(function ==null && operand != null) varIn(operand) else function?.variables ?: setOf()
     }
 
-    override fun toString(): String = "(d(${operand ?: function}))"
+    override fun string(): String = "(d(${operand ?: function}))"
 
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is Differentiate) {
+            return false
+        }
+        if(Objects.nonNull(function) && Objects.nonNull(operand.function)) {
+            return operand.function?.let { function?.deepEquals(it) } ?: false
+        }
+        if(Objects.nonNull(operand) && Objects.nonNull(operand.operand)) {
+            return operand.operand?.let { operand?.deepEquals(it) } ?: false
+        }
+        return false
     }
 
     fun func(): String? {
@@ -400,47 +531,80 @@ open abstract class Literal<out Object>(val obj: Object, name: String?) : UnitOp
 class IntegerLiteral(obj: BigInteger, name: String?) : Literal<BigInteger>(obj, name) {
     constructor(obj: BigInteger) : this(obj, null)
 
-    override fun toString(): String = obj.toString()
+    override fun string(): String = obj.toString()
 
     override fun calc(): Number {
         return obj
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is IntegerLiteral) {
+            return false
+        }
+        return obj == operand.obj
     }
 }
 
 class DecimalLiteral(obj: BigDecimal, name: String?) : Literal<BigDecimal>(obj, name) {
     constructor(obj: BigDecimal) : this(obj, null)
 
-    override fun toString(): String = obj.toString()
+    override fun string(): String = obj.toString()
 
     override fun calc(): Number {
         return obj
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is DecimalLiteral) {
+            return false
+        }
+        return obj == operand.obj
     }
 }
 
 class StringLiteral(obj: String, name: String?) : Literal<String>(obj, name) {
     constructor(obj: String) : this(obj, null)
 
-    override fun toString(): String = "\"$obj\""
+    override fun string(): String = "\"$obj\""
 
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is StringLiteral) {
+            return false
+        }
+        return obj == operand.obj
+
     }
 }
 
 class BooleanLiteral(obj: Boolean, name: String?) : Literal<Boolean>(obj, name) {
     constructor(obj: Boolean) : this(obj, null)
 
-    override fun toString(): String = obj.toString()
+    override fun string(): String = obj.toString()
 
     override fun calc(): Number {
         throw Exception("No constant value")
     }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        if(operand !is BooleanLiteral) {
+            return false
+        }
+        return obj == operand.obj
+    }
 }
 
 class Undefined: Operand() {
-    override fun toString(): String = throw ArithmeticException()
+    override fun string(): String = throw ArithmeticException()
 
     override fun calc(): Number {
         throw Exception("No constant value")
+    }
+
+    override fun deepEquals(operand: Operand): Boolean {
+        return (operand is Undefined)
     }
 }
