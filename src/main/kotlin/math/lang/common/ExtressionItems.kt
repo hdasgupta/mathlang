@@ -147,32 +147,32 @@ enum class Operators(val symbol: String, val reduce: (numbers:List<BigDecimal>, 
             val num = java.math.BigDecimal(java.lang.Math.toDegrees(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    isin("invsin", {numbers, isReal->
+   asin("asin", {numbers, isReal->
         run {
             val num = java.math.BigDecimal(kotlin.math.asin(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    icos("invcos", {numbers, isReal->
+   acos("acos", {numbers, isReal->
         run {
             val num = java.math.BigDecimal(kotlin.math.acos(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    itan("invtan", {numbers, isReal->
+   atan("atan", {numbers, isReal->
         run {
             val num = java.math.BigDecimal(kotlin.math.atan(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    icot("invcot", {numbers, isReal->
+   acot("acot", {numbers, isReal->
         run {
             val num = BigDecimal.ONE / java.math.BigDecimal(kotlin.math.atan(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    isec("invsec", {numbers, isReal->
+   asec("asec", {numbers, isReal->
         run {
             val num = java.math.BigDecimal.ONE / java.math.BigDecimal(kotlin.math.acos(numbers[0].toDouble()))
             num.toPlainString()
         }}, 1),
-    icsc("invcosec", {numbers, isReal->
+   acsc("acosec", {numbers, isReal->
         run {
             val num = java.math.BigDecimal.ONE / java.math.BigDecimal(kotlin.math.asin(numbers[0].toDouble()))
             num.toPlainString()
@@ -272,14 +272,14 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
             1 -> "<table border=\"0\" cellpadding=\"0\">" +
                     "<tr>" +
                     "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                    "<b>" +
+                    "<b style=\"color: purple\">" +
                     "<i>" +
                     "${operator.symbol}" +
                     "</i>" +
                     "</b>" +
                     "</td>" +
                     "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                    "${if(operands[0] !is Operation || (operands[0] is Operation && ((operands[0] as Operation).operands.size == 1)||(operands[0] as Operation).operator==Operators.pow)) "<b color=\"blue\">(</b></td><td style=\"vertical-align: middle;padding: 0;margin: 0;\">${operands[0].toHtmlString()}</td><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b color=\"blue\">)</b>" else operands[0].toHtmlString() }</td></tr></table>"
+                    "${if(operands[0] !is Operation || (operands[0] is Operation && ((operands[0] as Operation).operands.size == 1)||(operands[0] as Operation).operator==Operators.pow)) "<b style=\"color:indigo\">(</b></td><td style=\"vertical-align: middle;padding: 0;margin: 0;\">${operands[0].toHtmlString()}</td><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">)</b>" else operands[0].toHtmlString() }</td></tr></table>"
             else -> if(operator== Operators.div)
                 "<table border=\"0\" cellpadding=\"0\">" +
                         "<tr>" +
@@ -305,9 +305,11 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
             else if(operator== Operators.pow)
                 "<table border=\"0\" cellpadding=\"0\">" +
                         "<tr>" +
+                        (if(operands[0] is Operation) "<td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b>(</b></td>" else "" )+
                         "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
                         "${operands[0].toHtmlString()}" +
                         "</td>" +
+                        (if(operands[0] is Operation) "<td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b>)</b></td>"  else "") +
                         "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
                         "<sup>${operands[1].toHtmlString()}</sup>" +
                         "</td>" +
@@ -319,7 +321,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
                         (
                         if(!root && (operands[0] !is Operation || (operands[0] is Operation && (operands[0] as Operation).operands.size == 1)))
                             "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                            "<b color=\"blue\">" +
+                            "<b style=\"color:indigo\">" +
                             "(" +
                             "</b>" +
                             "</td>"
@@ -328,7 +330,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
                         ) +
                         "${operands.joinToString(
                             separator = "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                                    "<b color=\"blue\">" +
+                                    "<b style=\"color:indigo\">" +
                                     "${if(operator== Operators.mul) "×" else operator.symbol}" +
                                     "</b>" +
                                     "</td>"
@@ -341,7 +343,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
                         }" +
                         (if(!root && (operands[0] !is Operation || (operands[0] is Operation && (operands[0] as Operation).operands.size == 1)))
                         "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<b color=\"blue\">" +
+                        "<b style=\"color:indigo\">" +
                         ")" +
                         "</b>" +
                         "</td>" +
@@ -388,7 +390,7 @@ class Constant(name: String): UnitOperand(name, false) {
         this.lit = lit as Literal<out Object>
     }
     override fun toString(): String = "${lit ?: name}"
-    override fun toHtmlString(root:Boolean): String = "<i color=\"#800080\">${lit ?: name}</i>"
+    override fun toHtmlString(root:Boolean): String = "<i style=\"color:maroon\">${lit ?: name}</i>"
     override fun calc(): Number {
         return lit?.calc() ?: throw Exception("No constant value")
     }
@@ -399,8 +401,8 @@ class Constant(name: String): UnitOperand(name, false) {
 
 }
 
-class Variable(name: String): UnitOperand(name, true) {
-    private var index: Int?= null
+class Variable(name: String): UnitOperand(name(name), true) {
+    private var index: Int?= num(name)
     private constructor(name: String, index: Int): this(name) {
         this.index = index
     }
@@ -409,7 +411,7 @@ class Variable(name: String): UnitOperand(name, true) {
     }
 
     override fun toString(): String = "${name ?: ""}${index ?: ""}"
-    override fun toHtmlString(root:Boolean): String = if(name==null) "" else "<b>$name${if(index==null) "" else "<sub>$index</sub>"}</b>"
+    override fun toHtmlString(root:Boolean): String = if(name==null) "" else "<b><i style=\"color:green\">$name${if(index==null) "" else "<sub>$index</sub>"}</i></b>"
     override fun calc(): Number {
         throw Exception("No constant value")
     }
@@ -418,6 +420,21 @@ class Variable(name: String): UnitOperand(name, true) {
 
     private companion object {
         val counter: Counter = Counter()
+        val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
+        fun name(name : String) : String {
+            println(name)
+            val matcher : Matcher = numericPattern.matcher(name)
+            val find = matcher.find()
+            println("$name -> ${matcher.group("name")}, ${matcher.group("num")}")
+            return matcher.group("name")
+        }
+
+        fun num(name: String) : Int? {
+            val matcher : Matcher = numericPattern.matcher(name)
+            val find = matcher.find()
+
+            return if(find && matcher.group("num").isNotEmpty()) Integer.parseInt(matcher.group("num")) else null
+        }
     }
 }
 
@@ -433,14 +450,14 @@ class Function(private val nm: String, val variables: Set<Variable>? = null, val
     }
 
     override fun toString(): String = "$name(${variables?.joinToString(",") { variable -> variable.name ?: "" } ?: function})"
-    override fun toHtmlString(root:Boolean): String = "<b><i color=\"green\">$nam<sub>$idx</sub></i></b><b color=\"blue\">(</b>${variables?.joinToString { variable -> if(variable.name==null) "<b>x</b>" else "<b>${variable.name}</b>" } ?: function?.toHtmlString() ?: "<b>x</b>"}<b color=\"blue\">)</b>"
+    override fun toHtmlString(root:Boolean): String = "<b><i style=\"color:green\">$nam<sub>$idx</sub></i></b><b style=\"color:indigo\">(</b>${variables?.joinToString { variable -> if(variable.name==null) "<b>x</b>" else "<b>${variable.name}</b>" } ?: function?.toHtmlString() ?: "<b>x</b>"}<b style=\"color:indigo\">)</b>"
     override fun calc(): Number {
         throw Exception("No constant value")
     }
 
     private companion object {
         val counter: Counter = Counter(1)
-        val numericPattern: Pattern = Pattern.compile("^(?<name>.*)(?<num>[0-9]+)$")
+        val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
     }
 
 }
@@ -454,11 +471,11 @@ class Differentiate(val function: Function? = null, val operand: Operand? = null
     override fun toHtmlString(root:Boolean): String {
         var of:String = "${operand?.toHtmlString() ?: function?.toHtmlString()}"
         if(operand!=null || function !=null) {
-            of = "<td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b color=\"blue\">(</b></td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\">$of</td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b color=\"blue\">)</b></td>"
+            of = "<td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">(</b></td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\">$of</td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">)</b></td>"
         } else {
             of = "<td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\">$of</td>"
         }
-        return "<table border=\"0\" cellpadding=\"0\"><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b color=\"#FF00FF\">d</b></td>$of</tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><hr style=\"height: 2px; padding: 0;margin: 0; color: black;\"/></td></tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b color=\"#FF00FF\">d${func() ?: "x"}</b></td></tr></table>"
+        return "<table border=\"0\" cellpadding=\"0\"><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color: darkred\">d</b></td>$of</tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><hr style=\"height: 2px; padding: 0;margin: 0; color: black;\"/></td></tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color: darkred\">dx</b></td></tr></table>"
     }
 
     override fun calc(): Number {
@@ -486,7 +503,7 @@ class IntegerLiteral(obj: BigInteger, name: String?) : Literal<BigInteger>(obj, 
     constructor(obj: BigInteger) : this(obj, null)
 
     override fun toString(): String = obj.toString()
-    override fun toHtmlString(root:Boolean): String = "<b  color=\"#800080\">${obj}</b>"
+    override fun toHtmlString(root:Boolean): String = "<b style=\"color:maroon\">${obj}</b>"
     override fun calc(): Number {
         return obj
     }
@@ -496,7 +513,7 @@ class DecimalLiteral(obj: BigDecimal, name: String?) : Literal<BigDecimal>(obj, 
     constructor(obj: BigDecimal) : this(obj, null)
 
     override fun toString(): String = obj.toString()
-    override fun toHtmlString(root:Boolean): String = "<b  color=\"#800080\">${obj}</b>"
+    override fun toHtmlString(root:Boolean): String = "<b  style=\"color:maroon\">${obj}</b>"
     override fun calc(): Number {
         return obj
     }

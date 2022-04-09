@@ -127,9 +127,9 @@
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Differentiate</button>
         </div>
-<!--        <center>
-            <button type="submit" class="btn btn-primary">Apply</button>
-        </center>-->
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="generate('#table')" data-toggle="modal" data-target="#help">Help</button>
+        </div>
     </div>
     <div class="alert alert-success alert-dismissible fade show" id="success">
         <strong>Success!</strong> Your expression parsed successfully.
@@ -145,7 +145,46 @@
             load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diffHtml'}]]")
         }
     </script>
+</div>
 
+<div class="modal fade" id="help">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Help
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Insert arithmetic expression in text box.
+                    Instant validation will happen and shows the result just below
+                    of the text box.
+                </p>
+                <p>
+                    Expression could contain only x as variable.
+                    Only a as symbolic constant.
+                    Expression also contain integer(like 1234) and real(1234.567) as number
+                </p>
+                <p>
+                    Expression can contain basic operators like +(plus), -(minus), *(multiply) and /(divide).
+                    It can also contain ^(power) operator
+                </p>
+                <p>
+                    Trigonometric functions like sin(), cos(), tan(), cot(), sec(), cosec() also can be
+                    used here.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

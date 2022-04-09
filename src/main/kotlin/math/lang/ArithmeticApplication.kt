@@ -12,6 +12,5 @@ class ArithmeticApplication
 
 fun main(args: Array<String>) {
 	runApplication<ArithmeticApplication>(*args)
-	println(ExpressionConstants.y.new())
-	println( getOperand(TokenNode.getTree(Token.getTokens(ExpressionConstants.y.new().toString()))))
+	println( d(getOperand(TokenNode.getTree(Token.getTokens("(acosec(x)^cot(x))/(x^((x^2)+(2*x)))")))))
 }

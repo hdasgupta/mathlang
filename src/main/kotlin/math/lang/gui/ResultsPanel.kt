@@ -16,7 +16,7 @@ import javax.swing.table.TableCellRenderer
 import kotlin.collections.ArrayList
 
 
-class ResultsPanel(private val results: Results) : JTable(results.map { result-> listOf(result.operand, Differentiate(operand = result.formulaApplied.fx), result.formulaApplied.dFx, result.formulaApplied.name, result.assumptions).toTypedArray() }.toTypedArray(), listOf("result", "d(formula)/dx", "formula out", "Formula name",  "assumption").toTypedArray()) {
+class ResultsPanel(private val results: Results) : JTable(results.map { result-> listOf(result.operand, Differentiate(operand = result.fx), result.dFx, result.formulaName, result.assumptions).toTypedArray() }.toTypedArray(), listOf("result", "d(formula)/dx", "formula out", "Formula name",  "assumption").toTypedArray()) {
     init {
         /*dataModel = ResultTableModel(results)*/
         columnModel.getColumn(0).cellEditor = OperandCellEditor()

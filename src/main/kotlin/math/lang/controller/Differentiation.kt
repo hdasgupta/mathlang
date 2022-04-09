@@ -3,6 +3,7 @@ package math.lang.controller
 import math.lang.Results
 import math.lang.common.Differentiate
 import math.lang.common.Operand
+import math.lang.common.Operation
 import math.lang.diff
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
@@ -47,7 +48,9 @@ class Differentiation {
             ""
         } else {
             try {
-                val operand: Operand = Differentiate(operand = getOperand(TokenNode.getTree(Token.getTokens(formula))))
+                val operation = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+                val operand: Operand = Differentiate(operand = operation)
+                println("$formula -> ${(operation as Operation).operands[0].javaClass}")
 
                 "<body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}${operand.toHtmlString(true)}${if(center) "</center>" else ""}</body>"
             } catch (t: Throwable) {

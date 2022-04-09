@@ -9,9 +9,9 @@ import javax.swing.JPanel
 class FormulaPanel(val formula: Formula) : JPanel() {
     init {
         layout = BorderLayout()
-        val diff: OperandPanel = OperandPanel(Differentiate(operand = formula.fx))
+        val diff: OperandPanel = OperandPanel(Differentiate(operand = formula.fx(listOf())))
         val equals : JLabel = JLabel(" = ")
-        val sol:OperandPanel = OperandPanel(formula.dFx)
+        val sol:OperandPanel = OperandPanel(formula.dFx(listOf()))
         diff.alignmentX = CENTER_ALIGNMENT
         diff.alignmentY = CENTER_ALIGNMENT
         equals.alignmentX = CENTER_ALIGNMENT

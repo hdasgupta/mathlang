@@ -60,18 +60,18 @@
 
                             <br/>
 
-                            <h6>Formula Applied : <span th:text="${result.formulaApplied.name == null ? '' : result.formulaApplied.name}" ></span></h6>
+                            <h5>Formula Applied : <span th:text="${result.formulaName == null ? '' : result.formulaName}" ></span></h5>
 
                             <table border="0">
                                 <tr>
                                     <td th:id="${'fx_'+stat.count}">
                                         <script>
-                                            load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.formulaApplied.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
+                                            load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
                                         </script>
                                     </td>
                                     <td>=</td>
                                     <td th:id="${'dFx_'+stat.count}">
-                                        <div  th:remove="tag" th:utext="${result.formulaApplied.dFx.toHtmlString()}">
+                                        <div  th:remove="tag" th:utext="${result.dFx.toHtmlString()}">
                                         </div>
                                     </td>
                                 </tr>

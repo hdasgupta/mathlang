@@ -99,7 +99,7 @@ class ExpressionConstants {
 
         fun sec(operand: Operand): Operation = op(Operators.sec, operand)
 
-        fun csc(operand: Operand): Operation = op(Operators.csc, operand)
+        fun cosec(operand: Operand): Operation = op(Operators.csc, operand)
 
         fun r2d(operand: Operand): Operation = op(Operators.rad2deg, operand)
 
@@ -107,17 +107,17 @@ class ExpressionConstants {
 
         fun undef(): Undefined = Undefined()
 
-        fun isin(operand: Operand): Operation = op(Operators.isin, operand)
+        fun asin(operand: Operand): Operation = op(Operators.asin, operand)
 
-        fun icos(operand: Operand): Operation = op(Operators.icos, operand)
+        fun acos(operand: Operand): Operation = op(Operators.acos, operand)
 
-        fun itan(operand: Operand): Operation = op(Operators.itan, operand)
+        fun atan(operand: Operand): Operation = op(Operators.atan, operand)
 
-        fun icot(operand: Operand): Operation = op(Operators.icot, operand)
+        fun acot(operand: Operand): Operation = op(Operators.acot, operand)
 
-        fun isec(operand: Operand): Operation = op(Operators.isec, operand)
+        fun asec(operand: Operand): Operation = op(Operators.asec, operand)
 
-        fun icsc(operand: Operand): Operation = op(Operators.icsc, operand)
+        fun acosec(operand: Operand): Operation = op(Operators.acsc, operand)
 
         fun sinh(operand: Operand): Operation = op(Operators.sinh, operand)
 
@@ -129,7 +129,7 @@ class ExpressionConstants {
 
         fun sech(operand: Operand): Operation = op(Operators.sech, operand)
 
-        fun csch(operand: Operand): Operation = op(Operators.csch, operand)
+        fun cosech(operand: Operand): Operation = op(Operators.csch, operand)
 
         fun func(vararg variables: Variable): Function = Function("fx", variables.toSet())
 
