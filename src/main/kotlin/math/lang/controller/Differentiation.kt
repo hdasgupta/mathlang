@@ -26,42 +26,23 @@ class Differentiation {
     }
 
     @RequestMapping(value = ["/html"])
-    @ResponseBody
-    fun getHtml(@RequestParam(required = false) formula: String = "", @RequestParam(required = false) center: Boolean = false): String {
-        return if(formula.isEmpty()) {
-            ""
-        } else {
-            try {
-                val operand: Operand = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+    fun getHtml(@RequestParam formula: String, map: ModelMap): String {
+        val operand: Operand = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+        map["operand"] = operand
 
-                "<body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}${operand.toHtmlString(true)}${if(center) "</center>" else ""}</body>"
-            } catch (t: Throwable) {
-                println(formula)
-                "<body color=\"red\">Error in Expression</body> "
-            }
-        }
+        return "operands/MainOperand"
     }
     @RequestMapping(value = ["/diff"])
-    @ResponseBody
-    fun getDiff(@RequestParam(required = false) formula: String = "", @RequestParam(required = false) center: Boolean = false): String {
-        return if(formula.isEmpty()) {
-            ""
-        } else {
-            try {
-                val operation = getOperand(TokenNode.getTree(Token.getTokens(formula)))
-                val operand: Operand = Differentiate(operand = operation)
-                println("$formula -> ${(operation as Operation).operands[0].javaClass}")
+    fun getDiff(@RequestParam formula: String, map: ModelMap): String {
+        val operation = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+        val operand: Operand = Differentiate(operand = operation)
+        map["operand"] = operand
 
-                "<body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}${operand.toHtmlString(true)}${if(center) "</center>" else ""}</body>"
-            } catch (t: Throwable) {
-                println(formula)
-                "<body color=\"red\">Error in Expression</body> "
-            }
-        }
+        return "operands/MainOperand"
     }
 
     @RequestMapping(value = ["/diffHtml"])
-    fun getDiffHtml(@RequestParam(required = false) formula: String = "", @RequestParam(required = false) center: Boolean = false, map: ModelMap): String {
+    fun getDiffHtml(@RequestParam formula: String, map: ModelMap): String {
         try {
             val results: Results = diff(getOperand(TokenNode.getTree(Token.getTokens(formula))))
             map["results"] = results

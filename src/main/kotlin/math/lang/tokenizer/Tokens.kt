@@ -160,7 +160,7 @@ class TokenNode private constructor(val token: Nodable, val children: MutableLis
             val lastPriority: Int = operators.priority().index
             val nodes: MutableList<TokenNode> = mutableListOf()
             nodes.add(stacks.operands.pop())
-            while (stacks.operators.peek().priority().index == lastPriority) {
+            while (stacks.operators.isNotEmpty() && stacks.operators.peek().priority().index == lastPriority) {
                 stacks.operators.pop()
                 nodes.add(0, stacks.operands.pop())
             }

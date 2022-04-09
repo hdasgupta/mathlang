@@ -223,12 +223,6 @@ abstract class Operand(val leaf: Boolean = true) : Comparable<Operand> {
 
     abstract override fun toString(): String
 
-    fun toHtmlString(): String {
-        return toHtmlString(false)
-    }
-
-    abstract fun toHtmlString(root:Boolean): String
-
     open fun toTypeString(): String = this.javaClass.simpleName
     
     abstract fun calc(): Number
@@ -264,93 +258,6 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         return when(operands.size) {
             1 -> "${operator.symbol}(${operands[0]})"
             else -> "(${operands.joinToString(separator = operator.symbol) { o -> o.toString() }})"
-        }
-    }
-
-    override fun toHtmlString(root:Boolean): String {
-        return when(operands.size) {
-            1 -> "<table border=\"0\" cellpadding=\"0\">" +
-                    "<tr>" +
-                    "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                    "<b style=\"color: purple\">" +
-                    "<i>" +
-                    "${operator.symbol}" +
-                    "</i>" +
-                    "</b>" +
-                    "</td>" +
-                    "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                    "${if(operands[0] !is Operation || (operands[0] is Operation && ((operands[0] as Operation).operands.size == 1)||(operands[0] as Operation).operator==Operators.pow)) "<b style=\"color:indigo\">(</b></td><td style=\"vertical-align: middle;padding: 0;margin: 0;\">${operands[0].toHtmlString()}</td><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">)</b>" else operands[0].toHtmlString() }</td></tr></table>"
-            else -> if(operator== Operators.div)
-                "<table border=\"0\" cellpadding=\"0\">" +
-                        "<tr>" +
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<center>" +
-                        "${operands[0].toHtmlString()}" +
-                        "</center>" +
-                        "</td>" +
-                        "</tr>" +
-                        "<tr>" +
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<hr style=\"height: 2px; padding: 0;margin: 0; color: black;\"/>" +
-                        "</td>" +
-                        "</tr>" +
-                        "<tr>" +
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<center>" +
-                        "${operands[1].toHtmlString()}" +
-                        "</center>" +
-                        "</td>" +
-                        "</tr>" +
-                        "</table>"
-            else if(operator== Operators.pow)
-                "<table border=\"0\" cellpadding=\"0\">" +
-                        "<tr>" +
-                        (if(operands[0] is Operation) "<td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b>(</b></td>" else "" )+
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "${operands[0].toHtmlString()}" +
-                        "</td>" +
-                        (if(operands[0] is Operation) "<td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b>)</b></td>"  else "") +
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<sup>${operands[1].toHtmlString()}</sup>" +
-                        "</td>" +
-                        "</tr>" +
-                        "</table>"
-            else
-                "<table border=\"0\" cellpadding=\"0\">" +
-                        "<tr>" +
-                        (
-                        if(!root && (operands[0] !is Operation || (operands[0] is Operation && (operands[0] as Operation).operands.size == 1)))
-                            "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                            "<b style=\"color:indigo\">" +
-                            "(" +
-                            "</b>" +
-                            "</td>"
-                        else
-                            ""
-                        ) +
-                        "${operands.joinToString(
-                            separator = "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                                    "<b style=\"color:indigo\">" +
-                                    "${if(operator== Operators.mul) "×" else operator.symbol}" +
-                                    "</b>" +
-                                    "</td>"
-                        ) 
-                        { 
-                                o -> "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                                "${o.toHtmlString()}" +
-                                "</td>" 
-                        }
-                        }" +
-                        (if(!root && (operands[0] !is Operation || (operands[0] is Operation && (operands[0] as Operation).operands.size == 1)))
-                        "<td style=\"vertical-align: middle;padding: 0;margin: 0;\">" +
-                        "<b style=\"color:indigo\">" +
-                        ")" +
-                        "</b>" +
-                        "</td>" +
-                        "</tr>"
-                        else
-                            "") +
-                        "</table>"
         }
     }
 
@@ -390,7 +297,7 @@ class Constant(name: String): UnitOperand(name, false) {
         this.lit = lit as Literal<out Object>
     }
     override fun toString(): String = "${lit ?: name}"
-    override fun toHtmlString(root:Boolean): String = "<i style=\"color:maroon\">${lit ?: name}</i>"
+
     override fun calc(): Number {
         return lit?.calc() ?: throw Exception("No constant value")
     }
@@ -402,7 +309,7 @@ class Constant(name: String): UnitOperand(name, false) {
 }
 
 class Variable(name: String): UnitOperand(name(name), true) {
-    private var index: Int?= num(name)
+    var index: Int?= num(name)
     private constructor(name: String, index: Int): this(name) {
         this.index = index
     }
@@ -411,7 +318,7 @@ class Variable(name: String): UnitOperand(name(name), true) {
     }
 
     override fun toString(): String = "${name ?: ""}${index ?: ""}"
-    override fun toHtmlString(root:Boolean): String = if(name==null) "" else "<b><i style=\"color:green\">$name${if(index==null) "" else "<sub>$index</sub>"}</i></b>"
+
     override fun calc(): Number {
         throw Exception("No constant value")
     }
@@ -444,13 +351,13 @@ class Function(private val nm: String, val variables: Set<Variable>? = null, val
     private val find = matcher.find()
 
     val nam: String = if(find) matcher.group("name")  else nm
-    private val idx: String = if(find) matcher.group("num") else index.toString()
+    val idx: String = if(find) matcher.group("num") else index.toString()
     override fun funcOf(): Set<Variable> {
         return variables ?: function?.variables ?: setOf()
     }
 
     override fun toString(): String = "$name(${variables?.joinToString(",") { variable -> variable.name ?: "" } ?: function})"
-    override fun toHtmlString(root:Boolean): String = "<b><i style=\"color:green\">$nam<sub>$idx</sub></i></b><b style=\"color:indigo\">(</b>${variables?.joinToString { variable -> if(variable.name==null) "<b>x</b>" else "<b>${variable.name}</b>" } ?: function?.toHtmlString() ?: "<b>x</b>"}<b style=\"color:indigo\">)</b>"
+
     override fun calc(): Number {
         throw Exception("No constant value")
     }
@@ -468,15 +375,6 @@ class Differentiate(val function: Function? = null, val operand: Operand? = null
     }
 
     override fun toString(): String = "(d(${operand ?: function}))"
-    override fun toHtmlString(root:Boolean): String {
-        var of:String = "${operand?.toHtmlString() ?: function?.toHtmlString()}"
-        if(operand!=null || function !=null) {
-            of = "<td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">(</b></td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\">$of</td><td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color:indigo\">)</b></td>"
-        } else {
-            of = "<td rowspan=\"3\" style=\"vertical-align: middle;padding: 0;margin: 0;\">$of</td>"
-        }
-        return "<table border=\"0\" cellpadding=\"0\"><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color: darkred\">d</b></td>$of</tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><hr style=\"height: 2px; padding: 0;margin: 0; color: black;\"/></td></tr><tr><td style=\"vertical-align: middle;padding: 0;margin: 0;\"><b style=\"color: darkred\">dx</b></td></tr></table>"
-    }
 
     override fun calc(): Number {
         throw Exception("No constant value")
@@ -503,7 +401,7 @@ class IntegerLiteral(obj: BigInteger, name: String?) : Literal<BigInteger>(obj, 
     constructor(obj: BigInteger) : this(obj, null)
 
     override fun toString(): String = obj.toString()
-    override fun toHtmlString(root:Boolean): String = "<b style=\"color:maroon\">${obj}</b>"
+
     override fun calc(): Number {
         return obj
     }
@@ -513,7 +411,7 @@ class DecimalLiteral(obj: BigDecimal, name: String?) : Literal<BigDecimal>(obj, 
     constructor(obj: BigDecimal) : this(obj, null)
 
     override fun toString(): String = obj.toString()
-    override fun toHtmlString(root:Boolean): String = "<b  style=\"color:maroon\">${obj}</b>"
+
     override fun calc(): Number {
         return obj
     }
@@ -523,7 +421,7 @@ class StringLiteral(obj: String, name: String?) : Literal<String>(obj, name) {
     constructor(obj: String) : this(obj, null)
 
     override fun toString(): String = "\"$obj\""
-    override fun toHtmlString(root:Boolean): String = "\"$obj\""
+
     override fun calc(): Number {
         throw Exception("No constant value")
     }
@@ -533,7 +431,7 @@ class BooleanLiteral(obj: Boolean, name: String?) : Literal<Boolean>(obj, name) 
     constructor(obj: Boolean) : this(obj, null)
 
     override fun toString(): String = obj.toString()
-    override fun toHtmlString(root:Boolean): String = obj.toString()
+
     override fun calc(): Number {
         throw Exception("No constant value")
     }
@@ -541,7 +439,7 @@ class BooleanLiteral(obj: Boolean, name: String?) : Literal<Boolean>(obj, name) 
 
 class Undefined: Operand() {
     override fun toString(): String = throw ArithmeticException()
-    override fun toHtmlString(root:Boolean): String = ArithmeticException().toString()
+
     override fun calc(): Number {
         throw Exception("No constant value")
     }

@@ -290,7 +290,7 @@ class PowerRule(fx: (v:List<Variable>) -> Operand, dFx: (v:List<Variable>) -> Op
                 Derive(newVar, pow(newVar1, newVar2), "Assumption"),
                 Derive(ln(newVar), mul(newVar2, ln(newVar1)), "Taking Log in Both Side"),
                 Derive(mul(inv(newVar), Differentiate(operand = newVar)), add(mul(div(newVar2, newVar1), Differentiate(operand = newVar1)), mul(ln(newVar1), Differentiate(operand = newVar2))), "Differentiating Both Side"),
-                Derive(Differentiate(operand = newVar), mul(add(mul(div(newVar2, newVar1), Differentiate(operand = newVar1)), mul(ln(newVar1), Differentiate(operand = newVar2))), newVar), "Multiplied by ${newVar.toHtmlString()} both side")
+                Derive(Differentiate(operand = newVar), mul(add(mul(div(newVar2, newVar1), Differentiate(operand = newVar1)), mul(ln(newVar1), Differentiate(operand = newVar2))), newVar), "Multiplied by $newVar both side")
             )
         }
     }

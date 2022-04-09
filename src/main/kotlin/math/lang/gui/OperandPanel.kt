@@ -66,6 +66,6 @@ class OperandPanel(private val operand: Operand, val center:Boolean = false) : J
         //isEditable = false
         contentType = "text/html"
         //font = Font(Font.MONOSPACED, Font.PLAIN, 1)
-        text = "<html><body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}${operand.toHtmlString(true)}${if(center) "</center>" else ""}</body></html>"
+        text = "<html><body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}$operand${if(center) "</center>" else ""}</body></html>"
     }
 }

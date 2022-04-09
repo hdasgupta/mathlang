@@ -1,7 +1,7 @@
 <table th:if="${!results.isEmpty()}" border="0">
     <tr>
         <td id="diff_formula" colspan="2">
-                <script>
+            <script>
                 load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
             </script>
         </td>
@@ -33,7 +33,10 @@
                                     load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
                                 </script>
                             </div>
-                            <span  th:if="${stat.index > 0}" th:remove="tag" th:utext="${results.get(stat.index-1).operand.toHtmlString()}">
+                            <span  th:if="${stat.index > 0}" th:id="${'prevStep_'+stat.count}">
+                                 <script>
+                                    load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${results.get(stat.index-1).operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                </script>
                             </span>
 
                             <br th:if="${!result.assumptions.isEmpty()}"/>
@@ -71,8 +74,9 @@
                                     </td>
                                     <td>=</td>
                                     <td th:id="${'dFx_'+stat.count}">
-                                        <div  th:remove="tag" th:utext="${result.dFx.toHtmlString()}">
-                                        </div>
+                                        <script>
+                                            load("[[${'#dFx_'+stat.count}]]", {'formula': '[[${result.dFx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                        </script>
                                     </td>
                                 </tr>
 
@@ -83,17 +87,19 @@
                             <h5 th:if="${!result.derive.isEmpty()}">Explanation</h5>
                             <table th:if="${!result.derive.isEmpty()}">
                                 <tr th:each="d, estat: ${result.derive}">
-                                    <td>
-                                        <div  th:remove="tag" th:utext="${d.left.toHtmlString()}">
-                                        </div>
+                                    <td th:id="${'left_'+stat.count+'_'+estat.count}">
+                                        <script>
+                                            load("[[${'#left_'+stat.count+'_'+estat.count}]]", {'formula': '[[${d.left}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                        </script>
                                     </td>
                                     <td>=</td>
-                                    <td>
-                                        <div  th:remove="tag" th:utext="${d.right.toHtmlString()}">
-                                        </div>
+                                    <td th:id="${'right_'+stat.count+'_'+estat.count}">
+                                        <script>
+                                            load("[[${'#right_'+stat.count+'_'+estat.count}]]", {'formula': '[[${d.right}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                        </script>
                                     </td>
                                     <td>
-                                        <div  th:remove="tag" th:utext="${d.desc}">
+                                        <div th:text="${d.desc}">
                                         </div>
                                     </td>
                                 </tr>
@@ -102,7 +108,10 @@
                             <br/>
 
                             <h5>Current Step: </h5>
-                            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
+                            <span   th:id="${'curr_'+stat.count}">
+                                <script>
+                                    load("[[${'#curr_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                </script>
                             </span>
 
                         </div>
@@ -116,7 +125,10 @@
             </div>
         </td>
         <td>
-            <span  th:remove="tag" th:utext="${result.operand.toHtmlString()}">
+            <span  th:id="${'result_'+stat.count}">
+                <script>
+                    load("[[${'#result_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                </script>
             </span>
         </td>
 
