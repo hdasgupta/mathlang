@@ -256,7 +256,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
 
     override fun toString(): String {
         return when(operands.size) {
-            1 -> "${operator.symbol}(${operands[0]})"
+            1 -> "${operator.symbol}${if(operands[0] is Operation) "${operands[0]}" else "(${operands[0]})"}"
             else -> "(${operands.joinToString(separator = operator.symbol) { o -> o.toString() }})"
         }
     }

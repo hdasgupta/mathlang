@@ -12,5 +12,9 @@ class ArithmeticApplication
 
 fun main(args: Array<String>) {
 	runApplication<ArithmeticApplication>(*args)
-	println( d(getOperand(TokenNode.getTree(Token.getTokens("(x^acot(x^atan(x))+x)")))))
+	val str = getOperand(TokenNode.getTree(Token.getTokens("-sin(x)"))).toString()
+	val tokens = Token.getTokens(str)
+	println(str)
+	println( TokenNode.getTree(tokens))
+	println(tokens.size)
 }

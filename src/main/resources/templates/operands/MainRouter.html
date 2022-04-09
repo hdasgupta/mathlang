@@ -1,5 +1,6 @@
-<div th:fragment="route(operand, root)">
-    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operands.length==1}">
+<div th:fragment="route(operand, root)"  th:remove="tag">
+    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operands.length==1}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: unary(operator=${operand.operator}, operands=${operand.operands})"
                 th:remove="tag">
@@ -7,7 +8,8 @@
 
     </div>
 
-    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()=='div'}">
+    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()=='div'}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: divide(operator=${operand.operator}, operands=${operand.operands})"
                  th:remove="tag">
@@ -17,7 +19,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()=='pow'}">
+    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()=='pow'}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: power(operator=${operand.operator}, operands=${operand.operands})"
                  th:remove="tag">
@@ -27,7 +30,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()!='pow' && operand.operator.name()!='div' && operand.operands.length>1}">
+    <div th:if="${operand instanceof T(math.lang.common.Operation) && operand.operator.name()!='pow' && operand.operator.name()!='div' && operand.operands.length>1}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: binary(operator=${operand.operator}, operands=${operand.operands}, root=${root!=null && root})"
                  th:remove="tag">
@@ -37,7 +41,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.Constant)}">
+    <div th:if="${operand instanceof T(math.lang.common.Constant)}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: constant(lit=${operand.lit}, name=${operand.name})"
                  th:remove="tag">
@@ -47,7 +52,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.Variable)}">
+    <div th:if="${operand instanceof T(math.lang.common.Variable)}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: variable(name=${operand.name}, index=${operand.index})"
                  th:remove="tag">
@@ -57,7 +63,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.Function)}">
+    <div th:if="${operand instanceof T(math.lang.common.Function)}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: function(name=${operand.nam}, index=${operand.idx})"
                  th:remove="tag">
@@ -66,7 +73,8 @@
 
     </div>
 
-    <div th:if="${operand instanceof T(math.lang.common.Differentiate)}">
+    <div th:if="${operand instanceof T(math.lang.common.Differentiate)}"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: differentiate(operand=${operand.operand}, function=${operand.function})"
                  th:remove="tag">
@@ -76,7 +84,8 @@
     </div>
 
 
-    <div th:if="${operand instanceof T(math.lang.common.IntegerLiteral) || operand instanceof T(math.lang.common.DecimalLiteral) }">
+    <div th:if="${operand instanceof T(math.lang.common.IntegerLiteral) || operand instanceof T(math.lang.common.DecimalLiteral) }"
+         th:remove="tag">
         <div
                 th:replace="operands/Fragments :: numeric(obj=${operand.obj})"
                  th:remove="tag">

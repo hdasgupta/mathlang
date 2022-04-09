@@ -11,8 +11,6 @@ import math.lang.common.Function
 import java.math.BigDecimal
 import java.math.BigInteger
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
-import java.util.concurrent.atomic.AtomicInteger
 import java.util.regex.Pattern
 
 //fun main() {
@@ -45,11 +43,12 @@ class Token private constructor(val value:String, val type: TokenType, val subTy
                 gapMisMatch.set(!gapMisMatch.get() && !space.matcher(missingStr).matches())
                 lastEnd.set(m.end())
                 var token: Token? = null
-                for (type: TokenType in TokenType.values()) {
+                outer@ for (type: TokenType in TokenType.values()) {
                     if (type.compile()?.matcher(value)?.matches() == true) {
                         for (subType: SubPattern in type.patterns()) {
                             if (subType.compile()?.matcher(value)?.matches() == true) {
                                 token = Token(value, type, subType)
+                                break@outer
                             }
                         }
                     }
@@ -70,6 +69,7 @@ class Token private constructor(val value:String, val type: TokenType, val subTy
 
 fun getOperand(node: TokenNode) : Operand {
     val token = node.token
+    println(token)
     if(token is Token) {
         return when(token.type) {
             TokenType.variable ->
@@ -121,7 +121,11 @@ class TokenNode private constructor(val token: Nodable, val children: MutableLis
             val stacks: Stacks = Stacks()
             stacks.operators.push(BracketsType.opening)
 
-            for (i: Int in tokens.indices) {
+            println(tokens.joinToString("") { it.value })
+
+            var i:Int = 0
+
+            while (tokens.size > i) {
                 val token: Token = tokens[i]
                 if(token.subTypes == BracketsType.opening) {
                     if(i>0 && tokens[i-1].type==TokenType.variable) {
@@ -131,20 +135,40 @@ class TokenNode private constructor(val token: Nodable, val children: MutableLis
                 } else if(token.subTypes == BracketsType.closing) {
                     popUntilOpening(stacks)
                 } else if(token.type == TokenType.operators) {
-                    val operator : Operators = token.subTypes as Operators
-                    if(stacks.operators.empty()) {
-                        stacks.operands.push(TokenNode(token, mutableListOf(stacks.operands.pop(), stacks.operands.pop())))
-                    } else if(operator.priority().index < stacks.operators.peek().priority().index) {
-                        while (operator.priority().index < stacks.operators.peek().priority().index) {
-                            popAllSamePriority(stacks)
+                    if(token.subTypes==OperatorType.sub||token.subTypes == OperatorType.add) {
+                        val op = when(token.subTypes) {
+                            OperatorType.sub->OperatorType.neg
+                            else->OperatorType.pos
                         }
-                    } else if(operator.priority().index == stacks.operators.peek().priority().index) {
-                        popAllSamePriority(stacks)
+                        if(i==0 || tokens[i-1].subTypes==BracketsType.opening || tokens[i-1].type ==TokenType.operators) {
+                            if((i+1)< tokens.size && tokens[i+1].subTypes == BracketsType.opening) {
+                                val closing:Int = getMatchingClosing(tokens, i+1)
+                                val tokenNode: TokenNode = getTree(tokens.subList(i+1,closing+1))
+                                stacks.operands.push(TokenNode(op, mutableListOf( tokenNode)))
+                                i = closing
+                            } else if((i+2)< tokens.size && tokens[i+1].subTypes is VariableType && tokens[i+2].subTypes == BracketsType.opening) {
+                                val closing:Int = getMatchingClosing(tokens, i+1)
+                                val tokenNode: TokenNode = getTree(tokens.subList(i+1,closing+1))
+                                stacks.operands.push(TokenNode(op, mutableListOf( tokenNode)))
+                                i = closing
+                            } else if((i+1)< tokens.size){
+                                val tokenNode: TokenNode = getTree(tokens.subList(i+1,i+2))
+                                stacks.operands.push(TokenNode(op, mutableListOf( tokenNode)))
+                                i++
+                            } else {
+                                applyOperator(token, stacks)
+                            }
+                        } else {
+                            applyOperator(token, stacks)
+                        }
+                    } else {
+                        applyOperator(token, stacks)
                     }
-                    stacks.operators.push(operator)
                 } else {
                     stacks.operands.push(TokenNode(token))
                 }
+
+                i++
             }
 
             popUntilOpening(stacks)
@@ -153,6 +177,39 @@ class TokenNode private constructor(val token: Nodable, val children: MutableLis
                 throw ExpressionException()
             }
             return stacks.operands.pop()
+        }
+
+        fun applyOperator(token: Token, stacks: Stacks)  {
+            val operator : Operators = token.subTypes as Operators
+            if(stacks.operators.empty()) {
+                stacks.operands.push(TokenNode(token, mutableListOf(stacks.operands.pop(), stacks.operands.pop())))
+            } else if(operator.priority().index < stacks.operators.peek().priority().index) {
+                while (operator.priority().index < stacks.operators.peek().priority().index) {
+                    popAllSamePriority(stacks)
+                }
+            } else if(operator.priority().index == stacks.operators.peek().priority().index) {
+                popAllSamePriority(stacks)
+            }
+            stacks.operators.push(operator)
+        }
+
+        fun getMatchingClosing(tokens: List<Token>, i: Int): Int {
+            var openingBracketCount = 0
+            for(index: Int in i until tokens.size) {
+                if(tokens[index].subTypes==BracketsType.opening) {
+                    openingBracketCount++
+                } else if(tokens[index].subTypes==BracketsType.closing) {
+                    if(openingBracketCount==0) {
+                        return i
+                    }
+                    openingBracketCount--
+                    if(openingBracketCount==0) {
+                        return index
+                    }
+                }
+            }
+            throw ExpressionException()
+
         }
 
         private fun popAllSamePriority(stacks: Stacks) {
@@ -282,7 +339,9 @@ enum class OperatorType(private val pattern:String, private val priority: Priori
     mul("\\*", Priority.medium),
     div("\\/", Priority.high),
     pow("\\^", Priority.veryHigh),
-    mod("\\%", Priority.extremeHigh);
+    mod("\\%", Priority.extremeHigh),
+    pos("\\+", Priority.low),
+    neg("\\-", Priority.veryLow ),;
     override fun pattern(): String = pattern
     override fun getName(): String = name
     override fun priority(): Priority = priority

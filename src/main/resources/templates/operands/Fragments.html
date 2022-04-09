@@ -1,3 +1,11 @@
+<!--<script>
+    $(document).ready(function() {
+        $(".left").resize(function() {
+            $(this).attr('width', $(this).height()/2)
+            console.log($(this).attr('height'))
+        });
+    })
+</script>-->
 <table border="0" cellpadding="0" th:fragment="unary (operator, operands)">
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
@@ -7,18 +15,16 @@
                 </i>
             </b>
         </td>
-        <td style="vertical-align: middle;padding: 0;margin: 0;">
-            <b th:if="${!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && (operands[0].operands.length == 1)||operands[0].operator==T(math.lang.common.Operators).pow)}" style="color:indigo">
-                (
-            </b>
+        <td style="vertical-align: middle;padding: 0;margin: 0;"
+            th:class="${(!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && (operands[0].operands.length == 1)||operands[0].operator==T(math.lang.common.Operators).pow)) ? 'left' :''}">
+            (
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=false)"></div>
         </td>
-        <td style="vertical-align: middle;padding: 0;margin: 0;">
-            <b  th:if="${!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && (operands[0].operands.length == 1)||operands[0].operator==T(math.lang.common.Operators).pow)}" style=\"color:indigo\">
-                )
-            </b>
+        <td style="vertical-align: middle;padding: 0;margin: 0;"
+            th:class="${(!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && (operands[0].operands.length == 1)||operands[0].operator==T(math.lang.common.Operators).pow)) ? 'right' :''}">
+            )
         </td>
     </tr>
 </table>
@@ -49,14 +55,14 @@
 
 <table border="0" cellpadding="0" th:fragment="power (operator, operands)">
     <tr>
-        <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b>(</b>
+        <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;"  class="left" >
+            (
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=false)"></div>
         </td>
-        <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b>)</b>
+        <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;" class="right" >
+            )
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <sup>
@@ -69,10 +75,9 @@
 
 <table border="0" cellpadding="0" th:fragment="binary (operator, operands, root)">
     <tr>
-        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b style="color:indigo">
-                (
-            </b>
+        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;"
+            class="left">
+            (
         </td>
         <div th:each="o, stat: ${operands}" th:remove="tag">
             <td th:if="${stat.index>0}" style="vertical-align: middle;padding: 0;margin: 0;">
@@ -84,10 +89,9 @@
                 <div th:replace="operands/MainRouter.html :: route(operand=${o}, root=false)"></div>
             </td>
         </div>
-        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b style="color:indigo">
-                )
-            </b>
+        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;"
+            class="right">
+            )
         </td>
     </tr>
 </table>
@@ -108,21 +112,30 @@
 </b>
 
 
-<div th:fragment="function (name, index)">
-    <b>
-        <i style="color:green">
-            $nam
-            <sub>
-                $idx
-            </sub>
-        </i>
-    </b>
-    <b style="color:indigo">
-        (x)
-    </b>
-    <b>x</b>
-    <b style="color:indigo">
-        )
+<div th:fragment="function (name, index)" th:remove="tag">
+    <table>
+        <tr>
+            <td>
+                <b>
+                    <i style="color:green">
+                        $nam
+                        <sub>
+                            $idx
+                        </sub>
+                    </i>
+                </b>
+            </td>
+            <td class="left">
+                (
+            </td>
+            <td>
+                x
+            </td>
+            <td class="right">
+                )
+            </td>
+        </tr>
+    </table>
     </b>
 </div>
 
@@ -134,10 +147,9 @@
                 d
             </b>
         </td>
-        <td th:if="${operand!=null || function !=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b style="color:indigo">
-                (
-            </b>
+        <td th:if="${operand!=null || function !=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;"
+            class="left">
+            (
         </td>
         <td th:if="${operand!=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
             <div th:replace="operands/MainRouter.html :: route(operand=${operand}, root=false)"></div>
@@ -145,10 +157,9 @@
         <td th:if="${operand==null && function !=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
             <div th:replace="operands/MainRouter.html :: route(operand=${function}, root=false)"></div>
         </td>
-        <td th:if="${operand!=null || function !=null}"  rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
-            <b style="color:indigo">
-                )
-            </b>
+        <td th:if="${operand!=null || function !=null}"  rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;"
+            class="right">
+            )
         </td>
     </tr>
     <tr>

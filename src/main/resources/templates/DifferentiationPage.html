@@ -6,6 +6,7 @@
     <script th:src="@{js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
+    <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
     <script>
         var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
         var lastResponse = {}
@@ -98,6 +99,22 @@
 
         })
     </script>
+    <style>
+      td.left {
+        color: darkslateblue;
+        font-weight: bold;
+      }
+      td.right {
+        color: darkslateblue;
+        font-weight: bold;
+      }
+
+      td {
+        vertical-align: middle;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
     <title>Differentiation Page</title>
 </head>
 <body>
