@@ -29,10 +29,10 @@ class ExpressionConstants {
                 else -> false
             }
 
-        fun getConst(o: Operand): BigInteger? =
+        inline fun <reified R: Number>  getConst(o: Operand): R? =
             when(o) {
-                is IntegerLiteral -> o.obj
-                is Constant -> if(o.lit !=null) o.lit!!.obj as BigInteger else null
+                is Literal<*> -> if( o.obj is R) o.obj else null
+                is Constant -> if(o.lit !=null) if(o.lit!!.obj is R) o.lit!!.obj as R else null else null
                 else -> null
             }
 
@@ -168,13 +168,7 @@ class ExpressionConstants {
 
         fun d(operand: Operand): Differentiate = Differentiate(operand = operand)
 
-        fun const(lit: IntegerLiteral) = Constant(lit)
-
-        fun const(lit: DecimalLiteral) = Constant(lit)
-
-        fun const(lit: StringLiteral) = Constant(lit)
-
-        fun const(lit: BooleanLiteral) = Constant(lit)
+        inline fun <reified T: Literal<*>> const(lit: T) = Constant(lit)
 
         fun convert(operand: Operand): Operand {
             return if(operand is Operation) {
@@ -192,21 +186,44 @@ class ExpressionConstants {
             }
         }
 
-        fun replace(root: Operand, source: Operand, target: Operand): Operand {
-            return if(root is Operation) {
-                Operation(root.operator, *root.operands.map { op-> if(op==source) target else op }.toTypedArray())
-            } else if(root is IntegerLiteral) {
-                const(root)
-            } else if(root is DecimalLiteral) {
-                const(root)
-            } else if(root is StringLiteral) {
-                const(root)
-            } else if(root is BooleanLiteral) {
-                const(root)
-            } else {
-                root
+        fun compareConst(const1: Operand, const2: Operand) : Boolean {
+            if(const1 is Constant && const2 is Constant) {
+                return const1.name == const2.name
             }
+            return false
         }
+
+        fun replace(root: Operand, source: Operand, target: Operand): Operand =
+            when(root) {
+                is Operation -> Operation(root.operator, *root.operands.map { op-> if(compareConst(op,source)) target else replace(op, source, target) }.toTypedArray())
+                is Literal<*> -> const(root)
+                else -> root
+            }
+
+        fun isConst(operand: Operand): Boolean =
+            when(operand) {
+                is Operation -> operand.operands.all { isConst(it) }
+                is Literal<*> -> true
+                is Constant -> true
+                else -> false
+            }
+
+        fun hasValue(operand: Operand):Boolean =
+            when(operand) {
+                is Operation -> operand.operands.all { hasValue(it) }
+                is IntegerLiteral -> true
+                is DecimalLiteral -> true
+                is Constant -> if(operand.lit!=null) hasValue(operand.lit!!) else false
+                else -> false
+            }
+
+        fun getValue(operand: Operand):Number? =
+            if(hasValue(operand)) {
+                operand.calc()
+            } else {
+                null
+            }
+
 
         fun constIn(operand: Operand): Constant? {
             return if(operand is Operation) {

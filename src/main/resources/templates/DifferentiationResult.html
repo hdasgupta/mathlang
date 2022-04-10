@@ -1,3 +1,6 @@
+<h5  th:if="${!results.isEmpty()}">
+    Differentiation
+</h5>
 <table th:if="${!results.isEmpty()}" border="0">
     <tr>
         <td id="diff_formula" colspan="2">
@@ -135,6 +138,16 @@
     </tr>
 
  </table>
+<h5  th:if="${!results.isEmpty()}">
+    Simplification
+</h5>
+<div  th:if="${!results.isEmpty()}" id="simplify">
+    <script>
+        if(!!'[[${formula}]]') {
+            load("#simplify", {'formula': '[[${results[results.size-1].operand}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/simple'}]]")
+        }
+    </script>
+</div>
 <div  th:if="${results.isEmpty()}" style="color: red">
     <center>ERROR OCCURED</center>
 </div>

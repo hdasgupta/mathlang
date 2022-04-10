@@ -3,30 +3,35 @@ package math.lang.common
 import math.lang.common.ExpressionConstants.Companion.add
 import math.lang.common.ExpressionConstants.Companion.div
 import math.lang.common.ExpressionConstants.Companion.getConst
+import math.lang.common.ExpressionConstants.Companion.getValue
+import math.lang.common.ExpressionConstants.Companion.hasValue
 import math.lang.common.ExpressionConstants.Companion.isConst
 import math.lang.common.ExpressionConstants.Companion.mul
+import math.lang.common.ExpressionConstants.Companion.neg
 import math.lang.common.ExpressionConstants.Companion.one
 import math.lang.common.ExpressionConstants.Companion.pow
+import math.lang.common.ExpressionConstants.Companion.sub
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
+import math.lang.common.ExpressionConstants.Companion.zero
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
-import java.lang.reflect.Method
+import java.math.BigDecimal
 import java.math.BigInteger
 
 //fun main() {
 //    println(div(x, mul(x.new(), y.new())))
 //
 //    TokenNode.getTree(Token.getTokens("x+-(2)"))
-//    val str = "((x-2)*x)/(x*(2*-x-3))"
+//    val str = "x^2+3*x^2-2*x^2"
 //    val list = Token.getTokens(str)
 //    val tokenNode = TokenNode.getTree(list)
-//    val operand = getOperand(tokenNode)
+//    var operand = getOperand(tokenNode)
 //
 //    println(operand)
 //
-//    val results = simp(operand)
+//    var results = simp(operand)
 //    println(results)
 //
 //}
@@ -46,7 +51,7 @@ fun simp(operand: Operand): Results {
                 val result = formula.simplify(op)
                 if (result != null) {
                     r.add(result)
-                    op = result.operand as Operation
+                    op = result.operand
                     val rs: Results = simp(op)
                     if (rs.isNotEmpty()) {
                         r.addAll(rs)
@@ -82,7 +87,7 @@ fun simp(operand: Operand): Results {
                     val rs: Results = simp(op)
                     if (rs.isNotEmpty()) {
                         r.addAll(rs)
-                        op = rs.last().operand as Operation
+                        op = rs.last().operand
                     }
                 }
             }
@@ -94,6 +99,9 @@ fun simp(operand: Operand): Results {
 
 
 fun op(operator: Operators, ops: List<Operand>) :Operand {
+    if(operator.operandCount>1 && ops.size==1) {
+        return ops[0]
+    }
     return try {
         ExpressionConstants.Companion::class.java.getDeclaredMethod(operator.name, Array<Operand>::class.java).invoke(ExpressionConstants.Companion, ops.toTypedArray()) as Operand
     } catch (t:Throwable) {
@@ -107,28 +115,63 @@ fun getAllSimplificationEquation():MutableList<SimplificationFormula> {
     list.add(SimplificationFormula("Distributive Division", { div(x, mul(x.new(), y.new())) }, { ExpressionConstants.mul(
         *listOf(listOf(it[0]), (it[1] as Operation).operands.map { it1->it1.invert() }.toList()).flatten().toTypedArray()) }, true))
 
-    list.add(SimplificationFormula("Convert to Addition from Subtraction", { ExpressionConstants.sub(x, y) }, { applySub(it) }))
+    list.add(SimplificationFormula("Calculating Numeric Values", { x }, { calc(it.operator,
+        it.operands.toList()
+    ) }, true))
+
+    list.add(SimplificationFormula("Convert to Addition from Subtraction", { ExpressionConstants.sub(x, y) }, { applySub(it.operands.toList()) }))
 
     list.add(SimplificationFormula("Convert to Multiplication from Division", { ExpressionConstants.div(x, y) }, {
         ExpressionConstants.mul(
         it[0], it[1].invert()) }))
 
-    list.add(SimplificationFormula("Communicative Addition", { add(y.new(), add(x, y))}, { applyCommAdd(it) }))
+    list.add(SimplificationFormula("Communicative Addition", { add(y.new(), add(x, y))}, { applyCommAdd(it.operands.toList()) }))
 
-    list.add(SimplificationFormula("Communicative Multiplication", { mul(y.new(), mul(x, y))}, { applyCommMul(it) }))
+    list.add(SimplificationFormula("Communicative Multiplication", { mul(y.new(), mul(x, y))}, { applyCommMul(it.operands.toList()) }))
 
-    list.add(SimplificationFormula("Distributive Multiplication", { filterMulAdd(it) }, { applyMulAdd(it) }))
+    list.add(SimplificationFormula("Distributive Multiplication", { filterMulAdd(it) }, { applyMulAdd(it.operands.toList()) }))
 
     list.add(SimplificationFormula("Common Negation", { ExpressionConstants.mul(x, y) }, {
-        if(it.count { it1->it1.isNegative() }.mod(2)==1)  mul(
-            *it.map { it1->it1.positive() }.toTypedArray()).negate() else mul(
-            *it.map { it1->it1.positive() }.toTypedArray())}))
+        if(it.operands.count { it1->it1.isNegative() }.mod(2)==1)  mul(
+            *it.operands.map { it1->it1.positive() }.toTypedArray()).negate() else mul(
+            *it.operands.map { it1->it1.positive() }.toTypedArray())}))
 
-    list.add(SimplificationFormula("Power from Multiplication", { ExpressionConstants.mul(x, y) }, { applyPowMul(it) }))
+    list.add(SimplificationFormula("Power from Multiplication", { ExpressionConstants.mul(x, y) }, { applyPowMul(it.operands.toList()) }))
 
-    list.add(SimplificationFormula("Simplify Power, Multiplication and Division", { mul(x, div(x.new(), y.new())) }, { applyDivPowMul(it) }))
+    list.add(SimplificationFormula("Simplify Addition", { add(x, y) }, { applySimAdd(
+        it.operands.toList()
+    ) }))
+
+    list.add(SimplificationFormula("Simplify Power, Multiplication and Division", { div(x, pow(x.new(), y.new())) }, { applyDivPowMul(
+        it.operands.toList()
+    ) }))
+
+    list.add(SimplificationFormula("Simplify Power, Multiplication and Division", { mul(x, pow(x.new(), y.new())) }, { applyDivPowMul(
+        it.operands.toList()
+    ) }))
+
+    list.add(SimplificationFormula("Simplify Power, Multiplication and Division", { mul(x, div(x.new(), y.new())) }, { applyDivPowMul(
+        it.operands.toList()
+    ) }))
 
     return list
+}
+
+fun calc(op:Operators, list:List<out Operand>): Operand {
+    val consts = list.filter { hasValue(it) }
+    val vars = list.filter { !hasValue(it) }.toMutableList()
+
+    if(consts.size > 1) {
+        val num = getValue(Operation(op, *consts.toTypedArray()))
+
+        when (num) {
+            is BigInteger -> vars.add(IntegerLiteral(num))
+            is BigDecimal -> vars.add(DecimalLiteral(num))
+        }
+        return op(op, vars)
+    } else {
+        return op(op, list)
+    }
 }
 
 fun filterMulAdd(it:List<out Operand>): Operand {
@@ -171,16 +214,16 @@ fun applyMulAdd(it:List<out Operand>): Operand {
 }
 
 fun applyPowMul(it:List<out Operand>): Operand {
-    val map: MutableMap<Operand, BigInteger> = mutableMapOf()
+    val map: MutableMap<Operand, Operand> = mutableMapOf()
     for(operand in it) {
         val validKey = map.keys.filter { key->operand.deepEquals(key) }
         if(validKey.isNotEmpty()) {
-            map[validKey[0]] = map[validKey[0]]?.plus(BigInteger.ONE) ?: BigInteger.ZERO
+            map[validKey[0]] = map[validKey[0]]?.let { it1 -> add(it1 ,one)}!!
         } else {
-            map[operand] = BigInteger.ONE
+            map[operand] = one
         }
     }
-    return map.keys.map { if(map[it] ==null) it else if(map[it]!! > BigInteger.ONE) map[it]?.let { it1 -> IntegerLiteral(it1) }
+    return map.keys.map { if(map[it] ==null) it else if(getConst<BigInteger>(map[it]!!) != BigInteger.ONE) map[it]
         ?.let { it2 ->
             pow(it,
                 it2
@@ -188,8 +231,115 @@ fun applyPowMul(it:List<out Operand>): Operand {
         } else it }.toTypedArray()?.let { it3 -> mul(*it3 as Array<out Operand>) }
 }
 
+fun applySimAdd(list:List<out Operand>): Operand {
+    val map: MutableMap<Operand, Operand> = mutableMapOf()
+    val operation = list.filterIsInstance<Operation>()
+
+    val mults = operation.filter { it.operator == Operators.mul }
+
+    val negBases = operation.filter { !mults.contains(it) && it.operator==Operators.neg }
+
+    val negs = negBases.map { it.operands[0] }
+
+    val negOps = negs.filterIsInstance<Operation>()
+
+    val negMults = negOps.filter { it.operator == Operators.mul }
+
+    val negOther = negs.filter { !negMults.contains(it) }
+
+    val other = list.filter { !mults.contains(it) && !negBases.contains(it) }
+
+    for(o in other) {
+        map[o] = one
+    }
+
+    for(o in negOther) {
+        val validKey = map.keys.filter { key->o.deepEquals(key) }
+        if(validKey.isEmpty()) {
+            map[o] = one.negate()
+        } else {
+            val list = if((map[validKey[0]] is Operation))
+                ArrayList((map[validKey[0]] as Operation).operands.toMutableList())
+            else
+                mutableListOf(map[validKey[0]])
+            list.add(one.negate())
+            map[validKey[0]] = add(*list.toTypedArray())
+        }
+    }
+
+    for(m in mults) {
+        val conts = m.operands.filter { isConst(it) }
+        val vars = m.operands.filter { !isConst(it) }
+        if(vars.isEmpty()) {
+            if(map[one]==null) {
+                map[one] = mul(*conts.toTypedArray())
+            } else {
+                val list = if(map[one] is Operation)
+                    ArrayList((map[one] as Operation).operands.toMutableList())
+                else
+                    mutableListOf(map[one])
+                list.addAll(conts)
+                map[one] = add(*list.toTypedArray())
+            }
+        } else {
+            val op = if(vars.size==1) vars[0] else mul(*vars.toTypedArray())
+            val validKey = map.keys.filter { key->op.deepEquals(key) }
+            if(validKey.isEmpty()) {
+                map[op] = mul(*conts.toTypedArray())
+            } else {
+                val list = if((map[validKey[0]] is Operation))
+                    ArrayList((map[validKey[0]] as Operation).operands.toMutableList())
+                else
+                    mutableListOf(map[validKey[0]])
+                list.addAll(conts)
+                map[validKey[0]] = add(*list.toTypedArray())
+            }
+        }
+    }
+
+    for(m in negMults) {
+        val conts = m.operands.filter { isConst(it) }
+        val vars = m.operands.filter { !isConst(it) }
+        if(vars.isEmpty()) {
+            if(map[one]==null) {
+                map[one] = mul(*conts.toTypedArray()).negate()
+            } else {
+                val list = if(map[one] is Operation)
+                    ArrayList((map[one] as Operation).operands.toMutableList())
+                else
+                    mutableListOf(map[one])
+                list.addAll(conts)
+                map[one] = add(*list.toTypedArray()).negate()
+            }
+        } else {
+            val op = if(vars.size==1) vars[0] else mul(*vars.toTypedArray())
+            val validKey = map.keys.filter { key->op.deepEquals(key) }
+            if(validKey.isEmpty()) {
+                map[op] = mul(*conts.toTypedArray()).negate()
+            } else {
+                val list = if((map[validKey[0]] is Operation))
+                    ArrayList((map[validKey[0]] as Operation).operands.toMutableList())
+                else
+                    mutableListOf(map[validKey[0]])
+                list.addAll(conts.map { it.negate() })
+                map[validKey[0]] = add(*list.toTypedArray())
+            }
+        }
+    }
+
+
+    return map.keys.map { if(map[it] ==null) it else if(getConst<BigInteger>(map[it]!!) != BigInteger.ONE) map[it]
+        ?.let { it2 ->
+            mul(it,
+                it2
+            )
+        } else it }?.let { it3 -> add(*it3.toTypedArray() as Array<out Operand>) }
+
+}
+
+
 fun applyDivPowMul(list:List<out Operand>): Operand {
-    val map: MutableMap<Operand, BigInteger> = mutableMapOf()
+    val map: MutableMap<Operand, Operand> = mutableMapOf()
 
     val operation = list.filterIsInstance<Operation>()
     val powers = operation.filter { it.operator==Operators.pow }
@@ -199,37 +349,37 @@ fun applyDivPowMul(list:List<out Operand>): Operand {
     val other = list.filter { !powers.contains(it) && !inverts.contains(it) }
 
     powers.forEach {
-        map[it.operands[0]] =  getConst(it.operands[1]) ?: BigInteger.ONE
+        map[it.operands[0]] =  IntegerLiteral(getConst(it.operands[1]) ?: BigInteger.ONE)
     }
 
     for(op in invertsPow) {
         val validKey = map.keys.filter { key->(op.operands[1] as Operation).operands[0].deepEquals(key) }
         if(validKey.isNotEmpty()) {
-            map[validKey[0]] = map[validKey[0]]?.minus(((op.operands[1] as Operation).operands[1] as IntegerLiteral).obj) ?: BigInteger.ZERO
+            map[validKey[0]] = map[validKey[0]]?.let {sub(it,(op.operands[1] as Operation).operands[1])} ?: zero
         } else {
-            map[(op.operands[1] as Operation).operands[0]] = getConst((op.operands[1] as Operation).operands[1])?.negate() ?: BigInteger.ONE.negate()
+            map[(op.operands[1] as Operation).operands[0]] = (op.operands[1] as Operation).operands[1]?.negate() ?: one
         }
     }
 
     for(operand in invertOther) {
         val validKey = map.keys.filter { key->operand.operands[1].deepEquals(key) }
         if(validKey.isNotEmpty()) {
-            map[validKey[0]] = map[validKey[0]]?.minus(BigInteger.ONE) ?: BigInteger.ZERO
+            map[validKey[0]] = map[validKey[0]]?.let { sub(it, one) } ?: zero
         } else {
-            map[operand.operands[1]] = BigInteger.ONE.negate()
+            map[operand.operands[1]] = IntegerLiteral(BigInteger.ONE.negate())
         }
     }
 
     for(operand in other) {
         val validKey = map.keys.filter { key->operand.deepEquals(key) }
         if(validKey.isNotEmpty()) {
-            map[validKey[0]] = map[validKey[0]]?.plus(BigInteger.ONE) ?: BigInteger.ZERO
+            map[validKey[0]] = map[validKey[0]]?.let { add(it, one) } ?: zero
         } else {
-            map[operand] = BigInteger.ONE
+            map[operand] = one
         }
     }
 
-    return map.keys.map { if(map[it] ==null) it else if(map[it]!! != BigInteger.ONE) map[it]?.let { it1 -> IntegerLiteral(it1) }
+    return map.keys.map { if(map[it] ==null) it else if(getConst<BigInteger>(map[it]!!) != BigInteger.ONE) map[it]
         ?.let { it2 ->
             pow(it,
                 it2
@@ -247,19 +397,18 @@ fun dot(o1:Operation, o2:Operation, multiplier: List<Operand> ) : Operation{
     }.toTypedArray()) as Operation
 }
 
-open class Formula(val name: String?, val fx:(v:List<out Operand>) -> Operand, val dFx:(v:List<out Operand>) -> Operand)
+open class Formula<out T: Operand, out U>(val name: String?, val fx:(v:List<@UnsafeVariance T>) -> Operand, val dFx:(v: @UnsafeVariance U) -> Operand)
 
-open class SimplificationFormula(val name: String?, val fx:(v:List<out Operand>) -> Operand, val dFx:(v:List<out Operand>) -> Operand, val firstPriority: Boolean = false) {
+open class SimplificationFormula(name: String?, fx:(v:List<out Operand>) -> Operand, dFx:(operation: Operation) -> Operand, val firstPriority: Boolean = false): Formula<Operand, Operation>(name, fx, dFx) {
     fun simplify(operand: Operand) : Result? {
         if(operand is Operation) {
             val f = fx(operand.operands.toList())
             val level = getLevel(f, 0)
             val maxLevel = level.keys.maxOf { it }
             if(operand.toOperatorString(maxLevel-1, level) == f.toOperatorString(maxLevel)) {
-                val d = dFx(operand.operands.toList())
+                val d = dFx(operand)
                 if(d.toString() == operand.toString()) return null
-                println("$operand = $d, $name")
-                return name?.let { Result(d, f, d, it) }
+                return name?.let { Result(d, operand, d, it) }
             }
         }
         return null

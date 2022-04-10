@@ -365,12 +365,19 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         }
         return true
     }
+
+    operator fun get(index: Int): Operand = operands[index]
+
 }
 
 open abstract class UnitOperand(val name: String?, @NotNull val isVar: Boolean) : Operand()
 
 class Constant(name: String): UnitOperand(name, false) {
     var lit: Literal<out Any>? = null
+
+    constructor(lit: Literal<*>) : this("a"+ counter.getNext()){
+        this.lit = lit as Literal<out Object>
+    }
 
     constructor(lit: IntegerLiteral) : this("a"+ counter.getNext()){
         this.lit = lit as Literal<out Object>
@@ -405,9 +412,18 @@ class Constant(name: String): UnitOperand(name, false) {
     }
 
     override fun deepEquals(operand: Operand): Boolean {
-        if(operand !is Constant) {
+        if(operand !is Constant && operand !is Literal<*>) {
             return false
         }
+        if(operand !is Literal<*> ) {
+            if(lit != null)
+                return operand.deepEquals(lit!!)
+            else
+                false
+        }
+
+        if(operand !is Constant) return false
+
         if(Objects.equals(lit, operand.lit)) {
             return true
         }
@@ -556,10 +572,18 @@ class IntegerLiteral(obj: BigInteger, name: String?) : Literal<BigInteger>(obj, 
     }
 
     override fun deepEquals(operand: Operand): Boolean {
-        if(operand !is IntegerLiteral) {
-            return false
+        if(operand is IntegerLiteral) {
+            return obj == operand.obj
         }
-        return obj == operand.obj
+
+        if(operand is Constant) {
+            return if(operand.lit !=null)
+                Objects.equals( obj , operand.lit!!.obj)
+            else
+                false
+        }
+
+        return false
     }
 }
 
@@ -573,10 +597,18 @@ class DecimalLiteral(obj: BigDecimal, name: String?) : Literal<BigDecimal>(obj, 
     }
 
     override fun deepEquals(operand: Operand): Boolean {
-        if(operand !is DecimalLiteral) {
-            return false
+        if(operand is DecimalLiteral) {
+            return obj == operand.obj
         }
-        return obj == operand.obj
+
+        if(operand is Constant) {
+            return if(operand.lit !=null)
+                Objects.equals( obj , operand.lit!!.obj)
+            else
+                false
+        }
+
+        return false
     }
 }
 

@@ -109,7 +109,7 @@ fun diff(operand: Operand): Results {
     return Results()
 }
 
-open class DifferentiationFormula(name: String?, fx:(v:List<Variable>) -> Operand, dFx:(v:List<Variable>) ->  Operand) : Formula(name,
+open class DifferentiationFormula(name: String?, fx:(v:List<Variable>) -> Operand, dFx:(v:List<Variable>) ->  Operand) : Formula<Variable, List<Variable>>(name,
     fx as (List<out Operand>) -> Operand, dFx as (List<out Operand>) -> Operand
 ){
     open fun differentiate(operand: Operand): Results {

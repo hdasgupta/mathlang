@@ -98,7 +98,7 @@
 
 
 <i style="color:maroon" th:fragment="constant (lit, name)">
-    [[${lit==null ? name : lit}]]
+    [[${lit!=null ? lit : name}]]
 </i>
 
 

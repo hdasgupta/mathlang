@@ -1,21 +1,21 @@
 <table th:if="${!results.isEmpty()}" border="0">
     <tr>
-        <td id="diff_formula" colspan="2">
+        <td id="sim_formula" colspan="2">
             <script>
-                load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                load("#sim_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
             </script>
         </td>
     </tr>
     <tr th:each="result, stat :${results}">
         <td>
-            <button class="btn btn-secondary" data-toggle="modal" th:onclick="modal[[${stat.count}]]()">Step details
+            <button class="btn btn-secondary" data-toggle="modal" th:onclick="sim_modal[[${stat.count}]]()">Step details
                 <script>
-                    function modal[[${stat.count}]]() {
-                        $('[[${'#modal_'+stat.count}]]').modal('toggle')
+                    function sim_modal[[${stat.count}]]() {
+                        $('[[${'#sim_modal_'+stat.count}]]').modal('toggle')
                     }
                 </script>
             </button>
-            <div class="modal fade" th:id="${'modal_'+stat.count}">
+            <div class="modal fade" th:id="${'sim_modal_'+stat.count}">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -28,14 +28,14 @@
                         </div>
                         <div class="modal-body">
                             <h5>Previous Step : </h5>
-                            <div th:if="${stat.index == 0}" th:id="${'prevStep_'+stat.count}">
+                            <div th:if="${stat.index == 0}" th:id="${'sim_prevStep_'+stat.count}">
                                 <script>
-                                    load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                    load("[[${'#sim_prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
                                 </script>
                             </div>
-                            <span  th:if="${stat.index > 0}" th:id="${'prevStep_'+stat.count}">
+                            <span  th:if="${stat.index > 0}" th:id="${'sim_prevStep_'+stat.count}">
                                  <script>
-                                    load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${results.get(stat.index-1).operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                    load("[[${'#sim_prevStep_'+stat.count}]]", {'formula': '[[${results.get(stat.index-1).operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
                                 </script>
                             </span>
 
@@ -45,12 +45,29 @@
 
                             <div th:text="${result.formulaName == null ? '' : result.formulaName}" ></div>
 
+                            <table border="0">
+                                <tr>
+                                    <td th:id="${'sim_fx_'+stat.count}">
+                                        <script>
+                                            load("[[${'#sim_fx_'+stat.count}]]", {'formula': '[[${result.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                        </script>
+                                    </td>
+                                    <td>=</td>
+                                    <td th:id="${'sim_dFx_'+stat.count}">
+                                        <script>
+                                            load("[[${'#sim_dFx_'+stat.count}]]", {'formula': '[[${result.dFx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                        </script>
+                                    </td>
+                                </tr>
+
+                            </table>
+
                             <br/>
 
                             <h5>Current Step: </h5>
-                            <span   th:id="${'curr_'+stat.count}">
+                            <span   th:id="${'sim_curr_'+stat.count}">
                                 <script>
-                                    load("[[${'#curr_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                                    load("[[${'#sim_curr_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
                                 </script>
                             </span>
 
@@ -65,9 +82,9 @@
             </div>
         </td>
         <td>
-            <span  th:id="${'result_'+stat.count}">
+            <span  th:id="${'sim_result_'+stat.count}">
                 <script>
-                    load("[[${'#result_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
+                    load("[[${'#sim_result_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
                 </script>
             </span>
         </td>
