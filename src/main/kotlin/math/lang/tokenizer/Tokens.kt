@@ -69,7 +69,6 @@ class Token private constructor(val value:String, val type: TokenType, val subTy
 
 fun getOperand(node: TokenNode) : Operand {
     val token = node.token
-    println(token)
     if(token is Token) {
         return when(token.type) {
             TokenType.variable ->
@@ -120,8 +119,6 @@ class TokenNode private constructor(val token: Nodable, val children: MutableLis
         fun getTree(tokens : List<Token>): TokenNode {
             val stacks: Stacks = Stacks()
             stacks.operators.push(BracketsType.opening)
-
-            println(tokens.joinToString("") { it.value })
 
             var i:Int = 0
 
@@ -309,7 +306,7 @@ enum class VariableType(private val pattern:String) : SubPattern {
     atan("atan"),
     acot("acot"),
     asec("asec"),
-    variable("x|y[0-9]*"),
+    variable("x[0-9]*|y[0-9]*"),
     constant("a[0-9]*"),
     d("d"),
     function("fx[0-9]*|fy[0-9]*|f[0-9]*");

@@ -39,6 +39,7 @@ import math.lang.common.ExpressionConstants.Companion.tan
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
+import math.lang.common.Results
 
 private val DIFFERENTIATION_Differentiation_FORMULA : MutableList<DifferentiationFormula> = getAllDifferentialEquation()
 
@@ -216,7 +217,7 @@ class ProductiveRule(fx: (v:List<Variable>) -> Operand, dFx: (v:List<Variable>) 
 }
 
 class QuotientRule(fx: (v:List<Variable>) -> Operand, dFx: (v:List<Variable>) -> Operand): Rule("Quotient Rule", fx, dFx) {
-    override fun differentiate(operand: Operand): Results{
+    override fun differentiate(operand: Operand): Results {
         if(operand is Operation) {
             if(operand.operator== Operators.div) run {
                 val results: List<Results> = operand.operands.map { operand -> diff(operand) }
@@ -301,9 +302,9 @@ class ChainRule(fx: (v:List<Variable>) -> Operand, dFx: (v:List<Variable>) -> Op
     override fun differentiate(operand: Operand): Results {
         if(operand is Operation) {
             if(operand.operator.operandCount==1) {
-                val result1:Results = diff(operand.operands[0])
-                val differentiationResult2s:List<DifferentiationResult> = diff(Operation(operand.operator, x)).map { result-> DifferentiationResult(replace(result.operand, x, operand.operands[0]), result.fx, result.dFx, result.formulaName) }
-                val differentiationResults:List<List<Result>> = listOf(result1, differentiationResult2s)
+                val result1: Results = diff(operand.operands[0])
+                val differentiationResult2s:Set<DifferentiationResult> = diff(Operation(operand.operator, x)).map { result-> DifferentiationResult(replace(result.operand, x, operand.operands[0]), result.fx, result.dFx, result.formulaName) }.toSet()
+                val differentiationResults:List<Set<Result>> = listOf(result1, differentiationResult2s)
                 val result: Results = Results()
 
                 val newVar: Variable = y.new()
@@ -336,14 +337,6 @@ class DifferentiationResult(operand: Operand, fx: Operand, dFx: Operand, formula
     private companion object {
         const val preAppeneder = "= "
         const val postAppeneder = "| applying "
-    }
-}
-
-class Results: ArrayList<Result>() {
-    override fun toString(): String {
-        val maxOperandSize = maxOf { result->result.str.length } + 1
-        forEach { result -> result.maxOperandSize = maxOperandSize }
-        return joinToString("\r\n")
     }
 }
 

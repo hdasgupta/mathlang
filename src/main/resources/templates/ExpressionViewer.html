@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <script th:src="@{js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
+    <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
+    <script>
+        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/html'}]]"
+        var lastResponse = {}
+        var responses = {}
+        var successes = []
+        function load(elem, json, url, succCallBack, errCallBack) {
+            if(!lastResponse[url+JSON.stringify(json)]) {
+                $(document).ready(function() {
+                    $.post(url,
+                                json,
+                                function (response, status) {
+
+
+                                }
+                        )
+                        .done(function(response) {
+                            lastResponse[url+JSON.stringify(json)] = response
+                            responses[elem] = response
+                            successes.push(json.formula)
+                            if(!!succCallBack) {
+                                succCallBack()
+                            }
+                        })
+                        .fail(function() {
+                            if(!!errCallBack) {
+                                errCallBack()
+                            }
+                        })
+                })
+            } else {
+                if(!lateInit) {
+                    $(elem).html(lastResponse[url+JSON.stringify(json)])
+                } else {
+                    successes.push(json.formula)
+                }
+                responses[elem] = lastResponse[url+JSON.stringify(json)]
+                if(!!succCallBack) {
+                    succCallBack()
+                }
+            }
+        }
+
+        function loadHtml(elem) {
+            $(document).ready(function() {
+                $(elem).html(responses[elem])
+            })
+        }
+
+        function onChange(e) {
+            onReset()
+            $(document).ready(function() {
+                load("#table", {'formula': $('#formula').val()}, url, onSuccess, onError)
+            })
+        }
+
+
+        function onError() {
+            $("#success").hide()
+            $("#error").show()
+        }
+
+        function onReset() {
+            $("#success").hide()
+            $("#error").hide()
+        }
+
+        function onSuccess() {
+            if(responses["#table"].indexOf("ERROR")>=0) {
+                onError()
+            } else {
+                $("#success").show()
+                $("#error").hide()
+                loadHtml("#table")
+            }
+        }
+
+        $(document).ready(function() {
+            onReset()
+
+        })
+    </script>
+    <style>
+      td.left {
+        color: darkslateblue;
+        font-weight: bold;
+      }
+      td.right {
+        color: darkslateblue;
+        font-weight: bold;
+      }
+
+      td {
+        vertical-align: middle;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <title>Differentiation Page</title>
+</head>
+<body>
+
+    <div class="input-group input-group-lg has-error has-feedback nm">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">
+                <table>
+                    <tr>
+                        <td style="vertical-align: middle;padding: 0;margin: 0;">d</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;padding: 0;margin: 0;"><hr style="height: 2px; padding: 0;margin: 0; color: black;"/></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;padding: 0;margin: 0;">dx</td>
+                    </tr>
+                </table>
+            </span>
+        </div>
+        <textarea type="text"
+               class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
+               th:value="${formula}" placeholder="Enter Formula to Differentiate"
+               aria-label="Large"
+               onkeyup="onChange(event)" autocomplete="on"
+        ></textarea>
+    </div>
+    <div class="alert alert-success alert-dismissible fade show" id="success">
+        <strong>Success!</strong> Your expression parsed successfully.
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" id="error">
+        <strong>Error!</strong> A problem has been occurred while parsing expression.
+    </div>
+
+
+<div id="table">
+    <script>
+        if(!!'[[${formula}]]') {
+            load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]")
+        }
+    </script>
+</div>
+
+</body>
+</html>

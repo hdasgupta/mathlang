@@ -3,13 +3,10 @@ package math.lang.common
 import com.numericalmethod.suanshu.number.big.BigDecimalUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import math.lang.Results
+import math.lang.common.Results
+import math.lang.common.ExpressionConstants.Companion.one
 import math.lang.common.ExpressionConstants.Companion.varIn
 import math.lang.diff
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
-import math.lang.tokenizer.getOperand
-import org.apache.el.parser.AstNegative
 import org.jetbrains.annotations.NotNull
 import java.math.BigDecimal
 import java.math.BigInteger
@@ -213,10 +210,8 @@ enum class Operators(val symbol: String, val reduce: (numbers:List<BigDecimal>, 
         }}, 1),
  }
 
-abstract class Operand(val leaf: Boolean = true, negative: Boolean = false, inverted : Boolean = false) : Comparable<Operand> {
+abstract class Operand(val leaf: Boolean = true) : Comparable<Operand> {
     protected val id:Int = counter.getNext()
-    private var negative: Boolean = negative
-    private var inverted: Boolean = inverted
 
     override fun compareTo(other: Operand): Int {
         return id.compareTo(other.id)
@@ -225,64 +220,69 @@ abstract class Operand(val leaf: Boolean = true, negative: Boolean = false, inve
     companion object {
         private val counter: Counter = Counter()
         fun negate(op:Operand): Operand {
-            op.negative = op.negative.not()
-            return op
+            return if(op is Operation) {
+                if(op.operator == Operators.neg) {
+                    op.operands[0]
+                } else {
+                    Operation(Operators.neg, op)
+                }
+            } else {
+                Operation(Operators.neg, op)
+            }
         }
         fun invert(op:Operand): Operand {
-            op.inverted = op.inverted.not()
-            return op
+            return if(op is Operation) {
+                if(op.operator == Operators.div &&
+                    op.operands[0] is Literal<*> &&
+                    (op.operands[0] as Literal<*>).obj is Number &&
+                    (op.operands[0] as Literal<*>).obj == 1) {
+                    op.operands[1]
+                } else {
+                    Operation(Operators.div, one,  op)
+                }
+            } else {
+                Operation(Operators.div, one,  op)
+            }
         }
     }
 
     open fun funcOf(): Set<Variable> = setOf()
 
-    override fun toString(): String {
-        return if(negative) {
-            if(inverted) {
-                "(-1/${string()})"
-            } else {
-                "(-${string()})"
-            }
-        } else {
-            if(inverted) {
-                "(1/${string()})"
-            } else {
-                "${string()}"
-            }
-        }
-    }
+    override fun toString(): String = "${string()}"
 
     abstract fun string(): String
 
     open fun toTypeString(): String = this.javaClass.simpleName
 
-    open fun toOperatorString(level: Int) : String = ""
+    open fun toOperatorString(level: Int, operators: Map<Int, List<Operators>> = mapOf(*(0..level).map { Pair(it, Operators.values().toList()) }.toTypedArray())) : String = ""
     
     abstract fun calc(): Number
 
     abstract fun deepEquals(operand: Operand ): Boolean
 
-    fun isNegative(): Boolean = negative
+    fun isNegative(): Boolean = this is Operation && this.operator==Operators.neg
 
-    fun isInverted(): Boolean = inverted
+    fun isInverted(): Boolean = this is Operation &&
+            this.operator == Operators.div &&
+            this.operands[0] is Literal<*> &&
+            (this.operands[0] as Literal<*>).obj is Number &&
+            (this.operands[0] as Literal<*>).obj == 1
 
     fun negate(): Operand {
 
-        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
-        op.negative = op.negative.not()
-        return op
+        return Companion.negate(this)
     }
 
     fun invert(): Operand {
-        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
-        op.inverted = op.inverted.not()
-        return op
+        return Companion.invert(this)
     }
 
     fun positive(): Operand {
-        val op = getOperand(TokenNode.getTree(Token.getTokens(toString())))
-        op.negative = false
-        return op
+        return if(this is Operation && this.operator==Operators.neg) {
+            this.operands[0]
+        } else {
+            return this
+        }
     }
 
 }
@@ -327,9 +327,13 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         }
     }
 
-    override fun toOperatorString(level: Int): String {
+    override fun toOperatorString(level: Int, operators: Map<Int, List<Operators>>): String {
+        val maxLevel: Int = operators.keys.maxOf { it }
+        val list = operators[maxLevel - level -1]
+        val validOps: List<Operators> = list ?: Operators.values().toList()
+        if(!validOps.contains(operator)) return ""
         return if(operands.any { it is Operation } && level > 0) {
-            "(${operands.filterIsInstance<Operation>().map { it.toOperatorString(level -1 ) }.distinct().sorted().joinToString("|")}$operator)"
+            "(${operands.filterIsInstance<Operation>().map { it.toOperatorString(level -1 , operators) }.filter { it.isNotEmpty() }.distinct().sorted().joinToString("|")}$operator)"
 
         } else {
             "($operator)"
@@ -366,7 +370,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
 open abstract class UnitOperand(val name: String?, @NotNull val isVar: Boolean) : Operand()
 
 class Constant(name: String): UnitOperand(name, false) {
-    var lit: Literal<out Object>? = null
+    var lit: Literal<out Any>? = null
 
     constructor(lit: IntegerLiteral) : this("a"+ counter.getNext()){
         this.lit = lit as Literal<out Object>
@@ -381,6 +385,20 @@ class Constant(name: String): UnitOperand(name, false) {
         this.lit = lit as Literal<out Object>
     }
     override fun string(): String = "${lit ?: name}"
+
+
+    fun clone(): Constant {
+        return if(lit!=null) {
+            when (lit) {
+                is IntegerLiteral -> Constant(lit as IntegerLiteral)
+                is DecimalLiteral -> Constant(lit as DecimalLiteral)
+                is StringLiteral -> Constant(lit as StringLiteral)
+                else -> Constant(lit as BooleanLiteral)
+            }
+        } else {
+            Constant(name ?: "a")
+        }
+    }
 
     override fun calc(): Number {
         return lit?.calc() ?: throw Exception("No constant value")
@@ -433,14 +451,14 @@ class Variable(name: String): UnitOperand(name(name), true) {
 
     fun new(): Variable = Variable(this.name ?: "y", counter.getNext())
 
+    fun clone(): Variable = Variable(this.name ?: "y")
+
     private companion object {
         val counter: Counter = Counter()
         val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
         fun name(name : String) : String {
-            println(name)
             val matcher : Matcher = numericPattern.matcher(name)
             val find = matcher.find()
-            println("$name -> ${matcher.group("name")}, ${matcher.group("num")}")
             return matcher.group("name")
         }
 

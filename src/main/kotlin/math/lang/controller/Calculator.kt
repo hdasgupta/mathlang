@@ -1,16 +1,9 @@
 package math.lang.controller
 
-import math.lang.Results
-import math.lang.common.Differentiate
-import math.lang.common.Operand
 import math.lang.common.Operation
 import math.lang.common.calculator.Command
 import math.lang.common.calculator.History
 import math.lang.common.calculator.Node
-import math.lang.diff
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
-import math.lang.tokenizer.getOperand
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
 import org.springframework.util.MimeTypeUtils

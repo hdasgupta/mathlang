@@ -75,7 +75,7 @@
 
 <table border="0" cellpadding="0" th:fragment="binary (operator, operands, root)">
     <tr>
-        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;"
+        <td th:if="${!root}" style="vertical-align: middle;padding: 0;margin: 0;"
             class="left">
             (
         </td>
@@ -89,7 +89,7 @@
                 <div th:replace="operands/MainRouter.html :: route(operand=${o}, root=false)"></div>
             </td>
         </div>
-        <td th:if="${!root && (!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && operands[0].operands.length == 1))}" style="vertical-align: middle;padding: 0;margin: 0;"
+        <td th:if="${!root}" style="vertical-align: middle;padding: 0;margin: 0;"
             class="right">
             )
         </td>

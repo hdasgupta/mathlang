@@ -71,7 +71,6 @@ class Node(var cursor: Int = 0, val data: StringBuilder = StringBuilder(), priva
                 }
             }
         }
-        println(data)
         return when(command) {
             Command.result -> true
             else -> false

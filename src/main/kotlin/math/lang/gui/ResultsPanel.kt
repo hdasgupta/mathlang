@@ -1,8 +1,8 @@
 package math.lang.gui
 
-import math.lang.*
 import math.lang.common.Differentiate
 import math.lang.common.Operand
+import math.lang.common.Results
 import java.awt.Component
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent

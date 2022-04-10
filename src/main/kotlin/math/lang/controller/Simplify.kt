@@ -3,6 +3,7 @@ package math.lang.controller
 import math.lang.common.Results
 import math.lang.common.Differentiate
 import math.lang.common.Operand
+import math.lang.common.simp
 import math.lang.diff
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
@@ -14,34 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest
 
 @Controller
-class Differentiation {
-    @RequestMapping(value = ["/differentiate"])
+class Simplify {
+    @RequestMapping(value = ["/simplify"])
     fun getTemplate(@RequestParam(required = false) formula: String? = null, map: ModelMap, req: HttpServletRequest): String {
         map["formula"] = formula
 
-        return "DifferentiationPage"
+        return "SimplificationPage"
     }
-
-    @RequestMapping(value = ["/diff"])
-    fun getDiff(@RequestParam formula: String, map: ModelMap): String {
-        val operation = getOperand(TokenNode.getTree(Token.getTokens(formula)))
-        val operand: Operand = Differentiate(operand = operation)
-        map["operand"] = operand
-
-        return "operands/MainOperand"
-    }
-
-    @RequestMapping(value = ["/diffHtml"])
+    @RequestMapping(value = ["/simple"])
     fun getDiffHtml(@RequestParam formula: String, map: ModelMap): String {
         try {
-            val results: Results = diff(getOperand(TokenNode.getTree(Token.getTokens(formula))))
+            val results: Results = simp(getOperand(TokenNode.getTree(Token.getTokens(formula))))
             map["results"] = ArrayList(results)
             map["formula"] = formula
         } catch (t:Throwable) {
             map["results"] = Results()
         }
 
-        return "DifferentiationResult"
+        return "SimplificationResult"
     }
 
 }

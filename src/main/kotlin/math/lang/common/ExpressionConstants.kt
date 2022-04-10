@@ -22,6 +22,20 @@ class ExpressionConstants {
         val zero = IntegerLiteral(BigInteger.ZERO)
         val half = DecimalLiteral(BigDecimal(0.5))
 
+        fun isConst(o: Operand, num:BigInteger): Boolean =
+            when(o) {
+                is IntegerLiteral -> o.obj == num
+                is Constant -> if(o.lit !=null) o.lit!!.obj == num else false
+                else -> false
+            }
+
+        fun getConst(o: Operand): BigInteger? =
+            when(o) {
+                is IntegerLiteral -> o.obj
+                is Constant -> if(o.lit !=null) o.lit!!.obj as BigInteger else null
+                else -> null
+            }
+
         fun op(operators: Operators, vararg operands: Operand): Operation = Operation(operators, *operands)
 
         fun int(obj: Number): IntegerLiteral = IntegerLiteral(BigInteger(obj.toString()))
@@ -33,34 +47,40 @@ class ExpressionConstants {
         fun bool(obj:Boolean): BooleanLiteral = BooleanLiteral(obj)
 
         fun add(vararg operands: Operand): Operand =
-            if(operands.count { o ->
-                    o!= zero &&
-                    (o !is Constant ||
-                            !Objects.equals(o.lit, zero))
-                } >1)
-                op(Operators.add,  *operands.filter {
-                        o->o!= zero &&
-                        (o !is Constant ||
-                                !Objects.equals(o.lit, zero))
-                }.toTypedArray())
+            when(operands.count { !isConst(it, BigInteger.ZERO) }) {
+                0 -> zero
+                1 -> operands.first { !isConst(it, BigInteger.ZERO) }
+                else -> op(Operators.add,  *operands.filter { !isConst(it, BigInteger.ZERO) }.toTypedArray())
+            }
+
+
+        fun sub(vararg operands: Operand): Operand =
+            if(isConst(operands[0], BigInteger.ZERO))
+                neg(operands[1])
+            else if(isConst(operands[1], BigInteger.ZERO))
+                operands[0]
+            else op(Operators.sub, operands[0], operands[1])
+
+
+
+        fun mul(vararg operands: Operand): Operand {
+            return if (operands.any { isConst(it, BigInteger.ZERO) })
+                zero
+            else if (operands.count { !isConst(it, BigInteger.ONE) } == 0)
+                one
+            else if (operands.count { !isConst(it, BigInteger.ONE) } == 1)
+                operands.first { !isConst(it, BigInteger.ONE) }
+            else op(Operators.mul, *operands.filter { !isConst(it, BigInteger.ONE) }.toTypedArray())
+        }
+        fun div(vararg operands: Operand): Operand =
+            if(isConst(operands[0], BigInteger.ZERO))
+                zero
+            else if(isConst(operands[1], BigInteger.ZERO))
+                Undefined()
+            else if(isConst(operands[1], BigInteger.ONE))
+                operands[0]
             else
-                operands.first { o ->
-                    o != zero &&
-                            (o !is Constant ||
-                                    !Objects.equals(o.lit, zero))
-                }
-
-        fun sub(vararg operands: Operand): Operand = if(operands[0] == zero) neg(operands[1]) else if(operands[1]== zero) operands[0] else op(
-            Operators.sub, operands[0], operands[1])
-
-        fun mul(vararg operands: Operand): Operand = if(operands.any{ o->
-            o == zero || (o is Constant && o.lit != null && o.lit!!.equals(
-            zero
-            )) }) zero else if(operands.filter { o->o!= one }.count()==1) operands.filter { o->o!= one }.first() else op(
-            Operators.mul, *operands.filter { o->o!= one }.toTypedArray())
-
-        fun div(vararg operands: Operand): Operand = if(operands[0]== zero) zero else if(operands[1]== zero) Undefined() else if(operands[1]== one) operands[0] else op(
-            Operators.div, operands[0], operands[1])
+                op(Operators.div, operands[0], operands[1])
 
         fun eq(vararg operands: Operand): Operation = op(Operators.eq, operands[0], operands[1])
 
@@ -74,8 +94,17 @@ class ExpressionConstants {
 
         fun mod(vararg operands: Operand): Operation = op(Operators.mod, operands[0], operands[1])
 
-        fun pow(vararg operands: Operand): Operand = if(operands[1]== zero) one else if(operands[1] == one) operands[0] else if(operands[0]== zero) zero else if(operands[0]== one) one else op(
-            Operators.pow, operands[0], operands[1])
+        fun pow(vararg operands: Operand): Operand =
+            if(isConst(operands[1], BigInteger.ZERO))
+                one
+            else if(isConst(operands[1], BigInteger.ONE))
+                operands[0]
+            else if(isConst(operands[0], BigInteger.ZERO))
+                zero
+            else if(isConst(operands[0], BigInteger.ONE))
+                one
+            else
+                op(Operators.pow, operands[0], operands[1])
 
         fun sqr(vararg operands: Operand): Operation = op(Operators.pow, operands[0], two)
 
@@ -83,11 +112,11 @@ class ExpressionConstants {
 
         fun log(vararg operands: Operand): Operation = op(Operators.log, operands[0], operands[1])
 
-        fun ln(operand: Operand): Operation = op(Operators.ln, operand)
+        fun ln(vararg operand: Operand): Operation = op(Operators.ln, operand[0])
 
-        fun neg(vararg operand: Operand): Operand = Operand.negate(operand[0])
+        fun neg(vararg operand: Operand): Operand = Operand.negate(if(operand[0] is Variable) (operand[0] as Variable).clone() else if(operand[0] is Constant) (operand[0] as Constant).clone() else operand[0])
 
-        fun inv(operand: Operand): Operand = Operand.invert(operand)
+        fun inv(vararg operand: Operand): Operand = Operand.invert(if(operand[0] is Variable) (operand[0] as Variable).clone() else if(operand[0] is Constant) (operand[0] as Constant).clone() else operand[0])
 
         fun sin(operand: Operand): Operation = op(Operators.sin, operand)
 
