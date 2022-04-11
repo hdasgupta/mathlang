@@ -3,7 +3,6 @@ package math.lang.common
 import math.lang.common.ExpressionConstants.Companion.add
 import math.lang.common.ExpressionConstants.Companion.div
 import math.lang.common.ExpressionConstants.Companion.getConst
-import math.lang.common.ExpressionConstants.Companion.getValue
 import math.lang.common.ExpressionConstants.Companion.hasValue
 import math.lang.common.ExpressionConstants.Companion.isConst
 import math.lang.common.ExpressionConstants.Companion.mul
@@ -13,9 +12,7 @@ import math.lang.common.ExpressionConstants.Companion.sub
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
-import math.lang.d
-import math.lang.diff
-import math.lang.tokenizer.getOperand
+
 //
 //fun main() {
 //    println(div(x, mul(x.new(), y.new())))
@@ -62,7 +59,7 @@ fun simp(operand: Operand): Results {
                     results[i].forEach { res ->
                         ops[i] = res.operand
 
-                        var o: Operand = op((op as Operation).operator, ops)
+                        var o: Operand = op((op as Operation).operator, ops.toTypedArray())
                         r.add(
                             Result(
                                 o,
@@ -76,7 +73,7 @@ fun simp(operand: Operand): Results {
                 val result = formula.simplify(
                     op(
                         op.operator,
-                        *results.indices.map { if (results[it].isNotEmpty()) results[it].last().operand else (op as Operation).operands[it] })
+                        *results.indices.map { if (results[it].isNotEmpty()) results[it].last().operand else (op as Operation).operands[it] }.toTypedArray())
                 )
                 if (result != null && "$op" != "${result.operand}") {
                     r.add(result)
@@ -95,13 +92,13 @@ fun simp(operand: Operand): Results {
 }
 
 
-fun op(operator: Operators, ops: List<Operand>): Operand {
+fun op(operator: Operators, ops: Array<Operand>): Operand {
     if (operator.operandCount > 1 && ops.size == 1) {
         return ops[0]
     }
     return try {
         ExpressionConstants.Companion::class.java.getDeclaredMethod(operator.name, Array<Operand>::class.java)
-            .invoke(ExpressionConstants.Companion, ops.toTypedArray()) as Operand
+            .invoke(ExpressionConstants.Companion, ops) as Operand
     } catch (t: Throwable) {
         ExpressionConstants.Companion::class.java.getDeclaredMethod(operator.name, Operand::class.java)
             .invoke(ExpressionConstants.Companion, ops[0]) as Operand
@@ -213,29 +210,30 @@ fun calc(op: Operators, list: List<out Operand>): Operand {
     val isFirst = if (consts.isNotEmpty()) consts.minOf { list.indexOf(it) } == 0 else false
     val vars = list.filter { !hasValue(it) }.toMutableList()
 
-    return if (consts.isNotEmpty()) {
 
-        when (val num = getValue(
-            when (consts.size) {
-                1 -> consts[0]
-                else -> Operation(op, *consts.toTypedArray())
+    return     if (consts.isNotEmpty()) {
+
+        val values = consts.map { it.calc() }
+        val num = DecimalLiteral(values.reduce {c1,c2-> op(op, arrayOf(DecimalLiteral(c1.toDouble()), DecimalLiteral(c2.toDouble()))).calc()}.toDouble())
+
+        if(vars.isEmpty()) {
+            num
+        }else {
+            if (isFirst)
+                vars.add(0, num)
+            else
+                vars.add(num)
+
+            if (vars.size ==  op.operandCount) {
+                op(op, vars.toTypedArray())
+            } else if(vars.size>1 ){
+                op(op, vars.toTypedArray())
+            } else {
+                vars[0]
             }
-        )) {
-            is Int, is Integer -> if (isFirst) vars.add(
-                0,
-                IntegerLiteral(num.toInt())
-            ) else vars.add(IntegerLiteral(num.toInt()))
-            is Double, is java.lang.Double -> if (isFirst) vars.add(0, DecimalLiteral(num.toDouble())) else vars.add(
-                DecimalLiteral(num.toDouble())
-            )
-        }
-        if (vars.size == 1) {
-            vars[0]
-        } else {
-            op(op, vars)
         }
     } else {
-        op(op, list)
+        op(op, list.toTypedArray())
     }
 }
 

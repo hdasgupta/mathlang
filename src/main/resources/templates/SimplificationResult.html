@@ -1,4 +1,4 @@
-<table th:if="${!results.isEmpty()}" border="0">
+<table th:if="${!results.isEmpty()}" border="0" width="100%">
     <tr>
         <td id="sim_formula" colspan="2">
             <script>
@@ -7,7 +7,7 @@
         </td>
     </tr>
     <tr th:each="result, stat :${results}">
-        <td>
+        <td width="120px">
             <button class="btn btn-secondary" data-toggle="modal" th:onclick="sim_modal[[${stat.count}]]()">Step details
                 <script>
                     function sim_modal[[${stat.count}]]() {
@@ -112,13 +112,51 @@
 
     </tr>
     <tr th:if="${additionalButtons}">
-        <td>
+        <td colspan="2">
 
             <form th:action="@{/differentiate(formula=${results[results.size-1].operand})}" method="post">
                 <button class="btn btn-secondary" type="submit">
                     Differentiate
                 </button>
             </form>
+        </td>
+
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">x = </span>
+                </div>
+                <div>
+                    <input
+                            class="form-control" type="number" name="value"
+                            id="value" placeholder="Value of x"
+                            pattern="[0-9]+\.?|[0-9]+\.[0-9]+|\.?[0-9]+"
+                            onkeyup="loadValue()"
+                            required>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="output" style="width:200px">Enter Value</span>
+                </div>
+            </div>
+            <script>
+                function loadValue() {
+                    if(isNumber($('#value').val())) {
+                        load("#output", {'formula': '[[${results[results.size-1].operand}]]', 'x': getNumber($('#value').val())}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/eval'}]]')
+                    }
+                }
+
+                function isNumber(str) {
+                  if (typeof str != "string") return false // we only process strings!
+                  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+                         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+                }
+
+                function getNumber(str) {
+                    return parseFloat(str)
+                }
+            </script>
         </td>
 
     </tr>

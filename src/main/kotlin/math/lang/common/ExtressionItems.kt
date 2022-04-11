@@ -404,7 +404,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
 
         val dnumbers: List<Double> = numbers.map {
             java.lang.Double.parseDouble(
-                if (it.toString().contains(".")) it.toString() else "$it.${"0".repeat(200)}"
+                if (it.toString().contains(".")) it.toString() else "0"
             )
         }
         val result = operator.reduce(dnumbers, isReal)
