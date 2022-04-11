@@ -95,8 +95,8 @@ fun getOperand(node: TokenNode) : Operand {
                 }
             else ->
                 when(token.subTypes as NumericType) {
-                    NumericType.integer -> Constant(IntegerLiteral(BigInteger(token.value)))
-                    else -> Constant(DecimalLiteral(BigDecimal(token.value)))
+                    NumericType.integer -> Constant(IntegerLiteral(java.lang.Integer.parseInt(token.value)))
+                    else -> Constant(DecimalLiteral(java.lang.Double.parseDouble(token.value)))
                 }
         }
     } else {

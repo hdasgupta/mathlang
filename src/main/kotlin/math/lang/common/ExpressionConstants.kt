@@ -1,28 +1,26 @@
 package math.lang.common
 
-import java.math.BigDecimal
-import java.math.BigInteger
-import java.util.*
 import kotlin.math.E
 import kotlin.math.PI;
+import java.lang.Double;
 
 class ExpressionConstants {
     companion object {
         val a = Constant("a")
-        val e = DecimalLiteral(BigDecimal(E), "e")
-        val pi = DecimalLiteral(BigDecimal(PI), "pi")
+        val e = DecimalLiteral(E, "e")
+        val pi = DecimalLiteral(PI, "pi")
         val x = Variable("x")
         val y = Variable("y")
         val fx1 = func(x)
         val fx2 = func(x)
         val dfx1 = Differentiate(fx1)
         val dfx2 = Differentiate(fx2)
-        val one = IntegerLiteral(BigInteger.ONE)
-        val two = IntegerLiteral(BigInteger("2"))
-        val zero = IntegerLiteral(BigInteger.ZERO)
-        val half = DecimalLiteral(BigDecimal(0.5))
+        val one = IntegerLiteral(1)
+        val two = IntegerLiteral(2)
+        val zero = IntegerLiteral(0)
+        val half = DecimalLiteral(.5)
 
-        fun isConst(o: Operand, num:BigInteger): Boolean =
+        fun isConst(o: Operand, num:Int): Boolean =
             when(o) {
                 is IntegerLiteral -> o.obj == num
                 is Constant -> if(o.lit !=null) o.lit!!.obj == num else false
@@ -38,46 +36,46 @@ class ExpressionConstants {
 
         fun op(operators: Operators, vararg operands: Operand): Operation = Operation(operators, *operands)
 
-        fun int(obj: Number): IntegerLiteral = IntegerLiteral(BigInteger(obj.toString()))
+        fun int(obj: Number): IntegerLiteral = IntegerLiteral(Integer.parseInt(obj.toString()))
 
-        fun real(obj: Number): DecimalLiteral = DecimalLiteral(BigDecimal(obj.toString()))
+        fun real(obj: Number): DecimalLiteral = DecimalLiteral(java.lang.Double.parseDouble(obj.toString()))
 
         fun str(obj: String): StringLiteral = StringLiteral(obj)
 
         fun bool(obj:Boolean): BooleanLiteral = BooleanLiteral(obj)
 
         fun add(vararg operands: Operand): Operand =
-            when(operands.count { !isConst(it, BigInteger.ZERO) }) {
+            when(operands.count { !isConst(it, 0) }) {
                 0 -> zero
-                1 -> operands.first { !isConst(it, BigInteger.ZERO) }
-                else -> op(Operators.add,  *operands.filter { !isConst(it, BigInteger.ZERO) }.toTypedArray())
+                1 -> operands.first { !isConst(it, 0) }
+                else -> op(Operators.add,  *operands.filter { !isConst(it, 0) }.toTypedArray())
             }
 
 
         fun sub(vararg operands: Operand): Operand =
-            if(isConst(operands[0], BigInteger.ZERO))
+            if(isConst(operands[0], 0))
                 neg(operands[1])
-            else if(isConst(operands[1], BigInteger.ZERO))
+            else if(isConst(operands[1], 0))
                 operands[0]
             else op(Operators.sub, operands[0], operands[1])
 
 
 
         fun mul(vararg operands: Operand): Operand {
-            return if (operands.any { isConst(it, BigInteger.ZERO) })
+            return if (operands.any { isConst(it, 0) })
                 zero
-            else if (operands.count { !isConst(it, BigInteger.ONE) } == 0)
+            else if (operands.count { !isConst(it, 1) } == 0)
                 one
-            else if (operands.count { !isConst(it, BigInteger.ONE) } == 1)
-                operands.first { !isConst(it, BigInteger.ONE) }
-            else op(Operators.mul, *operands.filter { !isConst(it, BigInteger.ONE) }.toTypedArray())
+            else if (operands.count { !isConst(it, 1) } == 1)
+                operands.first { !isConst(it, 1) }
+            else op(Operators.mul, *operands.filter { !isConst(it, 1) }.toTypedArray())
         }
         fun div(vararg operands: Operand): Operand =
-            if(isConst(operands[0], BigInteger.ZERO))
+            if(isConst(operands[0], 0))
                 zero
-            else if(isConst(operands[1], BigInteger.ZERO))
+            else if(isConst(operands[1], 0))
                 Undefined()
-            else if(isConst(operands[1], BigInteger.ONE))
+            else if(isConst(operands[1], 1))
                 operands[0]
             else
                 op(Operators.div, operands[0], operands[1])
@@ -95,13 +93,13 @@ class ExpressionConstants {
         fun mod(vararg operands: Operand): Operation = op(Operators.mod, operands[0], operands[1])
 
         fun pow(vararg operands: Operand): Operand =
-            if(isConst(operands[1], BigInteger.ZERO))
+            if(isConst(operands[1], 0))
                 one
-            else if(isConst(operands[1], BigInteger.ONE))
+            else if(isConst(operands[1], 1))
                 operands[0]
-            else if(isConst(operands[0], BigInteger.ZERO))
+            else if(isConst(operands[0], 0))
                 zero
-            else if(isConst(operands[0], BigInteger.ONE))
+            else if(isConst(operands[0], 1))
                 one
             else
                 op(Operators.pow, operands[0], operands[1])
@@ -186,16 +184,19 @@ class ExpressionConstants {
             }
         }
 
-        fun compareConst(const1: Operand, const2: Operand) : Boolean {
-            if(const1 is Constant && const2 is Constant) {
-                return const1.name == const2.name
+        fun compare(op1: Operand, op2: Operand) : Boolean {
+            if(op1 is Constant && op2 is Constant) {
+                return op1.name == op2.name
+            }
+            if(op1 is Variable && op2 is Variable) {
+                return op1.name == op2.name
             }
             return false
         }
 
         fun replace(root: Operand, source: Operand, target: Operand): Operand =
             when(root) {
-                is Operation -> Operation(root.operator, *root.operands.map { op-> if(compareConst(op,source)) target else replace(op, source, target) }.toTypedArray())
+                is Operation -> Operation(root.operator, *root.operands.map { op-> if(compare(op,source)) target else replace(op, source, target) }.toTypedArray())
                 is Literal<*> -> const(root)
                 else -> root
             }
@@ -219,7 +220,7 @@ class ExpressionConstants {
 
         fun getValue(operand: Operand):Number? =
             if(hasValue(operand)) {
-                operand.calc()
+                operand.calc(true)
             } else {
                 null
             }

@@ -62,7 +62,7 @@
         function onChange(e) {
             onReset()
             $(document).ready(function() {
-                load("#table", {'formula': $('#formula').val()}, url, true, onSuccess, onError)
+                load("#table", {'formula': $('#formula').val(), 'additionalButtons': 'true'}, url, true, onSuccess, onError)
             })
         }
 
@@ -137,10 +137,10 @@
         </div>
         <textarea type="text"
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
-               th:value="${formula}" placeholder="Enter Formula to Differentiate"
+               placeholder="Enter Formula to Differentiate"
                aria-label="Large"
                onkeyup="onChange(event)" autocomplete="on"
-        ></textarea>
+        >[[${formula}]]</textarea>
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Simplify</button>
         </div>
@@ -156,7 +156,7 @@
 <div id="table">
     <script>
         if(!!'[[${formula}]]') {
-            load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/simple'}]]")
+            load("#table", {'formula': '[[${formula}]]', 'additionalButtons': 'true'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/simple'}]]")
         }
     </script>
 </div>

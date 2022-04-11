@@ -137,10 +137,10 @@
         </div>
         <textarea type="text"
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
-               th:value="${formula}" placeholder="Enter Formula to Differentiate"
+               placeholder="Enter Formula to Differentiate"
                aria-label="Large"
                onkeyup="onChange(event)" autocomplete="on"
-        ></textarea>
+        >[[${formula}]]</textarea>
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Differentiate</button>
         </div>

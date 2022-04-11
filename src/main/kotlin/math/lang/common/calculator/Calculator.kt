@@ -4,7 +4,7 @@ import math.lang.common.Operand
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
-import java.math.BigDecimal
+
 import java.util.*
 
 enum class Command(val text: String? = null, val isOperator:Boolean = false, val isPreOperator:Boolean = false) {
@@ -82,8 +82,8 @@ class Node(var cursor: Int = 0, val data: StringBuilder = StringBuilder(), priva
         val tokenNode : TokenNode = TokenNode.getTree(tokens)
         val parsed: Operand = getOperand(tokenNode)
         val result = parsed.calc()
-        if(result is BigDecimal) {
-            history = History(parsed, result.toPlainString())
+        if(result is Double) {
+            history = History(parsed, result.toString())
         } else {
             history = History(parsed, result.toString())
         }

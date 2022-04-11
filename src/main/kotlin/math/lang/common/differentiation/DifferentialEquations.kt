@@ -22,6 +22,7 @@ import math.lang.common.ExpressionConstants.Companion.inv
 import math.lang.common.ExpressionConstants.Companion.asec
 import math.lang.common.ExpressionConstants.Companion.asin
 import math.lang.common.ExpressionConstants.Companion.atan
+import math.lang.common.ExpressionConstants.Companion.isConst
 import math.lang.common.ExpressionConstants.Companion.ln
 import math.lang.common.ExpressionConstants.Companion.log
 import math.lang.common.ExpressionConstants.Companion.mul
@@ -36,6 +37,7 @@ import math.lang.common.ExpressionConstants.Companion.sqr
 import math.lang.common.ExpressionConstants.Companion.sqrt
 import math.lang.common.ExpressionConstants.Companion.sub
 import math.lang.common.ExpressionConstants.Companion.tan
+import math.lang.common.ExpressionConstants.Companion.varIn
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
@@ -114,7 +116,59 @@ open class DifferentiationFormula(name: String?, fx:(v:List<Variable>) -> Operan
 ){
     open fun differentiate(operand: Operand): Results {
         val results: Results = Results()
-        return if(fx(listOf()).toTypeString() == operand.toTypeString()) {
+        val f = fx(listOf())
+        if(f is Operation && operand is Operation) {
+            if(f.operator == operand.operator) {
+                if(f.operands.size == operand.operands.size) {
+                    if(f.operands.indices.all {
+                        isConst(f[it]) == isConst(operand[it]) &&
+                                varIn(f[it]).minus(varIn(operand[it])).isEmpty() &&
+                                !f[it].deepEquals(operand[it])
+                    }) {
+                        val usedConst = f.operands.indices.filter {
+                            isConst(f[it])
+                        }.map { operand[it] }
+                        val usedVar: Operand = f.operands.indices.filter {
+                            varIn(f[it]).minus(varIn(operand[it])).isEmpty()
+                        }.map { operand[it] }.first()
+                        val results: Results = Results()
+                        val diffOfVar = ArrayList(diff(usedVar))
+                        val assume = y.new()
+                        val assumption = eq(assume, usedVar)
+                        val newF = replace(f, x, assume)
+                        val diff = Differentiate(operand = newF)
+                        for(i in diffOfVar.indices) {
+                            val r = diffOfVar[i]
+
+                            results.add(
+                                DifferentiationResult(
+                                    mul(r.operand, diff),
+                                    r.fx,
+                                    r.dFx,
+                                    r.formulaName,
+                                    listOf( r.assumptions,if(i==0) {
+                                        listOf(assumption)
+                                    } else {
+                                        listOf()
+                                    }).flatten(),
+                                    r.derive
+
+                                )
+                            )
+                        }
+                        val replacedVar = replace(dFx(listOf()), x, usedVar)
+                        if(usedConst.isNotEmpty()) {
+                            val replacedConst = replace(replacedVar, a, usedConst[0])
+                            results.add(DifferentiationResult(mul(diffOfVar.last().operand,replacedConst), fx(listOf()), dFx(listOf()), name ?: ""))
+                        } else {
+                            results.add(DifferentiationResult(mul(diffOfVar.last().operand, replacedVar), fx(listOf()), dFx(listOf()), name ?: ""))
+                        }
+                        return results
+                    }
+                }
+            }
+        }
+        return if(f.toTypeString() == operand.toTypeString()) {
             val usedConst = constIn(operand)
             if(usedConst != null) {
                 results.add(DifferentiationResult(replace(dFx(listOf()), a, usedConst), fx(listOf()), dFx(listOf()), name ?: ""))

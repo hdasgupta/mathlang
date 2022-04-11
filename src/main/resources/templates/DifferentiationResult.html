@@ -37,6 +37,10 @@
                                 </script>
                             </div>
                             <span  th:if="${stat.index > 0}" th:id="${'prevStep_'+stat.count}">
+                                <div th:replace="operands/MainRouter.html :: route(operand=${results.get(stat.index-1).operand}, root=true)"
+                                     th:remove="tag">
+
+                                </div>
                                  <script>
                                     load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${results.get(stat.index-1).operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
                                 </script>
@@ -49,15 +53,23 @@
                                 <table border="0">
                                     <tr>
                                         <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_0'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <div th:replace="operands/MainRouter.html :: route(operand=${assumption.operands[0]}, root=true)"
+                                                 th:remove="tag">
+
+                                            </div><!--
                                             <script>
                                                 load("[[${'#assumption_'+astat.count+'_'+stat.count+'_0'}]]", {'formula': '[[${assumption.operands[0]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                            </script>
+                                            </script>-->
                                         </td>
                                         <td style="vertical-align: middle;padding: 0;margin: 0;">=</td>
                                         <td th:id="${'assumption_'+astat.count+'_'+stat.count+'_1'}" style="vertical-align: middle;padding: 0;margin: 0;">
+                                            <div th:replace="operands/MainRouter.html :: route(operand=${assumption.operands[1]}, root=true)"
+                                                 th:remove="tag">
+
+                                            </div><!--
                                             <script>
                                                 load("[[${'#assumption_'+astat.count+'_'+stat.count+'_1'}]]", {'formula': '[[${assumption.operands[1]}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                            </script>
+                                            </script>-->
                                         </td>
 
                                     </tr>
@@ -71,15 +83,23 @@
                             <table border="0">
                                 <tr>
                                     <td th:id="${'fx_'+stat.count}">
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${result.fx}, root=true)"
+                                             th:remove="tag">
+
+                                        </div><!--
                                         <script>
                                             load("[[${'#fx_'+stat.count}]]", {'formula': '[[${result.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                     <td>=</td>
                                     <td th:id="${'dFx_'+stat.count}">
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${result.dFx}, root=true)"
+                                             th:remove="tag">
+
+                                        </div><!--
                                         <script>
                                             load("[[${'#dFx_'+stat.count}]]", {'formula': '[[${result.dFx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                 </tr>
 
@@ -91,15 +111,23 @@
                             <table th:if="${!result.derive.isEmpty()}">
                                 <tr th:each="d, estat: ${result.derive}">
                                     <td th:id="${'left_'+stat.count+'_'+estat.count}">
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${d.left}, root=true)"
+                                             th:remove="tag">
+
+                                        </div><!--
                                         <script>
                                             load("[[${'#left_'+stat.count+'_'+estat.count}]]", {'formula': '[[${d.left}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                     <td>=</td>
                                     <td th:id="${'right_'+stat.count+'_'+estat.count}">
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${d.right}, root=true)"
+                                             th:remove="tag">
+
+                                        </div><!--
                                         <script>
                                             load("[[${'#right_'+stat.count+'_'+estat.count}]]", {'formula': '[[${d.right}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                     <td>
                                         <div th:text="${d.desc}">
@@ -112,9 +140,13 @@
 
                             <h5>Current Step: </h5>
                             <span   th:id="${'curr_'+stat.count}">
+                                <div th:replace="operands/MainRouter.html :: route(operand=${result.operand}, root=true)"
+                                     th:remove="tag">
+
+                                </div><!--
                                 <script>
                                     load("[[${'#curr_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                </script>
+                                </script>-->
                             </span>
 
                         </div>
@@ -129,9 +161,13 @@
         </td>
         <td>
             <span  th:id="${'result_'+stat.count}">
+                <div th:replace="operands/MainRouter.html :: route(operand=${result.operand}, root=true)"
+                     th:remove="tag">
+
+                </div><!--
                 <script>
                     load("[[${'#result_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                </script>
+                </script>-->
             </span>
         </td>
 
@@ -142,9 +178,10 @@
     Simplification
 </h5>
 <div  th:if="${!results.isEmpty()}" id="simplify">
+
     <script>
         if(!!'[[${formula}]]') {
-            load("#simplify", {'formula': '[[${results[results.size-1].operand}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/simple'}]]")
+            load("#simplify", {'formula': '[[${results[results.size-1].operand}]]', 'additionalButtons' : false}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/simple'}]]")
         }
     </script>
 </div>

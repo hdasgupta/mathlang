@@ -22,11 +22,13 @@ class Simplify {
 
         return "SimplificationPage"
     }
+
     @RequestMapping(value = ["/simple"])
-    fun getDiffHtml(@RequestParam formula: String, map: ModelMap): String {
+    fun getDiffHtml(@RequestParam formula: String, @RequestParam(required = false) additionalButtons:Boolean = true, map: ModelMap): String {
         try {
             val results: Results = simp(getOperand(TokenNode.getTree(Token.getTokens(formula))))
             map["results"] = ArrayList(results)
+            map["additionalButtons"] = additionalButtons
             map["formula"] = formula
         } catch (t:Throwable) {
             map["results"] = Results()

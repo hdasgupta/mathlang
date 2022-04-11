@@ -34,9 +34,13 @@
                                 </script>
                             </div>
                             <span  th:if="${stat.index > 0}" th:id="${'sim_prevStep_'+stat.count}">
+                                <div th:replace="operands/MainRouter.html :: route(operand=${results.get(stat.index-1).operand}, root=true)"
+                                     th:remove="tag">
+
+                                </div><!--
                                  <script>
                                     load("[[${'#sim_prevStep_'+stat.count}]]", {'formula': '[[${results.get(stat.index-1).operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                </script>
+                                </script>-->
                             </span>
 
                             <br/>
@@ -48,15 +52,23 @@
                             <table border="0">
                                 <tr>
                                     <td th:id="${'sim_fx_'+stat.count}">
-                                        <script>
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${result.fx}, root=true)"
+                                             th:remove="tag">
+
+                                        </div>
+                                        <!--<script>
                                             load("[[${'#sim_fx_'+stat.count}]]", {'formula': '[[${result.fx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                     <td>=</td>
                                     <td th:id="${'sim_dFx_'+stat.count}">
+                                        <div th:replace="operands/MainRouter.html :: route(operand=${result.dFx}, root=true)"
+                                             th:remove="tag">
+
+                                        </div><!--
                                         <script>
                                             load("[[${'#sim_dFx_'+stat.count}]]", {'formula': '[[${result.dFx}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                        </script>
+                                        </script>-->
                                     </td>
                                 </tr>
 
@@ -66,9 +78,13 @@
 
                             <h5>Current Step: </h5>
                             <span   th:id="${'sim_curr_'+stat.count}">
+                                <div th:replace="operands/MainRouter.html :: route(operand=${result.operand}, root=true)"
+                                     th:remove="tag">
+
+                                </div><!--
                                 <script>
                                     load("[[${'#sim_curr_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                                </script>
+                                </script>-->
                             </span>
 
                         </div>
@@ -83,15 +99,32 @@
         </td>
         <td>
             <span  th:id="${'sim_result_'+stat.count}">
+                <div th:replace="operands/MainRouter.html :: route(operand=${result.operand}, root=true)"
+                     th:remove="tag">
+
+                </div><!--
                 <script>
                     load("[[${'#sim_result_'+stat.count}]]", {'formula': '[[${result.operand}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/html'}]]')
-                </script>
+                </script>-->
             </span>
+        </td>
+
+
+    </tr>
+    <tr th:if="${additionalButtons}">
+        <td>
+
+            <form th:action="@{/differentiate(formula=${results[results.size-1].operand})}" method="post">
+                <button class="btn btn-secondary" type="submit">
+                    Differentiate
+                </button>
+            </form>
         </td>
 
     </tr>
 
  </table>
-<div  th:if="${results.isEmpty()}" style="color: red">
-    <center>ERROR OCCURED</center>
+
+<div  th:if="${results.isEmpty()}" style="color: blue">
+    Already Simplified
 </div>

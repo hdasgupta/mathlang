@@ -97,9 +97,9 @@
 </table>
 
 
-<i style="color:maroon" th:fragment="constant (lit, name)">
+<b style="color:maroon" th:fragment="constant (lit, name)">
     [[${lit!=null ? lit : name}]]
-</i>
+</b>
 
 
 <b th:fragment="variable (name, index)">
@@ -176,6 +176,6 @@
     </tr>
 </table>
 
-<b style="color:maroon"  th:fragment="numeric (operand, function)">
-    ${obj}
+<b style="color:maroon"  th:fragment="numeric (obj)">
+    [[${obj}]]
 </b>

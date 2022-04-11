@@ -126,10 +126,10 @@
         </div>
         <textarea type="text"
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
-               th:value="${formula}" placeholder="Enter Formula to Differentiate"
+               placeholder="Enter Formula to Differentiate"
                aria-label="Large"
                onkeyup="onChange(event)" autocomplete="on"
-        ></textarea>
+        >[[${formula}]]</textarea>
     </div>
     <div class="alert alert-success alert-dismissible fade show" id="success">
         <strong>Success!</strong> Your expression parsed successfully.
