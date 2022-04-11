@@ -42,6 +42,7 @@ import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
 import math.lang.common.Results
+import math.lang.controller.Differentiation
 
 private val DIFFERENTIATION_Differentiation_FORMULA : MutableList<DifferentiationFormula> = getAllDifferentialEquation()
 
@@ -137,6 +138,7 @@ open class DifferentiationFormula(name: String?, fx:(v:List<Variable>) -> Operan
                         val assumption = eq(assume, usedVar)
                         val newF = replace(f, x, assume)
                         val diff = Differentiate(operand = newF)
+                        results.add(DifferentiationResult(mul(Differentiate(operand = assume),diff), replace(fx(listOf()), x, assume), mul(replace(dFx(listOf()), x, assume), Differentiate(operand = assume)), name ?: "", listOf(assumption)))
                         for(i in diffOfVar.indices) {
                             val r = diffOfVar[i]
 
@@ -146,11 +148,7 @@ open class DifferentiationFormula(name: String?, fx:(v:List<Variable>) -> Operan
                                     r.fx,
                                     r.dFx,
                                     r.formulaName,
-                                    listOf( r.assumptions,if(i==0) {
-                                        listOf(assumption)
-                                    } else {
-                                        listOf()
-                                    }).flatten(),
+                                    r.assumptions,
                                     r.derive
 
                                 )

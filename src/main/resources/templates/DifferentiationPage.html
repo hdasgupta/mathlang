@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <!-- Popper -->
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
     <script th:src="@{js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
@@ -59,10 +62,10 @@
             })
         }
 
-        function onChange(e) {
+        function onChange(e, auto) {
             onReset()
             $(document).ready(function() {
-                load("#table", {'formula': $('#formula').val()}, url, true, onSuccess, onError)
+                load("#table", {'formula': $('#formula').val()}, url, auto, onSuccess, onError)
             })
         }
 
@@ -96,7 +99,7 @@
 
         $(document).ready(function() {
             onReset()
-
+            $('#auto').hide()
         })
     </script>
     <style>
@@ -139,8 +142,13 @@
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
                placeholder="Enter Formula to Differentiate"
                aria-label="Large"
-               onkeyup="onChange(event)" autocomplete="on"
+               onkeyup="onChange(event, $('#auto').val()=='on')" autocomplete="on"
         >[[${formula}]]</textarea>
+        <div class="input-group-append"  data-toggle="buttons">
+            <label class="btn btn-primary" style="height: 100%;" onclick="onChange(event, $('#auto').val()=='on')">
+                <input type="checkbox" id="auto" autocomplete="off"> Auto
+            </label>
+        </div>
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Differentiate</button>
         </div>

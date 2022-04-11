@@ -19,21 +19,21 @@ import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 
-//fun main() {
-//    println(div(x, mul(x.new(), y.new())))
-//
-//    TokenNode.getTree(Token.getTokens("x+-(2)"))
-//    val str = "1"
-//    val list = Token.getTokens(str)
-//    val tokenNode = TokenNode.getTree(list)
-//    var operand = getOperand(tokenNode)
-//
-//    //println(d(operand))
-//
-//    var results = simp(operand)
-//    println(results)
-//
-//}
+/*fun main() {
+    println(div(x, mul(x.new(), y.new())))
+
+    TokenNode.getTree(Token.getTokens("x+-(2)"))
+    val str = "(1/sin(x))*tan(x^x)*cos(x)*sin(x)^tan(x^x)"
+    val list = Token.getTokens(str)
+    val tokenNode = TokenNode.getTree(list)
+    var operand = getOperand(tokenNode)
+
+    //println(d(operand))
+
+    var results = simp(operand)
+    println(results)
+
+}*/
 
 val solution: MutableMap<String, Results> = mutableMapOf()
 
@@ -160,6 +160,7 @@ fun getAllSimplificationEquation():MutableList<SimplificationFormula> {
 
 fun calc(op:Operators, list:List<out Operand>): Operand {
     val consts = list.filter { hasValue(it) }
+    val isFirst = if(consts.isNotEmpty()) consts.minOf { list.indexOf(it) } == 0 else false
     val vars = list.filter { !hasValue(it) }.toMutableList()
 
     return if(consts.isNotEmpty()) {
@@ -170,8 +171,8 @@ fun calc(op:Operators, list:List<out Operand>): Operand {
                 else -> Operation(op, *consts.toTypedArray())
             }
         )) {
-            is Int -> vars.add(IntegerLiteral(num))
-            is Double -> vars.add(DecimalLiteral(num))
+            is Int, is Integer -> if(isFirst) vars.add(0, IntegerLiteral(num.toInt())) else vars.add(IntegerLiteral(num.toInt()))
+            is Double, is java.lang.Double -> if(isFirst) vars.add(0, DecimalLiteral(num.toDouble())) else vars.add( DecimalLiteral(num.toDouble()))
         }
         if(vars.size == 1) {
             vars[0]
@@ -383,7 +384,7 @@ fun applyDivPowMul(list:List<out Operand>): Operand {
                     (map[validKey[0]] as Operation).operands.toMutableList()
             else
                 map[validKey[0]]?.let { it1 -> mutableListOf(it1) } ?: mutableListOf()
-            list.add(IntegerLiteral(getConst(it.operands[1]) ?: 1) as Operand)
+            list.add(it[1])
             map[validKey[0]] = add(*list.toTypedArray())
         }
     }

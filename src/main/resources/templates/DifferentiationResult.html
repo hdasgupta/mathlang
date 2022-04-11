@@ -83,7 +83,7 @@
                             <table border="0">
                                 <tr>
                                     <td th:id="${'fx_'+stat.count}">
-                                        <div th:replace="operands/MainRouter.html :: route(operand=${result.fx}, root=true)"
+                                        <div th:replace="operands/Fragments.html :: differentiate(operand=${result.fx}, function=null)"
                                              th:remove="tag">
 
                                         </div><!--
