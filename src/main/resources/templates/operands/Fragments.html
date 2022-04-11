@@ -1,12 +1,5 @@
-<!--<script>
-    $(document).ready(function() {
-        $(".left").resize(function() {
-            $(this).attr('width', $(this).height()/2)
-            console.log($(this).attr('height'))
-        });
-    })
-</script>-->
-<table border="0" cellpadding="0" th:fragment="unary (operator, operands)">
+
+<table border="0" cellpadding="0" th:fragment="unary (operator, operands, root)">
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <b style="color: purple">
@@ -20,7 +13,7 @@
             (
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
-            <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=false)"></div>
+            <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=${false})"></div>
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;"
             th:class="${(!(operands[0] instanceof T(math.lang.common.Operation)) || (operands[0] instanceof T(math.lang.common.Operation) && (operands[0].operands.length == 1)||operands[0].operator==T(math.lang.common.Operators).pow)) ? 'right' :''}">
@@ -30,11 +23,11 @@
 </table>
 
 
-<table border="0" cellpadding="0" th:fragment="divide (operator, operands)">
+<table border="0" cellpadding="0" th:fragment="divide (operator, operands, root)">
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <center>
-                <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=false)"></div>
+                <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=${false})"></div>
             </center>
         </td>
     </tr>
@@ -46,27 +39,27 @@
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <center>
-                <div th:replace="operands/MainRouter.html :: route(operand=${operands[1]}, root=false)"></div>
+                <div th:replace="operands/MainRouter.html :: route(operand=${operands[1]}, root=${false})"></div>
             </center>
         </td>
     </tr>
 </table>
 
 
-<table border="0" cellpadding="0" th:fragment="power (operator, operands)">
+<table border="0" cellpadding="0" th:fragment="power (operator, operands, root)">
     <tr>
         <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;"  class="left" >
             (
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
-            <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=false)"></div>
+            <div th:replace="operands/MainRouter.html :: route(operand=${operands[0]}, root=${false})"></div>
         </td>
         <td th:if="${operands[0] instanceof T(math.lang.common.Operation)}" style="vertical-align: middle;padding: 0;margin: 0;" class="right" >
             )
         </td>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <sup>
-                <div th:replace="operands/MainRouter.html :: route(operand=${operands[1]}, root=false)"></div>
+                <div th:replace="operands/MainRouter.html :: route(operand=${operands[1]}, root=${false})"></div>
             </sup>
         </td>
     </tr>
@@ -82,11 +75,11 @@
         <div th:each="o, stat: ${operands}" th:remove="tag">
             <td th:if="${stat.index>0}" style="vertical-align: middle;padding: 0;margin: 0;">
                 <b style="color:indigo">
-                    [[${operator== T(math.lang.common.Operators).mul ? "×" : operator.symbol}]]
+                    [[${operator== T(math.lang.common.Operators).mul ? "." : operator.symbol}]]
                 </b>
             </td>
             <td style="vertical-align: middle;padding: 0;margin: 0;">
-                <div th:replace="operands/MainRouter.html :: route(operand=${o}, root=false)"></div>
+                <div th:replace="operands/MainRouter.html :: route(operand=${o}, root=${false})"></div>
             </td>
         </div>
         <td th:if="${!root}" style="vertical-align: middle;padding: 0;margin: 0;"
@@ -97,12 +90,12 @@
 </table>
 
 
-<b style="color:maroon" th:fragment="constant (lit, name)">
+<b style="color:maroon" th:fragment="constant (lit, name, root)">
     [[${lit!=null ? lit : name}]]
 </b>
 
 
-<b th:fragment="variable (name, index)">
+<b th:fragment="variable (name, index, root)">
     <i style="color:green" th:if="${name!=null}">
         [[${name}]]
         <sub th:if="${index!=null}">
@@ -112,7 +105,7 @@
 </b>
 
 
-<div th:fragment="function (name, index)" th:remove="tag">
+<div th:fragment="function (name, index, root)" th:remove="tag">
     <table>
         <tr>
             <td>
@@ -140,7 +133,7 @@
 </div>
 
 
-<table border="0" cellpadding="0" th:fragment="differentiate (operand, function)">
+<table border="0" cellpadding="0" th:fragment="differentiate (operand, function, respectTo, root)">
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <b style="color: darkred">
@@ -152,10 +145,10 @@
             (
         </td>
         <td th:if="${operand!=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
-            <div th:replace="operands/MainRouter.html :: route(operand=${operand}, root=false)"></div>
+            <div th:replace="operands/MainRouter.html :: route(operand=${operand}, root=${true})"></div>
         </td>
         <td th:if="${operand==null && function !=null}" rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;">
-            <div th:replace="operands/MainRouter.html :: route(operand=${function}, root=false)"></div>
+            <div th:replace="operands/MainRouter.html :: route(operand=${function}, root=${true})"></div>
         </td>
         <td th:if="${operand!=null || function !=null}"  rowspan="3" style="vertical-align: middle;padding: 0;margin: 0;"
             class="right">
@@ -170,12 +163,12 @@
     <tr>
         <td style="vertical-align: middle;padding: 0;margin: 0;">
             <b style="color: darkred">
-                dx
+                d[[${respectTo}]]
             </b>
         </td>
     </tr>
 </table>
 
-<b style="color:maroon"  th:fragment="numeric (obj)">
+<b style="color:maroon"  th:fragment="numeric (obj, root)">
     [[${obj}]]
 </b>

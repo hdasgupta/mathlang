@@ -98,6 +98,20 @@ fun d(operand: Operand): String {
     return "d($operand)/dx\r\n${results}"
 }
 
+fun diff(operand1: Operand, operand2: Operand): Results {
+    val y1 = y.new()
+    val y2 = y.new()
+    val result1 = diff(operand1)
+    val result2 = diff(operand2)
+    val results = Results()
+//    results.add(
+//        div(d(operand1, y1), d(operand2, y2)),
+//
+//    )
+
+    return results
+}
+
 fun diff(operand: Operand): Results {
     for (differentiationFormula: DifferentiationFormula in DIFFERENTIATION_Differentiation_FORMULA) {
         val result: Results = differentiationFormula.differentiate(operand)
@@ -148,7 +162,7 @@ open class DifferentiationFormula(
                         results.add(
                             DifferentiationResult(
                                 mul(Differentiate(operand = assume), diff),
-                                replace(fx(listOf()), x, assume),
+                                replace(f, x, assume),
                                 mul(replace(dFx(listOf()), x, assume), Differentiate(operand = assume)),
                                 name ?: "",
                                 listOf(assumption)
@@ -174,7 +188,7 @@ open class DifferentiationFormula(
                             val replacedConst = replace(replacedVar, a, usedConst[0])
                             results.add(
                                 DifferentiationResult(
-                                    mul(diffOfVar.last().operand, replacedConst),
+                                    replacedConst,
                                     fx(listOf()),
                                     dFx(listOf()),
                                     name ?: ""
@@ -183,7 +197,7 @@ open class DifferentiationFormula(
                         } else {
                             results.add(
                                 DifferentiationResult(
-                                    mul(diffOfVar.last().operand, replacedVar),
+                                    replacedVar,
                                     fx(listOf()),
                                     dFx(listOf()),
                                     name ?: ""

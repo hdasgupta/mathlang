@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import math.lang.common.ExpressionConstants.Companion.one
 import math.lang.common.ExpressionConstants.Companion.varIn
+import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.diff
 import org.jetbrains.annotations.NotNull
 import java.util.*
@@ -156,7 +157,7 @@ enum class Operators(
             num.toString()
         }
     }, 1),
-    csc("cosec", { numbers, isReal ->
+    cosec("cosec", { numbers, isReal ->
         run {
             val num = 1 / kotlin.math.sin(numbers[0].toDouble())
             num.toString()
@@ -204,7 +205,7 @@ enum class Operators(
             num.toString()
         }
     }, 1),
-    acsc("acosec", { numbers, isReal ->
+    acosec("acosec", { numbers, isReal ->
         run {
             val num = 1 / kotlin.math.asin(numbers[0].toDouble())
             num.toString()
@@ -240,7 +241,7 @@ enum class Operators(
             num.toString()
         }
     }, 1),
-    csch("cosech", { numbers, isReal ->
+    cosech("cosech", { numbers, isReal ->
         run {
             val num = 1 / kotlin.math.sinh(numbers[0].toDouble())
             num.toString()
@@ -369,7 +370,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
 
     override fun string(): String {
         return when (operands.size) {
-            1 -> "${operator.symbol}${if (operands[0] is Operation) "${operands[0]}" else "(${operands[0]})"}"
+            1 -> "${operator.symbol}${if (operands[0] is Operation && (operands[0] as Operation).operands.size>1) "${operands[0]}" else "(${operands[0]})"}"
             else -> "(${operands.joinToString(separator = operator.symbol) { o -> o.toString() }})"
         }
     }
@@ -596,12 +597,12 @@ class Function(
 
 }
 
-class Differentiate(val function: Function? = null, val operand: Operand? = null) : Operand() {
+class Differentiate(val function: Variable? = null, val operand: Operand? = null, val respectTo: Variable = x) : Operand() {
     override fun funcOf(): Set<Variable> {
-        return if (function == null && operand != null) varIn(operand) else function?.variables ?: setOf()
+        return if (function == null && operand != null) varIn(operand) else function?.funcOf() ?: setOf()
     }
 
-    override fun string(): String = "(d(${operand ?: function}))"
+    override fun string(): String = "(d(${operand ?: function}, ${respectTo}))"
 
     override fun calc(approx: Boolean): Number {
         throw Exception("No constant value")
@@ -621,15 +622,7 @@ class Differentiate(val function: Function? = null, val operand: Operand? = null
     }
 
     fun func(): String? {
-        return if (operand == null) {
-            if (function?.variables?.isNotEmpty() == true) function.variables.toList()
-                .get(0).name else "x"
-        } else {
-            if (varIn(operand).isNotEmpty())
-                varIn(operand).toList()[0].name
-            else
-                "x"
-        }
+        return "$respectTo"
     }
 
     fun apply(): Results = if (operand != null) diff(operand) else Results()

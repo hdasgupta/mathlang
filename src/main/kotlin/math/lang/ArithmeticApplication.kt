@@ -1,7 +1,5 @@
 package math.lang
 
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -11,9 +9,4 @@ class ArithmeticApplication
 
 fun main(args: Array<String>) {
     runApplication<ArithmeticApplication>(*args)
-    val str = getOperand(TokenNode.getTree(Token.getTokens("-sin(x)"))).string()
-    val tokens = Token.getTokens(str)
-    println(str)
-    println(TokenNode.getTree(tokens))
-    println(tokens.size)
 }

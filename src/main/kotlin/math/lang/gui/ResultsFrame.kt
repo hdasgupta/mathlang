@@ -3,8 +3,6 @@ package math.lang.gui
 import math.lang.common.Differentiate
 import math.lang.common.Operand
 import math.lang.diff
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import java.awt.BorderLayout
 import java.awt.Color
@@ -65,7 +63,7 @@ class ResultsFrame(val operand: Operand) : JFrame() {
 
                 rf.jTextField.border = rf.defaultBorder
                 try {
-                    var operand: Operand = getOperand(TokenNode.getTree(Token.getTokens(rf.jTextField.text)))
+                    var operand: Operand = getOperand(rf.jTextField.text)
                     rf.remove(rf.formula)
                     rf.formula = OperandPanel(Differentiate(operand = operand))
                     rf.add(rf.formula)

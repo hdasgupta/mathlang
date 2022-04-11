@@ -12,8 +12,8 @@ class ExpressionConstants {
         val y = Variable("y")
         val fx1 = func(x)
         val fx2 = func(x)
-        val dfx1 = Differentiate(fx1)
-        val dfx2 = Differentiate(fx2)
+        val dfx1 = d(fx1)
+        val dfx2 = d(fx2)
         val one = IntegerLiteral(1)
         val two = IntegerLiteral(2)
         val zero = IntegerLiteral(0)
@@ -127,7 +127,7 @@ class ExpressionConstants {
 
         fun sec(operand: Operand): Operation = op(Operators.sec, operand)
 
-        fun cosec(operand: Operand): Operation = op(Operators.csc, operand)
+        fun cosec(operand: Operand): Operation = op(Operators.cosec, operand)
 
         fun r2d(operand: Operand): Operation = op(Operators.rad2deg, operand)
 
@@ -145,7 +145,7 @@ class ExpressionConstants {
 
         fun asec(operand: Operand): Operation = op(Operators.asec, operand)
 
-        fun acosec(operand: Operand): Operation = op(Operators.acsc, operand)
+        fun acosec(operand: Operand): Operation = op(Operators.acosec, operand)
 
         fun sinh(operand: Operand): Operation = op(Operators.sinh, operand)
 
@@ -157,15 +157,17 @@ class ExpressionConstants {
 
         fun sech(operand: Operand): Operation = op(Operators.sech, operand)
 
-        fun cosech(operand: Operand): Operation = op(Operators.csch, operand)
+        fun cosech(operand: Operand): Operation = op(Operators.cosech, operand)
 
         fun func(vararg variables: Variable): Function = Function("fx", variables.toSet())
 
         fun func(function: Function): Function = Function("fx", function = function)
 
-        fun d(function: Function): Differentiate = Differentiate(function)
+        fun d(function: Variable): Differentiate = Differentiate(function)
 
-        fun d(operand: Operand): Differentiate = Differentiate(operand = operand)
+        fun d(function: Function): Differentiate = Differentiate(function = Variable("${function.nam}${function.idx}"))
+
+        fun d(vararg operand: Operand): Differentiate = Differentiate(operand = operand[0], respectTo = operand[1] as Variable)
 
         inline fun <reified T : Literal<*>> const(lit: T) = Constant(lit)
 

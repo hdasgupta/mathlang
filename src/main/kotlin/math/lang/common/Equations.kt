@@ -13,22 +13,25 @@ import math.lang.common.ExpressionConstants.Companion.sub
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
-
-/*fun main() {
-    println(div(x, mul(x.new(), y.new())))
-
-    TokenNode.getTree(Token.getTokens("x+-(2)"))
-    val str = "(1/sin(x))*tan(x^x)*cos(x)*sin(x)^tan(x^x)"
-    val list = Token.getTokens(str)
-    val tokenNode = TokenNode.getTree(list)
-    var operand = getOperand(tokenNode)
-
-    //println(d(operand))
-
-    var results = simp(operand)
-    println(results)
-
-}*/
+import math.lang.d
+import math.lang.diff
+import math.lang.tokenizer.getOperand
+//
+//fun main() {
+//    println(div(x, mul(x.new(), y.new())))
+//
+//   val str = "(4 x ^ 2 + 2 x)^cot(5x^2x)"
+//    var operand = getOperand(str)
+//
+//    println(getOperand("$operand"))
+//    val s =getOperand(diff(operand).last().operand.toString())
+//    println(s)
+//    println(getOperand(simp(s).last().operand.toString()))
+///*
+//    var results = simp(operand)
+//    println(results)*/
+//
+//}
 
 val solution: MutableMap<String, Results> = mutableMapOf()
 
@@ -75,7 +78,7 @@ fun simp(operand: Operand): Results {
                         op.operator,
                         *results.indices.map { if (results[it].isNotEmpty()) results[it].last().operand else (op as Operation).operands[it] })
                 )
-                if (result != null && !op.deepEquals(result.operand)) {
+                if (result != null && "$op" != "${result.operand}") {
                     r.add(result)
                     op = result.operand
                     val rs: Results = simp(op)

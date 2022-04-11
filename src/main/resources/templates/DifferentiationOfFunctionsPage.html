@@ -11,7 +11,7 @@
     <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
     <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
     <script>
-        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
+        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffFuncHtml'}]]"
         var lastResponse = {}
         var responses = {}
         var successes = []
@@ -62,10 +62,10 @@
             })
         }
 
-        function onChange(e, auto) {
+        function onChange(e) {
             onReset()
             $(document).ready(function() {
-                load("#table", {'formula': $('#formula').val()}, url, auto, onSuccess, onError)
+                load("#table", {'formula1': $('#formula1').val(), 'formula2': $('#formula2').val()}, url, true, onSuccess, onError)
             })
         }
 
@@ -131,30 +131,51 @@
 
     <div class="input-group input-group-lg has-error has-feedback nm">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">
-                <table>
-                    <tr>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">d</td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;"><hr style="height: 2px; padding: 0;margin: 0; color: black;"/></td>
-                    </tr>
-                    <tr>
-                        <td style="vertical-align: middle;padding: 0;margin: 0;">dx</td>
-                    </tr>
-                </table>
-            </span>
+            <table>
+                <tr>
+                    <td>y</td>
+                    <td><sub>1</sub></td>
+                </tr>
+            </table>
         </div>
-        <textarea type="text"
-               class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
+        <input type="text"
+               class="form-control basicAutoComplete cfc" th:id="formula1" th:name="formula1"
                placeholder="Enter Formula to Differentiate"
-               aria-label="Large"
-               onkeyup="onChange(event, $('#auto').val()=='on')" autocomplete="on"
-        >[[${formula}]]</textarea>
-        <div class="input-group-append"  data-toggle="buttons">
-            <label class="btn btn-primary" style="height: 100%;" onclick="onChange(event, $('#auto').val()=='on')">
-                <input type="checkbox" id="auto" autocomplete="off"> Auto
-            </label>
+               aria-label="Large" th:value="${formula1}"
+               onkeyup="onChange(event)" autocomplete="on"
+        >
+    </div>
+    <div class="input-group input-group-lg has-error has-feedback nm">
+        <div class="input-group-prepend">
+            <table>
+                <tr>
+                    <td>y</td>
+                    <td><sub>2</sub></td>
+                </tr>
+            </table>
+        </div>
+        <input type="text"
+               class="form-control basicAutoComplete cfc" th:id="formula2" th:name="formula2"
+               placeholder="Enter Formula to Differentiate"
+               aria-label="Large" th:value="${formula2}"
+               onkeyup="onChange(event)" autocomplete="on"
+        >
+    </div>
+    <div class="input-group input-group-lg has-error has-feedback nm">
+        <div class="input-group-prepend">
+            <table>
+                <tr>
+                    <td>dy</td>
+                    <td><sub>1</sub></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr/></td>
+                </tr>
+                <tr>
+                    <td>dy</td>
+                    <td><sub>2</sub></td>
+                </tr>
+            </table>
         </div>
         <div class="input-group-append">
             <button disabled class="btn btn-primary" type="button" id="generate" onclick="generate('#table')">Differentiate</button>
@@ -162,7 +183,9 @@
         <div class="input-group-append">
             <button class="btn btn-primary" type="button" onclick="generate('#table')" data-toggle="modal" data-target="#help">Help</button>
         </div>
+
     </div>
+
     <div class="alert alert-success alert-dismissible fade show" id="success">
         <strong>Success!</strong> Your expression parsed successfully.
     </div>
@@ -174,7 +197,7 @@
 <div id="table">
     <script>
         if(!!'[[${formula}]]') {
-            load("#table", {'formula': '[[${formula}]]'}, "[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diffHtml'}]]")
+            load("#table", {'formula1': $('#formula1').val(), 'formula2': $('#formula2').val()}, url, true, onSuccess, onError)
         }
     </script>
 </div>

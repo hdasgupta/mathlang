@@ -4,8 +4,6 @@ import math.lang.common.Differentiate
 import math.lang.common.Operand
 import math.lang.common.Results
 import math.lang.diff
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -28,7 +26,7 @@ class Differentiation {
 
     @RequestMapping(value = ["/diff"])
     fun getDiff(@RequestParam formula: String, map: ModelMap): String {
-        val operation = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+        val operation = getOperand(formula)
         val operand: Operand = Differentiate(operand = operation)
         map["operand"] = operand
 
@@ -38,7 +36,7 @@ class Differentiation {
     @RequestMapping(value = ["/diffHtml"])
     fun getDiffHtml(@RequestParam formula: String, map: ModelMap): String {
         try {
-            val results: Results = diff(getOperand(TokenNode.getTree(Token.getTokens(formula))))
+            val results: Results = diff(getOperand(formula))
             map["results"] = ArrayList(results)
             map["formula"] = formula
         } catch (t: Throwable) {

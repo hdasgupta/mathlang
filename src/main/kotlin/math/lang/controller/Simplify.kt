@@ -2,8 +2,6 @@ package math.lang.controller
 
 import math.lang.common.Results
 import math.lang.common.simp
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -31,7 +29,7 @@ class Simplify {
         map: ModelMap
     ): String {
         try {
-            val results: Results = simp(getOperand(TokenNode.getTree(Token.getTokens(formula))))
+            val results: Results = simp(getOperand(formula))
             map["results"] = ArrayList(results)
             map["additionalButtons"] = additionalButtons
             map["formula"] = formula

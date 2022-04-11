@@ -1,8 +1,6 @@
 package math.lang.common.calculator
 
 import math.lang.common.Operand
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 
 import java.util.*
@@ -84,9 +82,7 @@ class Node(
     }
 
     private fun prepareResult() {
-        val tokens: List<Token> = Token.getTokens("$data")
-        val tokenNode: TokenNode = TokenNode.getTree(tokens)
-        val parsed: Operand = getOperand(tokenNode)
+        val parsed: Operand = getOperand("$data")
         val result = parsed.calc()
         if (result is Double) {
             history = History(parsed, result.toString())

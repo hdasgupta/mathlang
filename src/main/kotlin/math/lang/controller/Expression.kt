@@ -1,8 +1,6 @@
 package math.lang.controller
 
 import math.lang.common.Operand
-import math.lang.tokenizer.Token
-import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
@@ -25,7 +23,7 @@ class Expression {
 
     @RequestMapping(value = ["/html"])
     fun getHtml(@RequestParam formula: String, map: ModelMap): String {
-        val operand: Operand = getOperand(TokenNode.getTree(Token.getTokens(formula)))
+        val operand: Operand = getOperand(formula)
         map["operand"] = operand
 
         return "operands/MainOperand"

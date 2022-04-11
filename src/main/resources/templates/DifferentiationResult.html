@@ -83,7 +83,7 @@
                             <table border="0">
                                 <tr>
                                     <td th:id="${'fx_'+stat.count}">
-                                        <div th:replace="operands/Fragments.html :: differentiate(operand=${result.fx}, function=null)"
+                                        <div th:replace="operands/Fragments.html :: differentiate(operand=${result.fx}, function=null, respectTo=${x}, root=true)"
                                              th:remove="tag">
 
                                         </div><!--
