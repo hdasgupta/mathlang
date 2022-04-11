@@ -1,18 +1,15 @@
 package math.lang.gui
 
-import math.lang.*
 import math.lang.common.Differentiate
-import math.lang.common.ExpressionConstants.Companion.a
-import math.lang.common.ExpressionConstants.Companion.mul
-import math.lang.common.ExpressionConstants.Companion.sin
-import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.Operand
+import math.lang.diff
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
 import java.awt.BorderLayout
 import java.awt.Color
-import java.awt.event.*
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
 import javax.swing.JFrame
 import javax.swing.JScrollPane
 import javax.swing.JTextField
@@ -31,6 +28,7 @@ class ResultsFrame(val operand: Operand) : JFrame() {
     private val defaultBorder = jTextField.border
     private val errorBorder = LineBorder(Color.RED, 1)
     private val jScrollPane = JScrollPane(panel)
+
     init {
         title = "ResultFrame"
         layout = BorderLayout()
@@ -55,8 +53,12 @@ class ResultsFrame(val operand: Operand) : JFrame() {
     private class KeyPressListener(val rf: ResultsFrame) : KeyAdapter() {
         override fun keyReleased(e: KeyEvent?) {
             super.keyReleased(e)
-            val isValid = e?.keyChar?.let { Character.isLetterOrDigit(it) || Character.isWhitespace(it) || Character.isSpaceChar(it) || "+-/*^%()".contains(it) }
-            if(isValid != true) {
+            val isValid = e?.keyChar?.let {
+                Character.isLetterOrDigit(it) || Character.isWhitespace(it) || Character.isSpaceChar(it) || "+-/*^%()".contains(
+                    it
+                )
+            }
+            if (isValid != true) {
                 return
             }
             SwingUtilities.invokeLater {

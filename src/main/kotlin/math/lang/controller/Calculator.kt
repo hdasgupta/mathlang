@@ -56,7 +56,12 @@ class Calculator {
 
 
     @RequestMapping(value = ["/calculator-{type}"])
-    fun calculator(@PathVariable type:CalculatorType, map: ModelMap, req: HttpServletRequest, sess: HttpSession): String {
+    fun calculator(
+        @PathVariable type: CalculatorType,
+        map: ModelMap,
+        req: HttpServletRequest,
+        sess: HttpSession
+    ): String {
         map["buttons"] = buttons[type]
         map["type"] = type
         map["types"] = CalculatorType.values()
@@ -65,11 +70,15 @@ class Calculator {
         return "Calculator"
     }
 
-    @RequestMapping(value = ["/calculator-{type}-result"], produces=[MimeTypeUtils.APPLICATION_JSON_VALUE])
+    @RequestMapping(value = ["/calculator-{type}-result"], produces = [MimeTypeUtils.APPLICATION_JSON_VALUE])
     @ResponseBody
-    fun update(@PathVariable type:CalculatorType, @RequestParam command: Command, sess: HttpSession): Map<String, String>? {
+    fun update(
+        @PathVariable type: CalculatorType,
+        @RequestParam command: Command,
+        sess: HttpSession
+    ): Map<String, String>? {
         val node: Node = sess.getAttribute("node") as Node
-        if(node.command(command)) {
+        if (node.command(command)) {
             var history: MutableList<History> = if (sess.getAttribute("history") == null) {
                 mutableListOf()
             } else {
@@ -77,8 +86,11 @@ class Calculator {
             }
             node.getHistory()?.let { history.add(it) }
             sess.setAttribute("history", history)
-            val lastOperation = if(node.getHistory()?.operand is Operation) if((node.getHistory()?.operand as Operation).operands.size == 1) "${(node.getHistory()?.operand as Operation).operator.symbol}(" else "${(node.getHistory()?.operand as Operation).operator.symbol}${(node.getHistory()?.operand as Operation).operands.last()}" else ""
-            sess.setAttribute("node", node.getHistory()?.let { Node(lastAnswer = it.result, lastOperation = lastOperation) })
+            val lastOperation =
+                if (node.getHistory()?.operand is Operation) if ((node.getHistory()?.operand as Operation).operands.size == 1) "${(node.getHistory()?.operand as Operation).operator.symbol}(" else "${(node.getHistory()?.operand as Operation).operator.symbol}${(node.getHistory()?.operand as Operation).operands.last()}" else ""
+            sess.setAttribute(
+                "node",
+                node.getHistory()?.let { Node(lastAnswer = it.result, lastOperation = lastOperation) })
             return node.getHistory()?.let { mapOf(Pair("result", it.result)) }
         } else {
             return mapOf(Pair("result", node.data.toString()))
@@ -96,4 +108,4 @@ enum class CalculatorType(val text: String) {
 
 open class Button(val command: Command?, val rowSpan: Int = 1, val colSpan: Int = 1)
 
-class SkipButton(): Button(null, 0, 0)
+class SkipButton : Button(null, 0, 0)

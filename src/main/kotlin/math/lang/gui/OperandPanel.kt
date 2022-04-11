@@ -3,7 +3,7 @@ package math.lang.gui
 import math.lang.common.Operand
 import javax.swing.JTextPane
 
-class OperandPanel(private val operand: Operand, val center:Boolean = false) : JTextPane() {
+class OperandPanel(private val operand: Operand, val center: Boolean = false) : JTextPane() {
     /*init {
         if(operand is Operation) {
             if (operand.operator==Operators.div) {
@@ -66,6 +66,7 @@ class OperandPanel(private val operand: Operand, val center:Boolean = false) : J
         //isEditable = false
         contentType = "text/html"
         //font = Font(Font.MONOSPACED, Font.PLAIN, 1)
-        text = "<html><body style=\"font-family: monospace; font-size:8px\">${if(center) "<center>" else ""}$operand${if(center) "</center>" else ""}</body></html>"
+        text =
+            "<html><body style=\"font-family: monospace; font-size:8px\">${if (center) "<center>" else ""}$operand${if (center) "</center>" else ""}</body></html>"
     }
 }

@@ -1,9 +1,6 @@
 package math.lang.controller
 
-import math.lang.common.Results
-import math.lang.common.Differentiate
 import math.lang.common.Operand
-import math.lang.diff
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
 import math.lang.tokenizer.getOperand
@@ -16,7 +13,11 @@ import javax.servlet.http.HttpServletRequest
 @Controller
 class Expression {
     @RequestMapping(value = ["/expression"])
-    fun getTemplate(@RequestParam(required = false) formula: String? = null, map: ModelMap, req: HttpServletRequest): String {
+    fun getTemplate(
+        @RequestParam(required = false) formula: String? = null,
+        map: ModelMap,
+        req: HttpServletRequest
+    ): String {
         map["formula"] = formula
 
         return "ExpressionViewer"

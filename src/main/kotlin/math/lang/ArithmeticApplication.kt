@@ -10,10 +10,10 @@ import org.springframework.boot.runApplication
 class ArithmeticApplication
 
 fun main(args: Array<String>) {
-	runApplication<ArithmeticApplication>(*args)
-	val str = getOperand(TokenNode.getTree(Token.getTokens("-sin(x)"))).string()
-	val tokens = Token.getTokens(str)
-	println(str)
-	println( TokenNode.getTree(tokens))
-	println(tokens.size)
+    runApplication<ArithmeticApplication>(*args)
+    val str = getOperand(TokenNode.getTree(Token.getTokens("-sin(x)"))).string()
+    val tokens = Token.getTokens(str)
+    println(str)
+    println(TokenNode.getTree(tokens))
+    println(tokens.size)
 }

@@ -1,8 +1,8 @@
 package math.lang.controller
 
-import math.lang.common.Results
 import math.lang.common.Differentiate
 import math.lang.common.Operand
+import math.lang.common.Results
 import math.lang.diff
 import math.lang.tokenizer.Token
 import math.lang.tokenizer.TokenNode
@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletRequest
 @Controller
 class Differentiation {
     @RequestMapping(value = ["/differentiate"])
-    fun getTemplate(@RequestParam(required = false) formula: String? = null, map: ModelMap, req: HttpServletRequest): String {
+    fun getTemplate(
+        @RequestParam(required = false) formula: String? = null,
+        map: ModelMap,
+        req: HttpServletRequest
+    ): String {
         map["formula"] = formula
 
         return "DifferentiationPage"
@@ -37,7 +41,7 @@ class Differentiation {
             val results: Results = diff(getOperand(TokenNode.getTree(Token.getTokens(formula))))
             map["results"] = ArrayList(results)
             map["formula"] = formula
-        } catch (t:Throwable) {
+        } catch (t: Throwable) {
             map["results"] = Results()
         }
 

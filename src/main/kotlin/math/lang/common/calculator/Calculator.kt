@@ -7,7 +7,7 @@ import math.lang.tokenizer.getOperand
 
 import java.util.*
 
-enum class Command(val text: String? = null, val isOperator:Boolean = false, val isPreOperator:Boolean = false) {
+enum class Command(val text: String? = null, val isOperator: Boolean = false, val isPreOperator: Boolean = false) {
     zero("0"),
     one("1"),
     two("2"),
@@ -42,27 +42,33 @@ enum class Command(val text: String? = null, val isOperator:Boolean = false, val
 
 
 }
-class Node(var cursor: Int = 0, val data: StringBuilder = StringBuilder(), private val lastAnswer:String = "", private val lastOperation:String = "") {
+
+class Node(
+    var cursor: Int = 0,
+    val data: StringBuilder = StringBuilder(),
+    private val lastAnswer: String = "",
+    private val lastOperation: String = ""
+) {
     private var history: History? = null
 
     fun command(command: Command): Boolean {
-        if(data.isEmpty() && lastOperation.isNotEmpty() && command == Command.result) {
-            if(lastOperation.endsWith("(")) {
+        if (data.isEmpty() && lastOperation.isNotEmpty() && command == Command.result) {
+            if (lastOperation.endsWith("(")) {
                 data.append(lastOperation).append(lastAnswer).append(")")
             } else {
                 data.append(lastAnswer).append(lastOperation)
             }
             prepareResult()
         } else {
-            when(command) {
+            when (command) {
                 Command.result -> prepareResult()
-                Command.left -> if(cursor>0) cursor-- else cursor = 0
-                Command.right -> if(cursor<data.length) cursor++ else cursor = data.length
-                Command.delete -> if(cursor>0) data.deleteCharAt(--cursor)
+                Command.left -> if (cursor > 0) cursor-- else cursor = 0
+                Command.right -> if (cursor < data.length) cursor++ else cursor = data.length
+                Command.delete -> if (cursor > 0) data.deleteCharAt(--cursor)
                 Command.clear -> data.clear()
                 else -> Optional.ofNullable(command.text).ifPresent {
-                    if(lastAnswer.isNotEmpty() && data.isEmpty() && command.isOperator) {
-                        data.append(if(command.isPreOperator) "${command.text}$lastAnswer" else "$lastAnswer${command.text}")
+                    if (lastAnswer.isNotEmpty() && data.isEmpty() && command.isOperator) {
+                        data.append(if (command.isPreOperator) "${command.text}$lastAnswer" else "$lastAnswer${command.text}")
                         cursor = data.length
                     } else {
                         data.insert(cursor, it)
@@ -71,18 +77,18 @@ class Node(var cursor: Int = 0, val data: StringBuilder = StringBuilder(), priva
                 }
             }
         }
-        return when(command) {
+        return when (command) {
             Command.result -> true
             else -> false
         }
     }
 
     private fun prepareResult() {
-        val tokens : List<Token> = Token.getTokens("$data")
-        val tokenNode : TokenNode = TokenNode.getTree(tokens)
+        val tokens: List<Token> = Token.getTokens("$data")
+        val tokenNode: TokenNode = TokenNode.getTree(tokens)
         val parsed: Operand = getOperand(tokenNode)
         val result = parsed.calc()
-        if(result is Double) {
+        if (result is Double) {
             history = History(parsed, result.toString())
         } else {
             history = History(parsed, result.toString())

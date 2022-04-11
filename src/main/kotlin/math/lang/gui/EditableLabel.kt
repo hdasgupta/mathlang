@@ -7,14 +7,15 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class EditableLabel(private var text : String) : JPanel(CardLayout()) {
+class EditableLabel(private var text: String) : JPanel(CardLayout()) {
     val label = JLabel(text)
     val textfield = JTextField()
-    fun getText():String = text
+    fun getText(): String = text
     fun setText(value: String) {
         this.text = value
         label.text = value
     }
+
     init {
         add(label, "label component")
         add(textfield, "textfield component")
