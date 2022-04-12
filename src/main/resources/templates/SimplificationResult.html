@@ -144,6 +144,8 @@
                 function loadValue() {
                     if(isNumber($('#value').val())) {
                         loadVal("#output", {'formula': '[[${results[results.size-1].operand}]]', 'x': getNumber($('#value').val())}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/eval'}]]')
+                    } else {
+                        $('#output').val('Enter Value')
                     }
                 }
 

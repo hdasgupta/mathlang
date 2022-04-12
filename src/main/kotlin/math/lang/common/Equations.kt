@@ -16,11 +16,11 @@ import math.lang.common.ExpressionConstants.Companion.zero
 import math.lang.diff
 import math.lang.tokenizer.getOperand
 
-//
+
 //fun main() {
 //    println(div(x, mul(x.new(), y.new())))
 //
-//   val str = "1/3"
+//   val str = "(4x+6)x/2"
 //    var operand = getOperand(str)
 //
 //    println( Operators.div.reduce(listOf(1.0,3.0), false))
@@ -48,9 +48,12 @@ fun simp(operand: Operand): Results {
         if (op is Operation) {
             if (formula.firstPriority) {
                 val result = formula.simplify(op)
-                if (result != null && !op.deepEquals(result.operand)) {
+
+                if (result != null) {
                     r.add(result)
                     op = result.operand
+                }
+                if (result != null && !op.deepEquals(result.operand)) {
                     val rs: Results = simp(op)
                     if (rs.isNotEmpty()) {
                         r.addAll(rs)
@@ -80,10 +83,12 @@ fun simp(operand: Operand): Results {
                         op.operator,
                         *results.indices.map { if (results[it].isNotEmpty()) results[it].last().operand else (op as Operation).operands[it] }.toTypedArray())
                 )
-                if (result != null && op.deepEquals(result.operand)) {
+                if (result != null) {
                     r.add(result)
                     op = result.operand
-                    val rs: Results = simp(op)
+                }
+                if (result != null && op.deepEquals(result.operand)) {
+                     val rs: Results = simp(op)
                     if (rs.isNotEmpty()) {
                         r.addAll(rs)
                         op = rs.last().operand
@@ -114,10 +119,15 @@ fun getAllSimplificationEquation(): MutableList<SimplificationFormula> {
     val list: MutableList<SimplificationFormula> = mutableListOf()
 
     list.add(SimplificationFormula("Distributive Division", { div(x, mul(x.new(), y.new())) }, {
-        ExpressionConstants.mul(
-            *listOf(listOf(it[0]), (it[1] as Operation).operands.map { it1 -> it1.invert() }.toList()).flatten()
-                .toTypedArray()
-        )
+        if(it[1] is Operation) {
+            ExpressionConstants.mul(
+
+                *listOf(listOf(it[0]), (it[1] as Operation).operands.map { it1 -> it1.invert() }.toList()).flatten()
+                    .toTypedArray()
+            )
+        } else {
+            it
+        }
     }, true))
 
     list.add(SimplificationFormula("Calculating Numeric Values", { x }, {

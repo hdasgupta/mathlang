@@ -2,9 +2,13 @@ var currScript = $('script[src*=common]'); // or better regexp to get the file n
 
 var path = currScript.attr('data-url');
 
+var autoload = currScript.attr('data-autoload');
+
 const currPath = $(location).attr("href")
 
 const url = currPath.substring(0, currPath.lastIndexOf('/')+1)+path
+
+
 
 var lastResponse = {}
 var responses = {}
@@ -59,7 +63,10 @@ function loadHtml(elem, html) {
 function onChange(e) {
     onReset()
     $(document).ready(function() {
-        load("#table", {'formula1': $('#formula1').val(), 'formula2': $('#formula2').val()}, url, true, onSuccess, onError)
+        var obj = {}
+        props = ['formula', 'formula1', 'formula2'].filter(prop=>$('#'+prop).val())
+        props.forEach(prop=>obj[prop]=$('#'+prop).val())
+        load("#table", obj, url, !autoload, onSuccess, onError)
     })
 }
 
@@ -92,6 +99,7 @@ function onSuccess() {
 }
 
 $(document).ready(function() {
+
     onReset()
     $('#auto').hide()
     $('*[tabindex=1]').focus()

@@ -165,8 +165,11 @@ private class TokenNode private constructor(val token: Token, val children: List
                         nodes.add(token)
                         nodes.add(Token.closing)
                     }else {
+                        val opening = getOpeningBracketOf(tokens, i-1)
+                        nodes.add(opening, Token.opening)
                         nodes.add(Token.mul)
                         nodes.add(token)
+                        nodes.add(Token.closing)
                     }
                 }else {
                     nodes.add(token)
@@ -175,6 +178,22 @@ private class TokenNode private constructor(val token: Token, val children: List
             }
 
             return nodes
+        }
+
+        fun getOpeningBracketOf(tokens: List<Token>, index: Int): Int {
+            var bracketCount = 0
+            var i = index
+            while(i>=0) {
+                when(tokens[i].subTypes) {
+                    BracketsType.opening ->
+                        if(--bracketCount==0) {
+                            return i
+                        }
+                    BracketsType.closing -> bracketCount++
+                }
+                i--
+            }
+            return i
         }
 
         fun brackets(tokens: List<Token>): List<TokenNode> {
