@@ -7,103 +7,8 @@
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
     <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
-    <script>
-        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/html'}]]"
-        var lastResponse = {}
-        var responses = {}
-        var successes = []
-        function load(elem, json, url, succCallBack, errCallBack) {
-            if(!lastResponse[url+JSON.stringify(json)]) {
-                $(document).ready(function() {
-                    $.post(url,
-                                json,
-                                function (response, status) {
-
-
-                                }
-                        )
-                        .done(function(response) {
-                            lastResponse[url+JSON.stringify(json)] = response
-                            responses[elem] = response
-                            successes.push(json.formula)
-                            if(!!succCallBack) {
-                                succCallBack()
-                            }
-                        })
-                        .fail(function() {
-                            if(!!errCallBack) {
-                                errCallBack()
-                            }
-                        })
-                })
-            } else {
-                if(!lateInit) {
-                    $(elem).html(lastResponse[url+JSON.stringify(json)])
-                } else {
-                    successes.push(json.formula)
-                }
-                responses[elem] = lastResponse[url+JSON.stringify(json)]
-                if(!!succCallBack) {
-                    succCallBack()
-                }
-            }
-        }
-
-        function loadHtml(elem) {
-            $(document).ready(function() {
-                $(elem).html(responses[elem])
-            })
-        }
-
-        function onChange(e) {
-            onReset()
-            $(document).ready(function() {
-                load("#table", {'formula': $('#formula').val()}, url, onSuccess, onError)
-            })
-        }
-
-
-        function onError() {
-            $("#success").hide()
-            $("#error").show()
-        }
-
-        function onReset() {
-            $("#success").hide()
-            $("#error").hide()
-        }
-
-        function onSuccess() {
-            if(responses["#table"].indexOf("ERROR")>=0) {
-                onError()
-            } else {
-                $("#success").show()
-                $("#error").hide()
-                loadHtml("#table")
-            }
-        }
-
-        $(document).ready(function() {
-            onReset()
-
-        })
-    </script>
-    <style>
-      td.left {
-        color: darkslateblue;
-        font-weight: bold;
-      }
-      td.right {
-        color: darkslateblue;
-        font-weight: bold;
-      }
-
-      td {
-        vertical-align: middle;
-        padding: 0;
-        margin: 0;
-      }
-    </style>
+    <script th:src="@{js/common.js}" data-url="html"></script>
+    <link rel="stylesheet" th:href="@{css/common.css}">
     <title>Differentiation Page</title>
 </head>
 <body>
@@ -124,7 +29,7 @@
                 </table>
             </span>
         </div>
-        <textarea type="text"
+        <textarea type="text" tabindex="1"
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
                placeholder="Enter Formula to Differentiate"
                aria-label="Large"

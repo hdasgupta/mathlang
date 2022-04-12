@@ -10,121 +10,9 @@
     <script th:src="@{js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{js/bootstrap-autocomplete.min.js}"></script>
     <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
-    <script>
-        var url = "[[@{${#request.scheme}+'://'+${#request.serverName}+':'+${#request.serverPort}+${#request.contextPath}+'/diffHtml'}]]"
-        var lastResponse = {}
-        var responses = {}
-        var successes = []
-        function load(elem, json, url, lateInit = false, succCallBack, errCallBack) {
-            if(!lastResponse[url+JSON.stringify(json)]) {
-                $(document).ready(function() {
-                    $.post(url,
-                                json,
-                                function (response, status) {
+    <script th:src="@{js/common.js}"  data-url="diffHtml"></script>
+    <link rel="stylesheet" th:href="@{css/common.css}">
 
-
-                                }
-                        )
-                        .done(function(response) {
-                            lastResponse[url+JSON.stringify(json)] = response
-                            responses[elem] = response
-                            if(!lateInit) {
-                                $(elem).html(response)
-                            } else {
-                                successes.push(json.formula)
-                            }
-                            if(!!succCallBack) {
-                                succCallBack()
-                            }
-                        })
-                        .fail(function() {
-                            if(!!errCallBack) {
-                                errCallBack()
-                            }
-                        })
-                })
-            } else {
-                if(!lateInit) {
-                    $(elem).html(lastResponse[url+JSON.stringify(json)])
-                } else {
-                    successes.push(json.formula)
-                }
-                responses[elem] = lastResponse[url+JSON.stringify(json)]
-                if(!!succCallBack) {
-                    succCallBack()
-                }
-            }
-        }
-
-        function loadHtml(elem, html) {
-            $(document).ready(function() {
-                $(elem).html(html);
-            })
-        }
-
-        function onChange(e, auto) {
-            onReset()
-            $(document).ready(function() {
-                load("#table", {'formula': $('#formula').val()}, url, auto, onSuccess, onError)
-            })
-        }
-
-        function generate(elem) {
-            onReset()
-            $(elem).html(responses[elem])
-            $("#generate").attr("disabled", "disabled")
-        }
-
-        function onError() {
-            $("#success").hide()
-            $("#error").show()
-            $("#generate").attr("disabled", "disabled")
-        }
-
-        function onReset() {
-            $("#success").hide()
-            $("#error").hide()
-        }
-
-        function onSuccess() {
-            if(responses["#table"].indexOf("ERROR")>=0) {
-                onError()
-            } else {
-                $("#success").show()
-                $("#error").hide()
-                $("#generate").removeAttr("disabled")
-
-            }
-        }
-
-        $(document).ready(function() {
-            onReset()
-            $('#auto').hide()
-        })
-    </script>
-    <style>
-      td.left {
-        color: darkslateblue;
-        font-weight: bold;
-      }
-      td.right {
-        color: darkslateblue;
-        font-weight: bold;
-      }
-
-      td {
-        vertical-align: middle;
-        padding: 0;
-        margin: 0;
-      }
-
-      hr {
-        height: 2px;
-        padding: 0;
-        margin: 0;
-        color: black;
-      }
-    </style>
     <title>Differentiation Page</title>
 </head>
 <body>
@@ -145,7 +33,7 @@
                 </table>
             </span>
         </div>
-        <textarea type="text"
+        <textarea type="text" tabindex="1"
                class="form-control basicAutoComplete cfc" th:id="formula" th:name="formula"
                placeholder="Enter Formula to Differentiate"
                aria-label="Large"

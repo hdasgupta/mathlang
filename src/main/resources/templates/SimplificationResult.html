@@ -143,19 +143,11 @@
             <script>
                 function loadValue() {
                     if(isNumber($('#value').val())) {
-                        load("#output", {'formula': '[[${results[results.size-1].operand}]]', 'x': getNumber($('#value').val())}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/eval'}]]')
+                        loadVal("#output", {'formula': '[[${results[results.size-1].operand}]]', 'x': getNumber($('#value').val())}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/eval'}]]')
                     }
                 }
 
-                function isNumber(str) {
-                  if (typeof str != "string") return false // we only process strings!
-                  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-                         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
-                }
 
-                function getNumber(str) {
-                    return parseFloat(str)
-                }
             </script>
         </td>
 

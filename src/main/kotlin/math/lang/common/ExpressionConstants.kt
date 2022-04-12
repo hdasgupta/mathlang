@@ -1,5 +1,7 @@
 package math.lang.common
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.math.E
 import kotlin.math.PI
 
@@ -22,6 +24,7 @@ class ExpressionConstants {
         fun isConst(o: Operand, num: Int): Boolean =
             when (o) {
                 is IntegerLiteral -> o.obj == num
+                is DecimalLiteral -> o.obj == num.toDouble()
                 is Constant -> if (o.lit != null) o.lit!!.obj == num else false
                 else -> false
             }
@@ -167,7 +170,41 @@ class ExpressionConstants {
 
         fun d(function: Function): Differentiate = Differentiate(function = Variable("${function.nam}${function.idx}"))
 
-        fun d(vararg operand: Operand): Differentiate = Differentiate(operand = operand[0], respectTo = operand[1] as Variable)
+        fun lit(str: String): Operand =
+            Constant(str.toDouble().let {
+                when {
+                    isInt(it) -> IntegerLiteral(it.toInt())
+                    else -> DecimalLiteral(it)
+                }
+            })
+
+        fun lit(it: Number): Operand =
+                when {
+                    isInt(it) -> IntegerLiteral(it.toInt())
+                    else -> DecimalLiteral(it.toDouble())
+                }
+
+        fun d(vararg operand: Operand): Operand {
+            var o: Operand = operand[0]
+            var i = 1
+            while(i<operand.size) {
+                o = when(operand[i]) {
+                    is Variable -> Differentiate(operand = o, respectTo = operand[i] as Variable)
+                    else -> div(o, Differentiate(operand=o, respectTo = x))
+                }
+                i++
+            }
+            return o
+        }
+
+        fun d(order:Int, vararg operand: Operand): Operand =
+            when {
+                order < 0 -> Undefined()
+                order == 0-> one
+                order == 1->Differentiate(operand = operand[0], respectTo = x)
+                else -> Differentiate(operand = d(order-1, *operand))
+            }
+
 
         inline fun <reified T : Literal<*>> const(lit: T) = Constant(lit)
 
@@ -269,6 +306,29 @@ class ExpressionConstants {
                 setOf()
             }
         }
+
+        fun name(name: String, defaultIndex: Int? = null) : Pair<String, Int?> {
+            val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
+            val matcher: Matcher = numericPattern.matcher(name)
+            val find = matcher.find()
+
+            val nam: String = if (find) matcher.group("name") else name
+            val idx: Int? = if (find && matcher.group("num").isNotEmpty()) Integer.parseInt(matcher.group("num")) else defaultIndex
+
+            return Pair(nam, idx)
+        }
+
+        fun isInt(d:Number): Boolean =
+            when {
+                d-d.toInt() ==0.0 -> true
+                else -> false
+            }
+
+        operator fun Number.minus(num:Number): Double =
+            this.toDouble()-num.toDouble()
     }
+
+
+
 
 }

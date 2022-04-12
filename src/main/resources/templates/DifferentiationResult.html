@@ -4,9 +4,10 @@
 <table th:if="${!results.isEmpty()}" border="0">
     <tr>
         <td id="diff_formula" colspan="2">
-            <script>
-                load("#diff_formula", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-            </script>
+            <div th:replace="operands/MainRouter.html :: route(operand=${formula}, root=true)"
+                 th:remove="tag">
+
+            </div>
         </td>
     </tr>
     <tr th:each="result, stat :${results}">
@@ -31,10 +32,9 @@
                         </div>
                         <div class="modal-body">
                             <h5>Previous Step : </h5>
-                            <div th:if="${stat.index == 0}" th:id="${'prevStep_'+stat.count}">
-                                <script>
-                                    load("[[${'#prevStep_'+stat.count}]]", {'formula': '[[${formula}]]'}, '[[${#request.scheme + '://' + #request.serverName + ':' + #request.serverPort + #request.contextPath + '/diff'}]]')
-                                </script>
+                            <div th:if="${stat.index == 0}" th:replace="operands/MainRouter.html :: route(operand=${formula}, root=true)"
+                                 th:remove="tag">
+
                             </div>
                             <span  th:if="${stat.index > 0}" th:id="${'prevStep_'+stat.count}">
                                 <div th:replace="operands/MainRouter.html :: route(operand=${results.get(stat.index-1).operand}, root=true)"

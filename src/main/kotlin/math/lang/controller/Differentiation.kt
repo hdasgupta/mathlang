@@ -36,9 +36,10 @@ class Differentiation {
     @RequestMapping(value = ["/diffHtml"])
     fun getDiffHtml(@RequestParam formula: String, map: ModelMap): String {
         try {
-            val results: Results = diff(getOperand(formula))
+            val operand = getOperand(formula)
+            val results: Results = diff(operand)
             map["results"] = ArrayList(results)
-            map["formula"] = formula
+            map["formula"] = Differentiate(operand=operand)
         } catch (t: Throwable) {
             map["results"] = Results()
         }

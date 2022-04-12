@@ -3,6 +3,7 @@ package math.lang.common
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import math.lang.common.ExpressionConstants.Companion.name
 import math.lang.common.ExpressionConstants.Companion.one
 import math.lang.common.ExpressionConstants.Companion.varIn
 import math.lang.common.ExpressionConstants.Companion.x
@@ -403,9 +404,7 @@ class Operation(@NotNull operator: Operators, @NotNull vararg operands: Operand)
         val isReal: Boolean = numbers.any { it is Double }
 
         val dnumbers: List<Double> = numbers.map {
-            java.lang.Double.parseDouble(
-                if (it.toString().contains(".")) it.toString() else "0"
-            )
+            it.toString().toDouble()
         }
         val result = operator.reduce(dnumbers, isReal)
 
@@ -508,8 +507,8 @@ class Constant(name: String) : UnitOperand(name, false) {
 
 }
 
-class Variable(name: String) : UnitOperand(name(name), true) {
-    var index: Int? = num(name)
+class Variable(name: String) : UnitOperand(name(name).first, true) {
+    var index: Int? = name(name).second
 
     private constructor(name: String, index: Int) : this(name) {
         this.index = index
@@ -541,19 +540,6 @@ class Variable(name: String) : UnitOperand(name(name), true) {
 
     private companion object {
         val counter: Counter = Counter()
-        val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
-        fun name(name: String): String {
-            val matcher: Matcher = numericPattern.matcher(name)
-            val find = matcher.find()
-            return matcher.group("name")
-        }
-
-        fun num(name: String): Int? {
-            val matcher: Matcher = numericPattern.matcher(name)
-            val find = matcher.find()
-
-            return if (find && matcher.group("num").isNotEmpty()) Integer.parseInt(matcher.group("num")) else null
-        }
     }
 }
 
@@ -564,11 +550,10 @@ class Function(
     private val index: Int = counter.getNext()
 ) : UnitOperand("${nm}${index}", true) {
 
-    private val matcher: Matcher = numericPattern.matcher(nm)
-    private val find = matcher.find()
+    private val pair = name(nm, index)
 
-    val nam: String = if (find) matcher.group("name") else nm
-    val idx: String = if (find) matcher.group("num") else index.toString()
+    val nam: String = pair.first
+    val idx: String = pair.second?.toString() ?: ""
     override fun funcOf(): Set<Variable> {
         return variables ?: function?.variables ?: setOf()
     }
@@ -592,12 +577,11 @@ class Function(
 
     private companion object {
         val counter: Counter = Counter(1)
-        val numericPattern: Pattern = Pattern.compile("^(?<name>[a-zA-Z_]+)(?<num>[0-9]*)$")
     }
 
 }
 
-class Differentiate(val function: Variable? = null, val operand: Operand? = null, val respectTo: Variable = x) : Operand() {
+class Differentiate(val function: Variable? = null, val operand: Operand? = null, val respectTo: Variable  = x) : Operand() {
     override fun funcOf(): Set<Variable> {
         return if (function == null && operand != null) varIn(operand) else function?.funcOf() ?: setOf()
     }
@@ -646,6 +630,10 @@ class IntegerLiteral(obj: Int, name: String?) : Literal<Int>(obj, name) {
             return obj == operand.obj
         }
 
+        if (operand is DecimalLiteral) {
+            return obj.toDouble() == operand.obj
+        }
+
         if (operand is Constant) {
             return if (operand.lit != null)
                 Objects.equals(obj, operand.lit!!.obj)
@@ -660,17 +648,21 @@ class IntegerLiteral(obj: Int, name: String?) : Literal<Int>(obj, name) {
 class DecimalLiteral(obj: Double, name: String?) : Literal<Double>(obj, name) {
     constructor(obj: Double) : this(obj, null)
 
-    override fun string(approx: Boolean): String = "${obj.toDouble()}"
+    override fun string(approx: Boolean): String = "${if(obj - obj.toInt() > 0) obj else obj.toInt()}"
 
     override fun string(): String = obj.toString()
 
     override fun calc(approx: Boolean): Number {
-        return obj.toDouble()
+        return obj
     }
 
     override fun deepEquals(operand: Operand): Boolean {
         if (operand is DecimalLiteral) {
             return obj == operand.obj
+        }
+
+        if (operand is IntegerLiteral) {
+            return obj == operand.obj.toDouble()
         }
 
         if (operand is Constant) {

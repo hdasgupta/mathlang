@@ -1,0 +1,21 @@
+td.left {
+    color: darkslateblue;
+    font-weight: bold;
+  }
+  td.right {
+    color: darkslateblue;
+    font-weight: bold;
+  }
+
+  td {
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+  }
+
+  hr {
+    height: 2px;
+    padding: 0;
+    margin: 0;
+    color: black;
+  }

@@ -5,6 +5,7 @@ import math.lang.common.ExpressionConstants.Companion.div
 import math.lang.common.ExpressionConstants.Companion.getConst
 import math.lang.common.ExpressionConstants.Companion.hasValue
 import math.lang.common.ExpressionConstants.Companion.isConst
+import math.lang.common.ExpressionConstants.Companion.lit
 import math.lang.common.ExpressionConstants.Companion.mul
 import math.lang.common.ExpressionConstants.Companion.one
 import math.lang.common.ExpressionConstants.Companion.pow
@@ -12,22 +13,26 @@ import math.lang.common.ExpressionConstants.Companion.sub
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import math.lang.common.ExpressionConstants.Companion.zero
+import math.lang.diff
+import math.lang.tokenizer.getOperand
 
 //
 //fun main() {
 //    println(div(x, mul(x.new(), y.new())))
 //
-//   val str = "(4 x ^ 2 + 2 x)^cot(5x^2x)"
+//   val str = "1/3"
 //    var operand = getOperand(str)
 //
-//    println(getOperand("$operand"))
+//    println( Operators.div.reduce(listOf(1.0,3.0), false))
+//    println(operand)
+//    println(simp(getOperand("$operand")))/*
 //    val s =getOperand(diff(operand).last().operand.toString())
 //    println(s)
-//    println(getOperand(simp(s).last().operand.toString()))
+//    println(getOperand(simp(s).last().operand.toString()))*/
 ///*
 //    var results = simp(operand)
 //    println(results)*/
-//
+//    println("x")
 //}
 
 val solution: MutableMap<String, Results> = mutableMapOf()
@@ -75,7 +80,7 @@ fun simp(operand: Operand): Results {
                         op.operator,
                         *results.indices.map { if (results[it].isNotEmpty()) results[it].last().operand else (op as Operation).operands[it] }.toTypedArray())
                 )
-                if (result != null && "$op" != "${result.operand}") {
+                if (result != null && op.deepEquals(result.operand)) {
                     r.add(result)
                     op = result.operand
                     val rs: Results = simp(op)
@@ -130,9 +135,12 @@ fun getAllSimplificationEquation(): MutableList<SimplificationFormula> {
     )
 
     list.add(SimplificationFormula("Convert to Multiplication from Division", { ExpressionConstants.div(x, y) }, {
-        ExpressionConstants.mul(
-            it[0], it[1].invert()
-        )
+        if(it[0].deepEquals(one))
+            it
+        else
+            ExpressionConstants.mul(
+                it[0], it[1].invert()
+            )
     }))
 
     list.add(
@@ -214,7 +222,7 @@ fun calc(op: Operators, list: List<out Operand>): Operand {
     return     if (consts.isNotEmpty()) {
 
         val values = consts.map { it.calc() }
-        val num = DecimalLiteral(values.reduce {c1,c2-> op(op, arrayOf(DecimalLiteral(c1.toDouble()), DecimalLiteral(c2.toDouble()))).calc()}.toDouble())
+        val num = lit(values.reduce {c1,c2-> op(op, arrayOf(DecimalLiteral(c1.toDouble()), DecimalLiteral(c2.toDouble()))).calc()})
 
         if(vars.isEmpty()) {
             num

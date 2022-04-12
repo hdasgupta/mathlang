@@ -3,8 +3,11 @@ package math.lang.tokenizer
 import math.lang.*
 import math.lang.common.*
 import math.lang.common.ExpressionConstants.Companion.a
+import math.lang.common.ExpressionConstants.Companion.d
 import math.lang.common.ExpressionConstants.Companion.fx1
 import math.lang.common.ExpressionConstants.Companion.fx2
+import math.lang.common.ExpressionConstants.Companion.lit
+import math.lang.common.ExpressionConstants.Companion.name
 import math.lang.common.ExpressionConstants.Companion.x
 import math.lang.common.ExpressionConstants.Companion.y
 import java.util.*
@@ -91,6 +94,16 @@ private fun getOperand(node: TokenNode): Operand {
                             "a" -> a
                             else -> Constant(token.value)
                         }
+                    VariableType.d ->
+                        name(node.token.value, 1).let {
+                            when (it.second) {
+                                1-> d(*node.children.map { n->getOperand(n) }.toTypedArray())
+                                else -> d(*listOf(
+                                    listOf(getOperand(node.children[0])),
+                                    (1..it.second!!).map { getOperand(node.children[1]) }
+                                ).flatten().toTypedArray())
+                            }
+                        }
                     VariableType.function ->
                         when (token.value) {
                             "fx1" -> fx1
@@ -117,10 +130,7 @@ private fun getOperand(node: TokenNode): Operand {
                         ExpressionConstants.Companion, node.children.map { c -> getOperand(c) }.toTypedArray()
                     ) as Operand
             else ->
-                when (token.subTypes as NumericType) {
-                    NumericType.integer -> Constant(IntegerLiteral(java.lang.Integer.parseInt(token.value)))
-                    else -> Constant(DecimalLiteral(java.lang.Double.parseDouble(token.value)))
-                }
+                lit(token.value)
         }
 }
 
@@ -417,7 +427,7 @@ enum class VariableType(private val pattern: String) : SubPattern {
     asec("asec"),
     variable("x[0-9]*|y[0-9]*"),
     constant("a[0-9]*|b[0-9]*|c[0-9]*|e|pi"),
-    d("d"),
+    d("d[0-9]*"),
     function("fx[0-9]*|fy[0-9]*|f[0-9]*");
 
     override fun pattern(): String = pattern
