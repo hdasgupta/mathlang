@@ -75,7 +75,7 @@
         <div th:each="o, stat: ${operands}" th:remove="tag">
             <td th:if="${stat.index>0}" style="vertical-align: middle;padding: 0;margin: 0;">
                 <b style="color:indigo">
-                    [[${operator== T(math.lang.common.Operators).mul ? "." : operator.symbol}]]
+                    [[${operator== T(math.lang.common.Operators).mul ? "&times;" : operator.symbol}]]
                 </b>
             </td>
             <td style="vertical-align: middle;padding: 0;margin: 0;">
