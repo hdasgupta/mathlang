@@ -1,0 +1,9 @@
+{
+  "build": {
+    "type": "maven",
+    "goal": "assembly:jar-with-dependencies"
+  },
+  "deploy": {
+    "goal": "exec:java"
+  }
+}
