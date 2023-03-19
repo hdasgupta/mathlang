@@ -5,19 +5,43 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/jquery-3.6.0.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
-    <title>Math Lang</title>
+    <title>Math Lang Home Page</title>
+    <script>
+        var n
+        function resize() {
+          const height= Math.floor(($(window).height() - $(".heading").height()) / n)
+          const width= $(window).width()
+          $("a.btn-primary").css("width", width);
+          $("a.btn-primary").attr("width", width);
+          $("a.btn-primary").css("height", height);
+          $("a.btn-primary").attr("height", height);
+        }
+
+        $(document).ready(function(){
+          n = $(".btn-group-vertical").children("a").length;
+          resize()
+          $(window).resize(function() {
+              resize()
+          })
+        })
+
+    </script>
 </head>
 <body>
 <center>
+    <div class="heading">
+        <h2><u>Mathematical Language Pages</u></h2>
+        <br />
+    </div>
     <div class="btn-group-vertical">
 
-        <a href="/expression"  class="btn btn-secondary">Expression Parser</a>
-        <a href="/simplify"  class="btn btn-secondary">Simplify Expression</a>
-        <a href="/differentiate"  class="btn btn-secondary">Differentiation</a>
-        <a href="/differentiateFunc"  class="btn btn-secondary">Differentiation of Function w.r.t. Another Function</a>
-        <a href="/calculator-sim" class="btn btn-secondary">Simple Calculator</a>
-        <a href="/calculator-tri" class="btn btn-secondary disabled">Trigonometric Calculator</a>
-        <a href="/calculator-sci" class="btn btn-secondary disabled">Scientific Calculator</a>
+        <a href="/expression"  class="btn btn-primary">Expression Parser</a>
+        <a href="/simplify"  class="btn btn-primary">Simplify Expression</a>
+        <a href="/differentiate"  class="btn btn-primary">Differentiation</a>
+        <a href="/differentiateFunc"  class="btn btn-primary">Differentiation of Function w.r.t. Another Function</a>
+        <a href="/calculator-sim" class="btn btn-primary">Simple Calculator</a>
+        <a href="/calculator-tri" class="btn btn-primary disabled">Trigonometric Calculator</a>
+        <a href="/calculator-sci" class="btn btn-primary disabled">Scientific Calculator</a>
     </div>
 </center>
 
